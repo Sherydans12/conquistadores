@@ -1,0 +1,58 @@
+:root {
+  --color-primary: #1a2779;
+  --color-primary-alt: #253e85;
+  --color-primary-deep: #111b5b;
+  --color-accent: #e8b94d;
+  --color-accent-strong: #d8a52d;
+  --color-turquoise: #20bca6;
+  --color-purple: #8b3eaa;
+  --color-background: #f1f1f1;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f8f8fb;
+  --color-text: #333333;
+  --color-text-muted: #62667a;
+  --color-border: #dfe2ec;
+  --color-focus: #f5c75d;
+
+  --font-family: Montserrat, Inter, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-size-xs: 0.78rem;
+  --font-size-sm: 0.9rem;
+  --font-size-base: 1rem;
+  --font-size-lg: clamp(1.05rem, 1rem + 0.25vw, 1.2rem);
+  --font-size-xl: clamp(1.25rem, 1.1rem + 0.8vw, 1.75rem);
+  --font-size-2xl: clamp(1.8rem, 1.35rem + 2vw, 3rem);
+  --font-size-hero: clamp(2.35rem, 1.55rem + 4vw, 5.5rem);
+  --line-height-tight: 1.08;
+  --line-height-heading: 1.2;
+  --line-height-body: 1.7;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: clamp(4rem, 7vw, 7rem);
+
+  --container: 76rem;
+  --container-narrow: 50rem;
+  --page-gutter: clamp(1rem, 3vw, 2rem);
+
+  --radius-sm: 0.4rem;
+  --radius-md: 0.8rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 999px;
+  --border-width: 1px;
+  --shadow-sm: 0 0.25rem 1rem rgb(17 27 91 / 0.08);
+  --shadow-md: 0 1rem 2.5rem rgb(17 27 91 / 0.13);
+
+  --announcement-height: 2.4rem;
+  --header-height-mobile: 4.75rem;
+  --header-height-desktop: 5.5rem;
+  --layer-header: 30;
+  --layer-nav: 40;
+  --transition-fast: 160ms ease;
+  --transition-base: 240ms ease;
+}

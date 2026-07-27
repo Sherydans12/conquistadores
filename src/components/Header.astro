@@ -1,0 +1,332 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/brand/colegio-conquistadores-logo.png';
+import { enrollmentCta, primaryNavigation } from '../data/navigation';
+import MobileNav from './MobileNav.astro';
+
+const currentPath = Astro.url.pathname;
+
+function isCurrent(href: string): boolean {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="/" aria-label="Colegio Conquistadores, inicio">
+      <Image
+        src={logo}
+        alt="Escudo del Colegio Conquistadores"
+        width={72}
+        height={78}
+        quality={90}
+      />
+      <span class="brand__text">
+        <strong>Colegio</strong>
+        <span>Conquistadores</span>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Navegación principal">
+      <ul>
+        {
+          primaryNavigation.map((item) => (
+            <li>
+              {item.children ? (
+                <details class="desktop-submenu" data-desktop-submenu>
+                  <summary>{item.label}</summary>
+                  <ul>
+                    {item.children.map((child) => (
+                      <li>
+                        <a
+                          href={child.href}
+                          target={child.external ? '_blank' : undefined}
+                          rel={child.external ? 'noopener noreferrer' : undefined}
+                        >
+                          {child.label}
+                          {child.external && (
+                            <span class="sr-only"> (sitio externo)</span>
+                          )}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              ) : (
+                <a
+                  href={item.href}
+                  aria-current={isCurrent(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a class="header-cta" href={enrollmentCta.href}>
+      {enrollmentCta.label}
+    </a>
+    <MobileNav />
+  </div>
+</header>
+
+<script>
+  const desktopSubmenus = document.querySelectorAll<HTMLDetailsElement>(
+    '[data-desktop-submenu]',
+  );
+
+  desktopSubmenus.forEach((submenu) => {
+    const summary = submenu.querySelector<HTMLElement>('summary');
+
+    submenu.addEventListener('keydown', (event) => {
+      if (
+        event.target === summary &&
+        (event.key === 'Enter' || event.key === ' ')
+      ) {
+        event.preventDefault();
+        submenu.open = !submenu.open;
+        return;
+      }
+
+      if (event.key === 'Escape' && submenu.open) {
+        event.preventDefault();
+        submenu.open = false;
+        summary?.focus();
+      }
+    });
+
+    submenu.addEventListener('toggle', () => {
+      if (!submenu.open) return;
+      desktopSubmenus.forEach((other) => {
+        if (other !== submenu) other.open = false;
+      });
+    });
+
+    submenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        submenu.open = false;
+      });
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    desktopSubmenus.forEach((submenu) => {
+      if (submenu.open && !submenu.contains(event.target as Node)) {
+        submenu.open = false;
+      }
+    });
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    z-index: var(--layer-header);
+    inset-block-start: 0;
+    min-height: var(--header-height-mobile);
+    background: var(--color-primary);
+    color: var(--color-surface);
+    box-shadow: 0 0.4rem 1.3rem rgb(17 27 91 / 0.2);
+  }
+
+  .site-header__inner {
+    min-height: var(--header-height-mobile);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .brand {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: var(--space-2);
+    margin-inline-end: auto;
+    color: var(--color-surface);
+    text-decoration: none;
+  }
+
+  .brand :global(img) {
+    width: 3.15rem;
+    height: 3.45rem;
+    object-fit: contain;
+  }
+
+  .brand__text {
+    display: none;
+    line-height: 1.05;
+  }
+
+  .brand__text strong,
+  .brand__text span {
+    display: block;
+  }
+
+  .brand__text strong {
+    font-size: var(--font-size-sm);
+  }
+
+  .brand__text span {
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .header-cta {
+    display: inline-flex;
+    min-height: 2.8rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 0.8rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    color: var(--color-primary-deep);
+    font-size: clamp(0.7rem, 0.65rem + 0.25vw, 0.84rem);
+    font-weight: 900;
+    line-height: 1.15;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .header-cta:hover {
+    background: var(--color-accent-strong);
+  }
+
+  @media (min-width: 32rem) {
+    .brand__text {
+      display: block;
+    }
+  }
+
+  @media (min-width: 70rem) {
+    .site-header {
+      min-height: var(--header-height-desktop);
+    }
+
+    .site-header__inner {
+      min-height: var(--header-height-desktop);
+      gap: var(--space-5);
+    }
+
+    .brand {
+      margin-inline-end: 0;
+    }
+
+    .brand :global(img) {
+      width: 3.8rem;
+      height: 4.15rem;
+    }
+
+    .desktop-nav {
+      display: block;
+      margin-inline-start: auto;
+    }
+
+    .desktop-nav > ul {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.25rem, 0.8vw, 0.75rem);
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .desktop-nav a,
+    .desktop-nav summary {
+      display: inline-flex;
+      min-height: 2.75rem;
+      align-items: center;
+      padding: 0.65rem 0.48rem;
+      border-block-end: 2px solid transparent;
+      color: var(--color-surface);
+      cursor: pointer;
+      font-size: clamp(0.68rem, 0.58rem + 0.35vw, 0.82rem);
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav summary:hover,
+    .desktop-nav a[aria-current="page"] {
+      border-block-end-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .desktop-submenu {
+      position: relative;
+    }
+
+    .desktop-submenu summary {
+      gap: var(--space-2);
+      list-style: none;
+    }
+
+    .desktop-submenu summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .desktop-submenu summary::after {
+      content: "+";
+      color: var(--color-accent);
+      font-size: 1rem;
+    }
+
+    .desktop-submenu[open] summary::after {
+      content: "−";
+    }
+
+    .desktop-submenu ul {
+      position: absolute;
+      z-index: calc(var(--layer-nav) + 1);
+      inset-block-start: calc(100% + 0.35rem);
+      inset-inline-end: 0;
+      width: 18rem;
+      padding: var(--space-2);
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-block-start: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-md);
+      list-style: none;
+    }
+
+    .desktop-submenu li + li {
+      border-block-start: 1px solid var(--color-border);
+    }
+
+    .desktop-submenu ul a {
+      width: 100%;
+      min-height: 2.65rem;
+      border: 0;
+      color: var(--color-primary-deep);
+      white-space: normal;
+    }
+
+    .desktop-submenu ul a:hover {
+      border: 0;
+      background: var(--color-surface-soft);
+      color: var(--color-primary);
+    }
+
+    .header-cta {
+      flex: 0 0 auto;
+      padding-inline: 1rem;
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .brand__text {
+      display: block;
+    }
+  }
+</style>

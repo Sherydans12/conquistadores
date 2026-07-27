@@ -1,0 +1,76 @@
+---
+import { absoluteUrl, site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  title = site.seo.defaultTitle,
+  description = site.seo.defaultDescription,
+  canonicalPath = '/',
+  image = site.seo.defaultImage,
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+const canonical = absoluteUrl(canonicalPath);
+const socialImage = new URL(image, site.baseUrl).toString();
+const shouldNoindex = noindex || site.environment !== 'production';
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: site.name,
+  url: site.baseUrl.toString(),
+  slogan: site.tagline,
+  logo: absoluteUrl('/apple-touch-icon.png'),
+  telephone: site.phone.international,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.locality,
+    addressCountry: 'CL',
+  },
+  sameAs: [site.social.instagram.url, site.social.youtube.url],
+};
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content={site.seo.themeColor} />
+<meta
+  name="robots"
+  content={shouldNoindex ? 'noindex,nofollow' : 'index,follow'}
+/>
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<meta property="og:locale" content={site.seo.locale} />
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={socialImage} />
+<meta
+  property="og:image:alt"
+  content={`Fachada e identidad de ${site.name}`}
+/>
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImage} />
+
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />

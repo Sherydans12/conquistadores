@@ -1,0 +1,123 @@
+---
+import { site } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section class="section contact" id="contacto" aria-labelledby="contact-title">
+  <div class="container">
+    <SectionHeading
+      id="contact-title"
+      eyebrow="Contacto y ubicación"
+      title="Estamos en Coquimbo"
+      description="Encuentra los datos públicos del colegio y los accesos a nuestros canales oficiales."
+      align="center"
+    />
+    <div class="contact__grid">
+      <article class="contact__card">
+        <p class="contact__label">Dirección</p>
+        <h3>{site.address.display}</h3>
+        <p>
+          Consulta la ruta y los detalles de ubicación directamente en Google Maps.
+        </p>
+        <a
+          class="button button--primary"
+          href={site.address.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Abrir en Google Maps
+        </a>
+        <p class="external-note">El mapa se abre en un servicio externo.</p>
+      </article>
+      <article class="contact__card contact__card--primary">
+        <p class="contact__label">Teléfono</p>
+        <h3><a href={site.phone.href}>{site.phone.display}</a></h3>
+        <p>Comunícate directamente con el colegio durante el horario de atención.</p>
+        <a class="button button--primary" href={site.phone.href}>
+          Llamar al colegio
+        </a>
+      </article>
+      <article class="contact__card">
+        <p class="contact__label">Redes oficiales</p>
+        <h3>Conoce nuestra comunidad</h3>
+        <p>
+          Sigue las novedades públicas del Colegio Conquistadores en Instagram.
+        </p>
+        <a
+          class="button button--primary"
+          href={site.social.instagram.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visitar Instagram
+        </a>
+        <p class="external-note">Instagram se abre en un servicio externo.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: var(--color-surface-soft);
+  }
+
+  .contact__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .contact__card {
+    padding: clamp(1.4rem, 3vw, 2rem);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .contact__card--primary {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  .contact__label {
+    margin-block-end: var(--space-2);
+    color: var(--color-primary-alt);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .contact__card--primary :is(.contact__label, h3, p, a) {
+    color: var(--color-surface);
+  }
+
+  .contact__card--primary .contact__label {
+    color: var(--color-accent);
+  }
+
+  .contact__card--primary .button {
+    color: var(--color-primary-deep);
+  }
+
+  h3 {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-xl);
+  }
+
+  h3 a {
+    text-decoration: none;
+  }
+
+  .external-note {
+    margin: var(--space-3) 0 0;
+  }
+
+  @media (min-width: 48rem) {
+    .contact__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

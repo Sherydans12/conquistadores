@@ -1,0 +1,188 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/brand/colegio-conquistadores-logo.png';
+import {
+  documentNavigation,
+  secondaryNavigation,
+} from '../data/navigation';
+import { site } from '../data/site';
+
+const footerDocuments = documentNavigation.filter(
+  (item) =>
+    item.href === '/plan-lector-2026/' ||
+    item.href === '/protocolos-internos/' ||
+    item.href === '/reglamento-interno-de-convivencia-escolar/' ||
+    item.label === 'Certificados de Estudios',
+);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="footer-brand">
+      <Image
+        src={logo}
+        alt="Escudo del Colegio Conquistadores"
+        width={96}
+        height={104}
+        loading="lazy"
+      />
+      <div>
+        <p class="footer-brand__name">{site.name}</p>
+        <p>{site.tagline}</p>
+      </div>
+    </div>
+
+    <nav aria-label="Navegación secundaria">
+      <h2>Explora</h2>
+      <ul>
+        {secondaryNavigation.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <nav aria-label="Documentos importantes">
+      <h2>Documentos</h2>
+      <ul>
+        {
+          footerDocuments.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+              >
+                {item.label}
+                {item.external && <span class="sr-only"> (sitio externo)</span>}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div>
+      <h2>Contacto</h2>
+      <address>
+        <a href={site.address.mapsUrl} target="_blank" rel="noopener noreferrer">
+          {site.address.display}
+        </a>
+        <a href={site.phone.href}>{site.phone.display}</a>
+      </address>
+      <a
+        class="footer-social"
+        href={site.social.instagram.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Instagram <span class="sr-only">(sitio externo)</span>
+      </a>
+    </div>
+  </div>
+  <div class="container site-footer__bottom">
+    <p>© {year} {site.name}</p>
+    <p>Los enlaces identificados como externos se abren fuera de este sitio.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: var(--space-7) var(--space-5);
+    background: var(--color-primary-deep);
+    color: rgb(255 255 255 / 0.84);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .footer-brand :global(img) {
+    width: 4.6rem;
+    height: 5rem;
+    object-fit: contain;
+  }
+
+  .footer-brand p {
+    margin: 0;
+  }
+
+  .footer-brand__name {
+    color: var(--color-surface);
+    font-size: var(--font-size-lg);
+    font-weight: 900;
+  }
+
+  h2 {
+    margin-block-end: var(--space-3);
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  li + li {
+    margin-block-start: var(--space-2);
+  }
+
+  a {
+    color: inherit;
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+
+  address {
+    display: grid;
+    gap: var(--space-2);
+    margin-block-end: var(--space-3);
+    font-style: normal;
+  }
+
+  .footer-social {
+    font-weight: 800;
+  }
+
+  .site-footer__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-block-start: var(--space-6);
+    margin-block-start: var(--space-6);
+    border-block-start: 1px solid rgb(255 255 255 / 0.18);
+    font-size: var(--font-size-xs);
+  }
+
+  .site-footer__bottom p {
+    margin: 0;
+  }
+
+  @media (min-width: 42rem) {
+    .site-footer__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .site-footer__bottom {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  @media (min-width: 70rem) {
+    .site-footer__grid {
+      grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

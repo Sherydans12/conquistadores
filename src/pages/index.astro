@@ -1,17 +1,502 @@
 ---
-
+import { Image } from 'astro:assets';
+import ActivityCard from '../components/ActivityCard.astro';
+import ContactSection from '../components/ContactSection.astro';
+import Hero from '../components/Hero.astro';
+import LazyVideo from '../components/LazyVideo.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { home } from '../data/home';
+import { site } from '../data/site';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Colegio Conquistadores | Aprender con alegría"
+  description="Conoce el Colegio Conquistadores de Coquimbo: una comunidad educativa integral e inclusiva, sus actividades, talleres, academias y Matrículas 2026."
+  canonicalPath="/"
+>
+  <Hero />
+
+  <section class="section intro" aria-labelledby="intro-title">
+    <div class="container intro__grid">
+      <div>
+        <SectionHeading
+          id="intro-title"
+          eyebrow={home.introduction.eyebrow}
+          title={home.introduction.title}
+        />
+        <p class="intro__body">{home.introduction.body}</p>
+        <a class="text-link" href="/quienes-somos/">Conocer nuestra historia</a>
+      </div>
+      <aside class="intro__callout">
+        <p class="intro__quote">“{site.tagline}”</p>
+        <p>
+          Una invitación a descubrir, compartir y crecer en un entorno de respeto.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--soft" id="historia" aria-labelledby="identity-title">
+    <div class="container">
+      <SectionHeading
+        id="identity-title"
+        eyebrow="Identidad institucional"
+        title="Historia, misión, visión y valores"
+        description="Los principios que orientan nuestra comunidad están disponibles sin depender de pestañas ni JavaScript."
+        align="center"
+      />
+      <div class="identity-grid">
+        {
+          home.institutional.map((item, index) => (
+            <article class="identity-card">
+              <span class="identity-card__number" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section attributes" aria-labelledby="attributes-title">
+    <div class="container">
+      <SectionHeading
+        id="attributes-title"
+        eyebrow="Nuestra forma de aprender"
+        title="Una propuesta cercana, activa e inclusiva"
+        description="Atributos públicos que reflejan el enfoque educativo del colegio, sin recurrir a cifras desactualizadas."
+        align="center"
+      />
+      <div class="attributes-grid">
+        {
+          home.attributes.map((attribute) => (
+            <article class="attribute-card">
+              <span class="attribute-card__mark" aria-hidden="true"></span>
+              <h3>{attribute.title}</h3>
+              <p>{attribute.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface" id="actividades" aria-labelledby="activities-title">
+    <div class="container">
+      <div class="section-lead">
+        <SectionHeading
+          id="activities-title"
+          eyebrow="Vida escolar"
+          title="Actividades destacadas"
+          description="Experiencias recientes que muestran innovación, cultura y encuentro en nuestra comunidad educativa."
+        />
+        <a class="button activities-link" href="/actividades/">
+          Ver todas las actividades
+        </a>
+      </div>
+      <div class="activities-grid">
+        {
+          home.activities.map((activity) => (
+            <ActivityCard activity={activity} />
+          ))
+        }
+      </div>
+      <p class="activities-note">
+        Durante la transición, estas tres actividades se abren en el sitio público
+        anterior y están identificadas como enlaces temporales.
+      </p>
+    </div>
+  </section>
+
+  <section class="section enrichment" aria-labelledby="enrichment-title">
+    <div class="container">
+      <SectionHeading
+        id="enrichment-title"
+        eyebrow="Más oportunidades"
+        title="Talleres y academias"
+        description="Espacios para explorar intereses, desarrollar habilidades y aprender junto a otros."
+        align="center"
+      />
+      <div class="enrichment-grid">
+        {
+          home.enrichment.map((item) => (
+            <article class="enrichment-card">
+              <Image
+                src={item.image}
+                alt={item.alt}
+                widths={[520, 800]}
+                sizes="(min-width: 48rem) 50vw, 100vw"
+                quality={84}
+                loading="lazy"
+              />
+              <div class="enrichment-card__body">
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+                <a class="text-link" href={item.href}>{item.linkLabel}</a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section community-media" id="social" aria-labelledby="community-title">
+    <div class="container community-media__grid">
+      <div>
+        <SectionHeading
+          id="community-title"
+          eyebrow="Nuestra comunidad"
+          title="Conoce una de nuestras experiencias"
+          description="El video se carga solo cuando decides reproducirlo, para cuidar el rendimiento y tu privacidad."
+          light
+        />
+        <LazyVideo />
+      </div>
+      <aside class="social-card">
+        <p class="social-card__eyebrow">Redes sociales</p>
+        <h2>La vida del colegio, en un canal oficial</h2>
+        <p>
+          Instagram reúne actividades, aprendizajes y encuentros de nuestra
+          comunidad. En esta fase ofrecemos un enlace directo, sin cargar un feed
+          ni rastreadores en la portada.
+        </p>
+        <a
+          class="button button--primary"
+          href={site.social.instagram.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Seguir en Instagram
+        </a>
+        <p class="external-note">Instagram se abre en un servicio externo.</p>
+      </aside>
+    </div>
+  </section>
+
+  <ContactSection />
+
+  <section class="enrollment" aria-labelledby="enrollment-title">
+    <div class="container enrollment__inner">
+      <div>
+        <p class="enrollment__eyebrow">Admisión 2026</p>
+        <h2 id="enrollment-title">Da el próximo paso junto a Conquistadores</h2>
+        <p>
+          Revisa el portal público con información de matrícula, listas de útiles
+          y accesos académicos vigentes para 2026.
+        </p>
+      </div>
+      <a class="button button--primary" href="/matriculas-2026/">
+        Ir a Matrículas 2026
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    background: var(--color-surface);
+  }
+
+  .intro__grid {
+    display: grid;
+    align-items: center;
+    gap: var(--space-7);
+  }
+
+  .intro :global(.section-heading) {
+    margin-block-end: var(--space-5);
+  }
+
+  .intro__body {
+    max-width: 44rem;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+  }
+
+  .intro__callout {
+    position: relative;
+    padding: clamp(1.6rem, 4vw, 2.5rem);
+    border-inline-start: 0.5rem solid var(--color-accent);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    background: var(--color-primary);
+    color: rgb(255 255 255 / 0.85);
+    box-shadow: var(--shadow-md);
+  }
+
+  .intro__quote {
+    margin-block-end: var(--space-3);
+    color: var(--color-surface);
+    font-size: var(--font-size-xl);
+    font-weight: 900;
+  }
+
+  .intro__callout p:last-child {
+    margin: 0;
+  }
+
+  .identity-grid,
+  .attributes-grid,
+  .activities-grid,
+  .enrichment-grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .identity-card {
+    min-height: 100%;
+    padding: clamp(1.4rem, 3vw, 2rem);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .identity-card__number {
+    display: inline-block;
+    margin-block-end: var(--space-5);
+    color: var(--color-accent-strong);
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .identity-card h3,
+  .attribute-card h3,
+  .enrichment-card h3 {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-xl);
+  }
+
+  .identity-card p,
+  .attribute-card p,
+  .enrichment-card p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .attributes {
+    background: var(--color-primary);
+  }
+
+  .attributes :global(.section-heading h2),
+  .attributes :global(.section-heading .description) {
+    color: var(--color-surface);
+  }
+
+  .attributes :global(.section-heading .eyebrow) {
+    color: var(--color-accent);
+  }
+
+  .attribute-card {
+    min-height: 100%;
+    padding: clamp(1.4rem, 3vw, 2rem);
+    border: 1px solid rgb(255 255 255 / 0.18);
+    border-radius: var(--radius-lg);
+    background: var(--color-primary-alt);
+  }
+
+  .attribute-card__mark {
+    display: block;
+    width: 3.2rem;
+    height: 0.35rem;
+    margin-block-end: var(--space-5);
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+  }
+
+  .attribute-card h3 {
+    color: var(--color-surface);
+  }
+
+  .attribute-card p {
+    color: rgb(255 255 255 / 0.79);
+  }
+
+  .section-lead {
+    margin-block-end: var(--space-7);
+  }
+
+  .section-lead :global(.section-heading) {
+    margin-block-end: var(--space-5);
+  }
+
+  .activities-link {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .activities-link:hover {
+    background: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  .activities-note {
+    max-width: 52rem;
+    margin: var(--space-5) auto 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    text-align: center;
+  }
+
+  .enrichment {
+    background: var(--color-background);
+  }
+
+  .enrichment-card {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .enrichment-card :global(img) {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .enrichment-card__body {
+    padding: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .enrichment-card__body p {
+    margin-block-end: var(--space-4);
+  }
+
+  .community-media {
+    background: var(--color-primary-deep);
+  }
+
+  .community-media__grid {
+    display: grid;
+    align-items: center;
+    gap: var(--space-7);
+  }
+
+  .social-card {
+    padding: clamp(1.6rem, 4vw, 2.8rem);
+    border-block-start: 0.4rem solid var(--color-accent);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+
+  .social-card__eyebrow,
+  .enrollment__eyebrow {
+    margin-block-end: var(--space-2);
+    color: var(--color-primary-alt);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .social-card h2 {
+    margin-block-end: var(--space-4);
+    font-size: var(--font-size-2xl);
+  }
+
+  .social-card .external-note {
+    margin: var(--space-3) 0 0;
+  }
+
+  .enrollment {
+    padding-block: clamp(3rem, 6vw, 5rem);
+    background: var(--color-accent);
+    color: var(--color-primary-deep);
+  }
+
+  .enrollment__inner {
+    display: grid;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .enrollment__eyebrow {
+    color: var(--color-primary-deep);
+  }
+
+  .enrollment h2 {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-2xl);
+  }
+
+  .enrollment p:last-child {
+    max-width: 50rem;
+    margin: 0;
+  }
+
+  .enrollment .button {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  .enrollment .button:hover {
+    background: var(--color-primary-deep);
+  }
+
+  @media (min-width: 42rem) {
+    .identity-grid,
+    .attributes-grid,
+    .activities-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .activities-grid > :global(:last-child) {
+      grid-column: 1 / -1;
+      width: min(100%, calc(50% - var(--space-2)));
+      justify-self: center;
+    }
+
+    .enrichment-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 56rem) {
+    .intro__grid {
+      grid-template-columns: 1.35fr 0.65fr;
+    }
+
+    .section-lead {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: var(--space-5);
+    }
+
+    .section-lead :global(.section-heading) {
+      margin-block-end: 0;
+    }
+
+    .community-media__grid {
+      grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+    }
+
+    .enrollment__inner {
+      grid-template-columns: 1fr auto;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .attributes-grid,
+    .activities-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .activities-grid > :global(:last-child) {
+      grid-column: auto;
+      width: auto;
+    }
+
+    .identity-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

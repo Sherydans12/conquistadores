@@ -1,6 +1,9 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://staging.colegioconquistadores.com',
+  site: process.env.SITE_URL ?? 'https://staging.colegioconquistadores.com',
   output: 'static',
+  devToolbar: {
+    enabled: false,
+  },
 });
