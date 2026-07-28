@@ -10,7 +10,7 @@ La implementación no consulta WordPress desde el navegador, no descarga en bloq
 
 - `src/pages/documentos.astro`: composición de la página, hero interior, secciones, archivo, servicio externo y SEO.
 - `src/data/documents.ts`: tipos, categorías, inventario curado, validación de IDs, documentos visibles e inventario interno de revisión.
-- `src/data/legacy-document-routes.ts`: propuestas tipadas de compatibilidad SEO, sin activación.
+- `src/data/legacy-routes.ts`: inventario central tipado de compatibilidad SEO, sin activación.
 - `src/components/documents/DocumentSearch.astro`: búsqueda y filtros progresivos con JavaScript vanilla.
 - `src/components/documents/DocumentFilters.astro`: controles semánticos de categoría, año y vigencia.
 - `src/components/documents/DocumentCard.astro`: presentación del documento y metadatos disponibles.
@@ -91,6 +91,8 @@ La mejora progresiva permite:
 - actualizar el contador mediante `aria-live="polite"`;
 - limpiar todos los filtros;
 - mostrar un estado vacío anunciado.
+- inicializar filtros desde `category`, `year`, `status` y `q`;
+- reflejar filtros válidos en la URL sin peticiones de red.
 
 Sin JavaScript, los controles permanecen deshabilitados y la lista completa continúa visible. Se ofrece una nota para usar la búsqueda del navegador.
 
@@ -106,18 +108,20 @@ No existe dependencia de la API REST de WordPress ni de un script de WordPress e
 
 ## Rutas antiguas y compatibilidad SEO
 
-`src/data/legacy-document-routes.ts` conserva propuestas para:
+`src/data/legacy-routes.ts` conserva las propuestas consolidadas para:
 
 | Ruta histórica | Destino propuesto |
 | --- | --- |
-| `/plan-lector-2026/` | `/documentos/#plan-lector` |
-| `/protocolos-internos/` | `/documentos/#protocolos` |
-| `/calendario-de-evaluaciones-2026/` | `/documentos/#evaluaciones-2026` |
-| `/reglamento-interno-de-convivencia-escolar/` | `/documentos/#reglamentos` |
-| `/horarios-2025/` | `/documentos/#archivo-historico` |
-| `/documentos/` | `/documentos/` |
+| `/plan-lector-2026/` | `/documentos/?category=plan-lector&year=2026` |
+| `/protocolos-internos/` | `/documentos/?category=protocolos` |
+| `/calendario-de-evaluaciones-2026/` | `/documentos/?category=evaluaciones&year=2026` |
+| `/reglamento-interno-de-convivencia-escolar/` | `/documentos/?category=reglamentos&year=2026` |
+| `/horarios-2025/` | `/documentos/?category=horarios&year=2025` |
+| `/matriculas-2025/` | `/matriculas-2026/` |
 
-Las propuestas 301 tienen `approved: false` y no están conectadas a Astro, Coolify, Cloudflare ni otra infraestructura. Una redirección solo podrá aprobarse cuando el ancla de destino contenga todo el contenido equivalente y se haya revisado su efecto en producción.
+Evaluaciones, plan lector y RICE 2026 tienen equivalencia aprobada. Protocolos,
+horarios y Matrículas 2025 permanecen pendientes. Ninguna propuesta está
+conectada a Astro, Coolify, Cloudflare ni otra infraestructura.
 
 ## Navegación
 
@@ -165,7 +169,8 @@ Astro consumiría esos registros durante el build, validaría el esquema y gener
 - Los PDF continúan alojados temporalmente en WordPress; no se copiaron ni optimizaron.
 - La revisión editorial de los documentos marcados como `review` requiere confirmación institucional.
 - Las redirecciones históricas están documentadas, pero no activadas.
-- No se implementó un administrador, webhook, sitemap nuevo ni integración headless.
+- No se implementó un administrador, webhook ni integración headless. Fase 4
+  añadió sitemap y validadores.
 - No se verificó equivalencia completa de las páginas históricas; por eso ninguna propuesta 301 está aprobada.
 - `@astrojs/check` y `typescript` no se añaden únicamente para esta fase si no forman parte de las dependencias existentes.
 

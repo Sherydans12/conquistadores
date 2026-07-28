@@ -7,12 +7,18 @@ interface Props {
 const { years, total } = Astro.props;
 ---
 
-<form class="archive-search" id="activity-search" role="search">
+<form
+  class="archive-search"
+  id="activity-search"
+  role="search"
+  action="/actividades/"
+  method="get"
+>
   <div class="archive-search__field">
     <label for="activity-query">Buscar en actividades</label>
     <input
       id="activity-query"
-      name="actividad"
+      name="q"
       type="search"
       placeholder="Título o palabra clave"
       autocomplete="off"

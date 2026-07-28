@@ -132,7 +132,8 @@ La evidencia comparativa de diseño se documenta en `design-qa.md`.
 - Algunos documentos conservan enlaces históricos externos, pero la portada no
   consulta WordPress en tiempo de ejecución.
 - No hay feed de Instagram, mapa embebido, formulario de contacto ni integración headless. La búsqueda existe solo dentro del centro documental y funciona en cliente sobre el HTML estático.
-- El sitemap y las redirecciones de producción quedan para una fase posterior.
+- Fase 4 añadió el sitemap y el inventario versionado de redirecciones; las
+  reglas pendientes continúan sin activarse.
 - No se desplegó a staging ni se modificó la configuración de Coolify.
 
 ## Diferencias conscientes respecto al sitio actual

@@ -3,11 +3,11 @@ import { site } from '../data/site';
 
 export const GET: APIRoute = () => {
   const body =
-    site.environment === 'production'
+    site.indexingAllowed
       ? [
           'User-agent: *',
           'Allow: /',
-          `Sitemap: ${new URL('/sitemap.xml', site.baseUrl).toString()}`,
+          `Sitemap: ${new URL('/sitemap.xml', site.productionUrl).toString()}`,
         ].join('\n')
       : ['User-agent: *', 'Disallow: /'].join('\n');
 

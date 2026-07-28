@@ -1,0 +1,19 @@
+source_url,target_url,status_code,approved,reason
+/calendario-de-evaluaciones-2026/,/documentos/?category=evaluaciones&year=2026,301,true,El centro documental contiene los once calendarios 2026 por nivel.
+/plan-lector-2026/,/documentos/?category=plan-lector&year=2026,301,true,El centro documental contiene los once planes lectores 2026 por nivel.
+/protocolos-internos/,/documentos/?category=protocolos,301,false,Los protocolos 2024 siguen ocultos y en revisión.
+/reglamento-interno-de-convivencia-escolar/,/documentos/?category=reglamentos&year=2026,301,true,El destino publica el mismo RICE 2026.
+/horarios-2025/,/documentos/?category=horarios&year=2025,301,false,Faltan los diez PDF por curso en el destino.
+/matriculas-2025/,/matriculas-2026/,301,false,La página heredada mezcla archivos 2025 y 2026.
+/category/actividades2023/,/actividades/?year=2023,301,true,El filtro anual consolida la categoría heredada.
+/category/actividades2023/page/2/,/actividades/?year=2023,301,true,La paginación queda consolidada en el filtro anual.
+/category/actividades2023/page/3/,/actividades/?year=2023,301,true,La paginación queda consolidada en el filtro anual.
+/category/actividades2023/page/4/,/actividades/?year=2023,301,true,La paginación queda consolidada en el filtro anual.
+/category/actividades-2024/,/actividades/?year=2024,301,false,La categoría también contiene publicaciones de 2025.
+/category/actividades-2024/page/2/,/actividades/?year=2024,301,false,La paginación requiere revisar publicaciones de 2025.
+/category/uncategorized/,/actividades/,301,true,Las tres publicaciones están en el archivo completo.
+/author/administrador/,/actividades/,301,true,El archivo duplicaba las 47 actividades del hub.
+/author/administrador/page/2/,/actividades/,301,true,La paginación queda consolidada en el archivo completo.
+/author/administrador/page/3/,/actividades/,301,true,La paginación queda consolidada en el archivo completo.
+/author/administrador/page/4/,/actividades/,301,true,La paginación queda consolidada en el archivo completo.
+/author/administrador/page/5/,/actividades/,301,true,La paginación queda consolidada en el archivo completo.

@@ -10,12 +10,24 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "check": "astro check",
     "activities:import": "node scripts/import-wordpress-activities.mjs",
     "activities:materialize": "node scripts/materialize-activity-content.mjs",
     "activities:validate": "node scripts/validate-activities.mjs",
-    "activities:validate-routes": "node scripts/validate-activity-routes.mjs"
+    "activities:validate-routes": "node scripts/validate-activity-routes.mjs",
+    "validate:activities": "node scripts/validate-activities.mjs",
+    "validate:routes": "node scripts/validate-site-routes.mjs",
+    "validate:links": "node scripts/validate-internal-links.mjs",
+    "validate:seo": "node scripts/validate-seo-output.mjs",
+    "validate:assets": "node scripts/validate-asset-budget.mjs",
+    "validate": "npm run activities:validate && npm run validate:routes && npm run validate:links && npm run validate:seo && npm run validate:assets",
+    "ci": "npm run check && npm run build && npm run validate"
   },
   "dependencies": {
     "astro": "^7.1.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3"
   }
 }

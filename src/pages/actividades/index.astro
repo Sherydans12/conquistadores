@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import ActivityArchiveCard from '../../components/activities/ActivityArchiveCard.astro';
 import ActivityArchiveSearch from '../../components/activities/ActivityArchiveSearch.astro';
-import { activitySearchText, sortActivities } from '../../data/activities';
+import { sortActivities } from '../../data/activities';
 import { absoluteUrl, site } from '../../data/site';
 import PageLayout from '../../layouts/PageLayout.astro';
 
@@ -119,19 +119,20 @@ const collectionSchema = {
     </div>
   </section>
 
-  <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
 </PageLayout>
 
 <script>
   const form = document.querySelector<HTMLFormElement>('#activity-search');
   const queryInput = document.querySelector<HTMLInputElement>('#activity-query');
-  const cards = [...document.querySelectorAll<HTMLElement>('[data-activity-card]')]
-    .filter((card) => card.closest('#activity-results'));
   const groups = [
     ...document.querySelectorAll<HTMLDetailsElement>('[data-activity-group]'),
   ];
   const resultCount = document.querySelector<HTMLElement>('#activity-results-count');
   const emptyState = document.querySelector<HTMLElement>('#activity-empty');
+  const allowedYears = new Set(
+    groups.map((group) => group.dataset.year).filter(Boolean),
+  );
 
   const normalize = (value: string) =>
     value
@@ -140,7 +141,19 @@ const collectionSchema = {
       .toLocaleLowerCase('es')
       .trim();
 
-  function applyFilters() {
+  function syncUrl(query: string, selectedYear: string) {
+    const params = new URLSearchParams();
+    if (selectedYear !== 'all') params.set('year', selectedYear);
+    if (query) params.set('q', queryInput?.value.trim() ?? '');
+    const search = params.toString();
+    window.history.replaceState(
+      null,
+      '',
+      `${window.location.pathname}${search ? `?${search}` : ''}`,
+    );
+  }
+
+  function applyFilters(updateUrl = true) {
     const query = normalize(queryInput?.value ?? '');
     const selectedYear =
       form?.querySelector<HTMLInputElement>('input[name="year"]:checked')
@@ -177,18 +190,32 @@ const collectionSchema = {
       }`;
     }
     if (emptyState) emptyState.hidden = visibleTotal !== 0;
+    if (updateUrl) syncUrl(query, selectedYear);
   }
 
-  form?.addEventListener('input', applyFilters);
+  form?.addEventListener('input', () => applyFilters());
+  form?.addEventListener('submit', (event) => event.preventDefault());
   form?.addEventListener('reset', () => {
-    window.setTimeout(() => {
+    window.requestAnimationFrame(() => {
       groups.forEach((group, index) => {
         group.open = index === 0;
       });
       applyFilters();
       queryInput?.focus();
-    }, 0);
+    });
   });
+
+  const initialParams = new URLSearchParams(window.location.search);
+  const initialYear = initialParams.get('year');
+  const initialQuery = initialParams.get('q');
+  if (initialYear && allowedYears.has(initialYear)) {
+    const yearInput = form?.querySelector<HTMLInputElement>(
+      `input[name="year"][value="${CSS.escape(initialYear)}"]`,
+    );
+    if (yearInput) yearInput.checked = true;
+  }
+  if (initialQuery && queryInput) queryInput.value = initialQuery;
+  applyFilters();
 </script>
 
 <style>

@@ -1,33 +1,29 @@
-const STAGING_URL = 'https://staging.colegioconquistadores.com';
-const PRODUCTION_HOST = 'www.colegioconquistadores.com';
+import {
+  PRODUCTION_HOST,
+  PRODUCTION_URL,
+  resolveSiteConfig,
+  STAGING_HOST,
+  STAGING_URL,
+} from './site-config';
 
-type SiteEnvironment = 'staging' | 'production';
-
-function getBaseUrl(): URL {
-  const configuredUrl = import.meta.env.SITE_URL?.trim();
-
-  try {
-    return new URL(configuredUrl || STAGING_URL);
-  } catch {
-    return new URL(STAGING_URL);
-  }
-}
-
-const baseUrl = getBaseUrl();
-const requestedEnvironment =
-  import.meta.env.SITE_ENV === 'production' ? 'production' : 'staging';
-const environment: SiteEnvironment =
-  requestedEnvironment === 'production' && baseUrl.hostname === PRODUCTION_HOST
-    ? 'production'
-    : 'staging';
+const resolvedSiteConfig = resolveSiteConfig({
+  SITE_ENV: import.meta.env.SITE_ENV,
+  SITE_URL: import.meta.env.SITE_URL,
+});
 
 export const site = {
   name: 'Colegio Conquistadores',
   shortName: 'Conquistadores',
   tagline: 'Aprender con alegría',
-  baseUrl,
-  environment,
+  baseUrl: resolvedSiteConfig.baseUrl,
+  environment: resolvedSiteConfig.environment,
+  canonicalHost: resolvedSiteConfig.canonicalHost,
+  isProduction: resolvedSiteConfig.isProduction,
+  indexingAllowed: resolvedSiteConfig.indexingAllowed,
   productionHost: PRODUCTION_HOST,
+  productionUrl: PRODUCTION_URL,
+  stagingHost: STAGING_HOST,
+  stagingUrl: STAGING_URL,
   phone: {
     display: '(51) 223 4652',
     href: 'tel:+56512234652',
@@ -63,4 +59,11 @@ export const site = {
 
 export function absoluteUrl(path: string): string {
   return new URL(path, site.baseUrl).toString();
+}
+
+export function canonicalUrl(path: string): string {
+  const url = new URL(path, site.baseUrl);
+  url.search = '';
+  url.hash = '';
+  return url.toString();
 }

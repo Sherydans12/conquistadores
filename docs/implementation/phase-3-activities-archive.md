@@ -224,6 +224,6 @@ No se implementó webhook ni automatización de publicación en esta fase.
   editorial sostenido.
 - No se instaló `@astrojs/check` ni TypeScript porque no forman parte de las
   dependencias del proyecto.
-- Quedan pendientes categorías, autor, paginaciones, redirecciones, sitemap
-  final, dominio principal, cuenta, registro, notas, analytics y fuente
-  editorial futura.
+- Categorías, autor y paginaciones ya están inventariados con propuestas de
+  redirección sin activar. Quedan pendientes aprobaciones, dominio principal,
+  cuenta, registro, notas, analytics y fuente editorial futura.
