@@ -7,8 +7,6 @@ import wroImage from '../assets/images/activities/world-robot-olympiad-2025.webp
 import galaImage from '../assets/images/activities/gala-raiz-folclorica-2025.webp';
 import familyImage from '../assets/images/activities/dia-de-la-familia-2025.webp';
 
-const legacyBaseUrl = 'https://www.colegioconquistadores.com';
-
 export interface Activity {
   title: string;
   date: string;
@@ -17,7 +15,6 @@ export interface Activity {
   href: string;
   image: ImageMetadata;
   alt: string;
-  temporaryExternal: true;
 }
 
 export const home = {
@@ -85,30 +82,27 @@ export const home = {
       date: '2025-10-06',
       dateLabel: '6 de octubre de 2025',
       category: 'Innovación',
-      href: `${legacyBaseUrl}/2025/10/06/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/`,
+      href: '/2025/10/06/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/',
       image: wroImage,
       alt: 'Estudiantes del Colegio Conquistadores en la World Robot Olympiad Chile',
-      temporaryExternal: true,
     },
     {
       title: 'Gala Raíz Folclórica 2025',
       date: '2025-09-29',
       dateLabel: '29 de septiembre de 2025',
       category: 'Comunidad',
-      href: `${legacyBaseUrl}/2025/09/29/gala-raiz-folclorica-2025/`,
+      href: '/2025/09/29/gala-raiz-folclorica-2025/',
       image: galaImage,
       alt: 'Presentación de estudiantes en la Gala Raíz Folclórica 2025',
-      temporaryExternal: true,
     },
     {
       title: 'Día de la Familia 2025',
       date: '2025-05-19',
       dateLabel: '19 de mayo de 2025',
       category: 'Convivencia',
-      href: `${legacyBaseUrl}/2025/05/19/dia-de-la-familia-2025/`,
+      href: '/2025/05/19/dia-de-la-familia-2025/',
       image: familyImage,
       alt: 'Comunidad del Colegio Conquistadores durante el Día de la Familia 2025',
-      temporaryExternal: true,
     },
   ] satisfies Activity[],
   enrichment: [

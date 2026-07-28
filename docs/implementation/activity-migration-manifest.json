@@ -1,0 +1,2220 @@
+{
+  "generatedAt": "2026-07-28T17:01:51.266Z",
+  "source": "https://www.colegioconquistadores.com",
+  "destination": "https://staging.colegioconquistadores.com",
+  "expectedActivities": 47,
+  "migratedActivities": 47,
+  "dateRange": {
+    "earliest": "2023-03-03T11:35:01",
+    "latest": "2025-10-06T12:00:06"
+  },
+  "summary": {
+    "full": 46,
+    "partial": 1,
+    "minimal": 0,
+    "needsReview": 1,
+    "featuredImages": 47,
+    "galleryImages": 778,
+    "externalResources": 11,
+    "uniqueLocalImages": 825,
+    "totalImageBytes": 80018598,
+    "largestImageBytes": 382680
+  },
+  "entries": [
+    {
+      "sourcePostId": 2382,
+      "title": "Una cálida bienvenida",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/03/03/una-calida-bienvenida/",
+      "astroPath": "/2023/03/03/una-calida-bienvenida/",
+      "publishDate": "2023-03-03T11:35:01",
+      "modifiedDate": "2023-11-29T19:29:39",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/una-calida-bienvenida/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/2023/03/1.png",
+        "bytes": 104782,
+        "width": 1600,
+        "height": 720,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 5,
+        "sourceSliderIds": [
+          "5"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/una-calida-bienvenida/gallery-001.webp",
+          "/src/assets/images/activities/2023/una-calida-bienvenida/gallery-002.webp",
+          "/src/assets/images/activities/2023/una-calida-bienvenida/gallery-003.webp",
+          "/src/assets/images/activities/2023/una-calida-bienvenida/gallery-004.webp",
+          "/src/assets/images/activities/2023/una-calida-bienvenida/gallery-005.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 2291,
+      "title": "Actividad Pascua",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/04/06/actividad-pascua-2/",
+      "astroPath": "/2023/04/06/actividad-pascua-2/",
+      "publishDate": "2023-04-06T01:10:21",
+      "modifiedDate": "2023-11-29T19:30:31",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/actividad-pascua-2/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/2023/10/IMG_20230414_124050.jpg",
+        "bytes": 116936,
+        "width": 1600,
+        "height": 720,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 75,
+        "sourceSliderIds": [
+          "11"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-001.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-002.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-003.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-004.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-005.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-006.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-007.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-008.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-009.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-010.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-011.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-012.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-013.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-014.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-015.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-016.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-017.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-018.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-019.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-020.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-021.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-022.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-023.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-024.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-025.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-026.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-027.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-028.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-029.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-030.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-031.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-032.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-033.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-034.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-035.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-036.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-037.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-038.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-039.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-040.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-041.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-042.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-043.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-044.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-045.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-046.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-047.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-048.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-049.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-050.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-051.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-052.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-053.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-054.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-055.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-056.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-057.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-058.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-059.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-060.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-061.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-062.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-063.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-064.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-065.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-066.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-067.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-068.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-069.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-070.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-071.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-072.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-073.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-074.webp",
+          "/src/assets/images/activities/2023/actividad-pascua-2/gallery-075.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 2465,
+      "title": "Acto natalicio de Gabriela Mistral",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/04/14/acto-natalicio-de-gabriela-mistral/",
+      "astroPath": "/2023/04/14/acto-natalicio-de-gabriela-mistral/",
+      "publishDate": "2023-04-14T11:46:10",
+      "modifiedDate": "2023-11-29T19:30:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider12/IMG_20230414_121016.jpeg",
+        "bytes": 58650,
+        "width": 1600,
+        "height": 720,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 27,
+        "sourceSliderIds": [
+          "12"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-001.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-002.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-003.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-004.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-005.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-006.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-007.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-008.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-009.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-010.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-011.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-012.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-013.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-014.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-015.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-016.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-017.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-018.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-019.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-020.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-021.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-022.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-023.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-024.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-025.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-026.webp",
+          "/src/assets/images/activities/2023/acto-natalicio-de-gabriela-mistral/gallery-027.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 2539,
+      "title": "Vacuna Influenza",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/04/19/vacuna-influenza/",
+      "astroPath": "/2023/04/19/vacuna-influenza/",
+      "publishDate": "2023-04-19T14:07:00",
+      "modifiedDate": "2023-11-30T02:40:00",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/vacuna-influenza/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider13/IMG-20230419-WA0017.jpeg",
+        "bytes": 223186,
+        "width": 900,
+        "height": 1600,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 38,
+        "sourceSliderIds": [
+          "13"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-001.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-002.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-003.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-004.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-005.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-006.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-007.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-008.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-009.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-010.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-011.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-012.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-013.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-014.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-015.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-016.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-017.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-018.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-019.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-020.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-021.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-022.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-023.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-024.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-025.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-026.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-027.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-028.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-029.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-030.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-031.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-032.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-033.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-034.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-035.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-036.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-037.webp",
+          "/src/assets/images/activities/2023/vacuna-influenza/gallery-038.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 2550,
+      "title": "Semana del Día del Libro",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/04/24/semana-del-dia-del-libro/",
+      "astroPath": "/2023/04/24/semana-del-dia-del-libro/",
+      "publishDate": "2023-04-24T20:01:11",
+      "modifiedDate": "2023-11-29T19:26:06",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/semana-del-dia-del-libro/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider15/20230428_121634.jpeg",
+        "bytes": 150660,
+        "width": 1600,
+        "height": 739,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 38,
+        "sourceSliderIds": [
+          "15"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-001.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-002.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-003.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-004.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-005.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-006.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-007.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-008.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-009.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-010.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-011.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-012.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-013.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-014.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-015.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-016.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-017.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-018.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-019.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-020.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-021.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-022.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-023.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-024.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-025.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-026.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-027.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-028.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-029.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-030.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-031.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-032.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-033.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-034.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-035.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-036.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-037.webp",
+          "/src/assets/images/activities/2023/semana-del-dia-del-libro/gallery-038.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3014,
+      "title": "Taller para Padres Y Apoderados",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/05/03/taller-para-padres-y-apoderados/",
+      "astroPath": "/2023/05/03/taller-para-padres-y-apoderados/",
+      "publishDate": "2023-05-03T20:05:23",
+      "modifiedDate": "2023-11-29T19:21:09",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider18/IMG_20230503_172049.jpeg",
+        "bytes": 96144,
+        "width": 1600,
+        "height": 720,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 12,
+        "sourceSliderIds": [
+          "18"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/gallery-001.webp",
+          "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/gallery-002.webp",
+          "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/gallery-003.webp",
+          "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/gallery-004.webp",
+          "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/gallery-005.webp",
+          "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/gallery-006.webp",
+          "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/gallery-007.webp",
+          "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/gallery-008.webp",
+          "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/gallery-009.webp",
+          "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/gallery-010.webp",
+          "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/gallery-011.webp",
+          "/src/assets/images/activities/2023/taller-para-padres-y-apoderados/gallery-012.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3029,
+      "title": "Día del Alumno",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/05/10/dia-del-alumno/",
+      "astroPath": "/2023/05/10/dia-del-alumno/",
+      "publishDate": "2023-05-10T20:10:07",
+      "modifiedDate": "2023-11-29T19:21:09",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/dia-del-alumno/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider19/Dia_alumno_conquistadores_2023_20.jpeg",
+        "bytes": 151920,
+        "width": 1600,
+        "height": 900,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 27,
+        "sourceSliderIds": [
+          "19"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-001.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-002.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-003.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-004.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-005.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-006.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-007.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-008.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-009.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-010.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-011.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-012.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-013.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-014.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-015.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-016.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-017.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-018.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-019.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-020.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-021.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-022.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-023.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-024.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-025.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-026.webp",
+          "/src/assets/images/activities/2023/dia-del-alumno/gallery-027.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3082,
+      "title": "Mes del Mar",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/05/15/mes-del-mar/",
+      "astroPath": "/2023/05/15/mes-del-mar/",
+      "publishDate": "2023-05-15T20:13:24",
+      "modifiedDate": "2023-11-29T19:21:09",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/mes-del-mar/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider20/salida_acuario_conquistadores_9.jpeg",
+        "bytes": 103336,
+        "width": 1200,
+        "height": 1600,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 20,
+        "sourceSliderIds": [
+          "20"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-001.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-002.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-003.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-004.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-005.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-006.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-007.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-008.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-009.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-010.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-011.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-012.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-013.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-014.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-015.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-016.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-017.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-018.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-019.webp",
+          "/src/assets/images/activities/2023/mes-del-mar/gallery-020.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3088,
+      "title": "Salida a Navegar",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/05/22/salida-a-navegar/",
+      "astroPath": "/2023/05/22/salida-a-navegar/",
+      "publishDate": "2023-05-22T20:15:56",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/salida-a-navegar/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider21/7.jpeg",
+        "bytes": 42716,
+        "width": 889,
+        "height": 889,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 14,
+        "sourceSliderIds": [
+          "21"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-001.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-002.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-003.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-004.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-005.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-006.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-007.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-008.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-009.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-010.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-011.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-012.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-013.webp",
+          "/src/assets/images/activities/2023/salida-a-navegar/gallery-014.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3157,
+      "title": "Visita al Centro Cultural Palace",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/05/24/visita-al-centro-cultural-palace/",
+      "astroPath": "/2023/05/24/visita-al-centro-cultural-palace/",
+      "publishDate": "2023-05-24T20:28:58",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider22/6to_10.jpeg",
+        "bytes": 67694,
+        "width": 1600,
+        "height": 1204,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 60,
+        "sourceSliderIds": [
+          "22"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-001.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-002.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-003.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-004.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-005.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-006.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-007.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-008.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-009.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-010.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-011.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-012.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-013.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-014.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-015.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-016.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-017.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-018.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-019.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-020.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-021.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-022.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-023.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-024.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-025.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-026.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-027.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-028.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-029.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-030.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-031.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-032.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-033.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-034.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-035.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-036.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-037.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-038.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-039.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-040.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-041.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-042.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-043.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-044.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-045.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-046.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-047.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-048.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-049.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-050.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-051.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-052.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-053.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-054.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-055.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-056.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-057.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-058.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-059.webp",
+          "/src/assets/images/activities/2023/visita-al-centro-cultural-palace/gallery-060.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3219,
+      "title": "Talento conquistadores",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/06/09/talento-conquistadores/",
+      "astroPath": "/2023/06/09/talento-conquistadores/",
+      "publishDate": "2023-06-09T20:32:44",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/talento-conquistadores/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider23/1talento_1.jpeg",
+        "bytes": 127020,
+        "width": 1600,
+        "height": 1200,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 56,
+        "sourceSliderIds": [
+          "23"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-001.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-002.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-003.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-004.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-005.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-006.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-007.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-008.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-009.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-010.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-011.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-012.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-013.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-014.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-015.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-016.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-017.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-018.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-019.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-020.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-021.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-022.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-023.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-024.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-025.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-026.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-027.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-028.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-029.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-030.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-031.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-032.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-033.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-034.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-035.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-036.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-037.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-038.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-039.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-040.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-041.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-042.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-043.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-044.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-045.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-046.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-047.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-048.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-049.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-050.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-051.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-052.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-053.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-054.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-055.webp",
+          "/src/assets/images/activities/2023/talento-conquistadores/gallery-056.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3299,
+      "title": "Jardín Japonés de Serena",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/06/25/jardin-japones-de-serena/",
+      "astroPath": "/2023/06/25/jardin-japones-de-serena/",
+      "publishDate": "2023-06-25T20:51:03",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/jardin-japones-de-serena/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider26/jardin_jap_7.png",
+        "bytes": 128732,
+        "width": 1599,
+        "height": 722,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 21,
+        "sourceSliderIds": [
+          "26"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-001.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-002.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-003.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-004.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-005.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-006.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-007.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-008.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-009.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-010.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-011.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-012.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-013.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-014.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-015.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-016.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-017.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-018.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-019.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-020.webp",
+          "/src/assets/images/activities/2023/jardin-japones-de-serena/gallery-021.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3244,
+      "title": "Día Canino de Acción y Aprendizaje con Carabineros en Nuestra Escuela",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/06/27/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/",
+      "astroPath": "/2023/06/27/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/",
+      "publishDate": "2023-06-27T20:42:27",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider24/canino_en_accion_9.png",
+        "bytes": 73238,
+        "width": 1022,
+        "height": 739,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 10,
+        "sourceSliderIds": [
+          "24"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/gallery-001.webp",
+          "/src/assets/images/activities/2023/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/gallery-002.webp",
+          "/src/assets/images/activities/2023/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/gallery-003.webp",
+          "/src/assets/images/activities/2023/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/gallery-004.webp",
+          "/src/assets/images/activities/2023/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/gallery-005.webp",
+          "/src/assets/images/activities/2023/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/gallery-006.webp",
+          "/src/assets/images/activities/2023/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/gallery-007.webp",
+          "/src/assets/images/activities/2023/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/gallery-008.webp",
+          "/src/assets/images/activities/2023/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/gallery-009.webp",
+          "/src/assets/images/activities/2023/dia-canino-de-accion-y-aprendizaje-con-carabineros-en-nuestra-escuela/gallery-010.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3250,
+      "title": "Día nacional del bombero",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/06/30/dia-nacional-del-bombero/",
+      "astroPath": "/2023/06/30/dia-nacional-del-bombero/",
+      "publishDate": "2023-06-30T20:47:45",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/dia-nacional-del-bombero/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider25/dia_nacional_bombero_1.png",
+        "bytes": 101694,
+        "width": 1600,
+        "height": 1204,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 16,
+        "sourceSliderIds": [
+          "25"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-001.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-002.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-003.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-004.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-005.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-006.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-007.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-008.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-009.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-010.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-011.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-012.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-013.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-014.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-015.webp",
+          "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-016.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3319,
+      "title": "Despedida del primer semestre",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/07/01/despedida-del-primer-semestre/",
+      "astroPath": "/2023/07/01/despedida-del-primer-semestre/",
+      "publishDate": "2023-07-01T20:54:19",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/despedida-del-primer-semestre/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider27/despedida-del-primer-semestre-7.png",
+        "bytes": 103876,
+        "width": 1600,
+        "height": 739,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 11,
+        "sourceSliderIds": [
+          "27"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/despedida-del-primer-semestre/gallery-001.webp",
+          "/src/assets/images/activities/2023/despedida-del-primer-semestre/gallery-002.webp",
+          "/src/assets/images/activities/2023/despedida-del-primer-semestre/gallery-003.webp",
+          "/src/assets/images/activities/2023/despedida-del-primer-semestre/gallery-004.webp",
+          "/src/assets/images/activities/2023/despedida-del-primer-semestre/gallery-005.webp",
+          "/src/assets/images/activities/2023/despedida-del-primer-semestre/gallery-006.webp",
+          "/src/assets/images/activities/2023/despedida-del-primer-semestre/gallery-007.webp",
+          "/src/assets/images/activities/2023/despedida-del-primer-semestre/gallery-008.webp",
+          "/src/assets/images/activities/2023/despedida-del-primer-semestre/gallery-009.webp",
+          "/src/assets/images/activities/2023/despedida-del-primer-semestre/gallery-010.webp",
+          "/src/assets/images/activities/2023/despedida-del-primer-semestre/gallery-011.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3329,
+      "title": "Segundo Taller para Padres y Apoderados",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/08/02/segundo-taller-para-padres-y-apoderados/",
+      "astroPath": "/2023/08/02/segundo-taller-para-padres-y-apoderados/",
+      "publishDate": "2023-08-02T20:59:48",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/segundo-taller-para-padres-y-apoderados/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider28/2-taller-para-padres-y-apoderados_2.png",
+        "bytes": 63808,
+        "width": 1600,
+        "height": 1204,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 5,
+        "sourceSliderIds": [
+          "28"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/segundo-taller-para-padres-y-apoderados/gallery-001.webp",
+          "/src/assets/images/activities/2023/segundo-taller-para-padres-y-apoderados/gallery-002.webp",
+          "/src/assets/images/activities/2023/segundo-taller-para-padres-y-apoderados/gallery-003.webp",
+          "/src/assets/images/activities/2023/segundo-taller-para-padres-y-apoderados/gallery-004.webp",
+          "/src/assets/images/activities/2023/segundo-taller-para-padres-y-apoderados/gallery-005.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3356,
+      "title": "Visita a la Cruz del Tercer Milenio",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/08/09/visita-a-la-cruz-del-tercer-milenio/",
+      "astroPath": "/2023/08/09/visita-a-la-cruz-del-tercer-milenio/",
+      "publishDate": "2023-08-09T21:02:07",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider29/visitaalaCruzdeltercermilenio_9.jpeg",
+        "bytes": 98364,
+        "width": 1200,
+        "height": 1600,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 19,
+        "sourceSliderIds": [
+          "29"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-001.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-002.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-003.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-004.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-005.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-006.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-007.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-008.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-009.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-010.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-011.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-012.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-013.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-014.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-015.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-016.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-017.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-018.webp",
+          "/src/assets/images/activities/2023/visita-a-la-cruz-del-tercer-milenio/gallery-019.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3370,
+      "title": "Torneo de Atletismo",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/08/11/torneo-de-atletismo/",
+      "astroPath": "/2023/08/11/torneo-de-atletismo/",
+      "publishDate": "2023-08-11T21:04:03",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/torneo-de-atletismo/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider30/torneodeatletismo_8.jpeg",
+        "bytes": 176284,
+        "width": 1052,
+        "height": 1402,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 9,
+        "sourceSliderIds": [
+          "30"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/torneo-de-atletismo/gallery-001.webp",
+          "/src/assets/images/activities/2023/torneo-de-atletismo/gallery-002.webp",
+          "/src/assets/images/activities/2023/torneo-de-atletismo/gallery-003.webp",
+          "/src/assets/images/activities/2023/torneo-de-atletismo/gallery-004.webp",
+          "/src/assets/images/activities/2023/torneo-de-atletismo/gallery-005.webp",
+          "/src/assets/images/activities/2023/torneo-de-atletismo/gallery-006.webp",
+          "/src/assets/images/activities/2023/torneo-de-atletismo/gallery-007.webp",
+          "/src/assets/images/activities/2023/torneo-de-atletismo/gallery-008.webp",
+          "/src/assets/images/activities/2023/torneo-de-atletismo/gallery-009.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3385,
+      "title": "Visita a La Serena Zoo",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/08/18/visita-a-la-serena-zoo/",
+      "astroPath": "/2023/08/18/visita-a-la-serena-zoo/",
+      "publishDate": "2023-08-18T21:07:37",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/visita-a-la-serena-zoo/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider31/UnaAventuraInolvidableVisitaaLaSerenaZoo_3.jpeg",
+        "bytes": 347438,
+        "width": 960,
+        "height": 1280,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 10,
+        "sourceSliderIds": [
+          "31"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/visita-a-la-serena-zoo/gallery-001.webp",
+          "/src/assets/images/activities/2023/visita-a-la-serena-zoo/gallery-002.webp",
+          "/src/assets/images/activities/2023/visita-a-la-serena-zoo/gallery-003.webp",
+          "/src/assets/images/activities/2023/visita-a-la-serena-zoo/gallery-004.webp",
+          "/src/assets/images/activities/2023/visita-a-la-serena-zoo/gallery-005.webp",
+          "/src/assets/images/activities/2023/visita-a-la-serena-zoo/gallery-006.webp",
+          "/src/assets/images/activities/2023/visita-a-la-serena-zoo/gallery-007.webp",
+          "/src/assets/images/activities/2023/visita-a-la-serena-zoo/gallery-008.webp",
+          "/src/assets/images/activities/2023/visita-a-la-serena-zoo/gallery-009.webp",
+          "/src/assets/images/activities/2023/visita-a-la-serena-zoo/gallery-010.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3400,
+      "title": "Día de la niñez",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/08/19/dia-de-la-ninez/",
+      "astroPath": "/2023/08/19/dia-de-la-ninez/",
+      "publishDate": "2023-08-19T21:10:26",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/dia-de-la-ninez/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider32/Dia-de-la-ninez-2.png",
+        "bytes": 168196,
+        "width": 1600,
+        "height": 1042,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 10,
+        "sourceSliderIds": [
+          "32"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/dia-de-la-ninez/gallery-001.webp",
+          "/src/assets/images/activities/2023/dia-de-la-ninez/gallery-002.webp",
+          "/src/assets/images/activities/2023/dia-de-la-ninez/gallery-003.webp",
+          "/src/assets/images/activities/2023/dia-de-la-ninez/gallery-004.webp",
+          "/src/assets/images/activities/2023/dia-de-la-ninez/gallery-005.webp",
+          "/src/assets/images/activities/2023/dia-de-la-ninez/gallery-006.webp",
+          "/src/assets/images/activities/2023/dia-de-la-ninez/gallery-007.webp",
+          "/src/assets/images/activities/2023/dia-de-la-ninez/gallery-008.webp",
+          "/src/assets/images/activities/2023/dia-de-la-ninez/gallery-009.webp",
+          "/src/assets/images/activities/2023/dia-de-la-ninez/gallery-010.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3410,
+      "title": "Natalicio Bernardo O’Higgins",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/08/22/dia-de-la-ninez-2/",
+      "astroPath": "/2023/08/22/dia-de-la-ninez-2/",
+      "publishDate": "2023-08-22T21:15:10",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/dia-de-la-ninez-2/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider33/natalicio-Bernardo-Ohiggins-2.png",
+        "bytes": 105554,
+        "width": 1296,
+        "height": 1599,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 4,
+        "sourceSliderIds": [
+          "33"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/dia-de-la-ninez-2/gallery-001.webp",
+          "/src/assets/images/activities/2023/dia-de-la-ninez-2/gallery-002.webp",
+          "/src/assets/images/activities/2023/dia-de-la-ninez-2/gallery-003.webp",
+          "/src/assets/images/activities/2023/dia-de-la-ninez-2/gallery-004.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3425,
+      "title": "Obra de teatro “Un mundo de diferencias”",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/09/13/obra-de-teatro-un-mundo-de-diferencias/",
+      "astroPath": "/2023/09/13/obra-de-teatro-un-mundo-de-diferencias/",
+      "publishDate": "2023-09-13T21:17:38",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/obra-de-teatro-un-mundo-de-diferencias/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider34/obradeteatro_Unmundodediferencias4.jpeg",
+        "bytes": 181176,
+        "width": 1600,
+        "height": 1200,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 8,
+        "sourceSliderIds": [
+          "34"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/obra-de-teatro-un-mundo-de-diferencias/gallery-001.webp",
+          "/src/assets/images/activities/2023/obra-de-teatro-un-mundo-de-diferencias/gallery-002.webp",
+          "/src/assets/images/activities/2023/obra-de-teatro-un-mundo-de-diferencias/gallery-003.webp",
+          "/src/assets/images/activities/2023/obra-de-teatro-un-mundo-de-diferencias/gallery-004.webp",
+          "/src/assets/images/activities/2023/obra-de-teatro-un-mundo-de-diferencias/gallery-005.webp",
+          "/src/assets/images/activities/2023/obra-de-teatro-un-mundo-de-diferencias/gallery-006.webp",
+          "/src/assets/images/activities/2023/obra-de-teatro-un-mundo-de-diferencias/gallery-007.webp",
+          "/src/assets/images/activities/2023/obra-de-teatro-un-mundo-de-diferencias/gallery-008.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3444,
+      "title": "Acto mes de octubre «Encuentro de dos mundos»",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/10/11/acto-mes-de-octubre-encuentro-de-dos-mundos/",
+      "astroPath": "/2023/10/11/acto-mes-de-octubre-encuentro-de-dos-mundos/",
+      "publishDate": "2023-10-11T21:19:55",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider35/Encuentro-de-dos-mundos-9.jpeg",
+        "bytes": 114450,
+        "width": 1200,
+        "height": 1600,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 13,
+        "sourceSliderIds": [
+          "35"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-001.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-002.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-003.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-004.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-005.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-006.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-007.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-008.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-009.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-010.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-011.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-012.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-octubre-encuentro-de-dos-mundos/gallery-013.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3485,
+      "title": "Visita a recinto Teletón",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/10/16/visita-a-recinto-teleton/",
+      "astroPath": "/2023/10/16/visita-a-recinto-teleton/",
+      "publishDate": "2023-10-16T21:24:00",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/visita-a-recinto-teleton/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider38/teleton13.jpeg",
+        "bytes": 71380,
+        "width": 791,
+        "height": 591,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 35,
+        "sourceSliderIds": [
+          "36",
+          "37",
+          "38"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-001.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-002.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-003.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-004.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-005.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-006.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-007.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-008.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-009.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-010.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-011.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-012.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-013.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-014.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-015.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-016.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-017.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-018.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-019.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-020.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-021.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-022.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-023.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-024.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-025.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-026.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-027.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-028.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-029.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-030.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-031.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-032.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-033.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-034.webp",
+          "/src/assets/images/activities/2023/visita-a-recinto-teleton/gallery-035.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3496,
+      "title": "Actividad higiene bucal",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/11/10/actividad-higiene-bucal/",
+      "astroPath": "/2023/11/10/actividad-higiene-bucal/",
+      "publishDate": "2023-11-10T21:29:37",
+      "modifiedDate": "2023-11-29T19:20:44",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/actividad-higiene-bucal/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider39/4999e7d6-9ab6-45ba-bf7c-ae60e11682f9.jpeg",
+        "bytes": 228394,
+        "width": 1600,
+        "height": 1200,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 5,
+        "sourceSliderIds": [
+          "39"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/actividad-higiene-bucal/gallery-001.webp",
+          "/src/assets/images/activities/2023/actividad-higiene-bucal/gallery-002.webp",
+          "/src/assets/images/activities/2023/actividad-higiene-bucal/gallery-003.webp",
+          "/src/assets/images/activities/2023/actividad-higiene-bucal/gallery-004.webp",
+          "/src/assets/images/activities/2023/actividad-higiene-bucal/gallery-005.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3558,
+      "title": "Acto mes de noviembre «Derechos de los niños y niñas»",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/11/14/acto-mes-de-noviembre-derechos-de-los-ninos-y-ninas/",
+      "astroPath": "/2023/11/14/acto-mes-de-noviembre-derechos-de-los-ninos-y-ninas/",
+      "publishDate": "2023-11-14T18:04:10",
+      "modifiedDate": "2023-11-29T23:24:04",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/acto-mes-de-noviembre-derechos-de-los-ninos-y-ninas/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider42/51c045d7-1efa-4e99-bab6-377e5fa62711.jpeg",
+        "bytes": 106648,
+        "width": 1600,
+        "height": 900,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 9,
+        "sourceSliderIds": [
+          "42"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/acto-mes-de-noviembre-derechos-de-los-ninos-y-ninas/gallery-001.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-noviembre-derechos-de-los-ninos-y-ninas/gallery-002.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-noviembre-derechos-de-los-ninos-y-ninas/gallery-003.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-noviembre-derechos-de-los-ninos-y-ninas/gallery-004.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-noviembre-derechos-de-los-ninos-y-ninas/gallery-005.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-noviembre-derechos-de-los-ninos-y-ninas/gallery-006.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-noviembre-derechos-de-los-ninos-y-ninas/gallery-007.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-noviembre-derechos-de-los-ninos-y-ninas/gallery-008.webp",
+          "/src/assets/images/activities/2023/acto-mes-de-noviembre-derechos-de-los-ninos-y-ninas/gallery-009.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3527,
+      "title": "Visita Cementerio Inglés de Guayacán",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/11/17/visita-cementerio-ingles-de-guayacan/",
+      "astroPath": "/2023/11/17/visita-cementerio-ingles-de-guayacan/",
+      "publishDate": "2023-11-17T21:35:22",
+      "modifiedDate": "2023-11-29T23:24:12",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/visita-cementerio-ingles-de-guayacan/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider41/d189c0dc-65c3-4e6d-85a3-0ada465a127f.jpeg",
+        "bytes": 191828,
+        "width": 1600,
+        "height": 900,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 9,
+        "sourceSliderIds": [
+          "41"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/visita-cementerio-ingles-de-guayacan/gallery-001.webp",
+          "/src/assets/images/activities/2023/visita-cementerio-ingles-de-guayacan/gallery-002.webp",
+          "/src/assets/images/activities/2023/visita-cementerio-ingles-de-guayacan/gallery-003.webp",
+          "/src/assets/images/activities/2023/visita-cementerio-ingles-de-guayacan/gallery-004.webp",
+          "/src/assets/images/activities/2023/visita-cementerio-ingles-de-guayacan/gallery-005.webp",
+          "/src/assets/images/activities/2023/visita-cementerio-ingles-de-guayacan/gallery-006.webp",
+          "/src/assets/images/activities/2023/visita-cementerio-ingles-de-guayacan/gallery-007.webp",
+          "/src/assets/images/activities/2023/visita-cementerio-ingles-de-guayacan/gallery-008.webp",
+          "/src/assets/images/activities/2023/visita-cementerio-ingles-de-guayacan/gallery-009.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 3512,
+      "title": "Visita al Jardín Japones La Serena",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/11/19/visita-al-jardin-japones-la-serena/",
+      "astroPath": "/2023/11/19/visita-al-jardin-japones-la-serena/",
+      "publishDate": "2023-11-19T21:32:23",
+      "modifiedDate": "2023-11-29T23:24:19",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/visita-al-jardin-japones-la-serena/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider40/55673a9f-5d89-42e7-a1fe-a693768f5d2c.jpeg",
+        "bytes": 176698,
+        "width": 1024,
+        "height": 768,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 10,
+        "sourceSliderIds": [
+          "40"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/visita-al-jardin-japones-la-serena/gallery-001.webp",
+          "/src/assets/images/activities/2023/visita-al-jardin-japones-la-serena/gallery-002.webp",
+          "/src/assets/images/activities/2023/visita-al-jardin-japones-la-serena/gallery-003.webp",
+          "/src/assets/images/activities/2023/visita-al-jardin-japones-la-serena/gallery-004.webp",
+          "/src/assets/images/activities/2023/visita-al-jardin-japones-la-serena/gallery-005.webp",
+          "/src/assets/images/activities/2023/visita-al-jardin-japones-la-serena/gallery-006.webp",
+          "/src/assets/images/activities/2023/visita-al-jardin-japones-la-serena/gallery-007.webp",
+          "/src/assets/images/activities/2023/visita-al-jardin-japones-la-serena/gallery-008.webp",
+          "/src/assets/images/activities/2023/visita-al-jardin-japones-la-serena/gallery-009.webp",
+          "/src/assets/images/activities/2023/visita-al-jardin-japones-la-serena/gallery-010.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 4232,
+      "title": "Expo Big Bang",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/11/20/expo-big-bang/",
+      "astroPath": "/2023/11/20/expo-big-bang/",
+      "publishDate": "2023-11-20T23:14:53",
+      "modifiedDate": "2023-11-29T23:23:38",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/expo-big-bang/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider43/ExpoBigBang-20denoviembre-2.jpeg",
+        "bytes": 184286,
+        "width": 1600,
+        "height": 900,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 9,
+        "sourceSliderIds": [
+          "43"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/expo-big-bang/gallery-001.webp",
+          "/src/assets/images/activities/2023/expo-big-bang/gallery-002.webp",
+          "/src/assets/images/activities/2023/expo-big-bang/gallery-003.webp",
+          "/src/assets/images/activities/2023/expo-big-bang/gallery-004.webp",
+          "/src/assets/images/activities/2023/expo-big-bang/gallery-005.webp",
+          "/src/assets/images/activities/2023/expo-big-bang/gallery-006.webp",
+          "/src/assets/images/activities/2023/expo-big-bang/gallery-007.webp",
+          "/src/assets/images/activities/2023/expo-big-bang/gallery-008.webp",
+          "/src/assets/images/activities/2023/expo-big-bang/gallery-009.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 4237,
+      "title": "Dia de la Musica",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/11/22/dia-de-la-musica/",
+      "astroPath": "/2023/11/22/dia-de-la-musica/",
+      "publishDate": "2023-11-22T23:19:44",
+      "modifiedDate": "2023-11-29T23:23:53",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/dia-de-la-musica/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider44/Dadelamsica22denoviembre-8.jpeg",
+        "bytes": 113298,
+        "width": 1477,
+        "height": 720,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 8,
+        "sourceSliderIds": [
+          "44"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/dia-de-la-musica/gallery-001.webp",
+          "/src/assets/images/activities/2023/dia-de-la-musica/gallery-002.webp",
+          "/src/assets/images/activities/2023/dia-de-la-musica/gallery-003.webp",
+          "/src/assets/images/activities/2023/dia-de-la-musica/gallery-004.webp",
+          "/src/assets/images/activities/2023/dia-de-la-musica/gallery-005.webp",
+          "/src/assets/images/activities/2023/dia-de-la-musica/gallery-006.webp",
+          "/src/assets/images/activities/2023/dia-de-la-musica/gallery-007.webp",
+          "/src/assets/images/activities/2023/dia-de-la-musica/gallery-008.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 4274,
+      "title": "Visita centro cultural Mohamed VI",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/11/23/visita-centro-cultural-mohamed-vi/",
+      "astroPath": "/2023/11/23/visita-centro-cultural-mohamed-vi/",
+      "publishDate": "2023-11-23T23:30:58",
+      "modifiedDate": "2023-11-29T23:33:18",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider45/CentroculturalMohamedVI-23denoviembre-14.jpeg",
+        "bytes": 96876,
+        "width": 960,
+        "height": 1280,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 19,
+        "sourceSliderIds": [
+          "45"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-001.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-002.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-003.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-004.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-005.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-006.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-007.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-008.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-009.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-010.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-011.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-012.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-013.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-014.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-015.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-016.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-017.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-018.webp",
+          "/src/assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-019.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 4289,
+      "title": "Mi primera experiencia Conquistadores",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/11/23/mi-primera-experiencia-conquistadores/",
+      "astroPath": "/2023/11/23/mi-primera-experiencia-conquistadores/",
+      "publishDate": "2023-11-23T23:35:27",
+      "modifiedDate": "2023-11-29T23:37:13",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/mi-primera-experiencia-conquistadores/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider46/MiprimeraexperienciaConquistadores-23denoviembre-7.jpeg",
+        "bytes": 165012,
+        "width": 1600,
+        "height": 1200,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 9,
+        "sourceSliderIds": [
+          "46"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/mi-primera-experiencia-conquistadores/gallery-001.webp",
+          "/src/assets/images/activities/2023/mi-primera-experiencia-conquistadores/gallery-002.webp",
+          "/src/assets/images/activities/2023/mi-primera-experiencia-conquistadores/gallery-003.webp",
+          "/src/assets/images/activities/2023/mi-primera-experiencia-conquistadores/gallery-004.webp",
+          "/src/assets/images/activities/2023/mi-primera-experiencia-conquistadores/gallery-005.webp",
+          "/src/assets/images/activities/2023/mi-primera-experiencia-conquistadores/gallery-006.webp",
+          "/src/assets/images/activities/2023/mi-primera-experiencia-conquistadores/gallery-007.webp",
+          "/src/assets/images/activities/2023/mi-primera-experiencia-conquistadores/gallery-008.webp",
+          "/src/assets/images/activities/2023/mi-primera-experiencia-conquistadores/gallery-009.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 4500,
+      "title": "Cierre de Aniversario Conquistadores",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/12/15/cierre-de-aniversario-conquistadores/",
+      "astroPath": "/2023/12/15/cierre-de-aniversario-conquistadores/",
+      "publishDate": "2023-12-15T21:07:34",
+      "modifiedDate": "2023-12-28T21:11:42",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider47/21ab396d-8c75-4f89-a608-618169d44b54.jpeg",
+        "bytes": 75334,
+        "width": 720,
+        "height": 1600,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 12,
+        "sourceSliderIds": [
+          "47"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/gallery-001.webp",
+          "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/gallery-002.webp",
+          "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/gallery-003.webp",
+          "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/gallery-004.webp",
+          "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/gallery-005.webp",
+          "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/gallery-006.webp",
+          "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/gallery-007.webp",
+          "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/gallery-008.webp",
+          "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/gallery-009.webp",
+          "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/gallery-010.webp",
+          "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/gallery-011.webp",
+          "/src/assets/images/activities/2023/cierre-de-aniversario-conquistadores/gallery-012.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 4557,
+      "title": "Bienvenida a estudiantes 2024",
+      "historicalUrl": "https://www.colegioconquistadores.com/2023/12/28/bienvenida-a-estudiantes-2024/",
+      "astroPath": "/2023/12/28/bienvenida-a-estudiantes-2024/",
+      "publishDate": "2023-12-28T18:29:09",
+      "modifiedDate": "2024-11-06T16:05:02",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider48/WhatsAppImage2024-01-04at1506152.jpeg",
+        "bytes": 81350,
+        "width": 1052,
+        "height": 780,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 13,
+        "sourceSliderIds": [
+          "48"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-001.webp",
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-002.webp",
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-003.webp",
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-004.webp",
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-005.webp",
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-006.webp",
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-007.webp",
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-008.webp",
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-009.webp",
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-010.webp",
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-011.webp",
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-012.webp",
+          "/src/assets/images/activities/2023/bienvenida-a-estudiantes-2024/gallery-013.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 4805,
+      "title": "Visita Biblioteca Gabriela Mistral",
+      "historicalUrl": "https://www.colegioconquistadores.com/2024/04/13/visita-biblioteca-gabriela-mistral/",
+      "astroPath": "/2024/04/13/visita-biblioteca-gabriela-mistral/",
+      "publishDate": "2024-04-13T18:25:31",
+      "modifiedDate": "2024-04-29T21:11:57",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2024/visita-biblioteca-gabriela-mistral/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/2024/04/WhatsApp-Image-2024-04-22-at-16.54.48-3.jpeg",
+        "bytes": 301502,
+        "width": 1600,
+        "height": 737,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 10,
+        "sourceSliderIds": [
+          "49"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2024/visita-biblioteca-gabriela-mistral/gallery-001.webp",
+          "/src/assets/images/activities/2024/visita-biblioteca-gabriela-mistral/gallery-002.webp",
+          "/src/assets/images/activities/2024/visita-biblioteca-gabriela-mistral/gallery-003.webp",
+          "/src/assets/images/activities/2024/visita-biblioteca-gabriela-mistral/gallery-004.webp",
+          "/src/assets/images/activities/2024/visita-biblioteca-gabriela-mistral/gallery-005.webp",
+          "/src/assets/images/activities/2024/visita-biblioteca-gabriela-mistral/gallery-006.webp",
+          "/src/assets/images/activities/2024/visita-biblioteca-gabriela-mistral/gallery-007.webp",
+          "/src/assets/images/activities/2024/visita-biblioteca-gabriela-mistral/gallery-008.webp",
+          "/src/assets/images/activities/2024/visita-biblioteca-gabriela-mistral/gallery-009.webp",
+          "/src/assets/images/activities/2024/visita-biblioteca-gabriela-mistral/gallery-010.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 4870,
+      "title": "Día del Libro",
+      "historicalUrl": "https://www.colegioconquistadores.com/2024/04/23/dia-de-libro/",
+      "astroPath": "/2024/04/23/dia-de-libro/",
+      "publishDate": "2024-04-23T14:00:38",
+      "modifiedDate": "2024-04-29T21:10:37",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2024/dia-de-libro/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider50/WhatsAppImage2024-04-24at1635201-scaled.jpeg",
+        "bytes": 118748,
+        "width": 1600,
+        "height": 901,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 18,
+        "sourceSliderIds": [
+          "50"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-001.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-002.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-003.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-004.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-005.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-006.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-007.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-008.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-009.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-010.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-011.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-012.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-013.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-014.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-015.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-016.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-017.webp",
+          "/src/assets/images/activities/2024/dia-de-libro/gallery-018.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 4955,
+      "title": "Día del estudiante",
+      "historicalUrl": "https://www.colegioconquistadores.com/2024/05/10/dia-del-estudiante/",
+      "astroPath": "/2024/05/10/dia-del-estudiante/",
+      "publishDate": "2024-05-10T10:00:13",
+      "modifiedDate": "2024-06-06T16:01:21",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2024/dia-del-estudiante/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/2024/06/WhatsApp-Image-2024-05-27-at-20.36.54.jpeg",
+        "bytes": 114052,
+        "width": 1280,
+        "height": 960,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 26,
+        "sourceSliderIds": [
+          "52"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-001.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-002.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-003.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-004.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-005.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-006.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-007.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-008.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-009.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-010.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-011.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-012.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-013.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-014.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-015.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-016.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-017.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-018.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-019.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-020.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-021.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-022.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-023.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-024.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-025.webp",
+          "/src/assets/images/activities/2024/dia-del-estudiante/gallery-026.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 4956,
+      "title": "English Day «Conquistaloza»",
+      "historicalUrl": "https://www.colegioconquistadores.com/2024/05/17/english-day-conquistaloza/",
+      "astroPath": "/2024/05/17/english-day-conquistaloza/",
+      "publishDate": "2024-05-17T15:44:21",
+      "modifiedDate": "2024-06-06T15:59:14",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2024/english-day-conquistaloza/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/2024/06/WhatsApp-Image-2024-05-27-at-20.10.52.jpeg",
+        "bytes": 107492,
+        "width": 1080,
+        "height": 1080,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 9,
+        "sourceSliderIds": [
+          "51"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2024/english-day-conquistaloza/gallery-001.webp",
+          "/src/assets/images/activities/2024/english-day-conquistaloza/gallery-002.webp",
+          "/src/assets/images/activities/2024/english-day-conquistaloza/gallery-003.webp",
+          "/src/assets/images/activities/2024/english-day-conquistaloza/gallery-004.webp",
+          "/src/assets/images/activities/2024/english-day-conquistaloza/gallery-005.webp",
+          "/src/assets/images/activities/2024/english-day-conquistaloza/gallery-006.webp",
+          "/src/assets/images/activities/2024/english-day-conquistaloza/gallery-007.webp",
+          "/src/assets/images/activities/2024/english-day-conquistaloza/gallery-008.webp",
+          "/src/assets/images/activities/2024/english-day-conquistaloza/gallery-009.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 4957,
+      "title": "Glorias Navales",
+      "historicalUrl": "https://www.colegioconquistadores.com/2024/05/27/glorias-navales/",
+      "astroPath": "/2024/05/27/glorias-navales/",
+      "publishDate": "2024-05-27T10:00:27",
+      "modifiedDate": "2024-06-06T16:00:04",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2024/glorias-navales/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/2024/06/WhatsApp-Image-2024-06-04-at-09.22.05-1.jpeg",
+        "bytes": 179734,
+        "width": 1600,
+        "height": 1204,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 6,
+        "sourceSliderIds": [
+          "53"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2024/glorias-navales/gallery-001.webp",
+          "/src/assets/images/activities/2024/glorias-navales/gallery-002.webp",
+          "/src/assets/images/activities/2024/glorias-navales/gallery-003.webp",
+          "/src/assets/images/activities/2024/glorias-navales/gallery-004.webp",
+          "/src/assets/images/activities/2024/glorias-navales/gallery-005.webp",
+          "/src/assets/images/activities/2024/glorias-navales/gallery-006.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 5121,
+      "title": "Jornada Deportiva",
+      "historicalUrl": "https://www.colegioconquistadores.com/2024/07/20/jornada-deportiva/",
+      "astroPath": "/2024/07/20/jornada-deportiva/",
+      "publishDate": "2024-07-20T10:02:58",
+      "modifiedDate": "2024-07-29T21:26:26",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2024/jornada-deportiva/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider54/WhatsAppImage2024-07-24at2020172.jpeg",
+        "bytes": 174868,
+        "width": 1600,
+        "height": 1200,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 7,
+        "sourceSliderIds": [
+          "54"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2024/jornada-deportiva/gallery-001.webp",
+          "/src/assets/images/activities/2024/jornada-deportiva/gallery-002.webp",
+          "/src/assets/images/activities/2024/jornada-deportiva/gallery-003.webp",
+          "/src/assets/images/activities/2024/jornada-deportiva/gallery-004.webp",
+          "/src/assets/images/activities/2024/jornada-deportiva/gallery-005.webp",
+          "/src/assets/images/activities/2024/jornada-deportiva/gallery-006.webp",
+          "/src/assets/images/activities/2024/jornada-deportiva/gallery-007.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 5136,
+      "title": "Encuentro Amistoso de Voleibol",
+      "historicalUrl": "https://www.colegioconquistadores.com/2024/07/22/encuentro-amistoso-de-voleibol/",
+      "astroPath": "/2024/07/22/encuentro-amistoso-de-voleibol/",
+      "publishDate": "2024-07-22T21:11:32",
+      "modifiedDate": "2024-07-29T21:26:17",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2024/encuentro-amistoso-de-voleibol/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider55/WhatsAppImage2024-07-24at2025173.jpeg",
+        "bytes": 344884,
+        "width": 1600,
+        "height": 1200,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 9,
+        "sourceSliderIds": [
+          "55"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2024/encuentro-amistoso-de-voleibol/gallery-001.webp",
+          "/src/assets/images/activities/2024/encuentro-amistoso-de-voleibol/gallery-002.webp",
+          "/src/assets/images/activities/2024/encuentro-amistoso-de-voleibol/gallery-003.webp",
+          "/src/assets/images/activities/2024/encuentro-amistoso-de-voleibol/gallery-004.webp",
+          "/src/assets/images/activities/2024/encuentro-amistoso-de-voleibol/gallery-005.webp",
+          "/src/assets/images/activities/2024/encuentro-amistoso-de-voleibol/gallery-006.webp",
+          "/src/assets/images/activities/2024/encuentro-amistoso-de-voleibol/gallery-007.webp",
+          "/src/assets/images/activities/2024/encuentro-amistoso-de-voleibol/gallery-008.webp",
+          "/src/assets/images/activities/2024/encuentro-amistoso-de-voleibol/gallery-009.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 5157,
+      "title": "Acto Pueblos Originarios",
+      "historicalUrl": "https://www.colegioconquistadores.com/2024/07/23/acto-pueblos-originarios/",
+      "astroPath": "/2024/07/23/acto-pueblos-originarios/",
+      "publishDate": "2024-07-23T10:19:49",
+      "modifiedDate": "2024-07-29T21:25:08",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2024/acto-pueblos-originarios/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/slider56/WhatsAppImage2024-07-26at183615.jpeg",
+        "bytes": 146146,
+        "width": 1600,
+        "height": 1204,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 8,
+        "sourceSliderIds": [
+          "56"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2024/acto-pueblos-originarios/gallery-001.webp",
+          "/src/assets/images/activities/2024/acto-pueblos-originarios/gallery-002.webp",
+          "/src/assets/images/activities/2024/acto-pueblos-originarios/gallery-003.webp",
+          "/src/assets/images/activities/2024/acto-pueblos-originarios/gallery-004.webp",
+          "/src/assets/images/activities/2024/acto-pueblos-originarios/gallery-005.webp",
+          "/src/assets/images/activities/2024/acto-pueblos-originarios/gallery-006.webp",
+          "/src/assets/images/activities/2024/acto-pueblos-originarios/gallery-007.webp",
+          "/src/assets/images/activities/2024/acto-pueblos-originarios/gallery-008.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 5200,
+      "title": "Visita del Kínder – Jardín Conquistadores",
+      "historicalUrl": "https://www.colegioconquistadores.com/2024/08/30/visita-del-kinder-jardin-conquistadores/",
+      "astroPath": "/2024/08/30/visita-del-kinder-jardin-conquistadores/",
+      "publishDate": "2024-08-30T19:12:05",
+      "modifiedDate": "2024-09-16T19:23:05",
+      "migrationStatus": "migrated",
+      "reviewStatus": "needs-review",
+      "contentQuality": "partial",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2024/visita-del-kinder-jardin-conquistadores/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/2024/08/Untitled.png",
+        "bytes": 132452,
+        "width": 1600,
+        "height": 900,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 0,
+        "sourceSliderIds": [],
+        "paths": []
+      },
+      "externalResources": [],
+      "notes": [
+        "El video MP4 heredado de 30,8 MB no se incorporó; la actividad conserva texto e imagen destacada y requiere una decisión editorial sobre el video."
+      ]
+    },
+    {
+      "sourcePostId": 5245,
+      "title": "Campaña Teletón 2024",
+      "historicalUrl": "https://www.colegioconquistadores.com/2024/10/04/campana-teleton-2024/",
+      "astroPath": "/2024/10/04/campana-teleton-2024/",
+      "publishDate": "2024-10-04T16:03:21",
+      "modifiedDate": "2025-10-05T21:20:51",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/2024/campana-teleton-2024/featured.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/2024/11/WhatsApp-Image-2024-10-05-at-1.15.11-PM-scaled.jpeg",
+        "bytes": 382680,
+        "width": 1521,
+        "height": 1600,
+        "reusedFromHome": false
+      },
+      "gallery": {
+        "migratedImages": 17,
+        "sourceSliderIds": [
+          "59"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-001.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-002.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-003.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-004.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-005.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-006.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-007.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-008.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-009.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-010.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-011.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-012.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-013.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-014.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-015.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-016.webp",
+          "/src/assets/images/activities/2024/campana-teleton-2024/gallery-017.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 5626,
+      "title": "Día de la Familia 2025",
+      "historicalUrl": "https://www.colegioconquistadores.com/2025/05/19/dia-de-la-familia-2025/",
+      "astroPath": "/2025/05/19/dia-de-la-familia-2025/",
+      "publishDate": "2025-05-19T21:02:59",
+      "modifiedDate": "2025-10-05T21:20:02",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/dia-de-la-familia-2025.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/2025/10/WhatsApp-Image-2025-05-23-at-2.54.11-PM-1.jpeg",
+        "bytes": 153176,
+        "width": 1200,
+        "height": 903,
+        "reusedFromHome": true
+      },
+      "gallery": {
+        "migratedImages": 11,
+        "sourceSliderIds": [
+          "58"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2025/dia-de-la-familia-2025/gallery-001.webp",
+          "/src/assets/images/activities/2025/dia-de-la-familia-2025/gallery-002.webp",
+          "/src/assets/images/activities/2025/dia-de-la-familia-2025/gallery-003.webp",
+          "/src/assets/images/activities/2025/dia-de-la-familia-2025/gallery-004.webp",
+          "/src/assets/images/activities/2025/dia-de-la-familia-2025/gallery-005.webp",
+          "/src/assets/images/activities/2025/dia-de-la-familia-2025/gallery-006.webp",
+          "/src/assets/images/activities/2025/dia-de-la-familia-2025/gallery-007.webp",
+          "/src/assets/images/activities/2025/dia-de-la-familia-2025/gallery-008.webp",
+          "/src/assets/images/activities/2025/dia-de-la-familia-2025/gallery-009.webp",
+          "/src/assets/images/activities/2025/dia-de-la-familia-2025/gallery-010.webp",
+          "/src/assets/images/activities/2025/dia-de-la-familia-2025/gallery-011.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    },
+    {
+      "sourcePostId": 5611,
+      "title": "Gala Raíz Folclórica 2025",
+      "historicalUrl": "https://www.colegioconquistadores.com/2025/09/29/gala-raiz-folclorica-2025/",
+      "astroPath": "/2025/09/29/gala-raiz-folclorica-2025/",
+      "publishDate": "2025-09-29T20:20:12",
+      "modifiedDate": "2025-10-05T20:56:46",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/gala-raiz-folclorica-2025.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/2025/09/Screenshot-2025-10-05-175345.png",
+        "bytes": 61900,
+        "width": 1200,
+        "height": 675,
+        "reusedFromHome": true
+      },
+      "gallery": {
+        "migratedImages": 0,
+        "sourceSliderIds": [],
+        "paths": []
+      },
+      "externalResources": [
+        {
+          "label": "Presentación 1° Básico",
+          "url": "https://drive.google.com/file/d/1Zi42VSevpYZr-5Wv-jSsfIEof734sTT9/view?usp=drive_link",
+          "service": "Google Drive"
+        },
+        {
+          "label": "Presentación 2° Básico",
+          "url": "https://drive.google.com/file/d/1RGHg8IL3Ht6tX40YgfMOzkMkpkldnrpe/view?usp=drive_link",
+          "service": "Google Drive"
+        },
+        {
+          "label": "Presentación 3° Básico",
+          "url": "https://drive.google.com/file/d/1Ol2LuMxbXXVvlr7LwDDcrgIeGB1QnIm5/view?usp=drive_link",
+          "service": "Google Drive"
+        },
+        {
+          "label": "Presentación 4° Básico",
+          "url": "https://drive.google.com/file/d/1tyeCSTvVJC1OzCSIac40lZm82pqPZ5R4/view?usp=drive_link",
+          "service": "Google Drive"
+        },
+        {
+          "label": "Presentación 5° Básico",
+          "url": "https://drive.google.com/file/d/1BdTn_zszajQNGj4xBJm2Bwf8gDUP89Uh/view?usp=drive_link",
+          "service": "Google Drive"
+        },
+        {
+          "label": "Presentación 6° Básico",
+          "url": "https://drive.google.com/file/d/1JhkmZjA92a81HWzcQhXTAqDt5PMCWazI/view?usp=drive_link",
+          "service": "Google Drive"
+        },
+        {
+          "label": "Presentación 7° Básico",
+          "url": "https://drive.google.com/file/d/11_aOUb_IVBjC91AGSgWu1ydNOpl0Qrnq/view?usp=drive_link",
+          "service": "Google Drive"
+        },
+        {
+          "label": "Presentación 8° Básico",
+          "url": "https://drive.google.com/file/d/18CZcB47oJWTt1ncpwuAx88naUeEsgnKB/view?usp=drive_link",
+          "service": "Google Drive"
+        },
+        {
+          "label": "Presentación 1° Medio",
+          "url": "https://drive.google.com/file/d/1WmyOPiOm2FTjgxZ2Wb1R-L5OiXF_dRDG/view?usp=drive_link",
+          "service": "Google Drive"
+        },
+        {
+          "label": "Presentación 2° Medio",
+          "url": "https://drive.google.com/file/d/1IacnEOGXHenlPRs117_Ijrb0d7Nt8Zf9/view?usp=drive_link",
+          "service": "Google Drive"
+        },
+        {
+          "label": "Gala completa (todas las presentaciones)",
+          "url": "https://drive.google.com/file/d/1SwdnxsQeCMJP9D5MWo_JFVFE5bNNKWkw/view?usp=drive_link",
+          "service": "Google Drive"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "sourcePostId": 5679,
+      "title": "Colegio Conquistadores lleva su innovación a la World Robot Olympiad Chile",
+      "historicalUrl": "https://www.colegioconquistadores.com/2025/10/06/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/",
+      "astroPath": "/2025/10/06/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/",
+      "publishDate": "2025-10-06T12:00:06",
+      "modifiedDate": "2025-10-13T15:01:37",
+      "migrationStatus": "migrated",
+      "reviewStatus": "reviewed",
+      "contentQuality": "full",
+      "featuredImage": {
+        "path": "/src/assets/images/activities/world-robot-olympiad-2025.webp",
+        "sourceUrl": "https://www.colegioconquistadores.com/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-06-at-7.51.27-AM.jpeg",
+        "bytes": 178790,
+        "width": 1200,
+        "height": 900,
+        "reusedFromHome": true
+      },
+      "gallery": {
+        "migratedImages": 11,
+        "sourceSliderIds": [
+          "60"
+        ],
+        "paths": [
+          "/src/assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-001.webp",
+          "/src/assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-002.webp",
+          "/src/assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-003.webp",
+          "/src/assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-004.webp",
+          "/src/assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-005.webp",
+          "/src/assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-006.webp",
+          "/src/assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-007.webp",
+          "/src/assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-008.webp",
+          "/src/assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-009.webp",
+          "/src/assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-010.webp",
+          "/src/assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-011.webp"
+        ]
+      },
+      "externalResources": [],
+      "notes": []
+    }
+  ]
+}

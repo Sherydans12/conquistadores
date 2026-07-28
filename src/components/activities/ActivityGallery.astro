@@ -1,0 +1,161 @@
+---
+import { Image } from 'astro:assets';
+import { resolveActivityImage } from '../../data/activities';
+
+interface GalleryImage {
+  image: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  images: GalleryImage[];
+  title?: string;
+}
+
+const { images, title = 'Galería de la actividad' } = Astro.props;
+const shouldCollapse = images.length > 12;
+---
+
+{
+  images.length > 0 && (
+    <section class="activity-gallery" aria-labelledby="activity-gallery-title">
+      <div class="activity-gallery__heading">
+        <p>Registro fotográfico</p>
+        <h2 id="activity-gallery-title">{title}</h2>
+        <span>{images.length} imágenes</span>
+      </div>
+      {shouldCollapse ? (
+        <details>
+          <summary>Ver galería completa ({images.length} imágenes)</summary>
+          <div class="activity-gallery__grid">
+            {images.map((item) => (
+              <figure>
+                <Image
+                  src={resolveActivityImage(item.image)}
+                  alt={item.alt}
+                  widths={[420, 800]}
+                  sizes="(min-width: 64rem) 30vw, (min-width: 42rem) 48vw, 100vw"
+                  quality={74}
+                  loading="lazy"
+                />
+                {item.caption && <figcaption>{item.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        </details>
+      ) : (
+        <div class="activity-gallery__grid">
+          {images.map((item) => (
+            <figure>
+              <Image
+                src={resolveActivityImage(item.image)}
+                alt={item.alt}
+                widths={[420, 800]}
+                sizes="(min-width: 64rem) 30vw, (min-width: 42rem) 48vw, 100vw"
+                quality={74}
+                loading="lazy"
+              />
+              {item.caption && <figcaption>{item.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .activity-gallery {
+    margin-block-start: var(--space-8);
+  }
+
+  .activity-gallery__heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+    margin-block-end: var(--space-5);
+  }
+
+  .activity-gallery__heading p {
+    width: 100%;
+    margin: 0;
+    color: var(--color-primary-alt);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .activity-gallery__heading h2 {
+    margin: 0;
+    font-size: var(--font-size-2xl);
+  }
+
+  .activity-gallery__heading span {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  details {
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-soft);
+  }
+
+  summary {
+    min-height: 3.25rem;
+    padding: var(--space-4) var(--space-5);
+    cursor: pointer;
+    color: var(--color-primary);
+    font-weight: 900;
+  }
+
+  details[open] summary {
+    border-block-end: var(--border-width) solid var(--color-border);
+  }
+
+  .activity-gallery__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  details .activity-gallery__grid {
+    padding: var(--space-4);
+  }
+
+  figure {
+    min-width: 0;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    margin: 0;
+    background: var(--color-surface-soft);
+    box-shadow: var(--shadow-sm);
+  }
+
+  figure :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  figcaption {
+    padding: var(--space-3);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+  }
+
+  @media (min-width: 42rem) {
+    .activity-gallery__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .activity-gallery__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

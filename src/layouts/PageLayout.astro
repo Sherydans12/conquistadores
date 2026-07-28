@@ -14,6 +14,7 @@ interface Props {
   heroAlt?: string;
   breadcrumbs: BreadcrumbItem[];
   socialImage?: string;
+  socialImageAlt?: string;
   noindex?: boolean;
   schemaType?: 'AboutPage' | 'WebPage';
 }
@@ -27,6 +28,7 @@ const {
   heroAlt,
   breadcrumbs,
   socialImage,
+  socialImageAlt,
   noindex = false,
   schemaType = 'WebPage',
 } = Astro.props;
@@ -61,6 +63,7 @@ const pageSchema = {
   description={description}
   canonicalPath={canonicalPath}
   socialImage={socialImage}
+  socialImageAlt={socialImageAlt}
   noindex={noindex}
 >
   <PageHero

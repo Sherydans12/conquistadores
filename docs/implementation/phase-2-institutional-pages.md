@@ -195,8 +195,7 @@ Comprobaciones:
 
 ## Rutas todavía pendientes
 
-- `/actividades/`
-- 47 rutas históricas de entradas
+Fase 3 implementó `/actividades/` y las 47 rutas históricas. Permanecen:
 - `/calendario-de-evaluaciones-2026/`
 - `/plan-lector-2026/`
 - `/protocolos-internos/`
@@ -209,7 +208,7 @@ Comprobaciones:
 
 - validar institucionalmente nómina y oferta extracurricular;
 - definir el portal seguro para cuenta/notas;
-- migrar Actividades conservando sus 47 rutas;
+- definir la fuente editorial para nuevas actividades;
 - revisar equivalencia antes de activar redirecciones;
 - definir fuente editorial futura;
 - preparar sitemap y crawl final cuando exista paridad;

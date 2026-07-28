@@ -9,7 +9,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "activities:import": "node scripts/import-wordpress-activities.mjs",
+    "activities:materialize": "node scripts/materialize-activity-content.mjs",
+    "activities:validate": "node scripts/validate-activities.mjs",
+    "activities:validate-routes": "node scripts/validate-activity-routes.mjs"
   },
   "dependencies": {
     "astro": "^7.1.4"

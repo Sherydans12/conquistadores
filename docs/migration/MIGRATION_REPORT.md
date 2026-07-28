@@ -78,7 +78,7 @@ La reconstrucción es viable como sitio Astro estático. El contenido institucio
 
 - Astro estático y TypeScript estricto.
 - Componentes `.astro`, CSS propio y JavaScript mínimo.
-- Colección tipada para las 47 actividades.
+- Colección tipada local implementada para las 47 actividades históricas.
 - Datos TypeScript para navegación, personal y documentos.
 - Medios optimizados en el repositorio o almacenamiento estable.
 - WordPress headless solo si existe necesidad editorial, consumido en build.
@@ -94,9 +94,9 @@ Detalle: [astro-architecture.md](astro-architecture.md).
 | 1 | tokens, layout, header/footer, SEO base | media |
 | 2 | inicio y páginas institucionales | media |
 | 3 | documentos y páginas 2026 | media |
-| 4 | importación/limpieza de 47 actividades | alta |
-| 5 | medios, galerías, Drive y embeds | alta |
-| 6 | búsqueda y servicios externos | media |
+| 4 | importación/limpieza de 47 actividades | completada |
+| 5 | medios, galerías y enlaces Drive de actividades | completada |
+| 6 | búsqueda de actividades; otros servicios externos | parcial |
 | 7 | paridad, accesibilidad, rendimiento y SEO | alta |
 | 8 | publicación y monitorización | media |
 
@@ -121,7 +121,7 @@ Detalle: [astro-architecture.md](astro-architecture.md).
 - [ ] Filtrar medios con [media-inventory.csv](media-inventory.csv).
 - [ ] Confirmar vigencia de los 73 PDF.
 - [ ] Obtener una decisión sobre `notas`, cuenta y recuperación.
-- [ ] Definir Astro collection versus WordPress headless.
+- [x] Implementar una Astro collection local para el archivo histórico.
 - [ ] Implementar primero layout, navegación, SEO y tokens.
 - [ ] Mantener `output: static`, TypeScript estricto y cero frameworks UI.
 - [ ] Crear H1 único y metadescripción por página.

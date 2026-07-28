@@ -1,0 +1,300 @@
+---
+import { getCollection } from 'astro:content';
+import ActivityArchiveCard from '../../components/activities/ActivityArchiveCard.astro';
+import ActivityArchiveSearch from '../../components/activities/ActivityArchiveSearch.astro';
+import { activitySearchText, sortActivities } from '../../data/activities';
+import { absoluteUrl, site } from '../../data/site';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const activities = sortActivities(await getCollection('activities'));
+const years = [...new Set(activities.map((activity) => activity.data.year))].sort(
+  (a, b) => b - a,
+);
+const featured = activities.filter((activity) => activity.data.featured);
+const groupedActivities = years.map((year) => ({
+  year,
+  activities: activities.filter((activity) => activity.data.year === year),
+}));
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Actividades',
+  description:
+    'Archivo histórico de actividades publicadas por el Colegio Conquistadores.',
+  url: absoluteUrl('/actividades/'),
+  isPartOf: {
+    '@type': 'WebSite',
+    name: site.name,
+    url: site.baseUrl.toString(),
+  },
+  hasPart: activities.map((activity) => ({
+    '@type': 'Article',
+    headline: activity.data.title,
+    url: absoluteUrl(activity.data.historicalPath),
+    datePublished: activity.data.publishDate.toISOString(),
+  })),
+};
+---
+
+<PageLayout
+  title="Actividades"
+  description="Explora el archivo histórico de actividades, encuentros, celebraciones y aprendizajes del Colegio Conquistadores."
+  canonicalPath="/actividades/"
+  eyebrow="Vida escolar"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Actividades' },
+  ]}
+>
+  <section class="page-section activities-intro">
+    <div class="container">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Archivo histórico</p>
+        <h2>Experiencias de nuestra comunidad</h2>
+        <p>
+          Este archivo reúne las actividades publicadas por el colegio entre
+          2023 y 2025. Puedes buscar por palabras o acotar los resultados por año.
+        </p>
+      </div>
+
+      {
+        featured.length > 0 && (
+          <section class="featured-activities" aria-labelledby="featured-title">
+            <div class="featured-activities__heading">
+              <p>Selección</p>
+              <h2 id="featured-title">Actividades destacadas</h2>
+            </div>
+            <div class="featured-activities__grid">
+              {featured.map((activity, index) => (
+                <ActivityArchiveCard
+                  activity={activity}
+                  headingLevel={3}
+                  priority={index === 0}
+                />
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="page-section page-section--soft archive" aria-labelledby="archive-title">
+    <div class="container">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Todas las publicaciones</p>
+        <h2 id="archive-title">Archivo completo</h2>
+        <p>Las {activities.length} actividades permanecen disponibles en el HTML, incluso sin JavaScript.</p>
+      </div>
+
+      <ActivityArchiveSearch years={years} total={activities.length} />
+
+      <div class="archive__groups" id="activity-results">
+        {
+          groupedActivities.map((group, index) => (
+            <details
+              class="archive-group"
+              data-activity-group
+              data-year={group.year}
+              open={index === 0}
+            >
+              <summary>
+                <span>Actividades {group.year}</span>
+                <strong data-group-count>{group.activities.length}</strong>
+              </summary>
+              <div class="archive-group__grid">
+                {group.activities.map((activity) => (
+                  <ActivityArchiveCard activity={activity} headingLevel={3} />
+                ))}
+              </div>
+            </details>
+          ))
+        }
+      </div>
+
+      <div class="archive-empty" id="activity-empty" role="status" hidden>
+        <h2>No encontramos coincidencias</h2>
+        <p>Prueba con otra palabra o limpia los filtros para volver al archivo completo.</p>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+</PageLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#activity-search');
+  const queryInput = document.querySelector<HTMLInputElement>('#activity-query');
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-activity-card]')]
+    .filter((card) => card.closest('#activity-results'));
+  const groups = [
+    ...document.querySelectorAll<HTMLDetailsElement>('[data-activity-group]'),
+  ];
+  const resultCount = document.querySelector<HTMLElement>('#activity-results-count');
+  const emptyState = document.querySelector<HTMLElement>('#activity-empty');
+
+  const normalize = (value: string) =>
+    value
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .toLocaleLowerCase('es')
+      .trim();
+
+  function applyFilters() {
+    const query = normalize(queryInput?.value ?? '');
+    const selectedYear =
+      form?.querySelector<HTMLInputElement>('input[name="year"]:checked')
+        ?.value ?? 'all';
+    let visibleTotal = 0;
+
+    for (const group of groups) {
+      let visibleInGroup = 0;
+      const groupCards = [
+        ...group.querySelectorAll<HTMLElement>('[data-activity-card]'),
+      ];
+
+      for (const card of groupCards) {
+        const matchesYear =
+          selectedYear === 'all' || card.dataset.year === selectedYear;
+        const matchesQuery = normalize(card.dataset.search ?? '').includes(query);
+        const visible = matchesYear && matchesQuery;
+        card.hidden = !visible;
+        if (visible) visibleInGroup += 1;
+      }
+
+      group.hidden = visibleInGroup === 0;
+      const count = group.querySelector<HTMLElement>('[data-group-count]');
+      if (count) count.textContent = String(visibleInGroup);
+      if (visibleInGroup > 0 && (query || selectedYear !== 'all')) {
+        group.open = true;
+      }
+      visibleTotal += visibleInGroup;
+    }
+
+    if (resultCount) {
+      resultCount.textContent = `${visibleTotal} ${
+        visibleTotal === 1 ? 'actividad' : 'actividades'
+      }`;
+    }
+    if (emptyState) emptyState.hidden = visibleTotal !== 0;
+  }
+
+  form?.addEventListener('input', applyFilters);
+  form?.addEventListener('reset', () => {
+    window.setTimeout(() => {
+      groups.forEach((group, index) => {
+        group.open = index === 0;
+      });
+      applyFilters();
+      queryInput?.focus();
+    }, 0);
+  });
+</script>
+
+<style>
+  .activities-intro {
+    background: var(--color-surface);
+  }
+
+  .featured-activities {
+    margin-block-start: var(--space-8);
+  }
+
+  .featured-activities__heading {
+    margin-block-end: var(--space-5);
+  }
+
+  .featured-activities__heading p {
+    margin-block-end: var(--space-2);
+    color: var(--color-primary-alt);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .featured-activities__heading h2 {
+    margin: 0;
+    font-size: var(--font-size-2xl);
+  }
+
+  .featured-activities__grid,
+  .archive-group__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .archive__groups {
+    display: grid;
+    gap: var(--space-4);
+    margin-block-start: var(--space-6);
+  }
+
+  .archive-group {
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  .archive-group summary {
+    display: flex;
+    min-height: 4rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    cursor: pointer;
+    color: var(--color-primary-deep);
+    font-size: var(--font-size-lg);
+    font-weight: 900;
+  }
+
+  .archive-group summary strong {
+    min-width: 2.2rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    font-size: var(--font-size-xs);
+    text-align: center;
+  }
+
+  .archive-group__grid {
+    padding: 0 var(--space-4) var(--space-4);
+  }
+
+  .archive-empty {
+    margin-block-start: var(--space-6);
+    padding: var(--space-7);
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
+
+  .archive-empty h2 {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-xl);
+  }
+
+  .archive-empty p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  @media (min-width: 42rem) {
+    .featured-activities__grid,
+    .archive-group__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .featured-activities__grid,
+    .archive-group__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

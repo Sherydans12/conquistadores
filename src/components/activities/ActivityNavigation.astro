@@ -1,0 +1,77 @@
+---
+import type { ActivityEntry } from '../../data/activities';
+
+interface Props {
+  previous?: ActivityEntry;
+  next?: ActivityEntry;
+}
+
+const { previous, next } = Astro.props;
+---
+
+{
+  (previous || next) && (
+    <nav class="activity-navigation" aria-label="Navegación entre actividades">
+      {previous ? (
+        <a href={previous.data.historicalPath} rel="prev">
+          <span>← Actividad anterior</span>
+          <strong>{previous.data.title}</strong>
+        </a>
+      ) : (
+        <span />
+      )}
+      {next && (
+        <a href={next.data.historicalPath} rel="next">
+          <span>Actividad siguiente →</span>
+          <strong>{next.data.title}</strong>
+        </a>
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .activity-navigation {
+    display: grid;
+    gap: var(--space-3);
+    margin-block-start: var(--space-8);
+    padding-block-start: var(--space-6);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .activity-navigation a {
+    display: flex;
+    min-height: 4.5rem;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .activity-navigation a:hover {
+    border-color: var(--color-primary);
+  }
+
+  .activity-navigation span {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+  }
+
+  .activity-navigation strong {
+    margin-block-start: var(--space-1);
+  }
+
+  @media (min-width: 42rem) {
+    .activity-navigation {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .activity-navigation a:last-child {
+      text-align: right;
+    }
+  }
+</style>

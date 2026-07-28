@@ -1,0 +1,146 @@
+---
+interface Props {
+  years: number[];
+  total: number;
+}
+
+const { years, total } = Astro.props;
+---
+
+<form class="archive-search" id="activity-search" role="search">
+  <div class="archive-search__field">
+    <label for="activity-query">Buscar en actividades</label>
+    <input
+      id="activity-query"
+      name="actividad"
+      type="search"
+      placeholder="Título o palabra clave"
+      autocomplete="off"
+    />
+  </div>
+  <fieldset>
+    <legend>Filtrar por año</legend>
+    <div class="archive-search__years">
+      <label>
+        <input type="radio" name="year" value="all" checked />
+        Todos
+      </label>
+      {
+        years.map((year) => (
+          <label>
+            <input type="radio" name="year" value={year} />
+            {year}
+          </label>
+        ))
+      }
+    </div>
+  </fieldset>
+  <div class="archive-search__status">
+    <p id="activity-results-count" aria-live="polite">
+      {total} actividades
+    </p>
+    <button id="activity-clear" type="reset">Limpiar filtros</button>
+  </div>
+</form>
+
+<style>
+  .archive-search {
+    display: grid;
+    gap: var(--space-5);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border-radius: var(--radius-lg);
+    background: var(--color-primary);
+    color: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+
+  .archive-search label,
+  .archive-search legend {
+    font-weight: 800;
+  }
+
+  .archive-search__field label {
+    display: block;
+    margin-block-end: var(--space-2);
+  }
+
+  .archive-search input[type="search"] {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.9rem;
+    border: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  fieldset {
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    margin: 0;
+  }
+
+  legend {
+    margin-block-end: var(--space-2);
+  }
+
+  .archive-search__years {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .archive-search__years label {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid rgb(255 255 255 / 0.35);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+  }
+
+  .archive-search__years label:has(input:checked) {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-primary-deep);
+  }
+
+  .archive-search__status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .archive-search__status p {
+    margin: 0;
+    font-weight: 900;
+  }
+
+  .archive-search button {
+    min-height: 2.75rem;
+    padding: 0.55rem 0.9rem;
+    border: 2px solid var(--color-accent);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-surface);
+    cursor: pointer;
+    font-weight: 800;
+  }
+
+  @media (min-width: 52rem) {
+    .archive-search {
+      grid-template-columns: minmax(16rem, 1fr) auto;
+      align-items: end;
+    }
+
+    .archive-search__status {
+      grid-column: 1 / -1;
+    }
+  }
+</style>
