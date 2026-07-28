@@ -2,18 +2,11 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/images/brand/colegio-conquistadores-logo.png';
 import {
-  documentNavigation,
+  documentHubNavigation,
   secondaryNavigation,
 } from '../data/navigation';
 import { site } from '../data/site';
 
-const footerDocuments = documentNavigation.filter(
-  (item) =>
-    item.href === '/plan-lector-2026/' ||
-    item.href === '/protocolos-internos/' ||
-    item.href === '/reglamento-interno-de-convivencia-escolar/' ||
-    item.label === 'Certificados de Estudios',
-);
 const year = new Date().getFullYear();
 ---
 
@@ -44,16 +37,9 @@ const year = new Date().getFullYear();
       <h2>Documentos</h2>
       <ul>
         {
-          footerDocuments.map((item) => (
+          documentHubNavigation.map((item) => (
             <li>
-              <a
-                href={item.href}
-                target={item.external ? '_blank' : undefined}
-                rel={item.external ? 'noopener noreferrer' : undefined}
-              >
-                {item.label}
-                {item.external && <span class="sr-only"> (sitio externo)</span>}
-              </a>
+              <a href={item.href}>{item.label}</a>
             </li>
           ))
         }

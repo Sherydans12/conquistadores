@@ -24,7 +24,7 @@ export const home = {
   announcement: {
     visible: true,
     text: 'Calendario de Evaluaciones 2026 actualizado',
-    href: '/calendario-de-evaluaciones-2026/',
+    href: '/documentos/#evaluaciones-2026',
   },
   hero: {
     image: heroImage,

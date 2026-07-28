@@ -33,34 +33,12 @@ function isCurrent(href: string): boolean {
         {
           primaryNavigation.map((item) => (
             <li>
-              {item.children ? (
-                <details class="desktop-submenu" data-desktop-submenu>
-                  <summary>{item.label}</summary>
-                  <ul>
-                    {item.children.map((child) => (
-                      <li>
-                        <a
-                          href={child.href}
-                          target={child.external ? '_blank' : undefined}
-                          rel={child.external ? 'noopener noreferrer' : undefined}
-                        >
-                          {child.label}
-                          {child.external && (
-                            <span class="sr-only"> (sitio externo)</span>
-                          )}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              ) : (
-                <a
-                  href={item.href}
-                  aria-current={isCurrent(item.href) ? 'page' : undefined}
-                >
-                  {item.label}
-                </a>
-              )}
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
             </li>
           ))
         }
@@ -73,54 +51,6 @@ function isCurrent(href: string): boolean {
     <MobileNav />
   </div>
 </header>
-
-<script>
-  const desktopSubmenus = document.querySelectorAll<HTMLDetailsElement>(
-    '[data-desktop-submenu]',
-  );
-
-  desktopSubmenus.forEach((submenu) => {
-    const summary = submenu.querySelector<HTMLElement>('summary');
-
-    submenu.addEventListener('keydown', (event) => {
-      if (
-        event.target === summary &&
-        (event.key === 'Enter' || event.key === ' ')
-      ) {
-        event.preventDefault();
-        submenu.open = !submenu.open;
-        return;
-      }
-
-      if (event.key === 'Escape' && submenu.open) {
-        event.preventDefault();
-        submenu.open = false;
-        summary?.focus();
-      }
-    });
-
-    submenu.addEventListener('toggle', () => {
-      if (!submenu.open) return;
-      desktopSubmenus.forEach((other) => {
-        if (other !== submenu) other.open = false;
-      });
-    });
-
-    submenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        submenu.open = false;
-      });
-    });
-  });
-
-  document.addEventListener('click', (event) => {
-    desktopSubmenus.forEach((submenu) => {
-      if (submenu.open && !submenu.contains(event.target as Node)) {
-        submenu.open = false;
-      }
-    });
-  });
-</script>
 
 <style>
   .site-header {
@@ -239,8 +169,7 @@ function isCurrent(href: string): boolean {
       list-style: none;
     }
 
-    .desktop-nav a,
-    .desktop-nav summary {
+    .desktop-nav a {
       display: inline-flex;
       min-height: 2.75rem;
       align-items: center;
@@ -255,67 +184,9 @@ function isCurrent(href: string): boolean {
     }
 
     .desktop-nav a:hover,
-    .desktop-nav summary:hover,
     .desktop-nav a[aria-current="page"] {
       border-block-end-color: var(--color-accent);
       color: var(--color-accent);
-    }
-
-    .desktop-submenu {
-      position: relative;
-    }
-
-    .desktop-submenu summary {
-      gap: var(--space-2);
-      list-style: none;
-    }
-
-    .desktop-submenu summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .desktop-submenu summary::after {
-      content: "+";
-      color: var(--color-accent);
-      font-size: 1rem;
-    }
-
-    .desktop-submenu[open] summary::after {
-      content: "−";
-    }
-
-    .desktop-submenu ul {
-      position: absolute;
-      z-index: calc(var(--layer-nav) + 1);
-      inset-block-start: calc(100% + 0.35rem);
-      inset-inline-end: 0;
-      width: 18rem;
-      padding: var(--space-2);
-      margin: 0;
-      border: 1px solid var(--color-border);
-      border-block-start: 3px solid var(--color-accent);
-      border-radius: var(--radius-md);
-      background: var(--color-surface);
-      box-shadow: var(--shadow-md);
-      list-style: none;
-    }
-
-    .desktop-submenu li + li {
-      border-block-start: 1px solid var(--color-border);
-    }
-
-    .desktop-submenu ul a {
-      width: 100%;
-      min-height: 2.65rem;
-      border: 0;
-      color: var(--color-primary-deep);
-      white-space: normal;
-    }
-
-    .desktop-submenu ul a:hover {
-      border: 0;
-      background: var(--color-surface-soft);
-      color: var(--color-primary);
     }
 
     .header-cta {

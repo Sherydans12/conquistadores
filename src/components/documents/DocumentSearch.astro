@@ -1,0 +1,257 @@
+---
+import DocumentFilters from './DocumentFilters.astro';
+
+interface Props {
+  total: number;
+}
+
+const { total } = Astro.props;
+---
+
+<form
+  class="document-search"
+  role="search"
+  action="/documentos/"
+  method="get"
+  data-document-search
+>
+  <div class="document-search__input">
+    <label for="document-query">Buscar documentos</label>
+    <input
+      id="document-query"
+      name="q"
+      type="search"
+      placeholder="Ej.: 3° básico, plan lector o convivencia"
+      autocomplete="off"
+      disabled
+      data-filter-query
+    />
+    <p>Busca por título, descripción, categoría, palabras clave, curso o año.</p>
+  </div>
+
+  <DocumentFilters />
+
+  <div class="document-search__summary">
+    <p aria-live="polite" aria-atomic="true" data-result-count>
+      {total} documentos disponibles
+    </p>
+    <button type="reset" disabled data-clear-filters>Limpiar filtros</button>
+  </div>
+
+  <noscript>
+    <p class="document-search__noscript">
+      La lista completa está disponible a continuación. Para buscar sin
+      JavaScript, utiliza la función “Buscar en la página” de tu navegador.
+    </p>
+  </noscript>
+</form>
+
+<script>
+  const searchForm = document.querySelector<HTMLFormElement>(
+    '[data-document-search]',
+  );
+
+  if (searchForm) {
+    const queryInput =
+      searchForm.querySelector<HTMLInputElement>('[data-filter-query]');
+    const categorySelect =
+      searchForm.querySelector<HTMLSelectElement>('[data-filter-category]');
+    const yearSelect =
+      searchForm.querySelector<HTMLSelectElement>('[data-filter-year]');
+    const statusSelect =
+      searchForm.querySelector<HTMLSelectElement>('[data-filter-status]');
+    const filterFields =
+      searchForm.querySelector<HTMLFieldSetElement>(
+        '[data-document-filter-fields]',
+      );
+    const clearButton =
+      searchForm.querySelector<HTMLButtonElement>('[data-clear-filters]');
+    const resultCount =
+      searchForm.querySelector<HTMLElement>('[data-result-count]');
+    const emptyState =
+      document.querySelector<HTMLElement>('[data-document-empty]');
+    const documentGroups =
+      document.querySelector<HTMLElement>('[data-document-groups]');
+    const featuredSection =
+      document.querySelector<HTMLElement>('[data-featured-section]');
+    const reviewNotice =
+      document.querySelector<HTMLElement>('[data-review-notice]');
+    const documents = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-document]'),
+    );
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-document-section]'),
+    );
+
+    const normalize = (value: string) =>
+      value
+        .normalize('NFD')
+        .replace(/\p{Diacritic}/gu, '')
+        .toLocaleLowerCase('es')
+        .trim();
+
+    queryInput?.removeAttribute('disabled');
+    filterFields?.removeAttribute('disabled');
+    clearButton?.removeAttribute('disabled');
+
+    const applyFilters = () => {
+      const query = normalize(queryInput?.value ?? '');
+      const category = categorySelect?.value ?? '';
+      const year = yearSelect?.value ?? '';
+      const status = statusSelect?.value ?? '';
+      let visibleCount = 0;
+
+      documents.forEach((documentCard) => {
+        const matchesQuery =
+          !query || normalize(documentCard.dataset.search ?? '').includes(query);
+        const matchesCategory =
+          !category || documentCard.dataset.category === category;
+        const matchesYear = !year || documentCard.dataset.year === year;
+        const matchesStatus = !status || documentCard.dataset.status === status;
+        const visible =
+          matchesQuery && matchesCategory && matchesYear && matchesStatus;
+
+        documentCard.hidden = !visible;
+        if (visible) visibleCount += 1;
+      });
+
+      sections.forEach((section) => {
+        const hasVisibleDocument = Array.from(
+          section.querySelectorAll<HTMLElement>('[data-document]'),
+        ).some((documentCard) => !documentCard.hidden);
+        section.hidden = !hasVisibleDocument;
+      });
+
+      const filtersActive = Boolean(query || category || year || status);
+      const showReviewNotice =
+        category === 'protocolos' && !query && !year && !status;
+      if (featuredSection) featuredSection.hidden = filtersActive;
+      if (reviewNotice) {
+        reviewNotice.hidden = filtersActive && !showReviewNotice;
+      }
+      if (emptyState) {
+        emptyState.hidden = visibleCount !== 0 || showReviewNotice;
+      }
+      if (documentGroups) {
+        documentGroups.hidden = visibleCount === 0 && !showReviewNotice;
+      }
+
+      if (resultCount) {
+        resultCount.textContent =
+          visibleCount === 1
+            ? '1 documento encontrado'
+            : `${visibleCount} documentos encontrados`;
+      }
+
+      clearButton?.toggleAttribute('disabled', !filtersActive);
+    };
+
+    searchForm.addEventListener('input', applyFilters);
+    searchForm.addEventListener('change', applyFilters);
+    searchForm.addEventListener('submit', (event) => event.preventDefault());
+    searchForm.addEventListener('reset', () => {
+      window.requestAnimationFrame(() => {
+        applyFilters();
+        queryInput?.focus();
+      });
+    });
+
+    applyFilters();
+  }
+</script>
+
+<style>
+  .document-search {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: var(--space-5);
+    padding: clamp(1.25rem, 4vw, 2rem);
+    margin-block-start: calc(var(--space-7) * -1);
+    border: 1px solid var(--color-border);
+    border-block-start: 0.35rem solid var(--color-accent);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+
+  .document-search__input {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .document-search__input label {
+    color: var(--color-primary-deep);
+    font-size: var(--font-size-lg);
+    font-weight: 900;
+  }
+
+  .document-search__input input {
+    width: 100%;
+    min-height: 3.25rem;
+    padding: 0.72rem 0.95rem;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-soft);
+    color: var(--color-text);
+  }
+
+  .document-search__input input:focus {
+    border-color: var(--color-primary);
+    background: var(--color-surface);
+  }
+
+  .document-search__input p,
+  .document-search__summary p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+  }
+
+  .document-search__summary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid var(--color-border);
+  }
+
+  .document-search__summary p {
+    color: var(--color-primary-deep);
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+  }
+
+  .document-search__summary button {
+    min-height: 2.75rem;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-primary);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+  }
+
+  .document-search__summary button:hover:not(:disabled) {
+    background: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  .document-search__summary button:disabled {
+    cursor: not-allowed;
+    opacity: 0.48;
+  }
+
+  .document-search__noscript {
+    padding: var(--space-3);
+    margin: 0;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-soft);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+</style>

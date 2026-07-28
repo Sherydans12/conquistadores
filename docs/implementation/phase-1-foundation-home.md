@@ -7,7 +7,7 @@ La fase reemplaza la portada inicial de Astro por una portada estática completa
 - sistema visual azul/dorado con tokens de color, tipografía, espaciado, escala fluida, bordes, sombras, capas y transiciones;
 - configuración tipada del sitio y SEO, con separación entre staging y producción;
 - layout global con salto al contenido, barra de anuncio, header, contenido principal y footer;
-- navegación de escritorio declarativa, submenú de documentos y menú móvil accesible;
+- navegación declarativa de escritorio y móvil, con un enlace único al centro de documentos;
 - hero, introducción, historia, misión, visión, valores, atributos institucionales, actividades, talleres, academias, video diferido, redes, contacto, ubicación y CTA de matrículas;
 - `robots.txt` dinámico y protección `noindex,nofollow` para staging;
 - validación responsive y capturas de referencia.
@@ -19,6 +19,7 @@ No se modificaron WordPress, Cloudflare, Coolify, DNS, VPS ni el dominio de prod
 - La portada es un refresh controlado, no una réplica de Elementor. Conserva el logo, el azul/dorado, el lema, la fachada y la estructura editorial principal.
 - La configuración falla de forma segura a staging. El modo producción solo se activa cuando `SITE_ENV=production` y `SITE_URL` utiliza el host público esperado.
 - Los enlaces de escritorio y móvil se generan desde `src/data/navigation.ts`; no hay dos inventarios de navegación.
+- Los documentos públicos se centralizan en `/documentos/`. La navegación ya no expone PDF ni páginas documentales dispersas, y `Evaluaciones 2026` se accede desde el centro documental.
 - Se reemplazaron los contadores desactualizados del sitio actual por atributos cualitativos verificables.
 - Historia, misión, visión y valores permanecen visibles en móvil sin depender de JavaScript.
 - El video usa una miniatura local y crea el iframe de YouTube con privacidad mejorada solo después de la interacción.
@@ -39,7 +40,7 @@ No se modificaron WordPress, Cloudflare, Coolify, DNS, VPS ni el dominio de prod
 - `SeoHead.astro`
 - `BaseLayout.astro`
 
-Los datos se centralizan en `src/data/site.ts`, `src/data/navigation.ts` y `src/data/home.ts`. Los estilos base viven en `src/styles/tokens.css`, `src/styles/global.css` y `src/styles/utilities.css`.
+Los datos se centralizan en `src/data/site.ts`, `src/data/navigation.ts`, `src/data/home.ts` y, para la ampliación documental, `src/data/documents.ts`. Los estilos base viven en `src/styles/tokens.css`, `src/styles/global.css` y `src/styles/utilities.css`.
 
 ## Recursos descargados
 
@@ -72,13 +73,12 @@ El JSON-LD se limita a estos datos públicos. No se copió el grafo Yoast.
 
 ## Rutas pendientes
 
-Esta fase crea únicamente `/` y `/robots.txt`. Las siguientes URL documentadas se enlazan desde la portada, pero sus páginas Astro quedan para fases posteriores:
+La rama crea `/`, `/documentos/` y `/robots.txt`. Las siguientes URL documentadas siguen pendientes de páginas Astro o de una decisión de redirección:
 
 - `/calendario-de-evaluaciones-2026/`
 - `/quienes-somos/`
 - `/actividades/`
 - `/personal/`
-- `/documentos/`
 - `/plan-lector-2026/`
 - `/protocolos-internos/`
 - `/reglamento-interno-de-convivencia-escolar/`
@@ -96,17 +96,18 @@ Las tres actividades destacadas continúan abriendo sus entradas históricas en 
 - Gala Raíz Folclórica 2025, 29 de septiembre de 2025;
 - Día de la Familia 2025, 19 de mayo de 2025.
 
-PISE 2024 y Carta Ley TEA continúan apuntando a los PDF públicos actuales de WordPress. Estos enlaces están marcados en los datos como externos y temporales. Certificados de Estudios abre el servicio externo de Mineduc.
+Los documentos 2026 seleccionados, PISE 2024 y el archivo de horarios 2025 se presentan únicamente dentro de `/documentos/` y conservan enlaces externos temporales a WordPress. Carta Ley TEA y los protocolos 2024 permanecen en revisión y no aparecen en el listado público. Certificados de Estudios abre el servicio oficial externo de Mineduc.
 
 ## Validación
 
 - `npm install`: correcto, sin vulnerabilidades informadas.
-- `npm run build`: correcto; genera HTML estático, `/index.html` y `/robots.txt`.
+- `npm run build`: correcto; genera HTML estático para `/`, `/documentos/` y `/robots.txt`.
 - Vista responsive comprobada en 360, 390, 768, 1024 y 1440 px, sin overflow horizontal ni imágenes rotas.
 - Un único `h1`.
 - Staging genera `noindex,nofollow`, canonical de staging y `Disallow: /`.
 - Menú móvil comprobado con mouse, teclado, Enter, Space y Escape; restaura el foco, bloquea el scroll de fondo y se cierra al volver a escritorio.
-- Submenú de documentos comprobado con mouse, Enter, Space y Escape.
+- El enlace `Documentos` es directo en escritorio y móvil; no existe un submenú documental duplicado.
+- El centro documental conserva los 39 resultados públicos en el HTML inicial y añade búsqueda y filtros progresivos sin peticiones de red.
 - El video no crea iframe al cargar y usa `youtube-nocookie.com` solo después de la interacción.
 - Consola del navegador revisada sin errores ni advertencias.
 
@@ -116,6 +117,9 @@ Capturas:
 - `docs/implementation/screenshots/phase-1/tablet-home.png`
 - `docs/implementation/screenshots/phase-1/mobile-home.png`
 - `docs/implementation/screenshots/phase-1/mobile-menu-open.png`
+- `docs/implementation/screenshots/document-center/desktop-documents.png`
+- `docs/implementation/screenshots/document-center/tablet-documents.png`
+- `docs/implementation/screenshots/document-center/mobile-documents.png`
 
 La evidencia comparativa de diseño se documenta en `design-qa.md`.
 
@@ -123,7 +127,7 @@ La evidencia comparativa de diseño se documenta en `design-qa.md`.
 
 - Las rutas pendientes producen 404 en este build hasta que sus páginas sean implementadas.
 - Las actividades y algunos documentos dependen todavía de enlaces históricos externos, pero la portada no consulta WordPress en tiempo de ejecución.
-- No hay feed de Instagram, mapa embebido, formulario de contacto, búsqueda ni integración headless.
+- No hay feed de Instagram, mapa embebido, formulario de contacto ni integración headless. La búsqueda existe solo dentro del centro documental y funciona en cliente sobre el HTML estático.
 - El sitemap y las redirecciones de producción quedan para una fase posterior.
 - No se desplegó a staging ni se modificó la configuración de Coolify.
 
@@ -139,7 +143,8 @@ La evidencia comparativa de diseño se documenta en `design-qa.md`.
 ## Siguiente fase
 
 - implementar las páginas institucionales y las rutas documentadas prioritarias;
-- añadir contenido local de documentos sin descargar masivamente los PDF;
+- revisar la equivalencia de las rutas documentales históricas antes de aprobar redirecciones;
+- reemplazar los enlaces documentales temporales cuando exista una fuente build-time aprobada;
 - definir la integración build-time de actividades;
 - preparar sitemap y plan de redirecciones cuando exista paridad;
 - revisar el despliegue en staging antes de cualquier cambio de dominio.

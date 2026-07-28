@@ -1,0 +1,94 @@
+---
+import { documentCategories } from '../../data/documents';
+---
+
+<fieldset class="filters" disabled data-document-filter-fields>
+  <legend>Filtrar documentos</legend>
+  <div class="filters__grid">
+    <label>
+      <span>Categoría</span>
+      <select name="category" data-filter-category>
+        <option value="">Todas las categorías</option>
+        {
+          documentCategories.map((category) => (
+            <option value={category.id}>{category.label}</option>
+          ))
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Año</span>
+      <select name="year" data-filter-year>
+        <option value="">Todos los años</option>
+        <option value="2026">2026</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+      </select>
+    </label>
+
+    <label>
+      <span>Vigencia</span>
+      <select name="status" data-filter-status>
+        <option value="">Todos los estados</option>
+        <option value="current">Vigente</option>
+        <option value="historical">Histórico</option>
+        <option value="external">Externo</option>
+      </select>
+    </label>
+  </div>
+</fieldset>
+
+<style>
+  .filters {
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+
+  legend {
+    margin-block-end: var(--space-3);
+    color: var(--color-primary-deep);
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+  }
+
+  .filters__grid {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  label {
+    display: grid;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  label span {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 800;
+  }
+
+  select {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.62rem 2.4rem 0.62rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  select:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  @media (min-width: 40rem) {
+    .filters__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

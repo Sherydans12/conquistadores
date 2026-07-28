@@ -1,0 +1,97 @@
+---
+import {
+  documentCategoryLabels,
+  type PublicDocument,
+} from '../../data/documents';
+import DocumentStatusBadge from './DocumentStatusBadge.astro';
+
+interface Props {
+  document: PublicDocument;
+}
+
+const { document } = Astro.props;
+const searchText = [
+  document.title,
+  document.description,
+  documentCategoryLabels[document.category],
+  ...(document.keywords ?? []),
+].join(' ');
+---
+
+<article
+  class="external-service"
+  data-document
+  data-search={searchText}
+  data-category={document.category}
+  data-year=""
+  data-status={document.status}
+>
+  <div>
+    <p class="external-service__eyebrow">Servicio oficial</p>
+    <h3>{document.title}</h3>
+    <p>{document.description}</p>
+  </div>
+  <div class="external-service__action">
+    <DocumentStatusBadge status="external" />
+    <a
+      class="button button--primary"
+      href={document.href}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Abrir portal de Mineduc
+      <span class="sr-only"> (se abre fuera de este sitio)</span>
+    </a>
+    <small>Se abrirá el portal oficial de Mineduc.</small>
+  </div>
+</article>
+
+<style>
+  .external-service {
+    display: grid;
+    align-items: center;
+    gap: var(--space-5);
+    padding: clamp(1.4rem, 4vw, 2.4rem);
+    border: 1px solid rgb(232 185 77 / 0.55);
+    border-radius: var(--radius-lg);
+    background: var(--color-primary-deep);
+    color: rgb(255 255 255 / 0.82);
+    box-shadow: var(--shadow-md);
+  }
+
+  .external-service__eyebrow {
+    margin-block-end: var(--space-2);
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin-block-end: var(--space-3);
+    color: var(--color-surface);
+    font-size: var(--font-size-xl);
+  }
+
+  p:last-child {
+    margin: 0;
+  }
+
+  .external-service__action {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  small {
+    color: rgb(255 255 255 / 0.72);
+  }
+
+  @media (min-width: 48rem) {
+    .external-service {
+      grid-template-columns: 1fr auto;
+    }
+  }
+</style>

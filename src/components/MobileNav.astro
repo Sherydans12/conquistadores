@@ -24,29 +24,7 @@ import { enrollmentCta, primaryNavigation } from '../data/navigation';
         {
           primaryNavigation.map((item) => (
             <li>
-              {item.children ? (
-                <details class="mobile-submenu">
-                  <summary>{item.label}</summary>
-                  <ul>
-                    {item.children.map((child) => (
-                      <li>
-                        <a
-                          href={child.href}
-                          target={child.external ? '_blank' : undefined}
-                          rel={child.external ? 'noopener noreferrer' : undefined}
-                        >
-                          {child.label}
-                          {child.external && (
-                            <span class="external-label"> (sitio externo)</span>
-                          )}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              ) : (
-                <a href={item.href}>{item.label}</a>
-              )}
+              <a href={item.href}>{item.label}</a>
             </li>
           ))
         }
@@ -69,7 +47,7 @@ import { enrollmentCta, primaryNavigation } from '../data/navigation';
   if (panel) panel.hidden = true;
 
   const focusableSelector =
-    'a[href], button:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
+    'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
   function setMenuState(open: boolean, restoreFocus = true) {
     if (!toggle || !panel) return;
@@ -92,9 +70,6 @@ import { enrollmentCta, primaryNavigation } from '../data/navigation';
       const firstLink = panel.querySelector<HTMLElement>(focusableSelector);
       firstLink?.focus();
     } else {
-      panel.querySelectorAll('details[open]').forEach((details) => {
-        details.removeAttribute('open');
-      });
       if (restoreFocus) (lastFocused ?? toggle).focus();
     }
   }
@@ -105,16 +80,6 @@ import { enrollmentCta, primaryNavigation } from '../data/navigation';
 
   panel?.addEventListener('click', (event) => {
     if (event.target instanceof HTMLAnchorElement) setMenuState(false, false);
-  });
-
-  panel?.querySelectorAll<HTMLDetailsElement>('details').forEach((details) => {
-    const summary = details.querySelector<HTMLElement>('summary');
-    summary?.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        details.open = !details.open;
-      }
-    });
   });
 
   document.addEventListener('keydown', (event) => {
@@ -201,8 +166,7 @@ import { enrollmentCta, primaryNavigation } from '../data/navigation';
     padding-block: var(--space-5) var(--space-7);
   }
 
-  .mobile-links,
-  .mobile-submenu ul {
+  .mobile-links {
     padding: 0;
     margin: 0;
     list-style: none;
@@ -212,8 +176,7 @@ import { enrollmentCta, primaryNavigation } from '../data/navigation';
     border-block-end: 1px solid rgb(255 255 255 / 0.14);
   }
 
-  .mobile-links a,
-  summary {
+  .mobile-links a {
     display: flex;
     min-height: 3.2rem;
     align-items: center;
@@ -225,48 +188,8 @@ import { enrollmentCta, primaryNavigation } from '../data/navigation';
     text-decoration: none;
   }
 
-  .mobile-links a:hover,
-  summary:hover {
+  .mobile-links a:hover {
     background: rgb(255 255 255 / 0.09);
-  }
-
-  summary {
-    justify-content: space-between;
-    list-style: none;
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
-  }
-
-  summary::after {
-    content: "+";
-    color: var(--color-accent);
-    font-size: 1.25rem;
-  }
-
-  details[open] summary::after {
-    content: "−";
-  }
-
-  .mobile-submenu ul {
-    padding: 0 0 var(--space-3) var(--space-4);
-  }
-
-  .mobile-submenu li {
-    border-inline-start: 2px solid var(--color-accent);
-  }
-
-  .mobile-submenu a {
-    min-height: 2.75rem;
-    padding-inline-start: var(--space-4);
-    font-size: var(--font-size-xs);
-    font-weight: 700;
-  }
-
-  .external-label {
-    font-size: 0.68rem;
-    font-weight: 500;
   }
 
   .mobile-cta {

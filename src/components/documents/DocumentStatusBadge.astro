@@ -1,0 +1,50 @@
+---
+import {
+  documentStatusLabels,
+  type DocumentStatus,
+} from '../../data/documents';
+
+interface Props {
+  status: Exclude<DocumentStatus, 'review'>;
+}
+
+const { status } = Astro.props;
+---
+
+<span class:list={['status-badge', `status-badge--${status}`]}>
+  {documentStatusLabels[status]}
+</span>
+
+<style>
+  .status-badge {
+    display: inline-flex;
+    min-height: 1.7rem;
+    align-items: center;
+    padding: 0.22rem 0.62rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.045em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .status-badge--current {
+    border-color: rgb(19 121 94 / 0.28);
+    background: #e7f7f1;
+    color: #116b55;
+  }
+
+  .status-badge--historical {
+    border-color: rgb(98 102 122 / 0.24);
+    background: #eef0f5;
+    color: #4d5268;
+  }
+
+  .status-badge--external {
+    border-color: rgb(26 39 121 / 0.22);
+    background: #edf0ff;
+    color: var(--color-primary);
+  }
+</style>
