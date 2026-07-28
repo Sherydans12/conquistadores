@@ -1,0 +1,98 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  variant?: 'primary' | 'accent' | 'soft';
+}
+
+const { eyebrow, title, variant = 'primary' } = Astro.props;
+---
+
+<aside class:list={['callout', `callout--${variant}`]}>
+  <div class="callout__copy">
+    {eyebrow && <p class="callout__eyebrow">{eyebrow}</p>}
+    <h2>{title}</h2>
+    <div class="callout__body">
+      <slot />
+    </div>
+  </div>
+  {
+    Astro.slots.has('actions') && (
+      <div class="callout__actions">
+        <slot name="actions" />
+      </div>
+    )
+  }
+</aside>
+
+<style>
+  .callout {
+    display: grid;
+    align-items: center;
+    gap: var(--space-5);
+    padding: clamp(1.5rem, 4vw, 2.8rem);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .callout--primary {
+    background: var(--color-primary);
+    color: rgb(255 255 255 / 0.84);
+  }
+
+  .callout--accent {
+    background: var(--color-accent);
+    color: var(--color-primary-deep);
+  }
+
+  .callout--soft {
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-soft);
+    color: var(--color-text);
+  }
+
+  .callout__eyebrow {
+    margin-block-end: var(--space-2);
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .callout--accent .callout__eyebrow,
+  .callout--soft .callout__eyebrow {
+    color: var(--color-primary-alt);
+  }
+
+  .callout h2 {
+    margin-block-end: var(--space-3);
+    color: var(--color-surface);
+    font-size: var(--font-size-2xl);
+  }
+
+  .callout--accent h2,
+  .callout--soft h2 {
+    color: var(--color-primary-deep);
+  }
+
+  .callout__body :global(p:last-child) {
+    margin: 0;
+  }
+
+  .callout__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 56rem) {
+    .callout {
+      grid-template-columns: 1fr auto;
+    }
+
+    .callout__actions {
+      justify-content: end;
+    }
+  }
+</style>

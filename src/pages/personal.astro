@@ -1,0 +1,199 @@
+---
+import Callout from '../components/Callout.astro';
+import StaffCard from '../components/StaffCard.astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import { getStaffByArea, publicStaff, staffAreas } from '../data/staff';
+---
+
+<PageLayout
+  title="Personal"
+  description="Conoce al equipo directivo, especialistas, docentes, asistentes y auxiliares publicado por el Colegio Conquistadores."
+  canonicalPath="/personal/"
+  eyebrow="Comunidad educativa"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Personal' },
+  ]}
+>
+  <section class="page-section page-section--surface" aria-labelledby="equipo-title">
+    <div class="container">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Nuestro equipo</p>
+        <h2 id="equipo-title">Personas que acompañan el aprendizaje</h2>
+        <p>
+          La siguiente nómina reproduce información públicamente visible en el
+          sitio del colegio y está organizada por áreas para facilitar su consulta.
+        </p>
+      </div>
+      <nav class="staff-jump" aria-label="Áreas del personal">
+        {
+          staffAreas.map((area) => (
+            <a href={`#${area.id}`}>
+              <span>{area.label}</span>
+              <small>{getStaffByArea(area.id).length}</small>
+            </a>
+          ))
+        }
+      </nav>
+      <p class="staff-note">
+        Publicación de referencia: {publicStaff.length} personas. Esta nómina no se
+        presenta como certificación de dotación vigente y requiere validación
+        institucional antes de producción.
+      </p>
+    </div>
+  </section>
+
+  {
+    staffAreas.map((area, index) => {
+      const members = getStaffByArea(area.id);
+
+      return (
+        <section
+          class:list={[
+            'page-section',
+            'staff-section',
+            { 'page-section--soft': index % 2 === 0 },
+          ]}
+          id={area.id}
+          aria-labelledby={`${area.id}-title`}
+        >
+          <div class="container">
+            <div class="staff-section__heading">
+              <div>
+                <p class="page-section__eyebrow">Área {String(index + 1).padStart(2, '0')}</p>
+                <h2 id={`${area.id}-title`}>{area.label}</h2>
+                <p>{area.description}</p>
+              </div>
+              <a href="#equipo-title">Volver a las áreas</a>
+            </div>
+            <div class="staff-grid">
+              {members.map((member) => <StaffCard member={member} />)}
+            </div>
+          </div>
+        </section>
+      );
+    })
+  }
+
+  <Callout
+    slot="cta"
+    eyebrow="Información pública"
+    title="¿Necesitas confirmar un cargo o integrante?"
+    variant="soft"
+  >
+    <p>
+      Contacta directamente al colegio antes de usar esta nómina para un trámite
+      o comunicación formal.
+    </p>
+    <div slot="actions">
+      <a class="button button--primary" href="/#contacto">Ver contacto</a>
+      <a class="button text-link" href="/quienes-somos/">Quiénes somos</a>
+    </div>
+  </Callout>
+</PageLayout>
+
+<style>
+  .staff-jump {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .staff-jump a {
+    min-height: 3.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .staff-jump a:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  .staff-jump small {
+    min-width: 2rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    color: var(--color-primary-deep);
+    text-align: center;
+  }
+
+  .staff-note {
+    max-width: var(--container-narrow);
+    padding: var(--space-4);
+    margin: var(--space-6) 0 0;
+    border-inline-start: 0.35rem solid var(--color-accent);
+    background: #fff8e8;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .staff-section {
+    scroll-margin-top: calc(var(--header-height-desktop) + var(--space-5));
+  }
+
+  .staff-section__heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-5);
+    margin-block-end: var(--space-6);
+  }
+
+  .staff-section__heading h2 {
+    margin-block-end: var(--space-2);
+    font-size: var(--font-size-2xl);
+  }
+
+  .staff-section__heading p:last-child {
+    max-width: 42rem;
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .staff-section__heading > a {
+    display: none;
+    flex: 0 0 auto;
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+  }
+
+  .staff-grid {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 42rem) {
+    .staff-jump {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .staff-section__heading > a {
+      display: inline-flex;
+    }
+
+    .staff-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .staff-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+</style>

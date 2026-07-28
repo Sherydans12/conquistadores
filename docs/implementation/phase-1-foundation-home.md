@@ -71,20 +71,21 @@ Los originales de trabajo se eliminaron después de convertirlos. No se descarg�
 
 El JSON-LD se limita a estos datos públicos. No se copió el grafo Yoast.
 
-## Rutas pendientes
+## Rutas pendientes al cierre de Fase 1
 
-La rama crea `/`, `/documentos/` y `/robots.txt`. Las siguientes URL documentadas siguen pendientes de páginas Astro o de una decisión de redirección:
+La rama de Fase 1 creó `/`, `/documentos/` y `/robots.txt`. Esta lista conserva
+el estado histórico de aquella entrega. Fase 2 implementó posteriormente
+`/quienes-somos/`, `/personal/`, `/talleres/`, `/academias/` y
+`/matriculas-2026/`.
+
+Las siguientes URL continúan pendientes de páginas Astro o de una decisión de
+redirección después de Fase 2:
 
 - `/calendario-de-evaluaciones-2026/`
-- `/quienes-somos/`
 - `/actividades/`
-- `/personal/`
 - `/plan-lector-2026/`
 - `/protocolos-internos/`
 - `/reglamento-interno-de-convivencia-escolar/`
-- `/talleres/`
-- `/academias/`
-- `/matriculas-2026/`
 
 No se crearon `/mi-cuenta/`, `/registro/` ni `/notas/`.
 
@@ -125,7 +126,9 @@ La evidencia comparativa de diseño se documenta en `design-qa.md`.
 
 ## Limitaciones
 
-- Las rutas pendientes producen 404 en este build hasta que sus páginas sean implementadas.
+- En el build de Fase 2 las cinco rutas institucionales y de matrícula ya no
+  producen 404. Las rutas que permanecen en la lista anterior continúan
+  pendientes.
 - Las actividades y algunos documentos dependen todavía de enlaces históricos externos, pero la portada no consulta WordPress en tiempo de ejecución.
 - No hay feed de Instagram, mapa embebido, formulario de contacto ni integración headless. La búsqueda existe solo dentro del centro documental y funciona en cliente sobre el HTML estático.
 - El sitemap y las redirecciones de producción quedan para una fase posterior.

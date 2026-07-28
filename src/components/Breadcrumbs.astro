@@ -1,0 +1,80 @@
+---
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label="Migas de pan">
+  <ol>
+    {
+      items.map((item, index) => {
+        const isLast = index === items.length - 1;
+
+        return (
+          <li>
+            {item.href && !isLast ? (
+              <a href={item.href}>{item.label}</a>
+            ) : (
+              <span aria-current={isLast ? 'page' : undefined}>{item.label}</span>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: rgb(255 255 255 / 0.76);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+  }
+
+  .breadcrumbs li:not(:last-child)::after {
+    content: "/";
+    color: var(--color-accent);
+    font-weight: 900;
+  }
+
+  .breadcrumbs a {
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-surface);
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--color-accent);
+  }
+
+  .breadcrumbs span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

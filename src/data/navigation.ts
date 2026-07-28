@@ -8,6 +8,8 @@ export const primaryNavigation: NavigationItem[] = [
   { label: 'Quiénes somos', href: '/quienes-somos/' },
   { label: 'Actividades', href: '/actividades/' },
   { label: 'Personal', href: '/personal/' },
+  { label: 'Talleres', href: '/talleres/' },
+  { label: 'Academias', href: '/academias/' },
   { label: 'Documentos', href: '/documentos/' },
 ];
 

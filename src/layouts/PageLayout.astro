@@ -1,0 +1,136 @@
+---
+import type { ImageMetadata } from 'astro';
+import PageHero from '../components/PageHero.astro';
+import type { BreadcrumbItem } from '../components/Breadcrumbs.astro';
+import BaseLayout from './BaseLayout.astro';
+import { absoluteUrl, site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  eyebrow?: string;
+  heroImage?: ImageMetadata;
+  heroAlt?: string;
+  breadcrumbs: BreadcrumbItem[];
+  socialImage?: string;
+  noindex?: boolean;
+  schemaType?: 'AboutPage' | 'WebPage';
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  eyebrow,
+  heroImage,
+  heroAlt,
+  breadcrumbs,
+  socialImage,
+  noindex = false,
+  schemaType = 'WebPage',
+} = Astro.props;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    item: absoluteUrl(item.href ?? canonicalPath),
+  })),
+};
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': schemaType,
+  name: title,
+  description,
+  url: absoluteUrl(canonicalPath),
+  isPartOf: {
+    '@type': 'WebSite',
+    name: site.name,
+    url: site.baseUrl.toString(),
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  socialImage={socialImage}
+  noindex={noindex}
+>
+  <PageHero
+    title={title}
+    description={description}
+    eyebrow={eyebrow}
+    heroImage={heroImage}
+    heroAlt={heroAlt}
+    breadcrumbs={breadcrumbs}
+  />
+  <div class="page-content">
+    <slot />
+  </div>
+  {
+    Astro.slots.has('cta') && (
+      <section class="page-layout-cta">
+        <div class="container">
+          <slot name="cta" />
+        </div>
+      </section>
+    )
+  }
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+</BaseLayout>
+
+<style>
+  .page-content {
+    overflow: clip;
+  }
+
+  .page-content :global(.page-section) {
+    padding-block: var(--space-8);
+  }
+
+  .page-content :global(.page-section--surface) {
+    background: var(--color-surface);
+  }
+
+  .page-content :global(.page-section--soft) {
+    background: var(--color-surface-soft);
+  }
+
+  .page-content :global(.page-section__intro) {
+    max-width: var(--container-narrow);
+    margin-block-end: var(--space-7);
+  }
+
+  .page-content :global(.page-section__eyebrow) {
+    margin-block-end: var(--space-2);
+    color: var(--color-primary-alt);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .page-content :global(.page-section__intro h2) {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-2xl);
+  }
+
+  .page-content :global(.page-section__intro p:last-child) {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+  }
+
+  .page-layout-cta {
+    padding-block: clamp(3rem, 6vw, 5rem);
+    background: var(--color-background);
+  }
+</style>

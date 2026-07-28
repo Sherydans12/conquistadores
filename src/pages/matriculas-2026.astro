@@ -1,0 +1,308 @@
+---
+import Callout from '../components/Callout.astro';
+import EnrollmentCard from '../components/EnrollmentCard.astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import { enrollment } from '../data/enrollment';
+import { site } from '../data/site';
+---
+
+<PageLayout
+  title="Matrículas 2026"
+  description="Orientación pública para Matrículas 2026 del Colegio Conquistadores: pasos generales, documentos y contacto."
+  canonicalPath="/matriculas-2026/"
+  eyebrow="Admisión 2026"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Matrículas 2026' },
+  ]}
+>
+  <section class="page-section page-section--surface" aria-labelledby="orientacion-title">
+    <div class="container enrollment-intro">
+      <div>
+        <p class="page-section__eyebrow">Orientación general</p>
+        <h2 id="orientacion-title">Antes de comenzar</h2>
+        <p>{enrollment.introduction}</p>
+      </div>
+      <aside>
+        <p class="enrollment-intro__label">Dirigido a</p>
+        <p>{enrollment.audience}</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="page-section" aria-labelledby="proceso-title">
+    <div class="container">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Proceso general</p>
+        <h2 id="proceso-title">Tres pasos para orientarte</h2>
+        <p>
+          Estos pasos organizan la información pública disponible. El colegio debe
+          confirmar el procedimiento aplicable a cada familia.
+        </p>
+      </div>
+      <ol class="steps">
+        {
+          enrollment.steps.map((step) => (
+            <li>
+              <span aria-hidden="true">{step.number}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="page-section page-section--surface" aria-labelledby="documentos-title">
+    <div class="container">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Centro documental</p>
+        <h2 id="documentos-title">Accesos 2026 en un solo lugar</h2>
+        <p>
+          Las listas por curso y los documentos institucionales permanecen
+          centralizados en Documentos; esta página ofrece accesos resumidos.
+        </p>
+      </div>
+      <div class="access-grid">
+        {
+          enrollment.accesses.map((access) => (
+            <EnrollmentCard
+              title={access.title}
+              description={access.description}
+              href={access.href}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section contact-enrollment" id="contacto-matriculas" aria-labelledby="contacto-title">
+    <div class="container contact-enrollment__grid">
+      <div>
+        <p class="page-section__eyebrow">Contacto del colegio</p>
+        <h2 id="contacto-title">Confirma directamente tu proceso</h2>
+        <p>
+          Para conocer requisitos, fechas o disponibilidad aplicable a tu caso,
+          comunícate con el establecimiento.
+        </p>
+      </div>
+      <address>
+        <div>
+          <span>Teléfono</span>
+          <a href={site.phone.href}>{site.phone.display}</a>
+        </div>
+        <div>
+          <span>Dirección</span>
+          <p>{site.address.display}</p>
+        </div>
+        <div class="contact-enrollment__actions">
+          <a class="button button--primary" href={site.phone.href}>
+            Llamar al colegio
+          </a>
+          <a
+            class="button contact-enrollment__map"
+            href={site.address.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Abrir Google Maps
+            <span class="visually-hidden"> (se abre en un servicio externo)</span>
+          </a>
+        </div>
+      </address>
+    </div>
+  </section>
+
+  <Callout
+    slot="cta"
+    eyebrow="Importante"
+    title="Consulta siempre la versión identificada como 2026"
+    variant="accent"
+  >
+    <p>
+      No uses fichas o documentos 2025 como si fueran actuales. Los materiales
+      pendientes de validación no se presentan en esta página.
+    </p>
+    <div slot="actions">
+      <a class="button button--secondary" href="/documentos/">
+        Ir a Documentos
+      </a>
+    </div>
+  </Callout>
+</PageLayout>
+
+<style>
+  .enrollment-intro,
+  .contact-enrollment__grid {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .enrollment-intro > div h2,
+  .contact-enrollment h2 {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-2xl);
+  }
+
+  .enrollment-intro > div > p:last-child,
+  .contact-enrollment > :global(.container) p {
+    max-width: 46rem;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+  }
+
+  .enrollment-intro aside {
+    padding: var(--space-5);
+    border-block-start: 0.4rem solid var(--color-accent);
+    border-radius: var(--radius-lg);
+    background: var(--color-primary);
+    color: rgb(255 255 255 / 0.84);
+    box-shadow: var(--shadow-md);
+  }
+
+  .enrollment-intro__label {
+    margin-block-end: var(--space-2);
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .enrollment-intro aside p:last-child {
+    margin: 0;
+  }
+
+  .steps {
+    display: grid;
+    gap: var(--space-4);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .steps li {
+    min-width: 0;
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .steps li > span {
+    color: var(--color-accent-strong);
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+  }
+
+  .steps h3 {
+    margin-block-end: var(--space-2);
+    font-size: var(--font-size-xl);
+  }
+
+  .steps p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .access-grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .contact-enrollment {
+    scroll-margin-top: calc(var(--header-height-desktop) + var(--space-5));
+    background: var(--color-primary-deep);
+    color: var(--color-surface);
+  }
+
+  .contact-enrollment h2 {
+    color: var(--color-surface);
+  }
+
+  .contact-enrollment .page-section__eyebrow {
+    color: var(--color-accent);
+  }
+
+  .contact-enrollment__grid > div > p:last-child {
+    color: rgb(255 255 255 / 0.78);
+  }
+
+  address {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border: 1px solid rgb(255 255 255 / 0.18);
+    border-radius: var(--radius-lg);
+    background: var(--color-primary-alt);
+    font-style: normal;
+  }
+
+  address span,
+  address p,
+  address a {
+    display: block;
+  }
+
+  address > div > span {
+    margin-block-end: var(--space-1);
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  address > div > a:not(.button) {
+    color: var(--color-surface);
+    font-size: var(--font-size-lg);
+    font-weight: 900;
+  }
+
+  address p {
+    margin: 0;
+    color: rgb(255 255 255 / 0.84);
+  }
+
+  .contact-enrollment__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding-block-start: var(--space-2);
+  }
+
+  .contact-enrollment__map {
+    border-color: rgb(255 255 255 / 0.55);
+    color: var(--color-surface);
+  }
+
+  @media (min-width: 48rem) {
+    .enrollment-intro,
+    .contact-enrollment__grid {
+      grid-template-columns: 1.25fr 0.75fr;
+      align-items: center;
+    }
+
+    .steps,
+    .access-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .access-grid > :global(:nth-child(4)),
+    .access-grid > :global(:nth-child(5)) {
+      grid-column: span 1;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .access-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>
