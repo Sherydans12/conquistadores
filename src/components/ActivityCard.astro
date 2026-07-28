@@ -1,0 +1,121 @@
+---
+import { Image } from 'astro:assets';
+import type { Activity } from '../data/home';
+
+interface Props {
+  activity: Activity;
+}
+
+const { activity } = Astro.props;
+---
+
+<article class="activity-card">
+  <a
+    class="activity-card__image-link"
+    href={activity.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`${activity.title} (abre el sitio anterior en una pestaña nueva)`}
+  >
+    <Image
+      src={activity.image}
+      alt={activity.alt}
+      widths={[480, 720, 960]}
+      sizes="(min-width: 64rem) 25rem, (min-width: 42rem) 48vw, 100vw"
+      quality={82}
+      loading="lazy"
+    />
+  </a>
+  <div class="activity-card__body">
+    <div class="activity-card__meta">
+      <span>{activity.category}</span>
+      <time datetime={activity.date}>{activity.dateLabel}</time>
+    </div>
+    <h3>
+      <a
+        href={activity.href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {activity.title}
+      </a>
+    </h3>
+    <p class="external-note">Actividad histórica en el sitio anterior</p>
+  </div>
+</article>
+
+<style>
+  .activity-card {
+    overflow: hidden;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    transition:
+      box-shadow var(--transition-base),
+      transform var(--transition-base);
+  }
+
+  .activity-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
+
+  .activity-card__image-link {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: var(--color-primary-deep);
+  }
+
+  .activity-card__image-link :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-base);
+  }
+
+  .activity-card:hover .activity-card__image-link :global(img) {
+    transform: scale(1.025);
+  }
+
+  .activity-card__body {
+    padding: var(--space-5);
+  }
+
+  .activity-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+    margin-block-end: var(--space-4);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+  }
+
+  .activity-card__meta span {
+    padding: 0.25rem 0.52rem;
+    border-radius: var(--radius-pill);
+    background: rgb(232 185 77 / 0.2);
+    color: var(--color-primary-deep);
+    font-weight: 900;
+  }
+
+  h3 {
+    margin-block-end: var(--space-4);
+    font-size: var(--font-size-lg);
+  }
+
+  h3 a {
+    text-decoration: none;
+  }
+
+  h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .external-note {
+    margin: 0;
+  }
+</style>

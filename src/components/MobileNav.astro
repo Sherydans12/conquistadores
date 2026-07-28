@@ -1,0 +1,215 @@
+---
+import { enrollmentCta, primaryNavigation } from '../data/navigation';
+---
+
+<div class="mobile-nav">
+  <button
+    class="mobile-toggle"
+    id="mobile-menu-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="mobile-navigation"
+    aria-label="Abrir menú principal"
+  >
+    <span>Menú</span>
+  </button>
+
+  <nav
+    class="mobile-panel"
+    id="mobile-navigation"
+    aria-label="Navegación móvil"
+  >
+    <div class="mobile-panel__inner">
+      <ul class="mobile-links">
+        {
+          primaryNavigation.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="mobile-cta" href={enrollmentCta.href}>
+        {enrollmentCta.label}
+      </a>
+    </div>
+  </nav>
+</div>
+
+<script>
+  document.documentElement.classList.add('mobile-nav-ready');
+
+  const toggle = document.querySelector<HTMLButtonElement>('#mobile-menu-toggle');
+  const panel = document.querySelector<HTMLElement>('#mobile-navigation');
+  const desktopQuery = window.matchMedia('(min-width: 70rem)');
+  let lastFocused: HTMLElement | null = null;
+
+  if (panel) panel.hidden = true;
+
+  const focusableSelector =
+    'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+  function setMenuState(open: boolean, restoreFocus = true) {
+    if (!toggle || !panel) return;
+
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute(
+      'aria-label',
+      open ? 'Cerrar menú principal' : 'Abrir menú principal',
+    );
+    const label = toggle.querySelector('span');
+    if (label) label.textContent = open ? 'Cerrar' : 'Menú';
+    panel.hidden = !open;
+    document.body.classList.toggle('nav-open', open);
+
+    if (open) {
+      lastFocused =
+        document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : toggle;
+      const firstLink = panel.querySelector<HTMLElement>(focusableSelector);
+      firstLink?.focus();
+    } else {
+      if (restoreFocus) (lastFocused ?? toggle).focus();
+    }
+  }
+
+  toggle?.addEventListener('click', () => {
+    setMenuState(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  panel?.addEventListener('click', (event) => {
+    if (event.target instanceof HTMLAnchorElement) setMenuState(false, false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (!toggle || !panel || toggle.getAttribute('aria-expanded') !== 'true') {
+      return;
+    }
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setMenuState(false);
+      return;
+    }
+
+    if (event.key !== 'Tab') return;
+
+    const focusable = [toggle, ...panel.querySelectorAll<HTMLElement>(focusableSelector)]
+      .filter((element) => !element.hasAttribute('disabled'));
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last?.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first?.focus();
+    }
+  });
+
+  desktopQuery.addEventListener('change', (event) => {
+    if (event.matches && toggle?.getAttribute('aria-expanded') === 'true') {
+      setMenuState(false, false);
+    }
+  });
+</script>
+
+<style>
+  .mobile-nav {
+    display: contents;
+  }
+
+  .mobile-toggle {
+    display: none;
+    min-width: 3.25rem;
+    min-height: 2.8rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 0.8rem;
+    border: 2px solid var(--color-accent);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-surface);
+    cursor: pointer;
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  :global(.mobile-nav-ready) .mobile-toggle {
+    display: inline-flex;
+  }
+
+  .mobile-panel {
+    width: 100%;
+    background: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  :global(.mobile-nav-ready) .mobile-panel {
+    position: absolute;
+    z-index: var(--layer-nav);
+    inset-block-start: 100%;
+    inset-inline: 0;
+    height: calc(100svh - var(--header-height-mobile));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-block-start: 1px solid rgb(255 255 255 / 0.16);
+  }
+
+  .mobile-panel__inner {
+    width: min(100% - (2 * var(--page-gutter)), 35rem);
+    margin-inline: auto;
+    padding-block: var(--space-5) var(--space-7);
+  }
+
+  .mobile-links {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .mobile-links > li {
+    border-block-end: 1px solid rgb(255 255 255 / 0.14);
+  }
+
+  .mobile-links a {
+    display: flex;
+    min-height: 3.2rem;
+    align-items: center;
+    padding: 0.7rem var(--space-3);
+    color: var(--color-surface);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .mobile-links a:hover {
+    background: rgb(255 255 255 / 0.09);
+  }
+
+  .mobile-cta {
+    display: flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    margin-block-start: var(--space-5);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    color: var(--color-primary-deep);
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  @media (min-width: 70rem) {
+    .mobile-nav {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+import type { PublicDocument } from '../../data/documents';
+import DocumentCard from './DocumentCard.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  description?: string;
+  documents: PublicDocument[];
+  archive?: boolean;
+}
+
+const { id, title, description, documents, archive = false } = Astro.props;
+---
+
+<section
+  class:list={['document-group', archive && 'document-group--archive']}
+  id={id}
+  aria-labelledby={`${id}-title`}
+  data-document-section
+>
+  <div class="document-group__heading">
+    <h2 id={`${id}-title`}>{title}</h2>
+    {description && <p>{description}</p>}
+  </div>
+  <div class="document-grid">
+    {documents.map((document) => <DocumentCard document={document} />)}
+  </div>
+</section>
+
+<style>
+  .document-group {
+    scroll-margin-top: calc(var(--header-height-desktop) + var(--space-5));
+  }
+
+  .document-group + .document-group {
+    padding-block-start: var(--space-7);
+    margin-block-start: var(--space-7);
+    border-block-start: 1px solid var(--color-border);
+  }
+
+  .document-group__heading {
+    max-width: 48rem;
+    margin-block-end: var(--space-5);
+  }
+
+  .document-group__heading h2 {
+    margin-block-end: var(--space-2);
+    font-size: var(--font-size-xl);
+  }
+
+  .document-group__heading p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .document-grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .document-group--archive {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-soft);
+  }
+
+  @media (min-width: 44rem) {
+    .document-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 68rem) {
+    .document-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -1,0 +1,137 @@
+---
+import { Image } from 'astro:assets';
+import { home } from '../data/home';
+import { site } from '../data/site';
+
+const { hero } = home;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <Image
+    class="hero__image"
+    src={hero.image}
+    alt={hero.alt}
+    widths={[640, 960, 1440, 2200]}
+    sizes="100vw"
+    quality={84}
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="hero__overlay" aria-hidden="true"></div>
+  <div class="container hero__content">
+    <p class="hero__eyebrow">{hero.eyebrow}</p>
+    <h1 id="hero-title">{hero.title}</h1>
+    <p class="hero__tagline">{hero.tagline}</p>
+    <p class="hero__address">{site.address.display}</p>
+    <div class="hero__actions">
+      <a class="button button--primary" href={hero.primaryCta.href}>
+        {hero.primaryCta.label}
+      </a>
+      <a class="button button--secondary" href={hero.secondaryCta.href}>
+        {hero.secondaryCta.label}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    min-height: clamp(31rem, 64svh, 41rem);
+    display: grid;
+    align-items: end;
+    overflow: hidden;
+    background: var(--color-primary-deep);
+  }
+
+  .hero__image,
+  .hero__overlay {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero__image {
+    object-fit: cover;
+    object-position: 51% center;
+  }
+
+  .hero__overlay {
+    z-index: -1;
+    background: rgb(8 14 55 / 0.56);
+  }
+
+  .hero__content {
+    padding-block: clamp(6rem, 16vh, 10rem) clamp(3.5rem, 9vh, 6rem);
+    color: var(--color-surface);
+    text-shadow: 0 2px 18px rgb(0 0 0 / 0.36);
+  }
+
+  .hero__eyebrow {
+    margin-block-end: var(--space-3);
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 12ch;
+    margin-block-end: var(--space-2);
+    color: var(--color-surface);
+    font-size: var(--font-size-hero);
+    letter-spacing: -0.035em;
+    line-height: var(--line-height-tight);
+  }
+
+  .hero__tagline {
+    margin-block-end: var(--space-2);
+    color: var(--color-accent);
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+  }
+
+  .hero__address {
+    margin-block-end: var(--space-6);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  @media (max-width: 30rem) {
+    .hero {
+      min-height: 31rem;
+    }
+
+    .hero__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .hero {
+      align-items: center;
+      min-height: clamp(34rem, 65svh, 42rem);
+    }
+
+    .hero__content {
+      padding-block: 7rem;
+    }
+
+    .hero__address {
+      font-size: var(--font-size-base);
+    }
+  }
+</style>

@@ -1,0 +1,424 @@
+---
+import DocumentCard from '../components/documents/DocumentCard.astro';
+import DocumentList from '../components/documents/DocumentList.astro';
+import DocumentSearch from '../components/documents/DocumentSearch.astro';
+import ExternalServiceCard from '../components/documents/ExternalServiceCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  featuredDocuments,
+  getPublicDocumentsByCategory,
+  publicDocuments,
+  publicExternalServices,
+  publicHistoricalDocuments,
+} from '../data/documents';
+
+const evaluationDocuments = getPublicDocumentsByCategory('evaluaciones');
+const readingPlanDocuments = getPublicDocumentsByCategory('plan-lector');
+const regulationDocuments = getPublicDocumentsByCategory('reglamentos');
+const enrollmentDocuments = getPublicDocumentsByCategory('matriculas');
+const institutionalDocuments =
+  getPublicDocumentsByCategory('institucionales');
+---
+
+<BaseLayout
+  title="Documentos | Colegio Conquistadores"
+  description="Consulta documentos públicos del Colegio Conquistadores: evaluaciones 2026, plan lector, reglamentos, matrículas y archivo histórico."
+  canonicalPath="/documentos/"
+>
+  <header class="documents-hero">
+    <div class="container documents-hero__inner">
+      <p class="documents-hero__eyebrow">Información pública</p>
+      <h1>Documentos</h1>
+      <p>
+        Encuentra calendarios, planes, reglamentos y documentos institucionales
+        en un solo lugar. Los archivos históricos están identificados y los
+        documentos pendientes de revisión no se publican en esta lista.
+      </p>
+    </div>
+  </header>
+
+  <section class="documents-tools" aria-label="Búsqueda y filtros">
+    <div class="container">
+      <DocumentSearch total={publicDocuments.length} />
+    </div>
+  </section>
+
+  <nav class="document-jump" aria-label="Secciones de documentos">
+    <div class="container document-jump__links">
+      <a href="#evaluaciones-2026">Evaluaciones 2026</a>
+      <a href="#plan-lector">Plan lector</a>
+      <a href="#reglamentos">Reglamentos</a>
+      <a href="#matriculas-admision">Matrículas</a>
+      <a href="#archivo-historico">Archivo histórico</a>
+    </div>
+  </nav>
+
+  <section
+    class="section featured-documents"
+    aria-labelledby="featured-documents-title"
+    data-featured-section
+  >
+    <div class="container">
+      <div class="section-intro">
+        <p class="section-intro__eyebrow">Accesos destacados</p>
+        <h2 id="featured-documents-title">Documentos institucionales 2026</h2>
+        <p>
+          Accesos directos a los documentos institucionales publicados para el
+          periodo actual.
+        </p>
+      </div>
+      <div class="featured-documents__grid">
+        {
+          featuredDocuments.map((document) => (
+            <DocumentCard document={document} preview />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section documents-catalog" aria-labelledby="catalog-title">
+    <div class="container">
+      <div class="catalog-heading">
+        <p class="section-intro__eyebrow">Centro documental</p>
+        <h2 id="catalog-title">Listado de documentos públicos</h2>
+        <p>
+          Todos los resultados siguientes están presentes en el HTML inicial.
+          La búsqueda y los filtros solo mejoran la exploración en el navegador.
+        </p>
+      </div>
+
+      <div class="document-groups" data-document-groups>
+        <DocumentList
+          id="evaluaciones-2026"
+          title="Evaluaciones y calendarios 2026"
+          description="Calendarios del primer semestre organizados por curso."
+          documents={evaluationDocuments}
+        />
+
+        <DocumentList
+          id="plan-lector"
+          title="Plan lector 2026"
+          description="Planes de lecturas complementarias y domiciliarias por nivel."
+          documents={readingPlanDocuments}
+        />
+
+        <DocumentList
+          id="reglamentos"
+          title="Reglamentos y convivencia"
+          description="Documentos reglamentarios publicados para 2026."
+          documents={regulationDocuments}
+        />
+
+        <DocumentList
+          id="documentos-institucionales"
+          title="Documentos institucionales"
+          description="Información institucional publicada para 2026."
+          documents={institutionalDocuments}
+        />
+
+        <DocumentList
+          id="matriculas-admision"
+          title="Matrículas y admisión 2026"
+          description="Listas de útiles escolares organizadas por curso."
+          documents={enrollmentDocuments}
+        />
+
+        <section
+          class="review-notice"
+          id="protocolos"
+          aria-labelledby="protocolos-title"
+          data-review-notice
+        >
+          <p class="review-notice__eyebrow">Revisión documental</p>
+          <h2 id="protocolos-title">Protocolos internos</h2>
+          <p>
+            Los protocolos históricos identificados en el sitio anterior están
+            en revisión de vigencia. No se muestran como documentos actuales
+            hasta completar esa validación.
+          </p>
+        </section>
+
+        <DocumentList
+          id="archivo-historico"
+          title="Archivo histórico"
+          description="Versiones anteriores conservadas como referencia. No corresponden al periodo actual."
+          documents={publicHistoricalDocuments}
+          archive
+        />
+
+        <section
+          class="external-services"
+          id="servicios-externos"
+          aria-labelledby="external-services-title"
+          data-document-section
+        >
+          <div class="external-services__heading">
+            <h2 id="external-services-title">Servicios externos</h2>
+            <p>
+              Accesos oficiales que funcionan fuera del sitio del colegio.
+            </p>
+          </div>
+          {
+            publicExternalServices.map((document) => (
+              <ExternalServiceCard document={document} />
+            ))
+          }
+        </section>
+      </div>
+
+      <div
+        class="empty-state"
+        role="status"
+        aria-live="polite"
+        hidden
+        data-document-empty
+      >
+        <p class="empty-state__title">No encontramos coincidencias</p>
+        <p>
+          Prueba con otra palabra o utiliza “Limpiar filtros” para volver a ver
+          todos los documentos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="documents-help" aria-labelledby="documents-help-title">
+    <div class="container documents-help__inner">
+      <div>
+        <p class="section-intro__eyebrow">¿Necesitas orientación?</p>
+        <h2 id="documents-help-title">Consulta antes de usar una versión antigua</h2>
+        <p>
+          Si un archivo aparece como histórico o no está disponible en esta
+          página, confirma su uso con el colegio antes de realizar un trámite.
+        </p>
+      </div>
+      <a class="button button--primary" href="tel:+56512234652">
+        Llamar al colegio
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .documents-hero {
+    padding-block: clamp(3.5rem, 8vw, 6.5rem) clamp(5rem, 10vw, 8rem);
+    background:
+      linear-gradient(125deg, rgb(17 27 91 / 0.96), rgb(37 62 133 / 0.9)),
+      var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  .documents-hero__inner {
+    max-width: var(--container-narrow);
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .documents-hero__eyebrow,
+  .section-intro__eyebrow,
+  .review-notice__eyebrow {
+    margin-block-end: var(--space-2);
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .documents-hero h1 {
+    margin-block-end: var(--space-4);
+    color: var(--color-surface);
+    font-size: var(--font-size-2xl);
+  }
+
+  .documents-hero p:last-child {
+    max-width: 44rem;
+    margin: 0 auto;
+    color: rgb(255 255 255 / 0.82);
+    font-size: var(--font-size-lg);
+  }
+
+  .documents-tools {
+    background: var(--color-background);
+  }
+
+  .document-jump {
+    padding-block: var(--space-5);
+    border-block: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .document-jump__links {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--space-2);
+    padding-block: var(--space-1);
+    scrollbar-width: thin;
+  }
+
+  .document-jump a {
+    display: inline-flex;
+    min-height: 2.75rem;
+    flex: 0 0 auto;
+    align-items: center;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    color: var(--color-primary);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .document-jump a:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  .featured-documents {
+    background: var(--color-surface);
+  }
+
+  .section-intro,
+  .catalog-heading {
+    max-width: 48rem;
+    margin-block-end: var(--space-6);
+  }
+
+  .section-intro h2,
+  .catalog-heading h2 {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-2xl);
+  }
+
+  .section-intro p:last-child,
+  .catalog-heading p:last-child {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .featured-documents__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .documents-catalog {
+    background: var(--color-background);
+  }
+
+  .document-groups {
+    padding: clamp(1.1rem, 3vw, 2.2rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .review-notice {
+    scroll-margin-top: calc(var(--header-height-desktop) + var(--space-5));
+    padding: clamp(1.25rem, 3vw, 2rem);
+    margin-block-start: var(--space-7);
+    border-inline-start: 0.4rem solid var(--color-accent);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    background: #fff8e8;
+  }
+
+  .review-notice__eyebrow {
+    color: var(--color-primary-alt);
+  }
+
+  .review-notice h2 {
+    margin-block-end: var(--space-2);
+    font-size: var(--font-size-xl);
+  }
+
+  .review-notice p:last-child {
+    max-width: 48rem;
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .external-services {
+    padding-block-start: var(--space-7);
+    margin-block-start: var(--space-7);
+    border-block-start: 1px solid var(--color-border);
+  }
+
+  .external-services__heading {
+    max-width: 48rem;
+    margin-block-end: var(--space-5);
+  }
+
+  .external-services__heading h2 {
+    margin-block-end: var(--space-2);
+    font-size: var(--font-size-xl);
+  }
+
+  .external-services__heading p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .empty-state {
+    padding: clamp(2rem, 5vw, 4rem);
+    margin-block-start: var(--space-6);
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    text-align: center;
+  }
+
+  .empty-state__title {
+    margin-block-end: var(--space-2);
+    color: var(--color-primary-deep);
+    font-size: var(--font-size-xl);
+    font-weight: 900;
+  }
+
+  .empty-state p:last-child {
+    max-width: 35rem;
+    margin: 0 auto;
+    color: var(--color-text-muted);
+  }
+
+  .documents-help {
+    padding-block: clamp(3rem, 6vw, 5rem);
+    background: var(--color-accent);
+  }
+
+  .documents-help__inner {
+    display: grid;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .documents-help h2 {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-2xl);
+  }
+
+  .documents-help p:last-child {
+    max-width: 50rem;
+    margin: 0;
+  }
+
+  .documents-help .button {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  @media (min-width: 44rem) {
+    .featured-documents__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 56rem) {
+    .documents-help__inner {
+      grid-template-columns: 1fr auto;
+    }
+  }
+</style>

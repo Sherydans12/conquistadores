@@ -1,0 +1,54 @@
+---
+import { home } from '../data/home';
+
+const { announcement } = home;
+---
+
+{
+  announcement.visible && (
+    <aside class="announcement" aria-label="Aviso importante">
+      <a href={announcement.href}>
+        <span aria-hidden="true">Aviso</span>
+        <strong>{announcement.text}</strong>
+      </a>
+    </aside>
+  )
+}
+
+<style>
+  .announcement {
+    min-height: var(--announcement-height);
+    display: grid;
+    place-items: center;
+    padding: 0.42rem var(--page-gutter);
+    border-block-end: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-primary);
+    font-size: clamp(0.72rem, 0.68rem + 0.25vw, 0.86rem);
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+  }
+
+  a:hover strong {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  span {
+    padding: 0.2rem 0.46rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    color: var(--color-primary-deep);
+    font-size: 0.64rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
