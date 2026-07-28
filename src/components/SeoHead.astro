@@ -1,5 +1,5 @@
 ---
-import { absoluteUrl, site } from '../data/site';
+import { absoluteUrl, canonicalUrl, site } from '../data/site';
 
 interface Props {
   title?: string;
@@ -22,9 +22,9 @@ const {
 } = Astro.props;
 
 const pageTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
-const canonical = absoluteUrl(canonicalPath);
+const canonical = canonicalUrl(canonicalPath);
 const socialImage = new URL(image, site.baseUrl).toString();
-const shouldNoindex = noindex || site.environment !== 'production';
+const shouldNoindex = noindex || !site.indexingAllowed;
 
 const organizationSchema = {
   '@context': 'https://schema.org',
@@ -73,4 +73,4 @@ const organizationSchema = {
 <meta name="twitter:image" content={socialImage} />
 <meta name="twitter:image:alt" content={imageAlt} />
 
-<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />

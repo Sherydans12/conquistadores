@@ -193,16 +193,17 @@ Comprobaciones:
   colegio.
 - Los PDF siguen centralizados y temporalmente alojados fuera de staging.
 
-## Rutas todavía pendientes
+## Rutas heredadas después de Fase 4
 
-Fase 3 implementó `/actividades/` y las 47 rutas históricas. Permanecen:
+Fase 3 implementó `/actividades/` y las 47 rutas históricas. Fase 4 registró,
+sin activar, destinos documentales para:
 - `/calendario-de-evaluaciones-2026/`
 - `/plan-lector-2026/`
 - `/protocolos-internos/`
 - `/reglamento-interno-de-convivencia-escolar/`
-- `/registro/`
-- `/mi-cuenta/`
-- `/notas/`
+
+`/registro/`, `/mi-cuenta/`, recuperación y `/notas/` permanecen como decisiones
+sensibles y bloqueadores; no se implementaron como páginas estáticas.
 
 ## Tareas siguientes
 

@@ -1,5 +1,14 @@
 # Plan de migración SEO
 
+## Avance de Fase 4
+
+La preparación versionada ya incluye sitemap Astro de 55 URL públicas,
+`robots.txt` seguro por entorno, canonicals coherentes, filtros URL, inventario
+central de 23 rutas heredadas, 18 propuestas exactas de redirección, validadores
+SEO/enlaces/rutas/assets y CI. Ninguna regla se ha activado. Cinco redirecciones,
+la query del mega menú y los flujos sensibles continúan pendientes de
+aprobación; por ello el sitio no está listo para producción.
+
 ## Estado actual
 
 - 78 URLs públicas relevantes documentadas en [url-inventory.md](url-inventory.md).

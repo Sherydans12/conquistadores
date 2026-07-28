@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-07-28T17:50:08.121Z",
+  "site": "Colegio Conquistadores",
+  "readyForProduction": false,
+  "checks": {
+    "build": true,
+    "astroCheck": true,
+    "routes": true,
+    "links": true,
+    "seo": true,
+    "assets": true,
+    "institutionalApproval": false,
+    "sensitivePortalDecision": false,
+    "redirectsApproved": false
+  },
+  "blockers": [
+    "Definir un portal seguro o una salida aprobada para notas, cuenta y recuperación.",
+    "Completar la aprobación institucional de personal, fotografías, talleres, academias y documentos.",
+    "Resolver la actividad parcial del Kínder y el MP4 heredado de 30,8 MB.",
+    "Aprobar las cinco redirecciones exactas pendientes y la regla de query del mega menú.",
+    "Definir analítica, privacidad y consentimiento antes del lanzamiento."
+  ]
+}

@@ -128,9 +128,10 @@ Detalle: [astro-architecture.md](astro-architecture.md).
 - [ ] Completar alt/captions antes de aceptar imágenes.
 - [ ] Preservar las 47 rutas de entradas.
 - [ ] Preparar y probar redirects de archivos/autor/mega menú.
-- [ ] Generar sitemap, robots, canonicals, OG y JSON-LD.
+- [x] Generar sitemap, robots, canonicals, OG y JSON-LD.
+- [x] Versionar inventarios de rutas, validadores y CI de preparación.
 - [ ] Validar móvil, teclado, contraste, reduced motion y embeds.
-- [ ] Ejecutar crawl comparativo contra las 78 URLs.
+- [ ] Ejecutar crawl comparativo contra las 78 URLs después de aprobar redirects.
 - [ ] Ejecutar `npm run build` antes de cualquier publicación.
 
 ## Índice de entregables

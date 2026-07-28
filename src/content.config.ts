@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const activityImage = z.object({
   image: z.string().startsWith('/src/assets/images/activities/'),
@@ -9,7 +10,7 @@ const activityImage = z.object({
 
 const externalResource = z.object({
   label: z.string().trim().min(1),
-  url: z.string().url(),
+  url: z.url(),
   service: z.string().trim().min(1),
 });
 
@@ -30,7 +31,7 @@ const activities = defineCollection({
       historicalPath: z
         .string()
         .regex(/^\/\d{4}\/\d{2}\/\d{2}\/[^/]+\/$/),
-      legacyUrl: z.string().url(),
+      legacyUrl: z.url(),
       featuredImage: z
         .string()
         .startsWith('/src/assets/images/activities/'),

@@ -14,7 +14,6 @@ const SOURCE_PATH = path.resolve(
   '.cache/activity-import/wordpress-activities.json',
 );
 const CONTENT_ROOT = path.resolve('src/content/activities');
-const IMAGE_ROOT = path.resolve('src/assets/images/activities');
 const MANIFEST_PATH = path.resolve(
   'docs/implementation/activity-migration-manifest.json',
 );

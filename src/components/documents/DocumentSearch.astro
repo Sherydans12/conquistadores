@@ -89,12 +89,39 @@ const { total } = Astro.props;
         .replace(/\p{Diacritic}/gu, '')
         .toLocaleLowerCase('es')
         .trim();
+    const allowedCategories = new Set(
+      Array.from(categorySelect?.options ?? []).map((option) => option.value),
+    );
+    const allowedYears = new Set(
+      Array.from(yearSelect?.options ?? []).map((option) => option.value),
+    );
+    const allowedStatuses = new Set(
+      Array.from(statusSelect?.options ?? []).map((option) => option.value),
+    );
 
     queryInput?.removeAttribute('disabled');
     filterFields?.removeAttribute('disabled');
     clearButton?.removeAttribute('disabled');
 
-    const applyFilters = () => {
+    const syncUrl = () => {
+      const params = new URLSearchParams();
+      const query = queryInput?.value.trim() ?? '';
+      const category = categorySelect?.value ?? '';
+      const year = yearSelect?.value ?? '';
+      const status = statusSelect?.value ?? '';
+      if (query) params.set('q', query);
+      if (category) params.set('category', category);
+      if (year) params.set('year', year);
+      if (status) params.set('status', status);
+      const search = params.toString();
+      window.history.replaceState(
+        null,
+        '',
+        `${window.location.pathname}${search ? `?${search}` : ''}`,
+      );
+    };
+
+    const applyFilters = (updateUrl = true) => {
       const query = normalize(queryInput?.value ?? '');
       const category = categorySelect?.value ?? '';
       const year = yearSelect?.value ?? '';
@@ -144,10 +171,11 @@ const { total } = Astro.props;
       }
 
       clearButton?.toggleAttribute('disabled', !filtersActive);
+      if (updateUrl) syncUrl();
     };
 
-    searchForm.addEventListener('input', applyFilters);
-    searchForm.addEventListener('change', applyFilters);
+    searchForm.addEventListener('input', () => applyFilters());
+    searchForm.addEventListener('change', () => applyFilters());
     searchForm.addEventListener('submit', (event) => event.preventDefault());
     searchForm.addEventListener('reset', () => {
       window.requestAnimationFrame(() => {
@@ -155,6 +183,26 @@ const { total } = Astro.props;
         queryInput?.focus();
       });
     });
+
+    const initialParams = new URLSearchParams(window.location.search);
+    const initialQuery = initialParams.get('q');
+    const initialCategory = initialParams.get('category');
+    const initialYear = initialParams.get('year');
+    const initialStatus = initialParams.get('status');
+    if (initialQuery && queryInput) queryInput.value = initialQuery;
+    if (
+      initialCategory &&
+      allowedCategories.has(initialCategory) &&
+      categorySelect
+    ) {
+      categorySelect.value = initialCategory;
+    }
+    if (initialYear && allowedYears.has(initialYear) && yearSelect) {
+      yearSelect.value = initialYear;
+    }
+    if (initialStatus && allowedStatuses.has(initialStatus) && statusSelect) {
+      statusSelect.value = initialStatus;
+    }
 
     applyFilters();
   }
