@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import type { SchoolProgram } from '../data/workshops';
+
+interface Props {
+  program: SchoolProgram;
+}
+
+const { program } = Astro.props;
+---
+
+<article class="program-card">
+  {
+    program.image ? (
+      <Image
+        src={program.image}
+        alt={program.imageAlt ?? ''}
+        widths={[420, 720, 960]}
+        sizes="(min-width: 64rem) 33vw, (min-width: 42rem) 50vw, 100vw"
+        quality={84}
+        loading="lazy"
+      />
+    ) : (
+      <div class="program-card__fallback" aria-hidden="true">
+        <span>{program.title.slice(0, 1)}</span>
+      </div>
+    )
+  }
+  <div class="program-card__body">
+    {program.category && <p class="program-card__category">{program.category}</p>}
+    <h3>{program.title}</h3>
+    <p>{program.description}</p>
+  </div>
+</article>
+
+<style>
+  .program-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .program-card :global(img),
+  .program-card__fallback {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+
+  .program-card :global(img) {
+    object-fit: cover;
+  }
+
+  .program-card__fallback {
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(circle at 70% 20%, rgb(232 185 77 / 0.32), transparent 32%),
+      var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  .program-card__fallback span {
+    font-size: 4rem;
+    font-weight: 900;
+  }
+
+  .program-card__body {
+    padding: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .program-card__category {
+    margin-block-end: var(--space-2);
+    color: var(--color-primary-alt);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .program-card h3 {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-xl);
+  }
+
+  .program-card__body > p:last-child {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+</style>

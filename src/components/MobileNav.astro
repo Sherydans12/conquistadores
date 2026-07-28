@@ -1,5 +1,12 @@
 ---
 import { enrollmentCta, primaryNavigation } from '../data/navigation';
+
+const currentPath = Astro.url.pathname;
+
+function isCurrent(href: string): boolean {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
 ---
 
 <div class="mobile-nav">
@@ -24,12 +31,21 @@ import { enrollmentCta, primaryNavigation } from '../data/navigation';
         {
           primaryNavigation.map((item) => (
             <li>
-              <a href={item.href}>{item.label}</a>
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
             </li>
           ))
         }
       </ul>
-      <a class="mobile-cta" href={enrollmentCta.href}>
+      <a
+        class="mobile-cta"
+        href={enrollmentCta.href}
+        aria-current={isCurrent(enrollmentCta.href) ? 'page' : undefined}
+      >
         {enrollmentCta.label}
       </a>
     </div>
@@ -188,8 +204,10 @@ import { enrollmentCta, primaryNavigation } from '../data/navigation';
     text-decoration: none;
   }
 
-  .mobile-links a:hover {
+  .mobile-links a:hover,
+  .mobile-links a[aria-current="page"] {
     background: rgb(255 255 255 / 0.09);
+    color: var(--color-accent);
   }
 
   .mobile-cta {

@@ -45,7 +45,11 @@ function isCurrent(href: string): boolean {
       </ul>
     </nav>
 
-    <a class="header-cta" href={enrollmentCta.href}>
+    <a
+      class="header-cta"
+      href={enrollmentCta.href}
+      aria-current={isCurrent(enrollmentCta.href) ? 'page' : undefined}
+    >
       {enrollmentCta.label}
     </a>
     <MobileNav />

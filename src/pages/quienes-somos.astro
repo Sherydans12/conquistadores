@@ -1,0 +1,276 @@
+---
+import fachada from '../assets/images/home/fachada-colegio-conquistadores.webp';
+import Callout from '../components/Callout.astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import { institutional, institutionalValues } from '../data/institutional';
+---
+
+<PageLayout
+  title="Quiénes somos"
+  description="Conoce la historia, misión, visión, valores y enfoque educativo del Colegio Conquistadores de Coquimbo."
+  canonicalPath="/quienes-somos/"
+  eyebrow="Identidad institucional"
+  heroImage={fachada}
+  heroAlt="Fachada del Colegio Conquistadores en Coquimbo"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Quiénes somos' },
+  ]}
+  schemaType="AboutPage"
+>
+  <section class="page-section page-section--surface" aria-labelledby="presentacion-title">
+    <div class="container about-intro">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Nuestra comunidad</p>
+        <h2 id="presentacion-title">Aprender con alegría, crecer con propósito</h2>
+        <p>{institutional.introduction}</p>
+      </div>
+      <blockquote>
+        <p>“Aprender con alegría”</p>
+        <cite>Lema institucional</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="page-section" aria-labelledby="historia-title">
+    <div class="container story-grid">
+      <div>
+        <p class="page-section__eyebrow">Nuestro recorrido</p>
+        <h2 id="historia-title">Historia</h2>
+      </div>
+      <div class="story-copy">
+        {institutional.history.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section identity-section" aria-label="Misión y visión">
+    <div class="container identity-grid">
+      <article>
+        <p class="identity-card__number" aria-hidden="true">01</p>
+        <h2>Misión</h2>
+        <p>{institutional.mission}</p>
+      </article>
+      <article>
+        <p class="identity-card__number" aria-hidden="true">02</p>
+        <h2>Visión</h2>
+        <p>{institutional.vision}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="page-section page-section--surface" aria-labelledby="valores-title">
+    <div class="container">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Lo que nos orienta</p>
+        <h2 id="valores-title">Nuestros valores</h2>
+        <p>
+          Principios declarados públicamente por el colegio y desarrollados como
+          parte de su identidad institucional.
+        </p>
+      </div>
+      <div class="values-grid">
+        {
+          institutionalValues.map((value, index) => (
+            <article id={value.id}>
+              <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <h3>{value.title}</h3>
+              <p>{value.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section" aria-labelledby="enfoque-title">
+    <div class="container">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Propuesta educativa</p>
+        <h2 id="enfoque-title">Un enfoque cercano, activo e inclusivo</h2>
+        <p>
+          La información institucional conecta el aprendizaje académico con el
+          desarrollo personal, la creatividad, el movimiento y la convivencia.
+        </p>
+      </div>
+      <div class="approach-grid">
+        {
+          institutional.educationalApproach.map((item) => (
+            <article>
+              <span class="approach-card__mark" aria-hidden="true"></span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Callout
+    slot="cta"
+    eyebrow="Sigue conociéndonos"
+    title="Las personas y los próximos pasos"
+  >
+    <p>
+      Conoce al equipo publicado por el colegio o revisa la orientación de
+      Matrículas 2026.
+    </p>
+    <div slot="actions">
+      <a class="button button--primary" href="/personal/">Conocer al personal</a>
+      <a class="button button--secondary" href="/matriculas-2026/">
+        Ver Matrículas 2026
+      </a>
+    </div>
+  </Callout>
+</PageLayout>
+
+<style>
+  .about-intro,
+  .story-grid {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .about-intro .page-section__intro {
+    margin: 0;
+  }
+
+  blockquote {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    margin: 0;
+    border-inline-start: 0.45rem solid var(--color-accent);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    background: var(--color-primary);
+    color: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+
+  blockquote p {
+    margin-block-end: var(--space-2);
+    color: var(--color-surface);
+    font-size: var(--font-size-xl);
+    font-weight: 900;
+  }
+
+  blockquote cite {
+    color: rgb(255 255 255 / 0.72);
+    font-size: var(--font-size-sm);
+    font-style: normal;
+  }
+
+  .story-grid h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .story-copy {
+    max-width: var(--container-narrow);
+  }
+
+  .story-copy p {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+  }
+
+  .story-copy p:last-child {
+    margin: 0;
+  }
+
+  .identity-section {
+    background: var(--color-primary-deep);
+  }
+
+  .identity-grid,
+  .values-grid,
+  .approach-grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .identity-grid article {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid rgb(255 255 255 / 0.17);
+    border-radius: var(--radius-lg);
+    background: var(--color-primary-alt);
+  }
+
+  .identity-card__number {
+    margin-block-end: var(--space-5);
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+  }
+
+  .identity-grid h2 {
+    color: var(--color-surface);
+    font-size: var(--font-size-2xl);
+  }
+
+  .identity-grid article > p:last-child {
+    margin: 0;
+    color: rgb(255 255 255 / 0.8);
+  }
+
+  .values-grid article,
+  .approach-grid article {
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .values-grid article > span {
+    display: inline-block;
+    margin-block-end: var(--space-5);
+    color: var(--color-accent-strong);
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+  }
+
+  .values-grid h3,
+  .approach-grid h3 {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-xl);
+  }
+
+  .values-grid p,
+  .approach-grid p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .approach-card__mark {
+    display: block;
+    width: 3rem;
+    height: 0.35rem;
+    margin-block-end: var(--space-5);
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+  }
+
+  @media (min-width: 48rem) {
+    .about-intro {
+      grid-template-columns: 1.4fr 0.6fr;
+      align-items: center;
+    }
+
+    .story-grid {
+      grid-template-columns: 0.55fr 1.45fr;
+    }
+
+    .identity-grid,
+    .values-grid,
+    .approach-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .values-grid,
+    .approach-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -1,0 +1,180 @@
+---
+import danceImage from '../assets/images/programs/academia-baile.webp';
+import footballImage from '../assets/images/programs/academia-futbol.webp';
+import theatreImage from '../assets/images/programs/academia-teatro.webp';
+import Callout from '../components/Callout.astro';
+import Gallery from '../components/Gallery.astro';
+import ProgramCard from '../components/ProgramCard.astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import { academies } from '../data/academies';
+
+const categories = [
+  {
+    title: 'Deportivas',
+    description: 'Movimiento, coordinación, disciplina y trabajo en equipo.',
+  },
+  {
+    title: 'Artísticas',
+    description: 'Expresión, creatividad, imaginación y comunicación.',
+  },
+  {
+    title: 'Bienestar',
+    description: 'Hábitos saludables y experiencias de equilibrio personal.',
+  },
+];
+---
+
+<PageLayout
+  title="Academias"
+  description="Conoce las academias deportivas, artísticas y de bienestar publicadas por el Colegio Conquistadores."
+  canonicalPath="/academias/"
+  eyebrow="Desarrollo extracurricular"
+  heroImage={footballImage}
+  heroAlt="Estudiantes participando en una práctica de fútbol"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Academias' },
+  ]}
+>
+  <section class="page-section page-section--surface" aria-labelledby="areas-title">
+    <div class="container">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Áreas de desarrollo</p>
+        <h2 id="areas-title">Deporte, arte y bienestar</h2>
+        <p>
+          La propuesta pública reúne actividades que buscan enriquecer la
+          experiencia educativa mediante el movimiento, la creatividad y la
+          convivencia.
+        </p>
+      </div>
+      <div class="category-grid">
+        {
+          categories.map((category) => (
+            <article>
+              <span aria-hidden="true"></span>
+              <h3>{category.title}</h3>
+              <p>{category.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section" aria-labelledby="academias-list-title">
+    <div class="container">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Programas publicados</p>
+        <h2 id="academias-list-title">Conoce las academias</h2>
+        <p>
+          La lista reproduce información actualmente visible en el sitio público.
+          No implica disponibilidad o inscripción abierta.
+        </p>
+      </div>
+      <div class="program-grid">
+        {academies.map((academy) => <ProgramCard program={academy} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section page-section--surface" aria-labelledby="galeria-academias-title">
+    <div class="container">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Galería</p>
+        <h2 id="galeria-academias-title">Experiencias compartidas</h2>
+        <p>
+          Imágenes públicas seleccionadas y optimizadas, disponibles directamente
+          en la página sin controles obligatorios.
+        </p>
+      </div>
+      <Gallery
+        label="Galería de academias"
+        items={[
+          {
+            image: footballImage,
+            alt: 'Estudiantes participando en una práctica de fútbol',
+            caption: 'Academia de fútbol',
+          },
+          {
+            image: danceImage,
+            alt: 'Estudiantes realizando una presentación grupal de baile',
+            caption: 'Academia de baile',
+          },
+          {
+            image: theatreImage,
+            alt: 'Estudiantes caracterizados durante una presentación de teatro',
+            caption: 'Academia de teatro',
+          },
+        ]}
+      />
+    </div>
+  </section>
+
+  <Callout
+    slot="cta"
+    eyebrow="Más información"
+    title="Consulta antes de planificar tu participación"
+  >
+    <p>
+      Confirma directamente con el colegio la oferta, horarios y condiciones que
+      correspondan al periodo actual.
+    </p>
+    <div slot="actions">
+      <a class="button button--primary" href="/matriculas-2026/">
+        Ver Matrículas 2026
+      </a>
+      <a class="button button--secondary" href="/#contacto">Contactar</a>
+    </div>
+  </Callout>
+</PageLayout>
+
+<style>
+  .category-grid,
+  .program-grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .category-grid article {
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .category-grid article > span {
+    display: block;
+    width: 3rem;
+    height: 0.35rem;
+    margin-block-end: var(--space-5);
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+  }
+
+  .category-grid h3 {
+    margin-block-end: var(--space-2);
+    font-size: var(--font-size-xl);
+  }
+
+  .category-grid p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 42rem) {
+    .category-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .program-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .program-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

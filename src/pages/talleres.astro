@@ -1,0 +1,102 @@
+---
+import musicImage from '../assets/images/programs/taller-musica.webp';
+import motorSkillsImage from '../assets/images/programs/taller-motricidad.webp';
+import knowledgeImage from '../assets/images/programs/taller-mundo-saberes.webp';
+import Callout from '../components/Callout.astro';
+import Gallery from '../components/Gallery.astro';
+import ProgramCard from '../components/ProgramCard.astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import { workshops } from '../data/workshops';
+---
+
+<PageLayout
+  title="Talleres"
+  description="Explora los talleres de música, motricidad y Mundo de Saberes publicados por el Colegio Conquistadores."
+  canonicalPath="/talleres/"
+  eyebrow="Aprendizaje y exploración"
+  heroImage={musicImage}
+  heroAlt="Docente guiando una actividad musical con estudiantes"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Talleres' },
+  ]}
+>
+  <section class="page-section page-section--surface" aria-labelledby="talleres-intro-title">
+    <div class="container">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Espacios formativos</p>
+        <h2 id="talleres-intro-title">Creatividad, movimiento y nuevos saberes</h2>
+        <p>
+          Los talleres publicados por el colegio presentan experiencias educativas
+          que combinan juego, expresión, exploración y aprendizaje.
+        </p>
+      </div>
+      <div class="program-grid">
+        {workshops.map((workshop) => <ProgramCard program={workshop} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section" aria-labelledby="galeria-talleres-title">
+    <div class="container">
+      <div class="page-section__intro">
+        <p class="page-section__eyebrow">Galería</p>
+        <h2 id="galeria-talleres-title">Talleres en acción</h2>
+        <p>
+          Una selección breve de imágenes públicas, presentada como grilla y sin
+          depender de un carrusel.
+        </p>
+      </div>
+      <Gallery
+        label="Galería de talleres"
+        items={[
+          {
+            image: musicImage,
+            alt: 'Docente con una guitarra durante una actividad musical con estudiantes',
+            caption: 'Taller de música',
+          },
+          {
+            image: motorSkillsImage,
+            alt: 'Estudiantes participando en una actividad de motricidad',
+            caption: 'Taller de motricidad',
+          },
+          {
+            image: knowledgeImage,
+            alt: 'Estudiantes explorando materiales durante una actividad educativa',
+            caption: 'Taller Mundo de Saberes',
+          },
+        ]}
+      />
+    </div>
+  </section>
+
+  <Callout
+    slot="cta"
+    eyebrow="Consulta directa"
+    title="Conoce la información disponible para 2026"
+  >
+    <p>
+      La publicación de estos talleres no confirma horarios, cupos o proceso de
+      inscripción. Consulta al colegio para información actual.
+    </p>
+    <div slot="actions">
+      <a class="button button--primary" href="/matriculas-2026/">
+        Ver Matrículas 2026
+      </a>
+      <a class="button button--secondary" href="/#contacto">Contactar</a>
+    </div>
+  </Callout>
+</PageLayout>
+
+<style>
+  .program-grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 42rem) {
+    .program-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>
