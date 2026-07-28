@@ -13,9 +13,7 @@ const { activity } = Astro.props;
   <a
     class="activity-card__image-link"
     href={activity.href}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label={`${activity.title} (abre el sitio anterior en una pestaña nueva)`}
+    aria-label={`Leer ${activity.title}`}
   >
     <Image
       src={activity.image}
@@ -32,15 +30,13 @@ const { activity } = Astro.props;
       <time datetime={activity.date}>{activity.dateLabel}</time>
     </div>
     <h3>
-      <a
-        href={activity.href}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href={activity.href}>
         {activity.title}
       </a>
     </h3>
-    <p class="external-note">Actividad histórica en el sitio anterior</p>
+    <a class="activity-card__link" href={activity.href}>
+      Ver actividad <span aria-hidden="true">→</span>
+    </a>
   </div>
 </article>
 
@@ -115,7 +111,9 @@ const { activity } = Astro.props;
     text-decoration: underline;
   }
 
-  .external-note {
-    margin: 0;
+  .activity-card__link {
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 900;
   }
 </style>

@@ -1,0 +1,52 @@
+---
+sourcePostId: 3250
+title: "Día nacional del bombero"
+description: "En anticipación al «Día Nacional del Bombero» el próximo 30 de Junio, nos complace compartir una experiencia impactante vivida en nuestra institución."
+publishDate: "2023-06-30T20:47:45"
+modifiedDate: "2023-11-29T19:20:44"
+year: 2023
+slug: "dia-nacional-del-bombero"
+historicalPath: "/2023/06/30/dia-nacional-del-bombero/"
+legacyUrl: "https://www.colegioconquistadores.com/2023/06/30/dia-nacional-del-bombero/"
+featuredImage: "/src/assets/images/activities/2023/dia-nacional-del-bombero/featured.webp"
+featuredAlt: "Imagen destacada de la actividad Día nacional del bombero"
+featured: false
+reviewStatus: "reviewed"
+contentQuality: "full"
+gallery:
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-001.webp"
+    alt: "Día nacional del bombero: registro fotográfico 1"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-002.webp"
+    alt: "Día nacional del bombero: registro fotográfico 2"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-003.webp"
+    alt: "Día nacional del bombero: registro fotográfico 3"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-004.webp"
+    alt: "Día nacional del bombero: registro fotográfico 4"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-005.webp"
+    alt: "Día nacional del bombero: registro fotográfico 5"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-006.webp"
+    alt: "Día nacional del bombero: registro fotográfico 6"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-007.webp"
+    alt: "Día nacional del bombero: registro fotográfico 7"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-008.webp"
+    alt: "Día nacional del bombero: registro fotográfico 8"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-009.webp"
+    alt: "Día nacional del bombero: registro fotográfico 9"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-010.webp"
+    alt: "Día nacional del bombero: registro fotográfico 10"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-011.webp"
+    alt: "Día nacional del bombero: registro fotográfico 11"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-012.webp"
+    alt: "Día nacional del bombero: registro fotográfico 12"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-013.webp"
+    alt: "Día nacional del bombero: registro fotográfico 13"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-014.webp"
+    alt: "Día nacional del bombero: registro fotográfico 14"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-015.webp"
+    alt: "Día nacional del bombero: registro fotográfico 15"
+  - image: "/src/assets/images/activities/2023/dia-nacional-del-bombero/gallery-016.webp"
+    alt: "Día nacional del bombero: registro fotográfico 16"
+---
+
+En anticipación al «Día Nacional del Bombero» el próximo 30 de Junio, nos complace compartir una experiencia impactante vivida en nuestra institución. El equipo de Convivencia Escolar coordinó una enriquecedora visita de la Primera Compañía de Bomberos, la cual dejó una profunda impresión en nuestra comunidad educativa. Expresamos nuestro más sincero agradecimiento por esta oportunidad, ya que los estudiantes de 1°, 2°, 3° y 4° básico tuvieron la posibilidad de sumergirse en el mundo bomberil mediante una demostración práctica y educativa, enriqueciendo su comprensión y dejando una huella imborrable en sus mentes.
+

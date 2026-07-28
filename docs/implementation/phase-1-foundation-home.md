@@ -76,22 +76,22 @@ El JSON-LD se limita a estos datos públicos. No se copió el grafo Yoast.
 La rama de Fase 1 creó `/`, `/documentos/` y `/robots.txt`. Esta lista conserva
 el estado histórico de aquella entrega. Fase 2 implementó posteriormente
 `/quienes-somos/`, `/personal/`, `/talleres/`, `/academias/` y
-`/matriculas-2026/`.
+`/matriculas-2026/`. Fase 3 implementó después `/actividades/` y las 47
+rutas históricas.
 
 Las siguientes URL continúan pendientes de páginas Astro o de una decisión de
 redirección después de Fase 2:
 
 - `/calendario-de-evaluaciones-2026/`
-- `/actividades/`
 - `/plan-lector-2026/`
 - `/protocolos-internos/`
 - `/reglamento-interno-de-convivencia-escolar/`
 
 No se crearon `/mi-cuenta/`, `/registro/` ni `/notas/`.
 
-## Enlaces temporales hacia WordPress
+## Enlaces de actividades
 
-Las tres actividades destacadas continúan abriendo sus entradas históricas en producción:
+Desde Fase 3, las tres actividades destacadas abren sus rutas Astro locales:
 
 - World Robot Olympiad Chile, 6 de octubre de 2025;
 - Gala Raíz Folclórica 2025, 29 de septiembre de 2025;
@@ -129,7 +129,8 @@ La evidencia comparativa de diseño se documenta en `design-qa.md`.
 - En el build de Fase 2 las cinco rutas institucionales y de matrícula ya no
   producen 404. Las rutas que permanecen en la lista anterior continúan
   pendientes.
-- Las actividades y algunos documentos dependen todavía de enlaces históricos externos, pero la portada no consulta WordPress en tiempo de ejecución.
+- Algunos documentos conservan enlaces históricos externos, pero la portada no
+  consulta WordPress en tiempo de ejecución.
 - No hay feed de Instagram, mapa embebido, formulario de contacto ni integración headless. La búsqueda existe solo dentro del centro documental y funciona en cliente sobre el HTML estático.
 - El sitemap y las redirecciones de producción quedan para una fase posterior.
 - No se desplegó a staging ni se modificó la configuración de Coolify.
@@ -148,6 +149,6 @@ La evidencia comparativa de diseño se documenta en `design-qa.md`.
 - implementar las páginas institucionales y las rutas documentadas prioritarias;
 - revisar la equivalencia de las rutas documentales históricas antes de aprobar redirecciones;
 - reemplazar los enlaces documentales temporales cuando exista una fuente build-time aprobada;
-- definir la integración build-time de actividades;
+- definir la fuente editorial para actividades futuras;
 - preparar sitemap y plan de redirecciones cuando exista paridad;
 - revisar el despliegue en staging antes de cualquier cambio de dominio.

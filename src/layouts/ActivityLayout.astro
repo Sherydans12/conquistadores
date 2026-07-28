@@ -1,0 +1,274 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ActivityExternalResources from '../components/activities/ActivityExternalResources.astro';
+import ActivityGallery from '../components/activities/ActivityGallery.astro';
+import ActivityNavigation from '../components/activities/ActivityNavigation.astro';
+import ActivityRelated from '../components/activities/ActivityRelated.astro';
+import type { ActivityEntry } from '../data/activities';
+import {
+  formatActivityDate,
+  resolveActivityImage,
+} from '../data/activities';
+import { absoluteUrl, site } from '../data/site';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  activity: ActivityEntry;
+  previous?: ActivityEntry;
+  next?: ActivityEntry;
+  related?: ActivityEntry[];
+}
+
+const { activity, previous, next, related = [] } = Astro.props;
+const { data } = activity;
+const featuredImage = resolveActivityImage(data.featuredImage);
+const socialImage = await getImage({
+  src: featuredImage,
+  width: 1200,
+  height: 630,
+  fit: 'cover',
+  format: 'webp',
+  quality: 80,
+});
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Actividades', href: '/actividades/' },
+  { label: data.title },
+];
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  image: absoluteUrl(socialImage.src),
+  datePublished: data.publishDate.toISOString(),
+  dateModified: (data.modifiedDate ?? data.publishDate).toISOString(),
+  mainEntityOfPage: absoluteUrl(data.historicalPath),
+  publisher: {
+    '@type': 'EducationalOrganization',
+    name: site.name,
+    url: site.baseUrl.toString(),
+    logo: {
+      '@type': 'ImageObject',
+      url: absoluteUrl('/apple-touch-icon.png'),
+    },
+  },
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    item: absoluteUrl(item.href ?? data.historicalPath),
+  })),
+};
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  canonicalPath={data.historicalPath}
+  socialImage={socialImage.src}
+  socialImageAlt={data.featuredAlt}
+  type="article"
+>
+  <article class="activity">
+    <header class="activity-hero">
+      <div class="container activity-hero__inner">
+        <Breadcrumbs items={breadcrumbs} />
+        <div class="activity-hero__copy">
+          <p class="activity-hero__eyebrow">Actividad · {data.year}</p>
+          <h1>{data.title}</h1>
+          <p class="activity-hero__description">{data.description}</p>
+          <div class="activity-hero__dates">
+            <span>Publicado</span>
+            <time datetime={data.publishDate.toISOString()}>
+              {formatActivityDate(data.publishDate)}
+            </time>
+            {
+              data.modifiedDate &&
+                data.modifiedDate.getTime() > data.publishDate.getTime() && (
+                  <>
+                    <span>Actualizado</span>
+                    <time datetime={data.modifiedDate.toISOString()}>
+                      {formatActivityDate(data.modifiedDate)}
+                    </time>
+                  </>
+                )
+            }
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container activity__content">
+      <figure class="activity__featured">
+        <Image
+          src={featuredImage}
+          alt={data.featuredAlt}
+          widths={[720, 1200, 1600]}
+          sizes="(min-width: 75rem) 70rem, calc(100vw - 2rem)"
+          quality={82}
+          loading="eager"
+        />
+      </figure>
+
+      <div class="activity__prose">
+        <slot />
+      </div>
+
+      <ActivityGallery images={data.gallery ?? []} />
+      <ActivityExternalResources resources={data.externalResources ?? []} />
+      <ActivityNavigation {previous} {next} />
+      <ActivityRelated activities={related} />
+
+      <div class="activity__back">
+        <a class="button button--primary" href="/actividades/">
+          Ver archivo de actividades
+        </a>
+      </div>
+    </div>
+  </article>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+</BaseLayout>
+
+<style>
+  .activity-hero {
+    padding-block: var(--space-5) clamp(3rem, 7vw, 6rem);
+    background:
+      radial-gradient(circle at 85% 15%, rgb(232 185 77 / 0.22), transparent 30%),
+      linear-gradient(145deg, var(--color-primary-deep), var(--color-primary));
+    color: var(--color-surface);
+  }
+
+  .activity-hero__copy {
+    max-width: 58rem;
+    padding-block-start: var(--space-7);
+  }
+
+  .activity-hero__eyebrow {
+    margin-block-end: var(--space-3);
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .activity-hero h1 {
+    max-width: 55rem;
+    margin-block-end: var(--space-4);
+    color: var(--color-surface);
+    font-size: clamp(2rem, 5vw, 4.2rem);
+  }
+
+  .activity-hero__description {
+    max-width: 48rem;
+    color: rgb(255 255 255 / 0.82);
+    font-size: var(--font-size-lg);
+  }
+
+  .activity-hero__dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    align-items: center;
+    margin-block-start: var(--space-5);
+    color: rgb(255 255 255 / 0.82);
+    font-size: var(--font-size-sm);
+  }
+
+  .activity-hero__dates span {
+    color: var(--color-accent);
+    font-weight: 900;
+  }
+
+  .activity__content {
+    padding-block: 0 var(--space-8);
+  }
+
+  .activity__featured {
+    overflow: hidden;
+    margin: clamp(-3rem, -5vw, -4.5rem) 0 var(--space-8);
+    border: 0.35rem solid var(--color-surface);
+    border-radius: var(--radius-lg);
+    background: var(--color-primary-deep);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .activity__featured :global(img) {
+    width: 100%;
+    max-height: 42rem;
+    object-fit: cover;
+  }
+
+  .activity__prose {
+    max-width: var(--container-narrow);
+    margin-inline: auto;
+    color: var(--color-text);
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
+  }
+
+  .activity__prose :global(p),
+  .activity__prose :global(li) {
+    color: var(--color-text-muted);
+  }
+
+  .activity__prose :global(h2) {
+    margin-block: var(--space-7) var(--space-3);
+    font-size: var(--font-size-2xl);
+  }
+
+  .activity__prose :global(ul),
+  .activity__prose :global(ol) {
+    padding-inline-start: 1.4rem;
+  }
+
+  .activity__prose :global(a) {
+    color: var(--color-primary);
+    font-weight: 800;
+  }
+
+  .activity__prose :global(.activity-table-wrapper) {
+    max-width: 100%;
+    overflow-x: auto;
+    margin-block: var(--space-5);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  .activity__prose :global(table) {
+    width: 100%;
+    min-width: 42rem;
+    border-collapse: collapse;
+  }
+
+  .activity__prose :global(caption) {
+    padding: var(--space-4);
+    color: var(--color-primary-deep);
+    font-weight: 900;
+    text-align: left;
+  }
+
+  .activity__prose :global(th),
+  .activity__prose :global(td) {
+    padding: 0.7rem 0.8rem;
+    border-block-start: var(--border-width) solid var(--color-border);
+    text-align: left;
+  }
+
+  .activity__prose :global(thead th) {
+    background: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  .activity__back {
+    margin-block-start: var(--space-8);
+    text-align: center;
+  }
+</style>

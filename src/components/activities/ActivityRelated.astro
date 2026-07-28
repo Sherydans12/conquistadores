@@ -1,0 +1,55 @@
+---
+import type { ActivityEntry } from '../../data/activities';
+import ActivityArchiveCard from './ActivityArchiveCard.astro';
+
+interface Props {
+  activities: ActivityEntry[];
+}
+
+const { activities } = Astro.props;
+---
+
+{
+  activities.length > 0 && (
+    <section class="activity-related" aria-labelledby="activity-related-title">
+      <p class="activity-related__eyebrow">Sigue explorando</p>
+      <h2 id="activity-related-title">Otras actividades</h2>
+      <div class="activity-related__grid">
+        {activities.map((activity) => (
+          <ActivityArchiveCard activity={activity} headingLevel={3} />
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .activity-related {
+    margin-block-start: var(--space-8);
+  }
+
+  .activity-related__eyebrow {
+    margin-block-end: var(--space-2);
+    color: var(--color-primary-alt);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .activity-related h2 {
+    margin-block-end: var(--space-5);
+    font-size: var(--font-size-2xl);
+  }
+
+  .activity-related__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 42rem) {
+    .activity-related__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

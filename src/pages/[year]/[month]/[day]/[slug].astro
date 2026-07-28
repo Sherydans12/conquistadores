@@ -1,0 +1,46 @@
+---
+import { getCollection, render } from 'astro:content';
+import ActivityLayout from '../../../../layouts/ActivityLayout.astro';
+import type { ActivityEntry } from '../../../../data/activities';
+import { sortActivities } from '../../../../data/activities';
+
+export async function getStaticPaths() {
+  const activities = sortActivities(await getCollection('activities'));
+
+  return Promise.all(
+    activities.map(async (activity, index) => {
+      const [, year, month, day, slug] =
+        activity.data.historicalPath.split('/');
+      const { Content } = await render(activity);
+      const previous = activities[index + 1];
+      const next = activities[index - 1];
+      const related = activities
+        .filter(
+          (candidate) =>
+            candidate.id !== activity.id &&
+            candidate.data.year === activity.data.year,
+        )
+        .slice(0, 2);
+
+      return {
+        params: { year, month, day, slug },
+        props: { activity, previous, next, related, Content },
+      };
+    }),
+  );
+}
+
+interface Props {
+  activity: ActivityEntry;
+  previous?: ActivityEntry;
+  next?: ActivityEntry;
+  related: ActivityEntry[];
+  Content: Awaited<ReturnType<typeof render>>['Content'];
+}
+
+const { activity, previous, next, related, Content } = Astro.props;
+---
+
+<ActivityLayout {activity} {previous} {next} {related}>
+  <Content />
+</ActivityLayout>

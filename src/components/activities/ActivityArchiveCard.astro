@@ -1,0 +1,137 @@
+---
+import { Image } from 'astro:assets';
+import type { ActivityEntry } from '../../data/activities';
+import {
+  formatActivityDate,
+  resolveActivityImage,
+} from '../../data/activities';
+
+interface Props {
+  activity: ActivityEntry;
+  headingLevel?: 2 | 3;
+  priority?: boolean;
+}
+
+const { activity, headingLevel = 3, priority = false } = Astro.props;
+const Heading = `h${headingLevel}`;
+const image = resolveActivityImage(activity.data.featuredImage);
+---
+
+<article
+  class="archive-card"
+  data-activity-card
+  data-year={activity.data.year}
+  data-search={`${activity.data.title} ${activity.data.description} ${(activity.data.keywords ?? []).join(' ')}`}
+>
+  <a
+    class="archive-card__image"
+    href={activity.data.historicalPath}
+    aria-label={`Leer ${activity.data.title}`}
+  >
+    <Image
+      src={image}
+      alt={activity.data.featuredAlt}
+      widths={[420, 720]}
+      sizes="(min-width: 64rem) 23rem, (min-width: 42rem) 48vw, 100vw"
+      quality={78}
+      loading={priority ? 'eager' : 'lazy'}
+    />
+  </a>
+  <div class="archive-card__body">
+    <p class="archive-card__meta">
+      <span>{activity.data.year}</span>
+      <time datetime={activity.data.publishDate.toISOString()}>
+        {formatActivityDate(activity.data.publishDate)}
+      </time>
+    </p>
+    <Heading>
+      <a href={activity.data.historicalPath}>{activity.data.title}</a>
+    </Heading>
+    <p>{activity.data.description}</p>
+    <a class="archive-card__link" href={activity.data.historicalPath}>
+      Ver actividad <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+<style>
+  .archive-card {
+    min-width: 0;
+    overflow: hidden;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .archive-card__image {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: var(--color-primary-deep);
+  }
+
+  .archive-card__image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-base);
+  }
+
+  .archive-card:hover .archive-card__image :global(img) {
+    transform: scale(1.025);
+  }
+
+  .archive-card__body {
+    padding: var(--space-5);
+  }
+
+  .archive-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    align-items: center;
+    margin-block-end: var(--space-3);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+  }
+
+  .archive-card__meta span {
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-pill);
+    background: rgb(232 185 77 / 0.22);
+    color: var(--color-primary-deep);
+    font-weight: 900;
+  }
+
+  h2,
+  h3 {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-lg);
+  }
+
+  h2 a,
+  h3 a {
+    text-decoration: none;
+  }
+
+  h2 a:hover,
+  h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .archive-card__body > p:not(.archive-card__meta) {
+    display: -webkit-box;
+    overflow: hidden;
+    margin-block-end: var(--space-4);
+    color: var(--color-text-muted);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .archive-card__link {
+    color: var(--color-primary);
+    font-weight: 900;
+  }
+</style>

@@ -11,6 +11,7 @@ interface Props {
   description?: string;
   canonicalPath?: string;
   socialImage?: string;
+  socialImageAlt?: string;
   type?: 'website' | 'article';
   noindex?: boolean;
 }
@@ -20,6 +21,7 @@ const {
   description,
   canonicalPath = Astro.url.pathname,
   socialImage,
+  socialImageAlt,
   type = 'website',
   noindex = false,
 } = Astro.props;
@@ -33,6 +35,7 @@ const {
       description={description}
       canonicalPath={canonicalPath}
       image={socialImage}
+      imageAlt={socialImageAlt}
       type={type}
       noindex={noindex}
     />

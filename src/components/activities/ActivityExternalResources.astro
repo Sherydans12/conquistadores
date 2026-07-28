@@ -1,0 +1,89 @@
+---
+interface ExternalResource {
+  label: string;
+  url: string;
+  service: string;
+}
+
+interface Props {
+  resources: ExternalResource[];
+}
+
+const { resources } = Astro.props;
+---
+
+{
+  resources.length > 0 && (
+    <section class="external-resources" aria-labelledby="external-resources-title">
+      <h2 id="external-resources-title">Recursos externos</h2>
+      <p>
+        Estos enlaces abren contenido público alojado fuera del sitio del colegio.
+      </p>
+      <ul>
+        {resources.map((resource) => (
+          <li>
+            <a href={resource.url} target="_blank" rel="noopener noreferrer">
+              {resource.label}
+              <span class="external-resources__service">
+                {resource.service}, servicio externo
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .external-resources {
+    margin-block-start: var(--space-8);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border-inline-start: 0.4rem solid var(--color-accent);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    background: var(--color-surface-soft);
+  }
+
+  .external-resources h2 {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-xl);
+  }
+
+  .external-resources ul {
+    display: grid;
+    gap: var(--space-3);
+    padding: 0;
+    margin: var(--space-5) 0 0;
+    list-style: none;
+  }
+
+  .external-resources a {
+    display: flex;
+    min-height: 3rem;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.65rem 0.8rem;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-primary);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .external-resources a:hover {
+    border-color: var(--color-primary);
+  }
+
+  .external-resources__service {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+  }
+
+  @media (min-width: 42rem) {
+    .external-resources ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
