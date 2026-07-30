@@ -1,0 +1,1157 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-30T16:21:44.148Z",
+  "source": "astro-inventory",
+  "categories": [
+    {
+      "id": "evaluaciones",
+      "name": "Evaluaciones y calendarios",
+      "slug": "evaluaciones",
+      "description": null,
+      "sort": 1
+    },
+    {
+      "id": "plan-lector",
+      "name": "Plan lector",
+      "slug": "plan-lector",
+      "description": null,
+      "sort": 2
+    },
+    {
+      "id": "reglamentos",
+      "name": "Reglamentos y convivencia",
+      "slug": "reglamentos",
+      "description": null,
+      "sort": 3
+    },
+    {
+      "id": "protocolos",
+      "name": "Protocolos internos",
+      "slug": "protocolos",
+      "description": null,
+      "sort": 4
+    },
+    {
+      "id": "seguridad",
+      "name": "Seguridad escolar",
+      "slug": "seguridad",
+      "description": null,
+      "sort": 5
+    },
+    {
+      "id": "horarios",
+      "name": "Horarios",
+      "slug": "horarios",
+      "description": null,
+      "sort": 6
+    },
+    {
+      "id": "matriculas",
+      "name": "Matrículas y admisión",
+      "slug": "matriculas",
+      "description": null,
+      "sort": 7
+    },
+    {
+      "id": "institucionales",
+      "name": "Documentos institucionales",
+      "slug": "institucionales",
+      "description": null,
+      "sort": 8
+    },
+    {
+      "id": "otros",
+      "name": "Otros",
+      "slug": "otros",
+      "description": null,
+      "sort": 9
+    }
+  ],
+  "documents": [
+    {
+      "id": "evaluaciones-2026-1-basico",
+      "title": "Calendario de evaluaciones 2026 — 1° básico",
+      "slug": "evaluaciones-2026-1-basico",
+      "description": "Calendario de evaluaciones del primer semestre de 2026 para 1° básico.",
+      "category": "evaluaciones",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/03/1%C2%B0-basico-Calendarios-de-evaluacion-1er-semestre-2026.pdf",
+      "external": true,
+      "audience": [
+        "1° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "calendario",
+        "evaluaciones",
+        "primer semestre",
+        "1° básico"
+      ],
+      "sort": 1,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "328 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "evaluaciones-2026-2-basico",
+      "title": "Calendario de evaluaciones 2026 — 2° básico",
+      "slug": "evaluaciones-2026-2-basico",
+      "description": "Calendario de evaluaciones del primer semestre de 2026 para 2° básico.",
+      "category": "evaluaciones",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/03/2%C2%B0-basico-Calendarios-de-evaluacion-1er-semestre-2026.pdf",
+      "external": true,
+      "audience": [
+        "2° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "calendario",
+        "evaluaciones",
+        "primer semestre",
+        "2° básico"
+      ],
+      "sort": 2,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "330 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "evaluaciones-2026-3-basico",
+      "title": "Calendario de evaluaciones 2026 — 3° básico",
+      "slug": "evaluaciones-2026-3-basico",
+      "description": "Calendario de evaluaciones del primer semestre de 2026 para 3° básico.",
+      "category": "evaluaciones",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/03/3%C2%B0-basico-Calendarios-de-evaluacion-1er-semestre-2026.pdf",
+      "external": true,
+      "audience": [
+        "3° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "calendario",
+        "evaluaciones",
+        "primer semestre",
+        "3° básico"
+      ],
+      "sort": 3,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "334 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "evaluaciones-2026-4-basico",
+      "title": "Calendario de evaluaciones 2026 — 4° básico",
+      "slug": "evaluaciones-2026-4-basico",
+      "description": "Calendario de evaluaciones del primer semestre de 2026 para 4° básico.",
+      "category": "evaluaciones",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/03/4%C2%B0-basico-Calendarios-de-evaluacion-1er-semestre-2026.pdf",
+      "external": true,
+      "audience": [
+        "4° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "calendario",
+        "evaluaciones",
+        "primer semestre",
+        "4° básico"
+      ],
+      "sort": 4,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "328 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "evaluaciones-2026-5-basico",
+      "title": "Calendario de evaluaciones 2026 — 5° básico",
+      "slug": "evaluaciones-2026-5-basico",
+      "description": "Calendario de evaluaciones del primer semestre de 2026 para 5° básico.",
+      "category": "evaluaciones",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/03/5%C2%B0-basico-Calendarios-de-evaluacion-1er-semestre-2026.pdf",
+      "external": true,
+      "audience": [
+        "5° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "calendario",
+        "evaluaciones",
+        "primer semestre",
+        "5° básico"
+      ],
+      "sort": 5,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "329 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "evaluaciones-2026-6-basico",
+      "title": "Calendario de evaluaciones 2026 — 6° básico",
+      "slug": "evaluaciones-2026-6-basico",
+      "description": "Calendario de evaluaciones del primer semestre de 2026 para 6° básico.",
+      "category": "evaluaciones",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/03/6%C2%B0-basico-Calendarios-de-evaluacion-1er-semestre-2026.pdf",
+      "external": true,
+      "audience": [
+        "6° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "calendario",
+        "evaluaciones",
+        "primer semestre",
+        "6° básico"
+      ],
+      "sort": 6,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "328 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "evaluaciones-2026-7-basico",
+      "title": "Calendario de evaluaciones 2026 — 7° básico",
+      "slug": "evaluaciones-2026-7-basico",
+      "description": "Calendario de evaluaciones del primer semestre de 2026 para 7° básico.",
+      "category": "evaluaciones",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/03/7%C2%B0-basico-Calendarios-de-evaluacion-1er-semestre-2026.pdf",
+      "external": true,
+      "audience": [
+        "7° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "calendario",
+        "evaluaciones",
+        "primer semestre",
+        "7° básico"
+      ],
+      "sort": 7,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "327 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "evaluaciones-2026-8-basico",
+      "title": "Calendario de evaluaciones 2026 — 8° básico",
+      "slug": "evaluaciones-2026-8-basico",
+      "description": "Calendario de evaluaciones del primer semestre de 2026 para 8° básico.",
+      "category": "evaluaciones",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/03/8%C2%B0-basico-Calendarios-de-evaluacion-1er-semestre-2026.pdf",
+      "external": true,
+      "audience": [
+        "8° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "calendario",
+        "evaluaciones",
+        "primer semestre",
+        "8° básico"
+      ],
+      "sort": 8,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "328 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "evaluaciones-2026-1-medio",
+      "title": "Calendario de evaluaciones 2026 — 1° medio",
+      "slug": "evaluaciones-2026-1-medio",
+      "description": "Calendario de evaluaciones del primer semestre de 2026 para 1° medio.",
+      "category": "evaluaciones",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/03/1%C2%B0-Medio-Calendarios-de-evaluacion-1er-semestre-2026.pdf",
+      "external": true,
+      "audience": [
+        "1° medio"
+      ],
+      "featured": false,
+      "keywords": [
+        "calendario",
+        "evaluaciones",
+        "primer semestre",
+        "1° medio"
+      ],
+      "sort": 9,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "328 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "evaluaciones-2026-2-medio",
+      "title": "Calendario de evaluaciones 2026 — 2° medio",
+      "slug": "evaluaciones-2026-2-medio",
+      "description": "Calendario de evaluaciones del primer semestre de 2026 para 2° medio.",
+      "category": "evaluaciones",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/03/2%C2%B0-Medio-Calendarios-de-evaluacion-1er-semestre-2026.pdf",
+      "external": true,
+      "audience": [
+        "2° medio"
+      ],
+      "featured": false,
+      "keywords": [
+        "calendario",
+        "evaluaciones",
+        "primer semestre",
+        "2° medio"
+      ],
+      "sort": 10,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "335 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "evaluaciones-2026-3-medio",
+      "title": "Calendario de evaluaciones 2026 — 3° medio",
+      "slug": "evaluaciones-2026-3-medio",
+      "description": "Calendario de evaluaciones del primer semestre de 2026 para 3° medio.",
+      "category": "evaluaciones",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/03/3%C2%B0-Medio-Calendarios-de-evaluacion-1er-semestre-2026.pdf",
+      "external": true,
+      "audience": [
+        "3° medio"
+      ],
+      "featured": false,
+      "keywords": [
+        "calendario",
+        "evaluaciones",
+        "primer semestre",
+        "3° medio"
+      ],
+      "sort": 11,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "333 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "plan-lector-2026-1-basico",
+      "title": "Plan de lecturas complementarias — 1° básico",
+      "slug": "plan-lector-2026-1-basico",
+      "description": "Plan lector 2026 para 1° básico.",
+      "category": "plan-lector",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/Plan-de-lecturas-complementarias-1%C2%B0.pdf",
+      "external": true,
+      "audience": [
+        "1° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "lecturas",
+        "libros",
+        "plan lector",
+        "1° básico"
+      ],
+      "sort": 12,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "287 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "plan-lector-2026-2-basico",
+      "title": "Plan de lecturas complementarias — 2° básico",
+      "slug": "plan-lector-2026-2-basico",
+      "description": "Plan lector 2026 para 2° básico.",
+      "category": "plan-lector",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/Plan-de-lecturas-complementarias-2%C2%B0.pdf",
+      "external": true,
+      "audience": [
+        "2° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "lecturas",
+        "libros",
+        "plan lector",
+        "2° básico"
+      ],
+      "sort": 13,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "282 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "plan-lector-2026-3-basico",
+      "title": "Plan de lecturas complementarias — 3° básico",
+      "slug": "plan-lector-2026-3-basico",
+      "description": "Plan lector 2026 para 3° básico.",
+      "category": "plan-lector",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/Plan-de-lecturas-complementarias-3%C2%B0.pdf",
+      "external": true,
+      "audience": [
+        "3° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "lecturas",
+        "libros",
+        "plan lector",
+        "3° básico"
+      ],
+      "sort": 14,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "307 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "plan-lector-2026-4-basico",
+      "title": "Plan de lecturas complementarias — 4° básico",
+      "slug": "plan-lector-2026-4-basico",
+      "description": "Plan lector 2026 para 4° básico.",
+      "category": "plan-lector",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/Plan-de-lecturas-complementarias-4%C2%B0.pdf",
+      "external": true,
+      "audience": [
+        "4° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "lecturas",
+        "libros",
+        "plan lector",
+        "4° básico"
+      ],
+      "sort": 15,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "364 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "plan-lector-2026-5-basico",
+      "title": "Plan de lecturas domiciliarias — 5° básico",
+      "slug": "plan-lector-2026-5-basico",
+      "description": "Plan lector 2026 para 5° básico.",
+      "category": "plan-lector",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/Plan-de-lecturas-domiciliarias-5%C2%B0.pdf",
+      "external": true,
+      "audience": [
+        "5° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "lecturas",
+        "libros",
+        "plan lector",
+        "5° básico"
+      ],
+      "sort": 16,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "264 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "plan-lector-2026-6-basico",
+      "title": "Plan de lecturas domiciliarias — 6° básico",
+      "slug": "plan-lector-2026-6-basico",
+      "description": "Plan lector 2026 para 6° básico.",
+      "category": "plan-lector",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/Plan-de-lecturas-domiciliarias-6%C2%B0.pdf",
+      "external": true,
+      "audience": [
+        "6° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "lecturas",
+        "libros",
+        "plan lector",
+        "6° básico"
+      ],
+      "sort": 17,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "256 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "plan-lector-2026-7-basico",
+      "title": "Plan de lecturas domiciliarias — 7° básico",
+      "slug": "plan-lector-2026-7-basico",
+      "description": "Plan lector 2026 para 7° básico.",
+      "category": "plan-lector",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/Plan-de-lecturas-domiciliarias-7%C2%B0.pdf",
+      "external": true,
+      "audience": [
+        "7° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "lecturas",
+        "libros",
+        "plan lector",
+        "7° básico"
+      ],
+      "sort": 18,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "309 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "plan-lector-2026-8-basico",
+      "title": "Plan de lecturas domiciliarias — 8° básico",
+      "slug": "plan-lector-2026-8-basico",
+      "description": "Plan lector 2026 para 8° básico.",
+      "category": "plan-lector",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/Plan-de-lecturas-domiciliarias-8%C2%B0.pdf",
+      "external": true,
+      "audience": [
+        "8° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "lecturas",
+        "libros",
+        "plan lector",
+        "8° básico"
+      ],
+      "sort": 19,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "299 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "plan-lector-2026-1-medio",
+      "title": "Plan de lecturas domiciliarias — 1° medio",
+      "slug": "plan-lector-2026-1-medio",
+      "description": "Plan lector 2026 para 1° medio.",
+      "category": "plan-lector",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/Plan-de-lecturas-domiciliarias-1%C2%B0-medio.pdf",
+      "external": true,
+      "audience": [
+        "1° medio"
+      ],
+      "featured": false,
+      "keywords": [
+        "lecturas",
+        "libros",
+        "plan lector",
+        "1° medio"
+      ],
+      "sort": 20,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "276 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "plan-lector-2026-2-medio",
+      "title": "Plan de lecturas domiciliarias — 2° medio",
+      "slug": "plan-lector-2026-2-medio",
+      "description": "Plan lector 2026 para 2° medio.",
+      "category": "plan-lector",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/Plan-de-lecturas-domiciliarias-2%C2%B0-medio.pdf",
+      "external": true,
+      "audience": [
+        "2° medio"
+      ],
+      "featured": false,
+      "keywords": [
+        "lecturas",
+        "libros",
+        "plan lector",
+        "2° medio"
+      ],
+      "sort": 21,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "286 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "plan-lector-2026-3-medio",
+      "title": "Plan de lecturas domiciliarias — 3° medio",
+      "slug": "plan-lector-2026-3-medio",
+      "description": "Plan lector 2026 para 3° medio.",
+      "category": "plan-lector",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/Plan-de-lecturas-domiciliarias-3%C2%B0-medio.pdf",
+      "external": true,
+      "audience": [
+        "3° medio"
+      ],
+      "featured": false,
+      "keywords": [
+        "lecturas",
+        "libros",
+        "plan lector",
+        "3° medio"
+      ],
+      "sort": 22,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "229 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "utiles-2026-1-basico",
+      "title": "Lista de útiles escolares 2026 — 1° básico",
+      "slug": "utiles-2026-1-basico",
+      "description": "Lista de útiles escolares 2026 para 1° básico.",
+      "category": "matriculas",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/LISTA-DE-UTILES-ESCOLARES-1%C2%B0-BASICO-2026.pdf",
+      "external": true,
+      "audience": [
+        "1° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "útiles",
+        "materiales",
+        "matrícula",
+        "admisión",
+        "1° básico"
+      ],
+      "sort": 23,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "206 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "utiles-2026-2-basico",
+      "title": "Lista de útiles escolares 2026 — 2° básico",
+      "slug": "utiles-2026-2-basico",
+      "description": "Lista de útiles escolares 2026 para 2° básico.",
+      "category": "matriculas",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/LISTA-DE-UTILES-ESCOLARES-2%C2%B0-BASICO-2026.pdf",
+      "external": true,
+      "audience": [
+        "2° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "útiles",
+        "materiales",
+        "matrícula",
+        "admisión",
+        "2° básico"
+      ],
+      "sort": 24,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "188 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "utiles-2026-3-basico",
+      "title": "Lista de útiles escolares 2026 — 3° básico",
+      "slug": "utiles-2026-3-basico",
+      "description": "Lista de útiles escolares 2026 para 3° básico.",
+      "category": "matriculas",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/LISTA-DE-UTILES-ESCOLARES-3%C2%B0-BASICO-2026.pdf",
+      "external": true,
+      "audience": [
+        "3° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "útiles",
+        "materiales",
+        "matrícula",
+        "admisión",
+        "3° básico"
+      ],
+      "sort": 25,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "195 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "utiles-2026-4-basico",
+      "title": "Lista de útiles escolares 2026 — 4° básico",
+      "slug": "utiles-2026-4-basico",
+      "description": "Lista de útiles escolares 2026 para 4° básico.",
+      "category": "matriculas",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/LISTA-DE-UTILES-ESCOLARES-4%C2%B0-BASICO-2026.pdf",
+      "external": true,
+      "audience": [
+        "4° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "útiles",
+        "materiales",
+        "matrícula",
+        "admisión",
+        "4° básico"
+      ],
+      "sort": 26,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "195 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "utiles-2026-5-basico",
+      "title": "Lista de útiles escolares 2026 — 5° básico",
+      "slug": "utiles-2026-5-basico",
+      "description": "Lista de útiles escolares 2026 para 5° básico.",
+      "category": "matriculas",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/LISTA-DE-UTILES-ESCOLARES-5%C2%B0-BASICO-2026.pdf",
+      "external": true,
+      "audience": [
+        "5° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "útiles",
+        "materiales",
+        "matrícula",
+        "admisión",
+        "5° básico"
+      ],
+      "sort": 27,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "156 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "utiles-2026-6-basico",
+      "title": "Lista de útiles escolares 2026 — 6° básico",
+      "slug": "utiles-2026-6-basico",
+      "description": "Lista de útiles escolares 2026 para 6° básico.",
+      "category": "matriculas",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/LISTA-DE-UTILES-ESCOLARES-6%C2%B0-BASICO-2026.pdf",
+      "external": true,
+      "audience": [
+        "6° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "útiles",
+        "materiales",
+        "matrícula",
+        "admisión",
+        "6° básico"
+      ],
+      "sort": 28,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "156 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "utiles-2026-7-basico",
+      "title": "Lista de útiles escolares 2026 — 7° básico",
+      "slug": "utiles-2026-7-basico",
+      "description": "Lista de útiles escolares 2026 para 7° básico.",
+      "category": "matriculas",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/LISTA-DE-UTILES-ESCOLARES-7%C2%B0-BASICO-2026.pdf",
+      "external": true,
+      "audience": [
+        "7° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "útiles",
+        "materiales",
+        "matrícula",
+        "admisión",
+        "7° básico"
+      ],
+      "sort": 29,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "158 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "utiles-2026-8-basico",
+      "title": "Lista de útiles escolares 2026 — 8° básico",
+      "slug": "utiles-2026-8-basico",
+      "description": "Lista de útiles escolares 2026 para 8° básico.",
+      "category": "matriculas",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/LISTA-DE-UTILES-ESCOLARES-8%C2%B0-BASICO-2026.pdf",
+      "external": true,
+      "audience": [
+        "8° básico"
+      ],
+      "featured": false,
+      "keywords": [
+        "útiles",
+        "materiales",
+        "matrícula",
+        "admisión",
+        "8° básico"
+      ],
+      "sort": 30,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "186 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "utiles-2026-1-medio",
+      "title": "Lista de útiles escolares 2026 — 1° medio",
+      "slug": "utiles-2026-1-medio",
+      "description": "Lista de útiles escolares 2026 para 1° medio.",
+      "category": "matriculas",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/LISTA-DE-UTILES-ESCOLARES-1%C2%B0-MEDIO-2026.pdf",
+      "external": true,
+      "audience": [
+        "1° medio"
+      ],
+      "featured": false,
+      "keywords": [
+        "útiles",
+        "materiales",
+        "matrícula",
+        "admisión",
+        "1° medio"
+      ],
+      "sort": 31,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "155 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "utiles-2026-2-medio",
+      "title": "Lista de útiles escolares 2026 — 2° medio",
+      "slug": "utiles-2026-2-medio",
+      "description": "Lista de útiles escolares 2026 para 2° medio.",
+      "category": "matriculas",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/LISTA-DE-UTILES-ESCOLARES-2%C2%B0-MEDIO-2026.pdf",
+      "external": true,
+      "audience": [
+        "2° medio"
+      ],
+      "featured": false,
+      "keywords": [
+        "útiles",
+        "materiales",
+        "matrícula",
+        "admisión",
+        "2° medio"
+      ],
+      "sort": 32,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "154 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "utiles-2026-3-medio",
+      "title": "Lista de útiles escolares 2026 — 3° medio",
+      "slug": "utiles-2026-3-medio",
+      "description": "Lista de útiles escolares 2026 para 3° medio.",
+      "category": "matriculas",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/LISTA-DE-UTILES-ESCOLARES-3%C2%B0-MEDIO-2026.pdf",
+      "external": true,
+      "audience": [
+        "3° medio"
+      ],
+      "featured": false,
+      "keywords": [
+        "útiles",
+        "materiales",
+        "matrícula",
+        "admisión",
+        "3° medio"
+      ],
+      "sort": 33,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "159 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "rice-2026",
+      "title": "Reglamento Interno de Convivencia Escolar 2026",
+      "slug": "rice-2026",
+      "description": "Reglamento interno de convivencia escolar publicado para 2026.",
+      "category": "reglamentos",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/05/RICE-CC.pdf",
+      "external": true,
+      "audience": [],
+      "featured": true,
+      "keywords": [
+        "RICE",
+        "convivencia escolar",
+        "reglamento interno"
+      ],
+      "sort": 34,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "695 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "reglamento-evaluacion-2026-2027",
+      "title": "Reglamento de Evaluación 2026–2027",
+      "slug": "reglamento-evaluacion-2026-2027",
+      "description": "Reglamento de evaluación del Colegio Conquistadores para 2026–2027.",
+      "category": "reglamentos",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2025/12/REGLAMENTO-DE-EVALUACION-CONQUISTADORES-2026-2027.pdf",
+      "external": true,
+      "audience": [],
+      "featured": true,
+      "keywords": [
+        "evaluación",
+        "reglamento",
+        "2027"
+      ],
+      "sort": 35,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "365 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "pei-2026",
+      "title": "Proyecto Educativo Institucional 2026",
+      "slug": "pei-2026",
+      "description": "Proyecto Educativo Institucional del Colegio Conquistadores publicado para 2026.",
+      "category": "institucionales",
+      "schoolYear": 2026,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2026/03/PEI-COLEGIO-CONQUISTADORES-2026.pdf",
+      "external": true,
+      "audience": [],
+      "featured": true,
+      "keywords": [
+        "PEI",
+        "proyecto educativo",
+        "institucional"
+      ],
+      "sort": 36,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "768 KB",
+      "displayStatus": "current"
+    },
+    {
+      "id": "pise-2024",
+      "title": "Plan Integral de Seguridad Escolar 2024",
+      "slug": "pise-2024",
+      "description": "Versión histórica 2024 del Plan Integral de Seguridad Escolar.",
+      "category": "seguridad",
+      "schoolYear": 2024,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://www.colegioconquistadores.com/wp-content/uploads/2023/12/PLAN-INTEGRAL-DE-SEGURIDAD-ESCOLAR-COLEGIO-CONQUISTADORES-2024.pdf",
+      "external": true,
+      "audience": [],
+      "featured": false,
+      "keywords": [
+        "PISE",
+        "seguridad escolar",
+        "emergencias"
+      ],
+      "sort": 37,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "PDF",
+      "fileSize": "1.4 MB",
+      "displayStatus": "historical"
+    },
+    {
+      "id": "horarios-2025",
+      "title": "Archivo de horarios 2025",
+      "slug": "horarios-2025",
+      "description": "Página histórica con los horarios publicados por curso durante 2025.",
+      "category": "horarios",
+      "schoolYear": 2025,
+      "status": "published",
+      "visibility": "public",
+      "href": "/documentos/?category=horarios&year=2025",
+      "external": false,
+      "audience": [],
+      "featured": false,
+      "keywords": [
+        "horarios",
+        "cursos",
+        "archivo"
+      ],
+      "sort": 38,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "Página",
+      "fileSize": null,
+      "displayStatus": "historical"
+    },
+    {
+      "id": "certificados-estudios-mineduc",
+      "title": "Certificados de Estudios",
+      "slug": "certificados-estudios-mineduc",
+      "description": "Acceso al portal oficial de Mineduc para consultar certificados de estudios.",
+      "category": "otros",
+      "schoolYear": null,
+      "status": "published",
+      "visibility": "public",
+      "href": "https://certificados.mineduc.cl/mvc/home/index",
+      "external": true,
+      "audience": [],
+      "featured": false,
+      "keywords": [
+        "certificados",
+        "estudios",
+        "Mineduc"
+      ],
+      "sort": 39,
+      "publishedAt": null,
+      "expiresAt": null,
+      "fileType": "Servicio web",
+      "fileSize": null,
+      "displayStatus": "external"
+    }
+  ]
+}

@@ -4,20 +4,36 @@ import DocumentList from '../components/documents/DocumentList.astro';
 import DocumentSearch from '../components/documents/DocumentSearch.astro';
 import ExternalServiceCard from '../components/documents/ExternalServiceCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import {
-  featuredDocuments,
-  getPublicDocumentsByCategory,
-  publicDocuments,
-  publicExternalServices,
-  publicHistoricalDocuments,
-} from '../data/documents';
+import { loadDocumentCatalog } from '../lib/cms/documents';
 
+const catalog = await loadDocumentCatalog();
+const publicDocuments = catalog.documents;
+const getPublicDocumentsByCategory = (category: string) =>
+  publicDocuments.filter(
+    (document) =>
+      document.category === category &&
+      document.status !== 'historical' &&
+      document.status !== 'external',
+  );
 const evaluationDocuments = getPublicDocumentsByCategory('evaluaciones');
 const readingPlanDocuments = getPublicDocumentsByCategory('plan-lector');
 const regulationDocuments = getPublicDocumentsByCategory('reglamentos');
 const enrollmentDocuments = getPublicDocumentsByCategory('matriculas');
-const institutionalDocuments =
-  getPublicDocumentsByCategory('institucionales');
+const institutionalDocuments = getPublicDocumentsByCategory('institucionales');
+const featuredDocuments = publicDocuments.filter((document) => document.featured);
+const publicHistoricalDocuments = publicDocuments.filter(
+  (document) => document.status === 'historical',
+);
+const publicExternalServices = publicDocuments.filter(
+  (document) => document.status === 'external',
+);
+const years = Array.from(
+  new Set(
+    publicDocuments
+      .map((document) => document.year)
+      .filter((year): year is number => typeof year === 'number'),
+  ),
+).sort((left, right) => right - left);
 ---
 
 <BaseLayout
@@ -39,7 +55,11 @@ const institutionalDocuments =
 
   <section class="documents-tools" aria-label="Búsqueda y filtros">
     <div class="container">
-      <DocumentSearch total={publicDocuments.length} />
+      <DocumentSearch
+        total={publicDocuments.length}
+        categories={catalog.categories}
+        years={years}
+      />
     </div>
   </section>
 

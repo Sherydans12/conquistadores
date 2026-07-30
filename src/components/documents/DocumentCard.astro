@@ -1,8 +1,5 @@
 ---
-import {
-  documentCategoryLabels,
-  type PublicDocument,
-} from '../../data/documents';
+import type { PublicDocument } from '../../lib/cms/types';
 import DocumentStatusBadge from './DocumentStatusBadge.astro';
 
 interface Props {
@@ -14,7 +11,7 @@ const { document, preview = false } = Astro.props;
 const searchText = [
   document.title,
   document.description,
-  documentCategoryLabels[document.category],
+  document.categoryLabel,
   document.year,
   ...(document.audience ?? []),
   ...(document.keywords ?? []),
@@ -33,13 +30,9 @@ const searchText = [
 >
   <div class="document-card__topline">
     <span class="document-card__category">
-      {documentCategoryLabels[document.category]}
+      {document.categoryLabel}
     </span>
-    {
-      document.status !== 'review' && (
-        <DocumentStatusBadge status={document.status} />
-      )
-    }
+    <DocumentStatusBadge status={document.status} />
   </div>
 
   <h3>{document.title}</h3>
@@ -70,14 +63,6 @@ const searchText = [
         </div>
       )
     }
-    {
-      document.updatedAt && (
-        <div>
-          <dt>Actualización</dt>
-          <dd>{document.updatedAt}</dd>
-        </div>
-      )
-    }
   </dl>
 
   {
@@ -103,8 +88,8 @@ const searchText = [
   </a>
 
   {
-    document.external && (
-      <p class="document-card__external">Enlace externo temporal</p>
+    document.external && !document.managedFile && (
+      <p class="document-card__external">Enlace a un servicio o archivo externo</p>
     )
   }
 </article>

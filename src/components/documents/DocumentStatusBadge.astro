@@ -1,14 +1,16 @@
 ---
-import {
-  documentStatusLabels,
-  type DocumentStatus,
-} from '../../data/documents';
+import type { DocumentDisplayStatus } from '../../lib/cms/types';
 
 interface Props {
-  status: Exclude<DocumentStatus, 'review'>;
+  status: DocumentDisplayStatus;
 }
 
 const { status } = Astro.props;
+const documentStatusLabels: Record<DocumentDisplayStatus, string> = {
+  current: 'Vigente',
+  historical: 'Histórico',
+  external: 'Externo',
+};
 ---
 
 <span class:list={['status-badge', `status-badge--${status}`]}>

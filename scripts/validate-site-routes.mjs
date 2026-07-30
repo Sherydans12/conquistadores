@@ -30,8 +30,8 @@ const activityRoutes = manifest.entries.map((entry) => entry.astroPath);
 const expectedRoutes = [...staticRoutes, ...activityRoutes];
 const errors = [];
 
-if (staticRoutes.length !== 8) {
-  errors.push(`Se esperaban 8 rutas públicas estables y se encontraron ${staticRoutes.length}.`);
+if (staticRoutes.length !== 9) {
+  errors.push(`Se esperaban 9 rutas públicas estables y se encontraron ${staticRoutes.length}.`);
 }
 if (
   manifest.expectedActivities !== EXPECTED_ACTIVITY_COUNT ||

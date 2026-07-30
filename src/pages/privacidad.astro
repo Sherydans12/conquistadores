@@ -1,0 +1,126 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { site } from '../data/site';
+---
+
+<PageLayout
+  title="Privacidad y uso de la información | Colegio Conquistadores"
+  description="Conoce cómo el sitio institucional del Colegio Conquistadores publica datos de contacto, fotografías, documentos y enlaces externos."
+  canonicalPath="/privacidad/"
+  eyebrow="Información institucional"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Privacidad' },
+  ]}
+  noindex={!site.indexingAllowed}
+>
+  <section class="page-section privacy-page">
+    <div class="container privacy-page__content">
+      <p class="privacy-page__notice">
+        <strong>Pendiente de aprobación institucional:</strong> identificar la
+        razón social o persona jurídica responsable del sitio antes del
+        lanzamiento.
+      </p>
+
+      <h2>Responsable y propósito del sitio</h2>
+      <p>
+        Este es el sitio institucional del Colegio Conquistadores, ubicado en
+        {site.address.display}. Su propósito es informar a la comunidad sobre
+        el proyecto educativo, actividades, personal, programas, matrículas y
+        documentos públicos del establecimiento.
+      </p>
+
+      <h2>Datos de contacto publicados</h2>
+      <p>
+        El sitio publica la dirección institucional y el teléfono
+        <a href={site.phone.href}>{site.phone.display}</a>. No ofrece registro,
+        cuentas públicas, recuperación de contraseña ni un portal de notas.
+      </p>
+
+      <h2>Fotografías y contenido institucional</h2>
+      <p>
+        Se publican fotografías autorizadas de actividades y contenidos
+        institucionales para informar sobre la vida escolar. Si una persona
+        considera que una imagen o dato debe corregirse o retirarse, puede usar
+        el canal indicado al final de esta página.
+      </p>
+
+      <h2>Documentos públicos</h2>
+      <p>
+        El centro documental presenta únicamente documentos marcados como
+        publicados y públicos. Los borradores, documentos en revisión, archivos
+        ocultos, notas internas y datos de usuarios administrativos no se
+        incorporan al sitio.
+      </p>
+
+      <h2>Enlaces a terceros</h2>
+      <p>
+        Algunos enlaces abren servicios externos, como plataformas oficiales o
+        redes sociales. Esos servicios aplican sus propias políticas y medidas
+        de seguridad.
+      </p>
+
+      <h2>Analítica y cuentas públicas</h2>
+      <p>
+        Durante el lanzamiento inicial no se utilizará analítica web. El sitio
+        tampoco crea cuentas para estudiantes, familias o visitantes, ni
+        habilita formularios de registro público.
+      </p>
+
+      <h2>Corrección o retiro</h2>
+      <p>
+        Para solicitar la corrección o el retiro de una fotografía, documento o
+        dato publicado, contacte al colegio por el teléfono
+        <a href={site.phone.href}>{site.phone.display}</a> o presencialmente en
+        {site.address.display}. El canal de correo institucional queda
+        <strong>pendiente de aprobación</strong> y no se publica un correo no
+        verificado.
+      </p>
+
+      <p class="privacy-page__updated">
+        Última actualización: 30 de julio de 2026.
+      </p>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .privacy-page {
+    background: var(--color-background);
+  }
+
+  .privacy-page__content {
+    max-width: var(--container-narrow);
+  }
+
+  .privacy-page__notice {
+    padding: var(--space-5);
+    border: 1px solid rgb(232 185 77 / 0.7);
+    border-inline-start: 0.35rem solid var(--color-accent);
+    border-radius: var(--radius-md);
+    background: #fff9e9;
+    color: var(--color-primary-deep);
+  }
+
+  .privacy-page h2 {
+    margin-block: var(--space-7) var(--space-3);
+    font-size: var(--font-size-xl);
+  }
+
+  .privacy-page p {
+    color: var(--color-text-muted);
+  }
+
+  .privacy-page a {
+    margin-inline: 0.2em;
+    font-weight: 800;
+  }
+
+  .privacy-page__updated {
+    padding-block-start: var(--space-5);
+    margin-block-start: var(--space-7);
+    border-block-start: 1px solid var(--color-border);
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+  }
+</style>
