@@ -28,6 +28,14 @@ export interface LoadDocumentOptions {
   timeoutMs?: number;
 }
 
+function getRuntimeEnvironment(): DocumentsEnvironment {
+  const runtime = globalThis as typeof globalThis & {
+    process?: { env?: DocumentsEnvironment };
+  };
+
+  return runtime.process?.env ?? {};
+}
+
 function snapshotToCatalog(
   snapshot: DocumentSnapshot,
   cmsUrl?: string,
@@ -78,7 +86,7 @@ function snapshotToCatalog(
 }
 
 export function resolveDocumentsSource(
-  environment: DocumentsEnvironment = process.env,
+  environment: DocumentsEnvironment = getRuntimeEnvironment(),
 ): DocumentsSource {
   const requested = environment.CMS_DOCUMENTS_SOURCE?.trim().toLowerCase();
   if (requested && requested !== 'directus' && requested !== 'snapshot') {
@@ -118,7 +126,7 @@ export function resolveDocumentsSource(
 }
 
 export async function loadDocumentCatalog({
-  environment = process.env,
+  environment = getRuntimeEnvironment(),
   snapshot = snapshotJson,
   fetchImpl = fetch,
   timeoutMs,
