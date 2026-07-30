@@ -72,6 +72,11 @@ npm run ci
 Actualizar snapshot requiere `CMS_URL` y `CMS_STATIC_TOKEN` en el entorno. El
 diff generado debe revisarse antes de commit.
 
+La validación oficial de Astro se limita al código del sitio. Las pruebas
+TypeScript bajo `tests/` se ejecutan por separado con el runner nativo de Node,
+y el adaptador obtiene las variables mediante un acceso tipado a `globalThis`
+para mantener la CI reproducible sin introducir tipos globales innecesarios.
+
 ## Privacidad y rutas retiradas
 
 Se añadió `/privacidad/` con `PageLayout`, SEO propio, noindex en staging y
