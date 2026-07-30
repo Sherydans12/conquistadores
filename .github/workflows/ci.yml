@@ -15,6 +15,9 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      CMS_DOCUMENTS_SOURCE: snapshot
+      SITE_ENV: staging
 
     steps:
       - name: Checkout

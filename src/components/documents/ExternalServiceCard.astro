@@ -1,8 +1,5 @@
 ---
-import {
-  documentCategoryLabels,
-  type PublicDocument,
-} from '../../data/documents';
+import type { PublicDocument } from '../../lib/cms/types';
 import DocumentStatusBadge from './DocumentStatusBadge.astro';
 
 interface Props {
@@ -13,7 +10,7 @@ const { document } = Astro.props;
 const searchText = [
   document.title,
   document.description,
-  documentCategoryLabels[document.category],
+  document.categoryLabel,
   ...(document.keywords ?? []),
 ].join(' ');
 ---

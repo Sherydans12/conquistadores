@@ -1,11 +1,14 @@
 ---
 import DocumentFilters from './DocumentFilters.astro';
+import type { DocumentCategory } from '../../lib/cms/types';
 
 interface Props {
   total: number;
+  categories: DocumentCategory[];
+  years: number[];
 }
 
-const { total } = Astro.props;
+const { total, categories, years } = Astro.props;
 ---
 
 <form
@@ -29,7 +32,7 @@ const { total } = Astro.props;
     <p>Busca por título, descripción, categoría, palabras clave, curso o año.</p>
   </div>
 
-  <DocumentFilters />
+  <DocumentFilters categories={categories} years={years} />
 
   <div class="document-search__summary">
     <p aria-live="polite" aria-atomic="true" data-result-count>

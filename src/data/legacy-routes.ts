@@ -188,36 +188,31 @@ export const legacyRoutes: readonly LegacyRoute[] = [
   },
   {
     from: '/mi-cuenta/',
-    action: 'pending',
-    reason:
-      'Requiere decidir un portal académico seguro, servicio externo o subdominio dedicado.',
-    approved: false,
-    launchBlocker: true,
+    action: 'gone',
+    status: 410,
+    reason: 'No existen cuentas públicas necesarias.',
+    approved: true,
   },
   {
     from: '/mi-cuenta/lost-password/',
-    action: 'pending',
-    reason:
-      'La recuperación debe pertenecer al futuro proveedor de identidad; no se puede simular en estático.',
-    approved: false,
-    launchBlocker: true,
+    action: 'gone',
+    status: 410,
+    reason: 'No se necesita recuperación pública.',
+    approved: true,
   },
   {
     from: '/registro/',
     action: 'gone',
     status: 410,
-    reason:
-      'El registro heredado está deshabilitado, pero la eliminación definitiva requiere aprobación institucional.',
-    approved: false,
-    launchBlocker: true,
+    reason: 'No existirá registro público.',
+    approved: true,
   },
   {
     from: '/notas/',
-    action: 'pending',
-    reason:
-      'Flujo crítico con datos de estudiantes: exige autenticación, autorización y auditoría en un portal seguro.',
-    approved: false,
-    launchBlocker: true,
+    action: 'gone',
+    status: 410,
+    reason: 'Notas no se utiliza.',
+    approved: true,
   },
   {
     from: '/?wpr_mega_menu=wpr-mega-menu-item-4795',
@@ -247,8 +242,14 @@ function validateLegacyRoutes(routes: readonly LegacyRoute[]): void {
     if (route.action === 'gone' && route.status !== 410) {
       throw new Error(`Ruta gone sin estado 410: ${route.from}`);
     }
-    if (route.approved && route.action !== 'redirect') {
-      throw new Error(`Solo se pueden aprobar redirecciones: ${route.from}`);
+    if (
+      route.approved &&
+      route.action !== 'redirect' &&
+      route.action !== 'gone'
+    ) {
+      throw new Error(
+        `Solo se pueden aprobar redirecciones o rutas gone: ${route.from}`,
+      );
     }
   }
 }

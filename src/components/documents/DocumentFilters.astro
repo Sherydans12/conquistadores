@@ -1,5 +1,12 @@
 ---
-import { documentCategories } from '../../data/documents';
+import type { DocumentCategory } from '../../lib/cms/types';
+
+interface Props {
+  categories: DocumentCategory[];
+  years: number[];
+}
+
+const { categories, years } = Astro.props;
 ---
 
 <fieldset class="filters" disabled data-document-filter-fields>
@@ -10,8 +17,8 @@ import { documentCategories } from '../../data/documents';
       <select name="category" data-filter-category>
         <option value="">Todas las categorías</option>
         {
-          documentCategories.map((category) => (
-            <option value={category.id}>{category.label}</option>
+          categories.map((category) => (
+            <option value={category.slug}>{category.name}</option>
           ))
         }
       </select>
@@ -21,9 +28,7 @@ import { documentCategories } from '../../data/documents';
       <span>Año</span>
       <select name="year" data-filter-year>
         <option value="">Todos los años</option>
-        <option value="2026">2026</option>
-        <option value="2025">2025</option>
-        <option value="2024">2024</option>
+        {years.map((year) => <option value={year}>{year}</option>)}
       </select>
     </label>
 

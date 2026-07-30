@@ -1,5 +1,12 @@
 # Estrategia para portal sensible
 
+> **Documento histórico, superado el 30 de julio de 2026.** La decisión
+> institucional aprobada es retirar `/notas/`, `/mi-cuenta/`,
+> `/mi-cuenta/lost-password/` y `/registro/` con respuesta 410. No habrá portal
+> público ni se utilizará `portal.colegioconquistadores.com`. Las opciones que
+> siguen se conservan únicamente como registro de la evaluación previa y no
+> representan la arquitectura vigente.
+
 ## Estado actual
 
 El sitio Astro se prepara como sitio institucional estático. El sitio público

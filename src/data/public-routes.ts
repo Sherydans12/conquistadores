@@ -3,6 +3,7 @@ export interface PublicRoute {
   type:
     | 'home'
     | 'institutional'
+    | 'privacy'
     | 'documents'
     | 'activities'
     | 'activity';
@@ -68,6 +69,14 @@ export const staticPublicRoutes: readonly PublicRoute[] = [
     includeInSitemap: true,
     priority: 0.9,
     changeFrequency: 'monthly',
+  },
+  {
+    path: '/privacidad/',
+    type: 'privacy',
+    indexableInProduction: true,
+    includeInSitemap: true,
+    priority: 0.4,
+    changeFrequency: 'yearly',
   },
   {
     path: '/actividades/',

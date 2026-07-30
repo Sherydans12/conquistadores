@@ -20,7 +20,10 @@
     "validate:links": "node scripts/validate-internal-links.mjs",
     "validate:seo": "node scripts/validate-seo-output.mjs",
     "validate:assets": "node scripts/validate-asset-budget.mjs",
-    "validate": "npm run activities:validate && npm run validate:routes && npm run validate:links && npm run validate:seo && npm run validate:assets",
+    "validate:documents": "node --experimental-strip-types scripts/validate-document-cms.mjs",
+    "test:documents": "node --experimental-strip-types --test tests/documents.test.ts",
+    "documents:snapshot": "node --experimental-strip-types scripts/update-document-snapshot.mjs",
+    "validate": "npm run activities:validate && npm run validate:routes && npm run validate:links && npm run validate:seo && npm run validate:assets && npm run validate:documents && npm run test:documents",
     "ci": "npm run check && npm run build && npm run validate"
   },
   "dependencies": {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-29T00:00:00.000Z",
+  "generatedAt": "2026-07-30T00:00:00.000Z",
   "site": "Colegio Conquistadores",
   "readyForProduction": false,
   "checks": {
@@ -11,15 +11,20 @@
     "assets": true,
     "publicSensitiveRoutesAudit": true,
     "institutionalApproval": false,
-    "sensitivePortalDecision": false,
+    "sensitivePortalDecision": true,
+    "photoApproval": true,
+    "staffApproval": true,
+    "programsApproval": true,
+    "analyticsDecision": true,
+    "documentCms": false,
+    "privacyApproval": false,
     "redirectsApproved": false
   },
   "blockers": [
-    "La auditoría pública confirma que /notas/ usa una contraseña de contenido WordPress y que Mi cuenta/recuperación dependen de User Registration; falta un destino aprobado.",
-    "El colegio debe confirmar sistema de notas, proveedor, responsable, usuarios, roles, datos, recuperación, soporte, auditoría, respaldo y privacidad.",
-    "Completar la aprobación institucional de personal, fotografías, talleres, academias y documentos.",
+    "Desplegar Directus y PostgreSQL en Coolify, aplicar y probar el esquema, importar 39 documentos públicos y 7 en revisión, y verificar una restauración de respaldo.",
+    "Aprobar la identificación del responsable y el canal institucional definitivo de la página de privacidad.",
     "Resolver la actividad parcial del Kínder y el MP4 heredado de 30,8 MB.",
-    "Aprobar las cinco redirecciones exactas pendientes y la regla de query del mega menú.",
-    "Definir analítica, privacidad y consentimiento antes del lanzamiento."
+    "Aprobar las redirecciones heredadas que siguen pendientes y la regla de query del mega menú.",
+    "Probar y activar las reglas 410 aprobadas para /notas/, /mi-cuenta/, /mi-cuenta/lost-password/ y /registro/."
   ]
 }
