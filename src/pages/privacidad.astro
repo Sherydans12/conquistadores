@@ -16,24 +16,20 @@ import { site } from '../data/site';
 >
   <section class="page-section privacy-page">
     <div class="container privacy-page__content">
-      <p class="privacy-page__notice">
-        <strong>Pendiente de aprobación institucional:</strong> identificar la
-        razón social o persona jurídica responsable del sitio antes del
-        lanzamiento.
-      </p>
-
       <h2>Responsable y propósito del sitio</h2>
       <p>
-        Este es el sitio institucional del Colegio Conquistadores, ubicado en
-        {site.address.display}. Su propósito es informar a la comunidad sobre
-        el proyecto educativo, actividades, personal, programas, matrículas y
-        documentos públicos del establecimiento.
+        El responsable informado para este sitio institucional es
+        <strong>{site.responsible}</strong>. El sitio corresponde al Colegio
+        Conquistadores, ubicado en {site.address.display}, y tiene como propósito
+        informar a la comunidad sobre el proyecto educativo, actividades,
+        personal, programas, matrículas y documentos públicos del establecimiento.
       </p>
 
       <h2>Datos de contacto publicados</h2>
       <p>
-        El sitio publica la dirección institucional y el teléfono
-        <a href={site.phone.href}>{site.phone.display}</a>. No ofrece registro,
+        El sitio publica la dirección institucional, el teléfono
+        <a href={site.phone.href}>{site.phone.display}</a> y el correo
+        <a href={site.email.href}>{site.email.display}</a>. No ofrece registro,
         cuentas públicas, recuperación de contraseña ni un portal de notas.
       </p>
 
@@ -42,7 +38,7 @@ import { site } from '../data/site';
         Se publican fotografías autorizadas de actividades y contenidos
         institucionales para informar sobre la vida escolar. Si una persona
         considera que una imagen o dato debe corregirse o retirarse, puede usar
-        el canal indicado al final de esta página.
+        los canales indicados al final de esta página.
       </p>
 
       <h2>Documentos públicos</h2>
@@ -70,15 +66,14 @@ import { site } from '../data/site';
       <h2>Corrección o retiro</h2>
       <p>
         Para solicitar la corrección o el retiro de una fotografía, documento o
-        dato publicado, contacte al colegio por el teléfono
-        <a href={site.phone.href}>{site.phone.display}</a> o presencialmente en
-        {site.address.display}. El canal de correo institucional queda
-        <strong>pendiente de aprobación</strong> y no se publica un correo no
-        verificado.
+        dato publicado, escriba a
+        <a href={site.email.href}>{site.email.display}</a>, llame al
+        <a href={site.phone.href}>{site.phone.display}</a> o contacte
+        presencialmente al colegio en {site.address.display}.
       </p>
 
       <p class="privacy-page__updated">
-        Última actualización: 30 de julio de 2026.
+        Última actualización: 4 de agosto de 2026.
       </p>
     </div>
   </section>
@@ -93,18 +88,13 @@ import { site } from '../data/site';
     max-width: var(--container-narrow);
   }
 
-  .privacy-page__notice {
-    padding: var(--space-5);
-    border: 1px solid rgb(232 185 77 / 0.7);
-    border-inline-start: 0.35rem solid var(--color-accent);
-    border-radius: var(--radius-md);
-    background: #fff9e9;
-    color: var(--color-primary-deep);
-  }
-
   .privacy-page h2 {
     margin-block: var(--space-7) var(--space-3);
     font-size: var(--font-size-xl);
+  }
+
+  .privacy-page h2:first-child {
+    margin-block-start: 0;
   }
 
   .privacy-page p {
