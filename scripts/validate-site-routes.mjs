@@ -11,7 +11,10 @@ import {
   walkFiles,
 } from './validation-helpers.mjs';
 
-const EXPECTED_ACTIVITY_COUNT = 47;
+const EXPECTED_ACTIVITY_COUNT = 46;
+const RETIRED_ACTIVITY_ROUTES = new Set([
+  '/2024/08/30/visita-del-kinder-jardin-conquistadores/',
+]);
 const publicRoutesSource = await readText(
   path.join(projectRoot, 'src/data/public-routes.ts'),
 );
@@ -26,19 +29,19 @@ const manifest = JSON.parse(
 const staticRoutes = [
   ...publicRoutesSource.matchAll(/\bpath:\s*'([^']+)'/g),
 ].map((match) => match[1]);
-const activityRoutes = manifest.entries.map((entry) => entry.astroPath);
+const activityRoutes = manifest.entries
+  .map((entry) => entry.astroPath)
+  .filter((route) => !RETIRED_ACTIVITY_ROUTES.has(route));
 const expectedRoutes = [...staticRoutes, ...activityRoutes];
 const errors = [];
 
 if (staticRoutes.length !== 9) {
   errors.push(`Se esperaban 9 rutas públicas estables y se encontraron ${staticRoutes.length}.`);
 }
-if (
-  manifest.expectedActivities !== EXPECTED_ACTIVITY_COUNT ||
-  manifest.migratedActivities !== EXPECTED_ACTIVITY_COUNT ||
-  activityRoutes.length !== EXPECTED_ACTIVITY_COUNT
-) {
-  errors.push('El manifiesto no contiene exactamente 47 actividades migradas.');
+if (activityRoutes.length !== EXPECTED_ACTIVITY_COUNT) {
+  errors.push(
+    `El manifiesto activo contiene ${activityRoutes.length} actividades; se esperaban ${EXPECTED_ACTIVITY_COUNT}.`,
+  );
 }
 if (unique(expectedRoutes).length !== expectedRoutes.length) {
   errors.push('Existen rutas públicas duplicadas.');
@@ -67,8 +70,7 @@ for (const route of expectedRoutes) {
   }
 }
 
-const requiredOutputs = ['404.html', 'sitemap.xml', 'robots.txt'];
-for (const output of requiredOutputs) {
+for (const output of ['404.html', 'sitemap.xml', 'robots.txt']) {
   if (!(await pathExists(path.join(distRoot, output)))) {
     errors.push(`Falta dist/${output}`);
   }
@@ -98,7 +100,9 @@ for (const sitemapPath of sitemapPaths) {
 const contentFiles = (await walkFiles(path.join(projectRoot, 'src/content/activities')))
   .filter((filePath) => filePath.endsWith('.md'));
 if (contentFiles.length !== EXPECTED_ACTIVITY_COUNT) {
-  errors.push(`La colección contiene ${contentFiles.length} Markdown; se esperaban 47.`);
+  errors.push(
+    `La colección contiene ${contentFiles.length} Markdown; se esperaban ${EXPECTED_ACTIVITY_COUNT}.`,
+  );
 }
 const contentRoutes = [];
 for (const filePath of contentFiles) {

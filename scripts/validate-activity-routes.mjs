@@ -5,7 +5,10 @@ import process from 'node:process';
 const ROOT = process.cwd();
 const CONTENT_ROOT = path.join(ROOT, 'src/content/activities');
 const INVENTORY_PATH = path.join(ROOT, 'docs/migration/url-inventory.md');
-const EXPECTED_COUNT = 47;
+const EXPECTED_COUNT = 46;
+const RETIRED_ACTIVITY_ROUTES = new Set([
+  '/2024/08/30/visita-del-kinder-jardin-conquistadores/',
+]);
 const baseUrlArg = process.argv.find((argument) =>
   argument.startsWith('--base-url='),
 );
@@ -82,7 +85,8 @@ async function main() {
   const expectedRoutes = [
     ...new Set(
       [...inventory.matchAll(/https:\/\/www\.colegioconquistadores\.com(\/\d{4}\/\d{2}\/\d{2}\/[^/\s|]+\/)/g)]
-        .map((match) => match[1]),
+        .map((match) => match[1])
+        .filter((route) => !RETIRED_ACTIVITY_ROUTES.has(route)),
     ),
   ].sort();
   const files = await listMarkdownFiles(CONTENT_ROOT);
@@ -94,12 +98,19 @@ async function main() {
   const routes = activities.map((activity) => activity.historicalPath).sort();
   const ids = activities.map((activity) => activity.sourcePostId);
   const datedSlugs = activities.map(
-    (activity) =>
-      `${activity.publishDate.slice(0, 10)}:${activity.slug}`,
+    (activity) => `${activity.publishDate.slice(0, 10)}:${activity.slug}`,
   );
 
-  assert(files.length === EXPECTED_COUNT, `Se esperaban 47 archivos y hay ${files.length}.`, errors);
-  assert(expectedRoutes.length === EXPECTED_COUNT, `El inventario contiene ${expectedRoutes.length} rutas de actividad.`, errors);
+  assert(
+    files.length === EXPECTED_COUNT,
+    `Se esperaban ${EXPECTED_COUNT} archivos y hay ${files.length}.`,
+    errors,
+  );
+  assert(
+    expectedRoutes.length === EXPECTED_COUNT,
+    `El inventario activo contiene ${expectedRoutes.length} rutas de actividad.`,
+    errors,
+  );
   assert(new Set(routes).size === routes.length, 'Hay rutas históricas duplicadas.', errors);
   assert(new Set(ids).size === ids.length, 'Hay sourcePostId duplicados.', errors);
   assert(new Set(datedSlugs).size === datedSlugs.length, 'Hay slugs duplicados en una misma fecha.', errors);
@@ -176,7 +187,9 @@ async function main() {
     return;
   }
 
-  console.log('Validador de rutas: 47 actividades, rutas e imágenes correctas.');
+  console.log(
+    `Validador de rutas: ${EXPECTED_COUNT} actividades, rutas e imágenes correctas.`,
+  );
 }
 
 main().catch((error) => {
