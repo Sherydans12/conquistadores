@@ -24,6 +24,11 @@ export const site = {
   productionUrl: PRODUCTION_URL,
   stagingHost: STAGING_HOST,
   stagingUrl: STAGING_URL,
+  responsible: 'Arturo Javier Galleguillos Trigo',
+  email: {
+    display: 'galleguillostrigo@gmail.com',
+    href: 'mailto:galleguillostrigo@gmail.com',
+  },
   phone: {
     display: '(51) 223 4652',
     href: 'tel:+56512234652',

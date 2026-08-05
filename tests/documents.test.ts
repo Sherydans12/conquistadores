@@ -4,6 +4,7 @@ import { fetchDirectusSnapshot } from '../src/lib/cms/directus.ts';
 import {
   loadDocumentCatalog,
   resolveDocumentsSource,
+  RETIRED_DOCUMENT_SLUGS,
 } from '../src/lib/cms/documents.ts';
 import {
   assertDocumentSnapshot,
@@ -63,10 +64,15 @@ function directusFetch(documents: unknown[] = [documentBase]): typeof fetch {
   }) as typeof fetch;
 }
 
-test('el snapshot local es válido y contiene 39 documentos', () => {
+test('el snapshot local es válido y deja 38 documentos activos', () => {
   const snapshot = assertDocumentSnapshot(snapshotJson);
-  assert.equal(snapshot.documents.length, 39);
   assert.ok(snapshot.documents.every(isPublishedPublic));
+  assert.equal(
+    snapshot.documents.filter(
+      ({ slug }) => !RETIRED_DOCUMENT_SLUGS.has(slug),
+    ).length,
+    38,
+  );
 });
 
 test('review, draft, hidden y archived quedan fuera', async () => {
@@ -88,6 +94,27 @@ test('review, draft, hidden y archived quedan fuera', async () => {
     now: new Date('2026-07-30T12:00:00.000Z'),
   });
   assert.deepEqual(snapshot.documents.map(({ slug }) => slug), [
+    'reglamento-prueba',
+  ]);
+});
+
+test('los documentos retirados se excluyen aunque Directus los entregue', async () => {
+  const retiredDocument = {
+    ...documentBase,
+    id: '44444444-4444-4444-8444-444444444444',
+    slug: 'horarios-2025',
+    title: 'Horarios 2025',
+  };
+  const catalog = await loadDocumentCatalog({
+    environment: {
+      SITE_ENV: 'staging',
+      CMS_DOCUMENTS_SOURCE: 'directus',
+      CMS_URL: 'https://cms.example.com',
+      CMS_STATIC_TOKEN: 'test-token-not-a-secret',
+    },
+    fetchImpl: directusFetch([documentBase, retiredDocument]),
+  });
+  assert.deepEqual(catalog.documents.map(({ slug }) => slug), [
     'reglamento-prueba',
   ]);
 });
@@ -159,7 +186,7 @@ test('CI y desarrollo usan snapshot sin red', async () => {
       throw new Error('no network expected');
     }) as typeof fetch,
   });
-  assert.equal(catalog.documents.length, 39);
+  assert.equal(catalog.documents.length, 38);
   assert.equal(requests, 0);
 });
 
@@ -186,7 +213,7 @@ test('producción exige Directus o snapshot aprobado', () => {
   );
 });
 
-test('snapshot aprobado admite rutas documentales locales con CMS_URL configurada', async () => {
+test('snapshot aprobado excluye horarios y ficha de matrícula retirados', async () => {
   const catalog = await loadDocumentCatalog({
     environment: {
       SITE_ENV: 'production',
@@ -195,10 +222,13 @@ test('snapshot aprobado admite rutas documentales locales con CMS_URL configurad
       CMS_URL: 'https://cms.colegioconquistadores.com',
     },
   });
-  const archive = catalog.documents.find(({ slug }) => slug === 'horarios-2025');
+  assert.equal(catalog.documents.length, 38);
   assert.equal(
-    archive?.href,
-    '/documentos/?category=horarios&year=2025',
+    catalog.documents.some(({ slug }) => RETIRED_DOCUMENT_SLUGS.has(slug)),
+    false,
   );
-  assert.equal(archive?.managedFile, false);
+  assert.equal(
+    catalog.categories.some(({ slug }) => slug === 'horarios'),
+    false,
+  );
 });

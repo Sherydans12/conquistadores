@@ -6,6 +6,11 @@ import process from 'node:process';
 const ROOT = process.cwd();
 const CONTENT_ROOT = path.join(ROOT, 'src/content/activities');
 const DIST_ROOT = path.join(ROOT, 'dist');
+const EXPECTED_ACTIVITY_COUNT = 46;
+const RETIRED_ACTIVITY_ROUTES = new Set([
+  '/2024/08/30/visita-del-kinder-jardin-conquistadores/',
+]);
+const RETIRED_SOURCE_POST_IDS = new Set([5200]);
 const forbiddenBodyPatterns = [
   ['Elementor', /elementor-/i],
   ['Ajax Search Lite', /ajax-search-lite/i],
@@ -59,7 +64,8 @@ async function main() {
   const routes = [
     ...new Set(
       [...inventory.matchAll(/https:\/\/www\.colegioconquistadores\.com(\/\d{4}\/\d{2}\/\d{2}\/[^/\s|]+\/)/g)]
-        .map((match) => match[1]),
+        .map((match) => match[1])
+        .filter((route) => !RETIRED_ACTIVITY_ROUTES.has(route)),
     ),
   ];
   const expectedBuiltPages = ['/actividades/', ...routes];
@@ -91,8 +97,13 @@ async function main() {
       'utf8',
     ),
   );
-  if (manifest.entries.length !== 47) {
-    errors.push(`El manifiesto contiene ${manifest.entries.length} entradas.`);
+  const activeManifestEntries = manifest.entries.filter(
+    (entry) => !RETIRED_SOURCE_POST_IDS.has(entry.sourcePostId),
+  );
+  if (activeManifestEntries.length !== EXPECTED_ACTIVITY_COUNT) {
+    errors.push(
+      `El manifiesto activo contiene ${activeManifestEntries.length} entradas; se esperaban ${EXPECTED_ACTIVITY_COUNT}.`,
+    );
   }
 
   const imageFiles = await listFiles(
@@ -109,7 +120,9 @@ async function main() {
     return;
   }
 
-  console.log(`QA estático: ${expectedBuiltPages.length} páginas de actividades verificadas.`);
+  console.log(
+    `QA estático: ${expectedBuiltPages.length} páginas de actividades verificadas.`,
+  );
   console.log(
     `Recursos locales: ${imageFiles.length} imágenes WebP, ${(bytes / 1024 / 1024).toFixed(1)} MB; mayor ${(largest / 1024).toFixed(1)} KB.`,
   );

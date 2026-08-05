@@ -6,6 +6,10 @@ import { assertDocumentSnapshot } from '../src/lib/cms/types.ts';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const errors = [];
 const read = (relativePath) => readFile(path.join(root, relativePath), 'utf8');
+const retiredDocumentSlugs = new Set([
+  'horarios-2025',
+  'ficha-matricula-2025',
+]);
 
 const snapshot = assertDocumentSnapshot(
   JSON.parse(await read('src/data/generated/documents.snapshot.json')),
@@ -13,17 +17,23 @@ const snapshot = assertDocumentSnapshot(
 const seed = JSON.parse(
   await read('src/data/generated/documents.seed.json'),
 );
-if (snapshot.documents.length !== 39) {
+const activeSnapshotDocuments = snapshot.documents.filter(
+  ({ slug }) => !retiredDocumentSlugs.has(slug),
+);
+if (activeSnapshotDocuments.length !== 38) {
   errors.push(
-    `El snapshot contiene ${snapshot.documents.length} documentos; se esperaban 39.`,
+    `El snapshot activo contiene ${activeSnapshotDocuments.length} documentos; se esperaban 38.`,
   );
 }
-const reviewDocuments = seed.documents.filter(
+const activeSeedDocuments = seed.documents.filter(
+  ({ slug }) => !retiredDocumentSlugs.has(slug),
+);
+const reviewDocuments = activeSeedDocuments.filter(
   ({ status, visibility }) => status === 'review' && visibility === 'hidden',
 );
-if (seed.documents.length !== 46 || reviewDocuments.length !== 7) {
+if (activeSeedDocuments.length !== 44 || reviewDocuments.length !== 6) {
   errors.push(
-    `El seed debe contener 46 documentos y 7 review + hidden; contiene ${seed.documents.length} y ${reviewDocuments.length}.`,
+    `El seed activo debe contener 44 documentos y 6 review + hidden; contiene ${activeSeedDocuments.length} y ${reviewDocuments.length}.`,
   );
 }
 
@@ -32,17 +42,27 @@ for (const fragment of [
   '<h1',
   'Privacidad',
   'noindex,nofollow',
+  'Arturo Javier Galleguillos Trigo',
+  'galleguillostrigo@gmail.com',
   'no ofrece registro',
   'no se utilizará analítica',
-  'pendiente de aprobación',
 ]) {
   if (!privacyHtml.toLowerCase().includes(fragment.toLowerCase())) {
     errors.push(`La página de privacidad omite: ${fragment}.`);
   }
 }
+if (privacyHtml.toLowerCase().includes('pendiente de aprobación')) {
+  errors.push('La página de privacidad conserva texto pendiente de aprobación.');
+}
 const homeHtml = await read('dist/index.html');
 if (!homeHtml.includes('href="/privacidad/"')) {
   errors.push('El footer no enlaza /privacidad/.');
+}
+const documentsHtml = await read('dist/documentos/index.html');
+for (const retiredSlug of retiredDocumentSlugs) {
+  if (documentsHtml.includes(retiredSlug)) {
+    errors.push(`El centro documental todavía publica ${retiredSlug}.`);
+  }
 }
 
 const legacyRoutes = await read('src/data/legacy-routes.ts');
@@ -53,13 +73,24 @@ for (const route of [
   '/registro/',
 ]) {
   const start = legacyRoutes.indexOf(`from: '${route}'`);
-  const block = start >= 0 ? legacyRoutes.slice(start, start + 260) : '';
+  const block = start >= 0 ? legacyRoutes.slice(start, start + 280) : '';
   if (
     !block.includes("action: 'gone'") ||
     !block.includes('status: 410') ||
     !block.includes('approved: true')
   ) {
     errors.push(`${route} no está registrada como gone 410 aprobada.`);
+  }
+}
+for (const route of ['/horarios-2025/', '/matriculas-2025/']) {
+  const start = legacyRoutes.indexOf(`from: '${route}'`);
+  const block = start >= 0 ? legacyRoutes.slice(start, start + 340) : '';
+  if (
+    !block.includes("action: 'not-found'") ||
+    !block.includes('status: 404') ||
+    !block.includes('approved: true')
+  ) {
+    errors.push(`${route} no está registrada como retirada 404 aprobada.`);
   }
 }
 
@@ -90,5 +121,5 @@ if (errors.length > 0) {
 }
 
 console.log(
-  `CMS build-time válido: ${snapshot.documents.length} públicos, 7 review excluidos, privacidad, 410 y cero requests CMS en navegador.`,
+  `CMS build-time válido: ${activeSnapshotDocuments.length} públicos efectivos, ${reviewDocuments.length} review excluidos, privacidad aprobada, 410 y cero requests CMS en navegador.`,
 );

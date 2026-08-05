@@ -1,6 +1,7 @@
 export type LegacyRouteAction =
   | 'redirect'
   | 'gone'
+  | 'not-found'
   | 'external-service'
   | 'pending';
 
@@ -8,24 +9,19 @@ export interface LegacyRoute {
   from: string;
   to?: string;
   action: LegacyRouteAction;
-  status?: 301 | 302 | 410;
+  status?: 301 | 302 | 404 | 410;
   reason: string;
   approved: boolean;
   launchBlocker?: boolean;
 }
 
-/**
- * Inventario de decisiones propuestas. Este módulo no se conecta a Astro,
- * Cloudflare ni a ningún otro mecanismo activo de redirección.
- */
 export const legacyRoutes: readonly LegacyRoute[] = [
   {
     from: '/calendario-de-evaluaciones-2026/',
     to: '/documentos/?category=evaluaciones&year=2026',
     action: 'redirect',
     status: 301,
-    reason:
-      'El centro documental contiene los once calendarios 2026 por nivel inventariados en la página heredada.',
+    reason: 'El centro documental conserva los calendarios 2026 por nivel.',
     approved: true,
   },
   {
@@ -33,8 +29,7 @@ export const legacyRoutes: readonly LegacyRoute[] = [
     to: '/documentos/?category=plan-lector&year=2026',
     action: 'redirect',
     status: 301,
-    reason:
-      'El centro documental contiene los once planes lectores 2026 por nivel inventariados en la página heredada.',
+    reason: 'El centro documental conserva los planes lectores 2026 por nivel.',
     approved: true,
   },
   {
@@ -42,47 +37,37 @@ export const legacyRoutes: readonly LegacyRoute[] = [
     to: '/documentos/?category=protocolos',
     action: 'redirect',
     status: 301,
-    reason:
-      'Los protocolos 2024 siguen ocultos y en revisión; el destino aún no contiene contenido equivalente.',
-    approved: false,
-    launchBlocker: true,
+    reason: 'La sección de protocolos explica que los documentos están en revisión.',
+    approved: true,
   },
   {
     from: '/reglamento-interno-de-convivencia-escolar/',
     to: '/documentos/?category=reglamentos&year=2026',
     action: 'redirect',
     status: 301,
-    reason:
-      'El destino publica el mismo RICE 2026 identificado en la ruta heredada.',
+    reason: 'El destino publica el RICE 2026.',
     approved: true,
   },
   {
     from: '/horarios-2025/',
-    to: '/documentos/?category=horarios&year=2025',
-    action: 'redirect',
-    status: 301,
-    reason:
-      'El destino solo conserva una ficha de archivo y no incorpora todavía los diez PDF por curso.',
-    approved: false,
-    launchBlocker: true,
+    action: 'not-found',
+    status: 404,
+    reason: 'El archivo histórico de horarios 2025 fue retirado por decisión institucional.',
+    approved: true,
   },
   {
     from: '/matriculas-2025/',
-    to: '/matriculas-2026/',
-    action: 'redirect',
-    status: 301,
-    reason:
-      'La página heredada mezcla archivos 2025 y 2026; no hay equivalencia documental confirmada.',
-    approved: false,
-    launchBlocker: true,
+    action: 'not-found',
+    status: 404,
+    reason: 'La página inconsistente de matrícula 2025 fue retirada y no tiene reemplazo equivalente.',
+    approved: true,
   },
   {
     from: '/category/actividades2023/',
     to: '/actividades/?year=2023',
     action: 'redirect',
     status: 301,
-    reason:
-      'El filtro anual conserva las publicaciones 2023 de la categoría heredada en el archivo completo.',
+    reason: 'Las publicaciones 2023 están disponibles en el archivo completo.',
     approved: true,
   },
   {
@@ -90,8 +75,7 @@ export const legacyRoutes: readonly LegacyRoute[] = [
     to: '/actividades/?year=2023',
     action: 'redirect',
     status: 301,
-    reason:
-      'La paginación heredada queda consolidada en el filtro anual completo.',
+    reason: 'La paginación heredada queda consolidada en el filtro anual.',
     approved: true,
   },
   {
@@ -99,8 +83,7 @@ export const legacyRoutes: readonly LegacyRoute[] = [
     to: '/actividades/?year=2023',
     action: 'redirect',
     status: 301,
-    reason:
-      'La paginación heredada queda consolidada en el filtro anual completo.',
+    reason: 'La paginación heredada queda consolidada en el filtro anual.',
     approved: true,
   },
   {
@@ -108,37 +91,31 @@ export const legacyRoutes: readonly LegacyRoute[] = [
     to: '/actividades/?year=2023',
     action: 'redirect',
     status: 301,
-    reason:
-      'La paginación heredada queda consolidada en el filtro anual completo.',
+    reason: 'La paginación heredada queda consolidada en el filtro anual.',
     approved: true,
   },
   {
     from: '/category/actividades-2024/',
-    to: '/actividades/?year=2024',
+    to: '/actividades/',
     action: 'redirect',
     status: 301,
-    reason:
-      'La categoría heredada también contiene publicaciones de 2025; el filtro 2024 no es equivalente.',
-    approved: false,
-    launchBlocker: true,
+    reason: 'La categoría heredada se consolida en el archivo general de actividades.',
+    approved: true,
   },
   {
     from: '/category/actividades-2024/page/2/',
-    to: '/actividades/?year=2024',
+    to: '/actividades/',
     action: 'redirect',
     status: 301,
-    reason:
-      'La categoría heredada también contiene publicaciones de 2025; se requiere revisar esta paginación.',
-    approved: false,
-    launchBlocker: true,
+    reason: 'La paginación heredada se consolida en el archivo general de actividades.',
+    approved: true,
   },
   {
     from: '/category/uncategorized/',
     to: '/actividades/',
     action: 'redirect',
     status: 301,
-    reason:
-      'Las tres publicaciones de Uncategorized están presentes en el archivo completo.',
+    reason: 'Las publicaciones están presentes en el archivo completo.',
     approved: true,
   },
   {
@@ -146,8 +123,7 @@ export const legacyRoutes: readonly LegacyRoute[] = [
     to: '/actividades/',
     action: 'redirect',
     status: 301,
-    reason:
-      'El archivo de autor duplicaba las 47 actividades conservadas en el hub.',
+    reason: 'El archivo de autor queda consolidado en Actividades.',
     approved: true,
   },
   {
@@ -155,8 +131,7 @@ export const legacyRoutes: readonly LegacyRoute[] = [
     to: '/actividades/',
     action: 'redirect',
     status: 301,
-    reason:
-      'La paginación de autor queda consolidada en el archivo completo.',
+    reason: 'La paginación de autor queda consolidada en Actividades.',
     approved: true,
   },
   {
@@ -164,8 +139,7 @@ export const legacyRoutes: readonly LegacyRoute[] = [
     to: '/actividades/',
     action: 'redirect',
     status: 301,
-    reason:
-      'La paginación de autor queda consolidada en el archivo completo.',
+    reason: 'La paginación de autor queda consolidada en Actividades.',
     approved: true,
   },
   {
@@ -173,8 +147,7 @@ export const legacyRoutes: readonly LegacyRoute[] = [
     to: '/actividades/',
     action: 'redirect',
     status: 301,
-    reason:
-      'La paginación de autor queda consolidada en el archivo completo.',
+    reason: 'La paginación de autor queda consolidada en Actividades.',
     approved: true,
   },
   {
@@ -182,8 +155,7 @@ export const legacyRoutes: readonly LegacyRoute[] = [
     to: '/actividades/',
     action: 'redirect',
     status: 301,
-    reason:
-      'La paginación de autor queda consolidada en el archivo completo.',
+    reason: 'La paginación de autor queda consolidada en Actividades.',
     approved: true,
   },
   {
@@ -211,16 +183,16 @@ export const legacyRoutes: readonly LegacyRoute[] = [
     from: '/notas/',
     action: 'gone',
     status: 410,
-    reason: 'Notas no se utiliza.',
+    reason: 'El portal de notas no se utiliza.',
     approved: true,
   },
   {
     from: '/?wpr_mega_menu=wpr-mega-menu-item-4795',
-    action: 'pending',
-    reason:
-      'Artefacto técnico basado en query string; requiere una regla específica y aprobación antes del lanzamiento.',
-    approved: false,
-    launchBlocker: true,
+    to: '/',
+    action: 'redirect',
+    status: 301,
+    reason: 'El parámetro técnico del mega menú de WordPress se descarta.',
+    approved: true,
   },
 ];
 
@@ -242,14 +214,14 @@ function validateLegacyRoutes(routes: readonly LegacyRoute[]): void {
     if (route.action === 'gone' && route.status !== 410) {
       throw new Error(`Ruta gone sin estado 410: ${route.from}`);
     }
+    if (route.action === 'not-found' && route.status !== 404) {
+      throw new Error(`Ruta retirada sin estado 404: ${route.from}`);
+    }
     if (
       route.approved &&
-      route.action !== 'redirect' &&
-      route.action !== 'gone'
+      !['redirect', 'gone', 'not-found'].includes(route.action)
     ) {
-      throw new Error(
-        `Solo se pueden aprobar redirecciones o rutas gone: ${route.from}`,
-      );
+      throw new Error(`Acción aprobada inválida: ${route.from}`);
     }
   }
 }
@@ -258,5 +230,24 @@ validateLegacyRoutes(legacyRoutes);
 
 export const exactLegacyRedirects = legacyRoutes.filter(
   (route): route is LegacyRoute & { to: string; status: 301 | 302 } =>
-    route.action === 'redirect' && Boolean(route.to),
+    route.approved &&
+    route.action === 'redirect' &&
+    Boolean(route.to) &&
+    !route.from.includes('?'),
+);
+
+export const queryLegacyRedirects = legacyRoutes.filter(
+  (route): route is LegacyRoute & { to: string; status: 301 | 302 } =>
+    route.approved &&
+    route.action === 'redirect' &&
+    Boolean(route.to) &&
+    route.from.includes('?'),
+);
+
+export const goneLegacyRoutes = legacyRoutes.filter(
+  (route) => route.approved && route.action === 'gone',
+);
+
+export const notFoundLegacyRoutes = legacyRoutes.filter(
+  (route) => route.approved && route.action === 'not-found',
 );

@@ -2,45 +2,38 @@
 
 Este checklist es interno y no debe publicarse en el frontend.
 
-## Bloqueadores críticos
+## Bloqueadores críticos cerrados
 
 - [x] Retirar `/notas/` con respuesta 410; no habrá portal académico público.
 - [x] Retirar `/mi-cuenta/`, su recuperación y `/registro/` con respuesta 410.
-- [x] Confirmar autorización institucional y legal para publicar fotografías de
-  estudiantes en las 47 actividades y sus galerías.
+- [x] Confirmar autorización institucional y legal para publicar fotografías de estudiantes en las actividades conservadas.
 
-## Bloqueadores de producción
+## Contenido aprobado para el lanzamiento
 
-- [x] Revisar las ocho fichas marcadas: Arturo Galleguillos, Elza Días,
-  Katherine Fuenzalida, Paola Contreras, Helen Gonzales, Silvianne Cabello,
-  Carla Flores y Joselyn Gonzáles.
-- [x] Confirmar vigencia de la nómina completa y de sus cargos.
-- [x] Confirmar vigencia, responsables, edades, horarios y cupos de talleres.
-- [x] Confirmar vigencia, responsables, edades, horarios y cupos de academias.
-- [x] Confirmar la nómina de academias publicada, incluida yoga.
-- [x] Mantener como `review + hidden` los siete documentos pendientes: Carta Ley TEA,
-  Enfermería 2024, Accidentes Escolares 2024, Identidad de Género 2024,
-  Reglamento de Evaluación 2025–2026, ficha de matrícula 2025 y Compra de
-  materiales sin año.
-- [ ] Corregir o retirar la ficha de matrícula inconsistente entre 2025 y 2026.
-- [ ] Confirmar vigencia de todos los PDF 2024/2025 visibles o enlazados.
-- [ ] Resolver la actividad parcial del Kínder y decidir si se conserva, migra o
-  retira el MP4 heredado de 30,8 MB.
-- [ ] Aprobar individualmente las redirecciones pendientes de protocolos,
-  horarios, Matrículas 2025 y categoría Actividades 2024.
-- [x] Aprobar respuesta 410 para `/registro/`, sin redirección a Inicio.
-- [ ] Confirmar redes sociales, dirección, teléfono y responsables de contacto.
+- [x] Revisar las ocho fichas de personal marcadas y confirmar nómina y cargos.
+- [x] Confirmar vigencia de talleres y academias, incluida yoga.
+- [x] Mantener ocultos los documentos que continúan en revisión editorial.
+- [x] Retirar `ficha-matricula-2025` por inconsistencia entre periodos.
+- [x] Retirar completamente `horarios-2025` por falta de utilidad y equivalencia documental.
+- [x] Retirar la actividad parcial del Kínder del 30 de agosto de 2024.
+- [x] No migrar el MP4 heredado de 30,8 MB.
+- [x] Aprobar `/protocolos-internos/` hacia el filtro de protocolos.
+- [x] Consolidar las rutas de categoría Actividades 2024 en `/actividades/`.
+- [x] Descartar la query técnica del mega menú mediante 301 a `/`.
+- [x] Mantener `/horarios-2025/` y `/matriculas-2025/` como 404 sin reemplazo.
+- [x] Confirmar dirección `Las Azucenas 690`, teléfono `(51) 223 4652`, responsable Arturo Javier Galleguillos Trigo y correo `galleguillostrigo@gmail.com`.
 - [x] No utilizar analítica durante el lanzamiento inicial.
-- [ ] Aprobar responsable y canal de contacto definitivos de la política de
-  privacidad.
+- [x] Aprobar el contenido definitivo de la página de privacidad.
+
+## Operación aún pendiente
+
+- [ ] Archivar y ocultar los dos registros retirados en Directus.
+- [ ] Aplicar en el proxy o CDN las reglas 301 y 410 ya aprobadas.
+- [ ] Ejecutar backup final, promoción de la app existente, cambio DNS y QA HTTP.
 
 ## Mejoras posteriores
 
-- [ ] Elegir el flujo editorial de actividades futuras: Git o WordPress
-  headless en build.
+- [ ] Elegir el flujo editorial de actividades futuras.
 - [ ] Evaluar almacenamiento de objetos S3 y CDN antes de crecimiento sostenido.
-- [ ] Migrar los PDF temporales fuera de `wp-content` conservando URLs o 301
-  exactos.
 - [ ] Revisar alt y captions con responsables editoriales.
-- [ ] Añadir monitorización de 404, Search Console y Core Web Vitals después del
-  lanzamiento.
+- [ ] Añadir monitorización de 404, Search Console y Core Web Vitals después del lanzamiento.

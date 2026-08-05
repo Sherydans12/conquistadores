@@ -12,6 +12,13 @@ import {
 
 export type DocumentsSource = 'directus' | 'snapshot';
 
+export const RETIRED_DOCUMENT_SLUGS = new Set([
+  'horarios-2025',
+  'ficha-matricula-2025',
+]);
+
+const RETIRED_CATEGORY_SLUGS = new Set(['horarios']);
+
 export interface DocumentsEnvironment {
   CMS_URL?: string;
   CMS_STATIC_TOKEN?: string;
@@ -40,8 +47,11 @@ function snapshotToCatalog(
   snapshot: DocumentSnapshot,
   cmsUrl?: string,
 ): DocumentCatalog {
+  const categories = snapshot.categories.filter(
+    (category) => !RETIRED_CATEGORY_SLUGS.has(category.slug),
+  );
   const labels = new Map(
-    snapshot.categories.map((category) => [category.slug, category.name]),
+    categories.map((category) => [category.slug, category.name]),
   );
   const managedOrigin = (() => {
     try {
@@ -50,34 +60,36 @@ function snapshotToCatalog(
       return null;
     }
   })();
-  const documents: PublicDocument[] = snapshot.documents.map((document) => ({
-    id: document.id,
-    title: document.title,
-    slug: document.slug,
-    description: document.description,
-    category: document.category,
-    categoryLabel: labels.get(document.category) ?? document.category,
-    year: document.schoolYear ?? undefined,
-    audience: document.audience,
-    fileType: document.fileType ?? undefined,
-    fileSize: document.fileSize ?? undefined,
-    status: document.displayStatus,
-    href: document.href,
-    external: document.external,
-    managedFile:
-      managedOrigin !== null &&
-      !document.href.startsWith('/') &&
-      new URL(document.href).origin === managedOrigin,
-    featured: document.featured,
-    keywords: document.keywords,
-    sort: document.sort,
-    publishedAt: document.publishedAt ?? undefined,
-    expiresAt: document.expiresAt ?? undefined,
-  }));
+  const documents: PublicDocument[] = snapshot.documents
+    .filter((document) => !RETIRED_DOCUMENT_SLUGS.has(document.slug))
+    .map((document) => ({
+      id: document.id,
+      title: document.title,
+      slug: document.slug,
+      description: document.description,
+      category: document.category,
+      categoryLabel: labels.get(document.category) ?? document.category,
+      year: document.schoolYear ?? undefined,
+      audience: document.audience,
+      fileType: document.fileType ?? undefined,
+      fileSize: document.fileSize ?? undefined,
+      status: document.displayStatus,
+      href: document.href,
+      external: document.external,
+      managedFile:
+        managedOrigin !== null &&
+        !document.href.startsWith('/') &&
+        new URL(document.href).origin === managedOrigin,
+      featured: document.featured,
+      keywords: document.keywords,
+      sort: document.sort,
+      publishedAt: document.publishedAt ?? undefined,
+      expiresAt: document.expiresAt ?? undefined,
+    }));
   return {
     generatedAt: snapshot.generatedAt,
     source: snapshot.source === 'directus' ? 'directus' : 'snapshot',
-    categories: [...snapshot.categories].sort(
+    categories: [...categories].sort(
       (left, right) =>
         left.sort - right.sort || left.name.localeCompare(right.name, 'es'),
     ),
