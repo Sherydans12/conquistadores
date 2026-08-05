@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T00:00:00.000Z",
+  "generatedAt": "2026-08-04T21:30:00-04:00",
   "site": "Colegio Conquistadores",
   "readyForProduction": false,
   "checks": {
@@ -10,21 +10,24 @@
     "seo": true,
     "assets": true,
     "publicSensitiveRoutesAudit": true,
-    "institutionalApproval": false,
+    "institutionalApproval": true,
     "sensitivePortalDecision": true,
     "photoApproval": true,
     "staffApproval": true,
     "programsApproval": true,
     "analyticsDecision": true,
-    "documentCms": false,
-    "privacyApproval": false,
-    "redirectsApproved": false
+    "documentCms": true,
+    "privacyApproval": true,
+    "redirectsApproved": true,
+    "retiredContentAppliedInCode": true,
+    "goneRoutesAppliedAtEdge": false,
+    "productionDomainCutover": false,
+    "productionHttpQa": false
   },
   "blockers": [
-    "Desplegar Directus y PostgreSQL en Coolify, aplicar y probar el esquema, importar 39 documentos públicos y 7 en revisión, y verificar una restauración de respaldo.",
-    "Aprobar la identificación del responsable y el canal institucional definitivo de la página de privacidad.",
-    "Resolver la actividad parcial del Kínder y el MP4 heredado de 30,8 MB.",
-    "Aprobar las redirecciones heredadas que siguen pendientes y la regla de query del mega menú.",
-    "Probar y activar las reglas 410 aprobadas para /notas/, /mi-cuenta/, /mi-cuenta/lost-password/ y /registro/."
+    "Archivar y ocultar en Directus horarios-2025 y ficha-matricula-2025, y refrescar el snapshot versionado.",
+    "Aplicar y probar en la capa autoritativa las redirecciones 301 y las cuatro respuestas HTTP 410.",
+    "Promover la aplicación actual de staging con SITE_ENV=production, SITE_URL de producción y el dominio www.",
+    "Completar backup final, cambio DNS y QA HTTP posterior al corte."
   ]
 }
