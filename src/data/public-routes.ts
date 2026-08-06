@@ -55,7 +55,7 @@ export const staticPublicRoutes: readonly PublicRoute[] = [
     changeFrequency: 'yearly',
   },
   {
-    path: '/matriculas-2026/',
+    path: '/matriculas-2027/',
     type: 'institutional',
     indexableInProduction: true,
     includeInSitemap: true,

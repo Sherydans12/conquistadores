@@ -5,6 +5,7 @@ source_url,target_url,status_code,approved,reason
 /reglamento-interno-de-convivencia-escolar/,/documentos/?category=reglamentos&year=2026,301,true,El destino publica el mismo RICE 2026.
 /horarios-2025/,/documentos/?category=horarios&year=2025,301,false,Faltan los diez PDF por curso en el destino.
 /matriculas-2025/,/matriculas-2026/,301,false,La página heredada mezcla archivos 2025 y 2026.
+/matriculas-2026/,/matriculas-2027/,301,true,Matrículas 2027 reemplaza la experiencia pública del proceso anterior.
 /category/actividades2023/,/actividades/?year=2023,301,true,El filtro anual consolida la categoría heredada.
 /category/actividades2023/page/2/,/actividades/?year=2023,301,true,La paginación queda consolidada en el filtro anual.
 /category/actividades2023/page/3/,/actividades/?year=2023,301,true,La paginación queda consolidada en el filtro anual.

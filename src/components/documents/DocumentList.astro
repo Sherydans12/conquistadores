@@ -8,24 +8,43 @@ interface Props {
   description?: string;
   documents: PublicDocument[];
   archive?: boolean;
+  emptyMessage?: string;
 }
 
-const { id, title, description, documents, archive = false } = Astro.props;
+const {
+  id,
+  title,
+  description,
+  documents,
+  archive = false,
+  emptyMessage,
+} = Astro.props;
 ---
 
 <section
   class:list={['document-group', archive && 'document-group--archive']}
   id={id}
   aria-labelledby={`${id}-title`}
-  data-document-section
+  data-document-section={documents.length > 0 ? '' : undefined}
+  data-empty-document-section={documents.length === 0 ? '' : undefined}
 >
   <div class="document-group__heading">
     <h2 id={`${id}-title`}>{title}</h2>
     {description && <p>{description}</p>}
   </div>
-  <div class="document-grid">
-    {documents.map((document) => <DocumentCard document={document} />)}
-  </div>
+  {
+    documents.length > 0 ? (
+      <div class="document-grid">
+        {documents.map((document) => <DocumentCard document={document} />)}
+      </div>
+    ) : (
+      emptyMessage && (
+        <div class="document-group__empty" role="status">
+          <p>{emptyMessage}</p>
+        </div>
+      )
+    )
+  }
 </section>
 
 <style>
@@ -57,6 +76,19 @@ const { id, title, description, documents, archive = false } = Astro.props;
   .document-grid {
     display: grid;
     gap: var(--space-4);
+  }
+
+  .document-group__empty {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-soft);
+  }
+
+  .document-group__empty p {
+    max-width: 46rem;
+    margin: 0;
+    color: var(--color-text-muted);
   }
 
   .document-group--archive {

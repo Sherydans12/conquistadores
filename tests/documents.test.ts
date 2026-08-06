@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { fetchDirectusSnapshot } from '../src/lib/cms/directus.ts';
 import {
+  ENROLLMENT_DOCUMENTS_EMPTY_MESSAGE,
+  getEnrollmentDocuments2027,
   loadDocumentCatalog,
   resolveDocumentsSource,
   RETIRED_DOCUMENT_SLUGS,
@@ -21,6 +23,14 @@ const category = {
   description: 'Normativa',
   active: true,
   sort: 1,
+};
+const enrollmentCategory = {
+  ...category,
+  id: '55555555-5555-4555-8555-555555555555',
+  name: 'Matrículas',
+  slug: 'matriculas',
+  description: 'Matrículas y admisión',
+  sort: 2,
 };
 const documentBase = {
   id: '22222222-2222-4222-8222-222222222222',
@@ -53,11 +63,14 @@ function jsonResponse(data: unknown, status = 200): Response {
   });
 }
 
-function directusFetch(documents: unknown[] = [documentBase]): typeof fetch {
+function directusFetch(
+  documents: unknown[] = [documentBase],
+  categories: unknown[] = [category],
+): typeof fetch {
   return (async (input: RequestInfo | URL) => {
     const url = new URL(input.toString());
     if (url.pathname === '/items/document_categories') {
-      return jsonResponse([category]);
+      return jsonResponse(categories);
     }
     if (url.pathname === '/items/documents') return jsonResponse(documents);
     return jsonResponse([], 404);
@@ -96,6 +109,102 @@ test('review, draft, hidden y archived quedan fuera', async () => {
   assert.deepEqual(snapshot.documents.map(({ slug }) => slug), [
     'reglamento-prueba',
   ]);
+});
+
+test('Matrículas 2027 incluye solo documentos published + public del año y categoría correctos', async () => {
+  const enrollment2027 = {
+    ...documentBase,
+    id: '66666666-6666-4666-8666-666666666666',
+    title: 'Documento público de Matrículas 2027',
+    slug: 'matriculas-2027-publicado',
+    category: enrollmentCategory,
+    school_year: 2027,
+  };
+  const enrollment2026 = {
+    ...enrollment2027,
+    id: '77777777-7777-4777-8777-777777777777',
+    title: 'Documento de Matrículas 2026',
+    slug: 'matriculas-2026-publicado',
+    school_year: 2026,
+  };
+  const excluded = [
+    { ...enrollment2027, id: 'draft-2027', slug: 'draft-2027', status: 'draft' },
+    { ...enrollment2027, id: 'review-2027', slug: 'review-2027', status: 'review' },
+    {
+      ...enrollment2027,
+      id: 'hidden-2027',
+      slug: 'hidden-2027',
+      visibility: 'hidden',
+    },
+    {
+      ...enrollment2027,
+      id: 'archived-2027',
+      slug: 'archived-2027',
+      status: 'archived',
+    },
+  ];
+  const catalog = await loadDocumentCatalog({
+    environment: {
+      CMS_DOCUMENTS_SOURCE: 'directus',
+      CMS_URL: 'https://cms.example.com',
+      CMS_STATIC_TOKEN: 'test-token-not-a-secret',
+    },
+    fetchImpl: directusFetch(
+      [enrollment2027, enrollment2026, ...excluded],
+      [category, enrollmentCategory],
+    ),
+  });
+
+  assert.deepEqual(
+    getEnrollmentDocuments2027(catalog).map(({ slug }) => slug),
+    ['matriculas-2027-publicado'],
+  );
+  const currentDocument = getEnrollmentDocuments2027(catalog)[0];
+  assert.deepEqual(
+    getEnrollmentDocuments2027({
+      ...catalog,
+      documents: [
+        currentDocument,
+        {
+          ...currentDocument,
+          id: 'historical-display',
+          slug: 'historical-display',
+          status: 'historical',
+        },
+        {
+          ...currentDocument,
+          id: 'external-display',
+          slug: 'external-display',
+          status: 'external',
+        },
+      ],
+    }).map(({ slug }) => slug),
+    ['matriculas-2027-publicado'],
+  );
+  assert.equal(
+    catalog.documents.some(({ slug }) => slug === 'matriculas-2026-publicado'),
+    true,
+  );
+  assert.equal(
+    catalog.documents.some(({ slug }) =>
+      ['draft-2027', 'review-2027', 'hidden-2027', 'archived-2027'].includes(
+        slug,
+      ),
+    ),
+    false,
+  );
+});
+
+test('Matrículas 2027 admite el estado vacío institucional', async () => {
+  const catalog = await loadDocumentCatalog({
+    environment: { CMS_DOCUMENTS_SOURCE: 'snapshot' },
+  });
+
+  assert.deepEqual(getEnrollmentDocuments2027(catalog), []);
+  assert.equal(
+    ENROLLMENT_DOCUMENTS_EMPTY_MESSAGE,
+    'Los documentos de Matrículas 2027 se publicarán en esta sección cuando estén disponibles.',
+  );
 });
 
 test('los documentos retirados se excluyen aunque Directus los entregue', async () => {

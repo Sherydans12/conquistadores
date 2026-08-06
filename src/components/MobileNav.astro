@@ -1,5 +1,6 @@
 ---
 import { enrollmentCta, primaryNavigation } from '../data/navigation';
+import { familyPortal } from '../data/family-portal';
 
 const currentPath = Astro.url.pathname;
 
@@ -46,6 +47,15 @@ function isCurrent(href: string): boolean {
       </ul>
       <a
         class="mobile-cta"
+        href={familyPortal.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {familyPortal.ctaLabel}
+        <span class="sr-only">(se abre en una pestaña nueva)</span>
+      </a>
+      <a
+        class="mobile-secondary-cta"
         href={enrollmentCta.href}
         aria-current={isCurrent(enrollmentCta.href) ? 'page' : undefined}
       >
@@ -226,6 +236,27 @@ function isCurrent(href: string): boolean {
     font-size: var(--font-size-sm);
     font-weight: 900;
     text-decoration: none;
+  }
+
+  .mobile-secondary-cta {
+    display: flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    margin-block-start: var(--space-3);
+    padding: 0.75rem 1rem;
+    border: 1px solid rgb(255 255 255 / 0.48);
+    border-radius: var(--radius-sm);
+    color: var(--color-surface);
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .mobile-secondary-cta:hover,
+  .mobile-secondary-cta[aria-current="page"] {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 
   @media (min-width: 70rem) {

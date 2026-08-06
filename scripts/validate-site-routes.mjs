@@ -88,6 +88,12 @@ const sitemapPaths = sitemapUrls.map((location) => {
 if (unique(sitemapPaths).length !== sitemapPaths.length) {
   errors.push('El sitemap contiene URL duplicadas.');
 }
+if (!sitemapPaths.includes('/matriculas-2027/')) {
+  errors.push('El sitemap omite /matriculas-2027/.');
+}
+if (sitemapPaths.includes('/matriculas-2026/')) {
+  errors.push('El sitemap todavía contiene /matriculas-2026/.');
+}
 for (const route of expectedRoutes) {
   if (!sitemapPaths.includes(route)) errors.push(`El sitemap omite ${route}`);
 }

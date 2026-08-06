@@ -1,19 +1,29 @@
 ---
 import Callout from '../components/Callout.astro';
+import DocumentList from '../components/documents/DocumentList.astro';
 import EnrollmentCard from '../components/EnrollmentCard.astro';
+import FamilyPortalSection from '../components/FamilyPortalSection.astro';
 import PageLayout from '../layouts/PageLayout.astro';
 import { enrollment } from '../data/enrollment';
 import { site } from '../data/site';
+import {
+  ENROLLMENT_DOCUMENTS_EMPTY_MESSAGE,
+  getEnrollmentDocuments2027,
+  loadDocumentCatalog,
+} from '../lib/cms/documents';
+
+const catalog = await loadDocumentCatalog();
+const enrollmentDocuments2027 = getEnrollmentDocuments2027(catalog);
 ---
 
 <PageLayout
-  title="Matrículas 2026"
-  description="Orientación pública para Matrículas 2026 del Colegio Conquistadores: pasos generales, documentos y contacto."
-  canonicalPath="/matriculas-2026/"
-  eyebrow="Admisión 2026"
+  title="Matrículas 2027"
+  description="Orientación pública para Matrículas 2027 del Colegio Conquistadores: pasos generales, trámites y pagos en línea, documentos y contacto."
+  canonicalPath="/matriculas-2027/"
+  eyebrow="Admisión 2027"
   breadcrumbs={[
     { label: 'Inicio', href: '/' },
-    { label: 'Matrículas 2026' },
+    { label: 'Matrículas 2027' },
   ]}
 >
   <section class="page-section page-section--surface" aria-labelledby="orientacion-title">
@@ -30,7 +40,9 @@ import { site } from '../data/site';
     </div>
   </section>
 
-  <section class="page-section" aria-labelledby="proceso-title">
+  <FamilyPortalSection id="tramites-y-pagos" />
+
+  <section class="page-section page-section--surface" aria-labelledby="proceso-title">
     <div class="container">
       <div class="page-section__intro">
         <p class="page-section__eyebrow">Proceso general</p>
@@ -56,14 +68,21 @@ import { site } from '../data/site';
     </div>
   </section>
 
-  <section class="page-section page-section--surface" aria-labelledby="documentos-title">
+  <div class="page-section enrollment-documents">
     <div class="container">
-      <div class="page-section__intro">
-        <p class="page-section__eyebrow">Centro documental</p>
-        <h2 id="documentos-title">Accesos 2026 en un solo lugar</h2>
+      <DocumentList
+        id="documentos-matriculas-2027"
+        title="Documentos de Matrículas 2027"
+        description="Esta lista se genera desde el catálogo documental público del colegio. Los mismos archivos permanecen disponibles en el Centro de documentos."
+        documents={enrollmentDocuments2027}
+        emptyMessage={ENROLLMENT_DOCUMENTS_EMPTY_MESSAGE}
+      />
+
+      <div class="page-section__intro enrollment-documents__more">
+        <h2>Otros accesos documentales</h2>
         <p>
-          Las listas por curso y los documentos institucionales permanecen
-          centralizados en Documentos; esta página ofrece accesos resumidos.
+          Consulta reglamentos, planes de lectura e información institucional en
+          el Centro de documentos.
         </p>
       </div>
       <div class="access-grid">
@@ -78,7 +97,7 @@ import { site } from '../data/site';
         }
       </div>
     </div>
-  </section>
+  </div>
 
   <section class="page-section contact-enrollment" id="contacto-matriculas" aria-labelledby="contacto-title">
     <div class="container contact-enrollment__grid">
@@ -120,17 +139,16 @@ import { site } from '../data/site';
   <Callout
     slot="cta"
     eyebrow="Importante"
-    title="Consulta siempre la versión identificada como 2026"
+    title="Confirma la información antes de realizar tu trámite"
     variant="accent"
   >
     <p>
-      No uses fichas o documentos 2025 como si fueran actuales. Los materiales
-      pendientes de validación no se presentan en esta página.
+      Esta página ofrece orientación general. Las fechas, requisitos, documentos y
+      disponibilidad deben ser confirmados directamente con el colegio.
     </p>
     <div slot="actions">
-      <a class="button button--secondary" href="/documentos/">
-        Ir a Documentos
-      </a>
+      <a class="button button--primary" href={site.phone.href}>Llamar al colegio</a>
+      <a class="button button--secondary" href="/documentos/">Ir a Documentos</a>
     </div>
   </Callout>
 </PageLayout>
@@ -190,14 +208,12 @@ import { site } from '../data/site';
     display: flex;
     gap: var(--space-4);
     padding: var(--space-5);
-    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    background: var(--color-surface);
-    box-shadow: var(--shadow-sm);
+    background: var(--color-background);
   }
 
   .steps li > span {
-    color: var(--color-accent-strong);
+    color: var(--color-primary-alt);
     font-size: var(--font-size-sm);
     font-weight: 900;
   }
@@ -215,6 +231,16 @@ import { site } from '../data/site';
   .access-grid {
     display: grid;
     gap: var(--space-4);
+  }
+
+  .enrollment-documents {
+    background: var(--color-surface);
+  }
+
+  .enrollment-documents__more {
+    padding-block-start: var(--space-7);
+    margin-block-start: var(--space-7);
+    border-block-start: 1px solid var(--color-border);
   }
 
   .contact-enrollment {
@@ -293,16 +319,11 @@ import { site } from '../data/site';
     .access-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
-
-    .access-grid > :global(:nth-child(4)),
-    .access-grid > :global(:nth-child(5)) {
-      grid-column: span 1;
-    }
   }
 
-  @media (min-width: 64rem) {
-    .access-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+  @media (max-width: 32rem) {
+    .contact-enrollment__actions .button {
+      width: 100%;
     }
   }
 </style>

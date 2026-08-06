@@ -38,10 +38,14 @@ if (activeSeedDocuments.length !== 44 || reviewDocuments.length !== 6) {
 }
 
 const privacyHtml = await read('dist/privacidad/index.html');
+const robotsText = await read('dist/robots.txt');
+const privacyRobots = robotsText.includes('Allow: /')
+  ? 'index,follow'
+  : 'noindex,nofollow';
 for (const fragment of [
   '<h1',
   'Privacidad',
-  'noindex,nofollow',
+  privacyRobots,
   'Arturo Javier Galleguillos Trigo',
   'galleguillostrigo@gmail.com',
   'no ofrece registro',
@@ -62,6 +66,40 @@ const documentsHtml = await read('dist/documentos/index.html');
 for (const retiredSlug of retiredDocumentSlugs) {
   if (documentsHtml.includes(retiredSlug)) {
     errors.push(`El centro documental todavía publica ${retiredSlug}.`);
+  }
+}
+const enrollmentHtml = await read('dist/matriculas-2027/index.html');
+const emptyEnrollmentMessage =
+  'Los documentos de Matrículas 2027 se publicarán en esta sección cuando estén disponibles.';
+for (const [label, html] of [
+  ['/documentos/', documentsHtml],
+  ['/matriculas-2027/', enrollmentHtml],
+]) {
+  if (!html.includes(emptyEnrollmentMessage)) {
+    errors.push(`${label} omite el estado vacío de documentos 2027.`);
+  }
+  if (html.includes('CMS_STATIC_TOKEN')) {
+    errors.push(`${label} expone CMS_STATIC_TOKEN.`);
+  }
+}
+if (!documentsHtml.includes('Matrículas y admisión 2027')) {
+  errors.push('/documentos/ omite la sección principal de Matrículas 2027.');
+}
+if (!documentsHtml.includes('Matrículas y admisión — años anteriores')) {
+  errors.push('/documentos/ no identifica los documentos de años anteriores.');
+}
+if (!documentsHtml.includes('utiles-2026-1-basico')) {
+  errors.push('/documentos/ dejó de publicar el catálogo normalizado de 2026.');
+}
+if (enrollmentHtml.includes('utiles-2026-1-basico')) {
+  errors.push('/matriculas-2027/ presenta un documento de 2026 como contenido 2027.');
+}
+for (const html of [homeHtml, enrollmentHtml]) {
+  if (!html.includes('https://portal.edupay.baselogic.cl/')) {
+    errors.push('Falta el acceso oficial a EduPay en una ruta requerida.');
+  }
+  if (/<iframe\b/i.test(html)) {
+    errors.push('EduPay no debe integrarse mediante iframe.');
   }
 }
 

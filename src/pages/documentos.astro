@@ -4,7 +4,11 @@ import DocumentList from '../components/documents/DocumentList.astro';
 import DocumentSearch from '../components/documents/DocumentSearch.astro';
 import ExternalServiceCard from '../components/documents/ExternalServiceCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { loadDocumentCatalog } from '../lib/cms/documents';
+import {
+  ENROLLMENT_DOCUMENTS_EMPTY_MESSAGE,
+  getEnrollmentDocuments2027,
+  loadDocumentCatalog,
+} from '../lib/cms/documents';
 
 const catalog = await loadDocumentCatalog();
 const publicDocuments = catalog.documents;
@@ -18,11 +22,17 @@ const getPublicDocumentsByCategory = (category: string) =>
 const evaluationDocuments = getPublicDocumentsByCategory('evaluaciones');
 const readingPlanDocuments = getPublicDocumentsByCategory('plan-lector');
 const regulationDocuments = getPublicDocumentsByCategory('reglamentos');
-const enrollmentDocuments = getPublicDocumentsByCategory('matriculas');
+const enrollmentDocuments2027 = getEnrollmentDocuments2027(catalog);
+const previousEnrollmentDocuments = publicDocuments.filter(
+  (document) =>
+    document.category === 'matriculas' && document.year === 2026,
+);
 const institutionalDocuments = getPublicDocumentsByCategory('institucionales');
 const featuredDocuments = publicDocuments.filter((document) => document.featured);
 const publicHistoricalDocuments = publicDocuments.filter(
-  (document) => document.status === 'historical',
+  (document) =>
+    document.status === 'historical' &&
+    !(document.category === 'matriculas' && document.year === 2026),
 );
 const publicExternalServices = publicDocuments.filter(
   (document) => document.status === 'external',
@@ -38,7 +48,7 @@ const years = Array.from(
 
 <BaseLayout
   title="Documentos | Colegio Conquistadores"
-  description="Consulta documentos públicos del Colegio Conquistadores: evaluaciones 2026, plan lector, reglamentos, matrículas y archivo histórico."
+  description="Consulta documentos públicos del Colegio Conquistadores, incluida la sección de Matrículas y admisión 2027, reglamentos, planes de lectura y archivos de años anteriores."
   canonicalPath="/documentos/"
 >
   <header class="documents-hero">
@@ -46,8 +56,8 @@ const years = Array.from(
       <p class="documents-hero__eyebrow">Información pública</p>
       <h1>Documentos</h1>
       <p>
-        Encuentra calendarios, planes, reglamentos y documentos institucionales
-        en un solo lugar. Los archivos históricos están identificados y los
+        Encuentra la documentación pública de Matrículas y admisión 2027 junto
+        con calendarios, planes, reglamentos y archivos de años anteriores. Los
         documentos pendientes de revisión no se publican en esta lista.
       </p>
     </div>
@@ -65,10 +75,11 @@ const years = Array.from(
 
   <nav class="document-jump" aria-label="Secciones de documentos">
     <div class="container document-jump__links">
+      <a href="#matriculas-admision-2027">Matrículas 2027</a>
       <a href="#evaluaciones-2026">Evaluaciones 2026</a>
       <a href="#plan-lector">Plan lector</a>
       <a href="#reglamentos">Reglamentos</a>
-      <a href="#matriculas-admision">Matrículas</a>
+      <a href="#matriculas-admision-anteriores">Años anteriores</a>
       <a href="#archivo-historico">Archivo histórico</a>
     </div>
   </nav>
@@ -81,10 +92,9 @@ const years = Array.from(
     <div class="container">
       <div class="section-intro">
         <p class="section-intro__eyebrow">Accesos destacados</p>
-        <h2 id="featured-documents-title">Documentos institucionales 2026</h2>
+        <h2 id="featured-documents-title">Documentos destacados</h2>
         <p>
-          Accesos directos a los documentos institucionales publicados para el
-          periodo actual.
+          Accesos directos a documentos públicos seleccionados por el colegio.
         </p>
       </div>
       <div class="featured-documents__grid">
@@ -109,6 +119,14 @@ const years = Array.from(
       </div>
 
       <div class="document-groups" data-document-groups>
+        <DocumentList
+          id="matriculas-admision-2027"
+          title="Matrículas y admisión 2027"
+          description="Documentos públicos identificados para el proceso 2027. Esta sección no reutiliza archivos de 2026."
+          documents={enrollmentDocuments2027}
+          emptyMessage={ENROLLMENT_DOCUMENTS_EMPTY_MESSAGE}
+        />
+
         <DocumentList
           id="evaluaciones-2026"
           title="Evaluaciones y calendarios 2026"
@@ -138,10 +156,11 @@ const years = Array.from(
         />
 
         <DocumentList
-          id="matriculas-admision"
-          title="Matrículas y admisión 2026"
-          description="Listas de útiles escolares organizadas por curso."
-          documents={enrollmentDocuments}
+          id="matriculas-admision-anteriores"
+          title="Matrículas y admisión — años anteriores"
+          description="Documentos identificados como 2026 y conservados solo como referencia de un periodo anterior. No corresponden a requisitos de Matrículas 2027."
+          documents={previousEnrollmentDocuments}
+          archive
         />
 
         <section

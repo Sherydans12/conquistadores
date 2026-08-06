@@ -31,6 +31,6 @@ export const documentHubNavigation: NavigationItem[] = [
 ];
 
 export const enrollmentCta: NavigationItem = {
-  label: 'Matrículas 2026',
-  href: '/matriculas-2026/',
+  label: 'Matrículas 2027',
+  href: '/matriculas-2027/',
 };

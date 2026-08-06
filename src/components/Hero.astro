@@ -24,8 +24,16 @@ const { hero } = home;
     <p class="hero__tagline">{hero.tagline}</p>
     <p class="hero__address">{site.address.display}</p>
     <div class="hero__actions">
-      <a class="button button--primary" href={hero.primaryCta.href}>
+      <a
+        class="button button--primary"
+        href={hero.primaryCta.href}
+        target={hero.primaryCta.external ? '_blank' : undefined}
+        rel={hero.primaryCta.external ? 'noopener noreferrer' : undefined}
+      >
         {hero.primaryCta.label}
+        {hero.primaryCta.external && (
+          <span class="sr-only">(se abre en una pestaña nueva)</span>
+        )}
       </a>
       <a class="button button--secondary" href={hero.secondaryCta.href}>
         {hero.secondaryCta.label}

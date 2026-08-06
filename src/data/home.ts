@@ -6,6 +6,7 @@ import videoImage from '../assets/images/home/video-un-mundo-de-diferencias.webp
 import wroImage from '../assets/images/activities/world-robot-olympiad-2025.webp';
 import galaImage from '../assets/images/activities/gala-raiz-folclorica-2025.webp';
 import familyImage from '../assets/images/activities/dia-de-la-familia-2025.webp';
+import { familyPortal } from './family-portal';
 
 export interface Activity {
   title: string;
@@ -30,12 +31,13 @@ export const home = {
     title: 'Colegio Conquistadores',
     tagline: 'Aprender con alegría',
     primaryCta: {
-      label: 'Conoce Matrículas 2026',
-      href: '/matriculas-2026/',
+      label: 'Ir al Portal de Pagos',
+      href: familyPortal.url,
+      external: true,
     },
     secondaryCta: {
-      label: 'Conoce nuestro colegio',
-      href: '/quienes-somos/',
+      label: 'Conoce Matrículas 2027',
+      href: '/matriculas-2027/',
     },
   },
   introduction: {
