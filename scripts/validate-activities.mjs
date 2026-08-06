@@ -47,6 +47,10 @@ async function main() {
   if (routeValidation.status !== 0) process.exit(routeValidation.status ?? 1);
 
   const errors = [];
+  const robots = await readFile(path.join(DIST_ROOT, 'robots.txt'), 'utf8');
+  const productionBuild = robots.includes('Allow: /');
+  const expectedRobots = productionBuild ? 'index,follow' : 'noindex,nofollow';
+  const environmentLabel = productionBuild ? 'producción' : 'staging';
   const contentFiles = await listFiles(CONTENT_ROOT, '.md');
   for (const file of contentFiles) {
     const body = markdownBody(await readFile(file, 'utf8'));
@@ -75,8 +79,10 @@ async function main() {
       const html = await readFile(builtFile, 'utf8');
       const h1Count = (html.match(/<h1(?:\s|>)/g) ?? []).length;
       if (h1Count !== 1) errors.push(`${route}: ${h1Count} elementos H1.`);
-      if (!/<meta name="robots" content="noindex,nofollow">/.test(html)) {
-        errors.push(`${route}: staging no contiene noindex,nofollow.`);
+      if (!html.includes(`<meta name="robots" content="${expectedRobots}">`)) {
+        errors.push(
+          `${route}: ${environmentLabel} no contiene robots=${expectedRobots}.`,
+        );
       }
       if (/wp-json|elementor-|ajax-search-lite/i.test(html)) {
         errors.push(`${route}: HTML construido contiene dependencia heredada.`);

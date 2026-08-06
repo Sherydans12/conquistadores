@@ -12,6 +12,9 @@ import {
 
 export type DocumentsSource = 'directus' | 'snapshot';
 
+export const ENROLLMENT_DOCUMENTS_EMPTY_MESSAGE =
+  'Los documentos de Matrículas 2027 se publicarán en esta sección cuando estén disponibles.';
+
 export const RETIRED_DOCUMENT_SLUGS = new Set([
   'horarios-2025',
   'ficha-matricula-2025',
@@ -33,6 +36,18 @@ export interface LoadDocumentOptions {
   snapshot?: unknown;
   fetchImpl?: typeof fetch;
   timeoutMs?: number;
+}
+
+export function getEnrollmentDocuments2027(
+  catalog: DocumentCatalog,
+): PublicDocument[] {
+  return catalog.documents.filter(
+    (document) =>
+      document.category === 'matriculas' &&
+      document.year === 2027 &&
+      document.status !== 'historical' &&
+      document.status !== 'external',
+  );
 }
 
 function getRuntimeEnvironment(): DocumentsEnvironment {

@@ -6,6 +6,7 @@ import {
   secondaryNavigation,
 } from '../data/navigation';
 import { site } from '../data/site';
+import { familyPortal } from '../data/family-portal';
 
 const year = new Date().getFullYear();
 ---
@@ -43,6 +44,24 @@ const year = new Date().getFullYear();
             </li>
           ))
         }
+      </ul>
+    </nav>
+
+    <nav aria-label="Accesos para familias">
+      <h2>Familias</h2>
+      <ul>
+        <li>
+          <a
+            class="footer-portal"
+            href={familyPortal.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {familyPortal.shortLabel}
+            <span class="sr-only">(se abre en una pestaña nueva)</span>
+          </a>
+        </li>
+        <li><a href="/matriculas-2027/">Matrículas 2027</a></li>
       </ul>
     </nav>
 
@@ -145,6 +164,11 @@ const year = new Date().getFullYear();
     font-weight: 800;
   }
 
+  .footer-portal {
+    color: var(--color-accent);
+    font-weight: 900;
+  }
+
   .site-footer__bottom {
     display: flex;
     flex-direction: column;
@@ -172,7 +196,7 @@ const year = new Date().getFullYear();
 
   @media (min-width: 70rem) {
     .site-footer__grid {
-      grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1.35fr repeat(4, minmax(0, 1fr));
     }
   }
 </style>

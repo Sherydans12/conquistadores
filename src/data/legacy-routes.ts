@@ -63,6 +63,14 @@ export const legacyRoutes: readonly LegacyRoute[] = [
     approved: true,
   },
   {
+    from: '/matriculas-2026/',
+    to: '/matriculas-2027/',
+    action: 'redirect',
+    status: 301,
+    reason: 'Matrículas 2027 reemplaza la experiencia pública del proceso anterior.',
+    approved: true,
+  },
+  {
     from: '/category/actividades2023/',
     to: '/actividades/?year=2023',
     action: 'redirect',

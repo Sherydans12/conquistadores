@@ -85,6 +85,9 @@ const { total, categories, years } = Astro.props;
     const sections = Array.from(
       document.querySelectorAll<HTMLElement>('[data-document-section]'),
     );
+    const emptySections = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-empty-document-section]'),
+    );
 
     const normalize = (value: string) =>
       value
@@ -153,6 +156,9 @@ const { total, categories, years } = Astro.props;
       });
 
       const filtersActive = Boolean(query || category || year || status);
+      emptySections.forEach((section) => {
+        section.hidden = filtersActive;
+      });
       const showReviewNotice =
         category === 'protocolos' && !query && !year && !status;
       if (featuredSection) featuredSection.hidden = filtersActive;

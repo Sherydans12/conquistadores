@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import ActivityCard from '../components/ActivityCard.astro';
 import ContactSection from '../components/ContactSection.astro';
+import FamilyPortalSection from '../components/FamilyPortalSection.astro';
 import Hero from '../components/Hero.astro';
 import LazyVideo from '../components/LazyVideo.astro';
 import SectionHeading from '../components/SectionHeading.astro';
@@ -12,10 +13,12 @@ import { site } from '../data/site';
 
 <BaseLayout
   title="Colegio Conquistadores | Aprender con alegría"
-  description="Conoce el Colegio Conquistadores de Coquimbo: una comunidad educativa integral e inclusiva, sus actividades, talleres, academias y Matrículas 2026."
+  description="Conoce el Colegio Conquistadores de Coquimbo: una comunidad educativa integral e inclusiva, sus actividades, talleres, academias y Matrículas 2027."
   canonicalPath="/"
 >
   <Hero />
+
+  <FamilyPortalSection />
 
   <section class="section intro" aria-labelledby="intro-title">
     <div class="container intro__grid">
@@ -179,15 +182,15 @@ import { site } from '../data/site';
   <section class="enrollment" aria-labelledby="enrollment-title">
     <div class="container enrollment__inner">
       <div>
-        <p class="enrollment__eyebrow">Admisión 2026</p>
+        <p class="enrollment__eyebrow">Admisión 2027</p>
         <h2 id="enrollment-title">Da el próximo paso junto a Conquistadores</h2>
         <p>
-          Revisa el portal público con información de matrícula, listas de útiles
-          y accesos académicos vigentes para 2026.
+          Revisa la orientación de matrícula, accede a trámites y pagos en línea,
+          y consulta la información pública disponible para 2027.
         </p>
       </div>
-      <a class="button button--primary" href="/matriculas-2026/">
-        Ir a Matrículas 2026
+      <a class="button button--primary" href="/matriculas-2027/">
+        Ir a Matrículas 2027
       </a>
     </div>
   </section>

@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/images/brand/colegio-conquistadores-logo.png';
 import { enrollmentCta, primaryNavigation } from '../data/navigation';
+import { familyPortal } from '../data/family-portal';
 import MobileNav from './MobileNav.astro';
 
 const currentPath = Astro.url.pathname;
@@ -48,13 +49,24 @@ function isCurrent(href: string): boolean {
       </ul>
     </nav>
 
-    <a
-      class="header-cta"
-      href={enrollmentCta.href}
-      aria-current={isCurrent(enrollmentCta.href) ? 'page' : undefined}
-    >
-      {enrollmentCta.label}
-    </a>
+    <div class="site-header__actions">
+      <a
+        class="header-cta header-cta--enrollment"
+        href={enrollmentCta.href}
+        aria-current={isCurrent(enrollmentCta.href) ? 'page' : undefined}
+      >
+        {enrollmentCta.label}
+      </a>
+      <a
+        class="header-cta"
+        href={familyPortal.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {familyPortal.shortLabel}
+        <span class="sr-only">(se abre en una pestaña nueva)</span>
+      </a>
+    </div>
     <MobileNav />
   </div>
 </header>
@@ -133,6 +145,25 @@ function isCurrent(href: string): boolean {
     text-decoration: none;
   }
 
+  .site-header__actions {
+    display: flex;
+    flex: 0 0 auto;
+    gap: var(--space-2);
+  }
+
+  .header-cta--enrollment {
+    display: none;
+    border: 1px solid rgb(255 255 255 / 0.5);
+    background: transparent;
+    color: var(--color-surface);
+  }
+
+  .header-cta--enrollment:hover {
+    border-color: var(--color-accent);
+    background: rgb(255 255 255 / 0.08);
+    color: var(--color-accent);
+  }
+
   .header-cta:hover {
     background: var(--color-accent-strong);
   }
@@ -199,6 +230,10 @@ function isCurrent(href: string): boolean {
     .header-cta {
       flex: 0 0 auto;
       padding-inline: 1rem;
+    }
+
+    .header-cta--enrollment {
+      display: inline-flex;
     }
   }
 
