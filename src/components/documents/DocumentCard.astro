@@ -1,5 +1,6 @@
 ---
 import type { PublicDocument } from '../../lib/cms/types';
+import { getDocumentActionPresentation } from '../../lib/cms/document-action';
 import DocumentStatusBadge from './DocumentStatusBadge.astro';
 
 interface Props {
@@ -8,11 +9,13 @@ interface Props {
 }
 
 const { document, preview = false } = Astro.props;
+const action = getDocumentActionPresentation(document);
 const searchText = [
   document.title,
   document.description,
   document.categoryLabel,
   document.year,
+  document.fileType,
   ...(document.audience ?? []),
   ...(document.keywords ?? []),
 ]
@@ -76,15 +79,12 @@ const searchText = [
   <a
     class="document-card__action"
     href={document.href}
-    target={document.external ? '_blank' : undefined}
-    rel={document.external ? 'noopener noreferrer' : undefined}
+    target={action.target}
+    rel={action.rel}
+    download={action.download}
   >
-    Ver documento
-    {
-      document.external && (
-        <span class="sr-only"> (se abre fuera de este sitio)</span>
-      )
-    }
+    {action.label}
+    {action.accessibleHint && <span class="sr-only">{action.accessibleHint}</span>}
   </a>
 
   {
@@ -185,6 +185,8 @@ const searchText = [
     color: var(--color-primary);
     font-size: var(--font-size-sm);
     font-weight: 900;
+    line-height: 1.35;
+    text-align: center;
     text-decoration: none;
   }
 

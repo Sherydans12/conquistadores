@@ -1,3 +1,8 @@
+import {
+  isManagedDocumentFileType,
+  type DocumentLinkBehavior,
+} from './document-formats.ts';
+
 export const CMS_DOCUMENT_STATUSES = [
   'draft',
   'review',
@@ -34,6 +39,8 @@ export interface PublicDocument {
   href: string;
   external: boolean;
   managedFile: boolean;
+  linkBehavior: DocumentLinkBehavior;
+  fileName?: string;
   featured: boolean;
   keywords?: string[];
   sort: number;
@@ -60,6 +67,9 @@ export interface SnapshotDocument {
   expiresAt: string | null;
   fileType: string | null;
   fileSize: string | null;
+  fileName: string | null;
+  managedFile: boolean;
+  linkBehavior: DocumentLinkBehavior;
   displayStatus: DocumentDisplayStatus;
 }
 
@@ -231,6 +241,45 @@ export function assertDocumentSnapshot(value: unknown): DocumentSnapshot {
       raw.schoolYear === null
         ? null
         : finiteNumber(raw.schoolYear, `documento ${slug}.schoolYear`);
+    const fileName = optionalString(
+      raw.fileName,
+      `documento ${slug}.fileName`,
+    );
+    const managedFile = raw.managedFile === undefined ? false : raw.managedFile;
+    if (typeof managedFile !== 'boolean') {
+      throw new Error(`Documento ${slug}: managedFile debe ser booleano.`);
+    }
+    const linkBehaviorValue = raw.linkBehavior ?? 'open';
+    if (linkBehaviorValue !== 'open' && linkBehaviorValue !== 'download') {
+      throw new Error(`Documento ${slug}: linkBehavior inválido.`);
+    }
+    const linkBehavior: DocumentLinkBehavior = linkBehaviorValue;
+    const fileType = optionalString(
+      raw.fileType,
+      `documento ${slug}.fileType`,
+    );
+    if (managedFile && !isManagedDocumentFileType(fileType)) {
+      throw new Error(
+        `Documento ${slug}: formato de archivo administrado inválido.`,
+      );
+    }
+    if (managedFile && fileType === 'Word (DOCX)' && linkBehavior !== 'download') {
+      throw new Error(
+        `Documento ${slug}: un DOCX administrado debe ser descargable.`,
+      );
+    }
+    if (linkBehavior === 'download') {
+      if (
+        fileType !== 'Word (DOCX)' ||
+        !managedFile ||
+        !fileName ||
+        !href.endsWith('?download')
+      ) {
+        throw new Error(
+          `Documento ${slug}: descarga DOCX administrada incompleta.`,
+        );
+      }
+    }
     return {
       id: requiredString(raw, 'id', `documento ${slug}`),
       title: requiredString(raw, 'title', `documento ${slug}`),
@@ -254,8 +303,11 @@ export function assertDocumentSnapshot(value: unknown): DocumentSnapshot {
         raw.expiresAt,
         `documento ${slug}.expiresAt`,
       ),
-      fileType: optionalString(raw.fileType, `documento ${slug}.fileType`),
+      fileType,
       fileSize: optionalString(raw.fileSize, `documento ${slug}.fileSize`),
+      fileName,
+      managedFile,
+      linkBehavior,
       displayStatus,
     };
   });
