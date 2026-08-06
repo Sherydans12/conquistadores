@@ -92,9 +92,12 @@ function snapshotToCatalog(
       href: document.href,
       external: document.external,
       managedFile:
+        document.managedFile ||
         managedOrigin !== null &&
         !document.href.startsWith('/') &&
         new URL(document.href).origin === managedOrigin,
+      linkBehavior: document.linkBehavior,
+      fileName: document.fileName ?? undefined,
       featured: document.featured,
       keywords: document.keywords,
       sort: document.sort,

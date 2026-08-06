@@ -5,6 +5,11 @@ import {
   type DocumentSnapshot,
   type SnapshotDocument,
 } from './types.ts';
+import {
+  managedAssetUrl,
+  resolveManagedDocumentMime,
+  safeManagedFilename,
+} from './document-formats.ts';
 
 const DEFAULT_TIMEOUT_MS = 8_000;
 const PUBLIC_DOCUMENT_FIELDS = [
@@ -223,19 +228,32 @@ function parseDocument(
       `Documento ${slug}: debe tener exactamente archivo o URL externa.`,
     );
   }
+  if (fileId && !isRecord(file)) {
+    throw new Error(
+      `Documento ${slug}: el archivo asociado no está visible para Astro.`,
+    );
+  }
+  const fileRecord = isRecord(file) ? file : null;
+
+  const managedFormat = fileId
+    ? resolveManagedDocumentMime(fileRecord?.type, slug)
+    : null;
   const filename =
-    isRecord(file) && typeof file.filename_download === 'string'
-      ? file.filename_download
-      : `${slug}.pdf`;
-  const location = fileId
-    ? {
-        href: new URL(
-          `/assets/${encodeURIComponent(fileId)}/${encodeURIComponent(filename)}`,
-          baseUrl,
-        ).toString(),
-        external: true,
-      }
-    : normalizeDocumentUrl(externalUrl as string);
+    fileId && managedFormat
+      ? safeManagedFilename(fileRecord?.filename_download, slug, managedFormat)
+      : null;
+  const location =
+    fileId && managedFormat && filename
+      ? {
+          href: managedAssetUrl(
+            baseUrl,
+            fileId,
+            filename,
+            managedFormat.linkBehavior,
+          ),
+          external: true,
+        }
+      : normalizeDocumentUrl(externalUrl as string);
   const schoolYear =
     value.school_year === null
       ? null
@@ -268,11 +286,6 @@ function parseDocument(
         : (() => {
             throw new Error(`Documento ${slug}: expires_at inválido.`);
           })();
-  const fileMime = isRecord(file) && typeof file.type === 'string' ? file.type : null;
-  if (fileId && fileMime !== 'application/pdf') {
-    throw new Error(`Documento ${slug}: el archivo asociado no es PDF.`);
-  }
-
   return {
     id: value.id as string,
     title: value.title as string,
@@ -290,12 +303,25 @@ function parseDocument(
     sort,
     publishedAt,
     expiresAt,
-    fileType: fileId || externalUrl?.toLowerCase().includes('.pdf')
-      ? 'PDF'
-      : 'Servicio web',
-    fileSize: isRecord(file) ? formatFileSize(file.filesize) : null,
+    fileType: managedFormat
+      ? managedFormat.fileType
+      : externalUrl?.toLowerCase().includes('.pdf')
+        ? 'PDF'
+        : 'Servicio web',
+    fileSize: fileRecord ? formatFileSize(fileRecord.filesize) : null,
+    fileName: filename,
+    managedFile: fileId !== null,
+    linkBehavior: managedFormat?.linkBehavior ?? 'open',
     displayStatus: displayStatus(value, schoolYear, keywords, currentYear),
   };
+}
+
+function documentSlug(value: unknown): string | undefined {
+  return (
+    isRecord(value) && typeof value.slug === 'string' && value.slug.trim()
+      ? value.slug
+      : undefined
+  );
 }
 
 export async function fetchDirectusSnapshot({
@@ -331,11 +357,43 @@ export async function fetchDirectusSnapshot({
   const categoryIds = new Map(
     categories.map((category) => [category.id, category]),
   );
-  const documents = rawDocuments
-    .map((document) =>
-      parseDocument(document, baseUrl, categoryIds, now.getFullYear()),
-    )
-    .filter((document): document is SnapshotDocument => document !== null);
+  const documents: SnapshotDocument[] = [];
+  const documentSlugs = new Set<string>();
+  let omittedDocuments = 0;
+  for (const rawDocument of rawDocuments) {
+    try {
+      const document = parseDocument(
+        rawDocument,
+        baseUrl,
+        categoryIds,
+        now.getFullYear(),
+      );
+      if (document) {
+        if (documentSlugs.has(document.slug)) {
+          throw new Error(`Documento duplicado: ${document.slug}.`);
+        }
+        documentSlugs.add(document.slug);
+        documents.push(document);
+      }
+    } catch (error) {
+      omittedDocuments += 1;
+      const slug = documentSlug(rawDocument);
+      const cause =
+        error instanceof Error
+          ? error.message
+          : 'Error de validación desconocido.';
+      console.warn('[documentos] Documento público omitido.', {
+        ...(slug ? { slug } : {}),
+        cause,
+      });
+    }
+  }
+  if (omittedDocuments > 0) {
+    console.warn('[documentos] Resumen de documentos omitidos.', {
+      omittedDocuments,
+      validDocuments: documents.length,
+    });
+  }
   const snapshot = assertDocumentSnapshot({
     schemaVersion: 1,
     generatedAt: now.toISOString(),
