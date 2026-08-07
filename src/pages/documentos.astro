@@ -60,6 +60,7 @@ const years = Array.from(
         con calendarios, planes, reglamentos y archivos de años anteriores. Los
         documentos pendientes de revisión no se publican en esta lista.
       </p>
+      <p class="documents-hero__note">{publicDocuments.length} documentos públicos disponibles en el catálogo.</p>
     </div>
   </header>
 
@@ -242,9 +243,7 @@ const years = Array.from(
 <style>
   .documents-hero {
     padding-block: clamp(3.5rem, 8vw, 6.5rem) clamp(5rem, 10vw, 8rem);
-    background:
-      linear-gradient(125deg, rgb(17 27 91 / 0.96), rgb(37 62 133 / 0.9)),
-      var(--color-primary);
+    background: var(--color-primary-deep);
     color: var(--color-surface);
   }
 
@@ -271,11 +270,18 @@ const years = Array.from(
     font-size: var(--font-size-2xl);
   }
 
-  .documents-hero p:last-child {
+  .documents-hero__inner > p:not(.documents-hero__note) {
     max-width: 44rem;
     margin: 0 auto;
     color: rgb(255 255 255 / 0.82);
     font-size: var(--font-size-lg);
+  }
+
+  .documents-hero__note {
+    margin-block-start: var(--space-4) !important;
+    color: var(--color-accent) !important;
+    font-size: var(--font-size-sm) !important;
+    font-weight: 900;
   }
 
   .documents-tools {
@@ -301,9 +307,8 @@ const years = Array.from(
     min-height: 2.75rem;
     flex: 0 0 auto;
     align-items: center;
-    padding: 0.55rem 0.85rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-pill);
+    padding: 0.55rem 0.2rem;
+    border-block-end: 2px solid transparent;
     color: var(--color-primary);
     font-size: var(--font-size-xs);
     font-weight: 900;
@@ -311,9 +316,8 @@ const years = Array.from(
   }
 
   .document-jump a:hover {
-    border-color: var(--color-primary);
-    background: var(--color-primary);
-    color: var(--color-surface);
+    border-block-end-color: var(--color-accent);
+    color: var(--color-primary-alt);
   }
 
   .featured-documents {
@@ -348,20 +352,17 @@ const years = Array.from(
   }
 
   .document-groups {
-    padding: clamp(1.1rem, 3vw, 2.2rem);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    background: var(--color-surface);
-    box-shadow: var(--shadow-sm);
+    padding-block: clamp(1.1rem, 3vw, 2.2rem);
   }
 
   .review-notice {
     scroll-margin-top: calc(var(--header-height-desktop) + var(--space-5));
     padding: clamp(1.25rem, 3vw, 2rem);
     margin-block-start: var(--space-7);
-    border-inline-start: 0.4rem solid var(--color-accent);
-    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-    background: #fff8e8;
+    border: 1px solid var(--color-border);
+    border-block-start: 0.25rem solid var(--color-accent);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-soft);
   }
 
   .review-notice__eyebrow {
@@ -404,7 +405,7 @@ const years = Array.from(
     padding: clamp(2rem, 5vw, 4rem);
     margin-block-start: var(--space-6);
     border: 2px dashed var(--color-border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     background: var(--color-surface);
     text-align: center;
   }
