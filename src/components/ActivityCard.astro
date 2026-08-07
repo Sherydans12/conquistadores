@@ -35,7 +35,7 @@ const { activity } = Astro.props;
       </a>
     </h3>
     <a class="activity-card__link" href={activity.href}>
-      Ver actividad <span aria-hidden="true">→</span>
+      Ver actividad <span class="activity-card__link-mark" aria-hidden="true"></span>
     </a>
   </div>
 </article>
@@ -110,8 +110,40 @@ const { activity } = Astro.props;
   }
 
   .activity-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
     color: var(--color-primary);
     font-size: var(--font-size-sm);
     font-weight: 900;
+  }
+
+  .activity-card__link-mark {
+    position: relative;
+    display: inline-block;
+    width: 1.15rem;
+    height: 0.7rem;
+  }
+
+  .activity-card__link-mark::before {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline: 0.05rem 0.28rem;
+    height: 2px;
+    background: currentColor;
+    content: "";
+    transform: translateY(-50%);
+  }
+
+  .activity-card__link-mark::after {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: 0.05rem;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-block-start: 2px solid currentColor;
+    border-inline-end: 2px solid currentColor;
+    content: "";
+    transform: translateY(-50%) rotate(45deg);
   }
 </style>
