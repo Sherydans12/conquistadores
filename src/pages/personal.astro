@@ -104,10 +104,9 @@ import { getStaffByArea, publicStaff, staffAreas } from '../data/staff';
     align-items: center;
     justify-content: space-between;
     gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
+    padding: var(--space-4) 0;
+    border-block-start: 1px solid var(--color-border);
+    background: transparent;
     color: var(--color-primary);
     font-size: var(--font-size-sm);
     font-weight: 900;
@@ -115,26 +114,24 @@ import { getStaffByArea, publicStaff, staffAreas } from '../data/staff';
   }
 
   .staff-jump a:hover {
-    border-color: var(--color-primary);
-    background: var(--color-primary);
-    color: var(--color-surface);
+    border-block-start-color: var(--color-primary-alt);
+    background: var(--color-surface-soft);
+    color: var(--color-primary-deep);
   }
 
   .staff-jump small {
-    min-width: 2rem;
-    padding: 0.2rem 0.5rem;
-    border-radius: var(--radius-pill);
-    background: var(--color-accent);
-    color: var(--color-primary-deep);
-    text-align: center;
+    color: var(--color-primary-alt);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
   }
 
   .staff-note {
     max-width: var(--container-narrow);
     padding: var(--space-4);
     margin: var(--space-6) 0 0;
-    border-inline-start: 0.35rem solid var(--color-accent);
-    background: #fff8e8;
+    border: 1px solid var(--color-border);
+    border-block-start: 0.25rem solid var(--color-accent);
+    background: var(--color-surface-soft);
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
   }

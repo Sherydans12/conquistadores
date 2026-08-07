@@ -49,7 +49,7 @@ const image = resolveActivityImage(activity.data.featuredImage);
     </Heading>
     <p>{activity.data.description}</p>
     <a class="archive-card__link" href={activity.data.historicalPath}>
-      Ver actividad <span aria-hidden="true">→</span>
+      Ver actividad <span class="archive-card__link-mark" aria-hidden="true"></span>
     </a>
   </div>
 </article>
@@ -59,9 +59,16 @@ const image = resolveActivityImage(activity.data.featuredImage);
     min-width: 0;
     overflow: hidden;
     border: var(--border-width) solid var(--color-border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     background: var(--color-surface);
-    box-shadow: var(--shadow-sm);
+    transition:
+      border-color var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .archive-card:hover {
+    border-color: var(--color-primary-alt);
+    transform: translateY(-2px);
   }
 
   .archive-card__image {
@@ -98,9 +105,8 @@ const image = resolveActivityImage(activity.data.featuredImage);
   }
 
   .archive-card__meta span {
-    padding: 0.2rem 0.55rem;
-    border-radius: var(--radius-pill);
-    background: rgb(232 185 77 / 0.22);
+    padding-block-end: 0.15rem;
+    border-block-end: 2px solid var(--color-accent);
     color: var(--color-primary-deep);
     font-weight: 900;
   }
@@ -131,7 +137,29 @@ const image = resolveActivityImage(activity.data.featuredImage);
   }
 
   .archive-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     color: var(--color-primary);
     font-weight: 900;
+  }
+
+  .archive-card__link-mark {
+    position: relative;
+    width: 1.2rem;
+    height: 0.6rem;
+    border-block-start: 2px solid currentColor;
+  }
+
+  .archive-card__link-mark::after {
+    position: absolute;
+    inset-block-start: -0.34rem;
+    inset-inline-end: 0;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-block-start: 2px solid currentColor;
+    border-inline-end: 2px solid currentColor;
+    content: '';
+    transform: rotate(45deg);
   }
 </style>

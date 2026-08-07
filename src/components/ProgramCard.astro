@@ -38,9 +38,9 @@ const { program } = Astro.props;
     min-width: 0;
     overflow: hidden;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
+    border-block-start: 0.25rem solid var(--color-accent);
     background: var(--color-surface);
-    box-shadow: var(--shadow-sm);
   }
 
   .program-card :global(img),
@@ -56,9 +56,7 @@ const { program } = Astro.props;
   .program-card__fallback {
     display: grid;
     place-items: center;
-    background:
-      radial-gradient(circle at 70% 20%, rgb(232 185 77 / 0.32), transparent 32%),
-      var(--color-primary);
+    background: var(--color-primary-alt);
     color: var(--color-surface);
   }
 
