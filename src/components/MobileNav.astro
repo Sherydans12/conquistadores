@@ -31,36 +31,42 @@ function isCurrent(href: string): boolean {
     aria-label="Navegación móvil"
   >
     <div class="mobile-panel__inner">
-      <ul class="mobile-links">
-        {
-          primaryNavigation.map((item) => (
-            <li>
-              <a
-                href={item.href}
-                aria-current={isCurrent(item.href) ? 'page' : undefined}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-      <a
-        class="mobile-cta"
-        href={familyPortal.url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {familyPortal.ctaLabel}
-        <span class="sr-only">(se abre en una pestaña nueva)</span>
-      </a>
-      <a
-        class="mobile-secondary-cta"
-        href={enrollmentCta.href}
-        aria-current={isCurrent(enrollmentCta.href) ? 'page' : undefined}
-      >
-        {enrollmentCta.label}
-      </a>
+      <div class="mobile-panel__group">
+        <p class="mobile-panel__label">Explorar</p>
+        <ul class="mobile-links">
+          {
+            primaryNavigation.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={isCurrent(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="mobile-panel__group mobile-panel__group--actions">
+        <p class="mobile-panel__label">Para familias</p>
+        <a
+          class="mobile-cta"
+          href={familyPortal.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {familyPortal.ctaLabel}
+          <span class="sr-only">(se abre en una pestaña nueva)</span>
+        </a>
+        <a
+          class="mobile-secondary-cta"
+          href={enrollmentCta.href}
+          aria-current={isCurrent(enrollmentCta.href) ? 'page' : undefined}
+        >
+          {enrollmentCta.label}
+        </a>
+      </div>
     </div>
   </nav>
 </div>
@@ -174,7 +180,7 @@ function isCurrent(href: string): boolean {
 
   .mobile-panel {
     width: 100%;
-    background: var(--color-primary);
+    background: var(--color-primary-deep);
     color: var(--color-surface);
   }
 
@@ -193,6 +199,19 @@ function isCurrent(href: string): boolean {
     width: min(100% - (2 * var(--page-gutter)), 35rem);
     margin-inline: auto;
     padding-block: var(--space-5) var(--space-7);
+  }
+
+  .mobile-panel__group + .mobile-panel__group {
+    margin-block-start: var(--space-6);
+  }
+
+  .mobile-panel__label {
+    margin: 0 0 var(--space-2);
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
   .mobile-links {
@@ -228,7 +247,6 @@ function isCurrent(href: string): boolean {
     min-height: 3rem;
     align-items: center;
     justify-content: center;
-    margin-block-start: var(--space-5);
     padding: 0.75rem 1rem;
     border-radius: var(--radius-sm);
     background: var(--color-accent);
