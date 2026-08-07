@@ -40,6 +40,32 @@ export const home = {
       href: '/matriculas-2027/',
     },
   },
+  quickAccess: [
+    {
+      label: 'Matrículas 2027',
+      description: 'Orientación y documentos del proceso.',
+      href: '/matriculas-2027/',
+      external: false,
+    },
+    {
+      label: 'Documentos',
+      description: 'Calendarios, planes y reglamentos.',
+      href: '/documentos/',
+      external: false,
+    },
+    {
+      label: 'Portal de pagos',
+      description: 'Pagos y certificados para familias.',
+      href: familyPortal.url,
+      external: true,
+    },
+    {
+      label: 'Contacto',
+      description: 'Ubicación y canales oficiales.',
+      href: '#contacto',
+      external: false,
+    },
+  ],
   introduction: {
     eyebrow: 'Nuestro colegio',
     title: 'Una educación que reconoce a cada estudiante',

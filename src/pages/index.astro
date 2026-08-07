@@ -18,6 +18,31 @@ import { site } from '../data/site';
 >
   <Hero />
 
+  <nav class="quick-access" aria-label="Accesos rápidos">
+    <div class="container quick-access__inner">
+      <p class="quick-access__heading">Para familias</p>
+      <ul class="quick-access__list">
+        {
+          home.quickAccess.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+              >
+                <span class="quick-access__copy">
+                  <strong>{item.label}</strong>
+                  <span>{item.description}</span>
+                </span>
+                {item.external && <span class="sr-only">(se abre en una pestaña nueva)</span>}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+
   <FamilyPortalSection />
 
   <section class="section intro" aria-labelledby="intro-title">
@@ -51,11 +76,8 @@ import { site } from '../data/site';
       />
       <div class="identity-grid">
         {
-          home.institutional.map((item, index) => (
+          home.institutional.map((item) => (
             <article class="identity-card">
-              <span class="identity-card__number" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
               <h3>{item.title}</h3>
               <p>{item.body}</p>
             </article>
@@ -218,18 +240,17 @@ import { site } from '../data/site';
   }
 
   .intro__callout {
-    position: relative;
     padding: clamp(1.6rem, 4vw, 2.5rem);
-    border-inline-start: 0.5rem solid var(--color-accent);
-    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-    background: var(--color-primary);
-    color: rgb(255 255 255 / 0.85);
-    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
+    border-block-start: 0.25rem solid var(--color-accent);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-soft);
+    color: var(--color-text-muted);
   }
 
   .intro__quote {
     margin-block-end: var(--space-3);
-    color: var(--color-surface);
+    color: var(--color-primary-deep);
     font-size: var(--font-size-xl);
     font-weight: 900;
   }
@@ -248,20 +269,8 @@ import { site } from '../data/site';
 
   .identity-card {
     min-height: 100%;
-    padding: clamp(1.4rem, 3vw, 2rem);
-    border: var(--border-width) solid var(--color-border);
-    border-radius: var(--radius-lg);
-    background: var(--color-surface);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .identity-card__number {
-    display: inline-block;
-    margin-block-end: var(--space-5);
-    color: var(--color-accent-strong);
-    font-size: var(--font-size-sm);
-    font-weight: 900;
-    letter-spacing: 0.08em;
+    padding-block: var(--space-5);
+    border-block-start: 1px solid var(--color-border);
   }
 
   .identity-card h3,
@@ -293,19 +302,74 @@ import { site } from '../data/site';
 
   .attribute-card {
     min-height: 100%;
-    padding: clamp(1.4rem, 3vw, 2rem);
-    border: 1px solid rgb(255 255 255 / 0.18);
-    border-radius: var(--radius-lg);
-    background: var(--color-primary-alt);
+    padding-block: var(--space-5);
+    border-block-start: 1px solid rgb(255 254 250 / 0.28);
   }
 
   .attribute-card__mark {
     display: block;
-    width: 3.2rem;
-    height: 0.35rem;
+    width: 2.5rem;
+    height: 0.2rem;
     margin-block-end: var(--space-5);
-    border-radius: var(--radius-pill);
     background: var(--color-accent);
+  }
+
+  .quick-access {
+    position: relative;
+    z-index: 1;
+    border-block-end: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .quick-access__inner {
+    display: grid;
+    gap: var(--space-3);
+    padding-block: var(--space-4);
+  }
+
+  .quick-access__heading {
+    margin: 0;
+    color: var(--color-primary-alt);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .quick-access__list {
+    display: grid;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .quick-access__list li + li {
+    border-block-start: 1px solid var(--color-border);
+  }
+
+  .quick-access__list a {
+    display: block;
+    padding-block: var(--space-3);
+    color: var(--color-primary-deep);
+    text-decoration: none;
+  }
+
+  .quick-access__list a:hover {
+    color: var(--color-primary-alt);
+  }
+
+  .quick-access__copy {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .quick-access__copy strong {
+    font-size: var(--font-size-sm);
+  }
+
+  .quick-access__copy span {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
   }
 
   .attribute-card h3 {
@@ -340,9 +404,9 @@ import { site } from '../data/site';
 
   .enrichment-card {
     overflow: hidden;
-    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
     background: var(--color-surface);
-    box-shadow: var(--shadow-sm);
   }
 
   .enrichment-card :global(img) {
@@ -371,10 +435,10 @@ import { site } from '../data/site';
 
   .social-card {
     padding: clamp(1.6rem, 4vw, 2.8rem);
-    border-block-start: 0.4rem solid var(--color-accent);
-    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    border-block-start: 0.25rem solid var(--color-accent);
+    border-radius: var(--radius-md);
     background: var(--color-surface);
-    box-shadow: var(--shadow-md);
   }
 
   .social-card__eyebrow,
@@ -433,6 +497,15 @@ import { site } from '../data/site';
   }
 
   @media (min-width: 42rem) {
+    .quick-access__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: var(--space-5);
+    }
+
+    .quick-access__list li:nth-child(2) {
+      border-block-start: 0;
+    }
+
     .identity-grid,
     .attributes-grid,
     .activities-grid {
@@ -451,6 +524,26 @@ import { site } from '../data/site';
   }
 
   @media (min-width: 56rem) {
+    .quick-access__inner {
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: var(--space-6);
+    }
+
+    .quick-access__list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: 0;
+    }
+
+    .quick-access__list li + li {
+      border-block-start: 0;
+      border-inline-start: 1px solid var(--color-border);
+    }
+
+    .quick-access__list a {
+      padding-inline: var(--space-4);
+    }
+
     .intro__grid {
       grid-template-columns: 1.35fr 0.65fr;
     }

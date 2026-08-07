@@ -44,16 +44,15 @@ const { activity } = Astro.props;
   .activity-card {
     overflow: hidden;
     border: var(--border-width) solid var(--color-border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     background: var(--color-surface);
-    box-shadow: var(--shadow-sm);
     transition:
-      box-shadow var(--transition-base),
+      border-color var(--transition-base),
       transform var(--transition-base);
   }
 
   .activity-card:hover {
-    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary-alt);
     transform: translateY(-3px);
   }
 
@@ -91,9 +90,8 @@ const { activity } = Astro.props;
   }
 
   .activity-card__meta span {
-    padding: 0.25rem 0.52rem;
-    border-radius: var(--radius-pill);
-    background: rgb(232 185 77 / 0.2);
+    padding-block-end: 0.15rem;
+    border-block-end: 2px solid var(--color-accent);
     color: var(--color-primary-deep);
     font-weight: 900;
   }

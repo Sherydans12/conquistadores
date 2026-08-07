@@ -19,26 +19,37 @@ const { hero } = home;
   />
   <div class="hero__overlay" aria-hidden="true"></div>
   <div class="container hero__content">
-    <p class="hero__eyebrow">{hero.eyebrow}</p>
-    <h1 id="hero-title">{hero.title}</h1>
-    <p class="hero__tagline">{hero.tagline}</p>
-    <p class="hero__address">{site.address.display}</p>
-    <div class="hero__actions">
-      <a
-        class="button button--primary"
-        href={hero.primaryCta.href}
-        target={hero.primaryCta.external ? '_blank' : undefined}
-        rel={hero.primaryCta.external ? 'noopener noreferrer' : undefined}
-      >
-        {hero.primaryCta.label}
-        {hero.primaryCta.external && (
-          <span class="sr-only">(se abre en una pestaña nueva)</span>
-        )}
-      </a>
-      <a class="button button--secondary" href={hero.secondaryCta.href}>
-        {hero.secondaryCta.label}
-      </a>
+    <div class="hero__main">
+      <p class="hero__eyebrow">{hero.eyebrow}</p>
+      <h1 id="hero-title">{hero.title}</h1>
+      <p class="hero__tagline">{hero.tagline}</p>
+      <div class="hero__actions">
+        <a
+          class="button button--primary"
+          href={hero.primaryCta.href}
+          target={hero.primaryCta.external ? '_blank' : undefined}
+          rel={hero.primaryCta.external ? 'noopener noreferrer' : undefined}
+        >
+          {hero.primaryCta.label}
+          {hero.primaryCta.external && (
+            <span class="sr-only">(se abre en una pestaña nueva)</span>
+          )}
+        </a>
+        <a class="button button--secondary" href={hero.secondaryCta.href}>
+          {hero.secondaryCta.label}
+        </a>
+      </div>
     </div>
+    <aside class="hero__rail" aria-label="Información del colegio">
+      <div>
+        <span>Ubicación</span>
+        <strong>{site.address.display}</strong>
+      </div>
+      <div>
+        <span>Propuesta educativa</span>
+        <strong>Integral e inclusiva</strong>
+      </div>
+    </aside>
   </div>
 </section>
 
@@ -46,7 +57,7 @@ const { hero } = home;
   .hero {
     position: relative;
     isolation: isolate;
-    min-height: clamp(31rem, 64svh, 41rem);
+    min-height: clamp(36rem, 70svh, 46rem);
     display: grid;
     align-items: end;
     overflow: hidden;
@@ -69,13 +80,16 @@ const { hero } = home;
 
   .hero__overlay {
     z-index: -1;
-    background: rgb(8 14 55 / 0.56);
+    background:
+      linear-gradient(90deg, rgb(20 35 79 / 0.9), rgb(20 35 79 / 0.46) 68%, rgb(20 35 79 / 0.28)),
+      linear-gradient(0deg, rgb(20 35 79 / 0.38), transparent 50%);
   }
 
   .hero__content {
-    padding-block: clamp(6rem, 16vh, 10rem) clamp(3.5rem, 9vh, 6rem);
+    display: grid;
+    gap: var(--space-7);
+    padding-block: clamp(7rem, 16vh, 11rem) clamp(3.5rem, 9vh, 6rem);
     color: var(--color-surface);
-    text-shadow: 0 2px 18px rgb(0 0 0 / 0.36);
   }
 
   .hero__eyebrow {
@@ -88,7 +102,7 @@ const { hero } = home;
   }
 
   h1 {
-    max-width: 12ch;
+    max-width: 10ch;
     margin-block-end: var(--space-2);
     color: var(--color-surface);
     font-size: var(--font-size-hero);
@@ -103,12 +117,30 @@ const { hero } = home;
     font-weight: 800;
   }
 
-  .hero__address {
-    margin-block-end: var(--space-6);
-    font-size: var(--font-size-sm);
-    font-weight: 700;
-    letter-spacing: 0.04em;
+  .hero__rail {
+    display: grid;
+    max-width: 28rem;
+    gap: var(--space-4);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid rgb(255 254 250 / 0.42);
+  }
+
+  .hero__rail div {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .hero__rail span {
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+  }
+
+  .hero__rail strong {
+    color: var(--color-surface);
+    font-size: var(--font-size-sm);
   }
 
   .hero__actions {
@@ -119,7 +151,7 @@ const { hero } = home;
 
   @media (max-width: 30rem) {
     .hero {
-      min-height: 31rem;
+      min-height: 38rem;
     }
 
     .hero__actions {
@@ -131,15 +163,17 @@ const { hero } = home;
   @media (min-width: 48rem) {
     .hero {
       align-items: center;
-      min-height: clamp(34rem, 65svh, 42rem);
+      min-height: clamp(36rem, 70svh, 46rem);
     }
 
     .hero__content {
+      grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.35fr);
+      align-items: end;
       padding-block: 7rem;
     }
 
-    .hero__address {
-      font-size: var(--font-size-base);
+    .hero__rail {
+      justify-self: end;
     }
   }
 </style>
