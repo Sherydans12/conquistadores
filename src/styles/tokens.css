@@ -1,31 +1,37 @@
 :root {
-  --color-primary: #1a2779;
-  --color-primary-alt: #253e85;
-  --color-primary-deep: #111b5b;
-  --color-accent: #e8b94d;
-  --color-accent-strong: #d8a52d;
-  --color-turquoise: #20bca6;
-  --color-purple: #8b3eaa;
-  --color-background: #f1f1f1;
-  --color-surface: #ffffff;
-  --color-surface-soft: #f8f8fb;
-  --color-text: #333333;
-  --color-text-muted: #62667a;
-  --color-border: #dfe2ec;
-  --color-focus: #f5c75d;
+  --color-primary: #1d2f70;
+  --color-primary-alt: #2d4b82;
+  --color-primary-deep: #14234f;
+  --color-secondary: #477e82;
+  --color-accent: #e6b83f;
+  --color-accent-strong: #c99520;
+  --color-background: #f5f3ee;
+  --color-surface: #fffefa;
+  --color-surface-soft: #f0f1f5;
+  --color-surface-muted: #e4e9f1;
+  --color-text: #263149;
+  --color-text-muted: #5f687b;
+  --color-border: #d7dce5;
+  --color-success: #2e765a;
+  --color-warning: #9a6500;
+  --color-error: #b1444b;
+  --color-focus: #f0b429;
+  --color-turquoise: var(--color-secondary);
+  --color-purple: #74527d;
 
-  --font-family: Montserrat, Inter, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  --font-family: Montserrat, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  --font-family-display: Montserrat, "Segoe UI", system-ui, sans-serif;
   --font-size-xs: 0.78rem;
   --font-size-sm: 0.9rem;
   --font-size-base: 1rem;
   --font-size-lg: clamp(1.05rem, 1rem + 0.25vw, 1.2rem);
   --font-size-xl: clamp(1.25rem, 1.1rem + 0.8vw, 1.75rem);
   --font-size-2xl: clamp(1.8rem, 1.35rem + 2vw, 3rem);
-  --font-size-hero: clamp(2.35rem, 1.55rem + 4vw, 5.5rem);
+  --font-size-hero: clamp(2.75rem, 1.8rem + 4vw, 5.25rem);
   --line-height-tight: 1.08;
-  --line-height-heading: 1.2;
-  --line-height-body: 1.7;
+  --line-height-heading: 1.12;
+  --line-height-body: 1.65;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -33,24 +39,32 @@
   --space-4: 1rem;
   --space-5: 1.5rem;
   --space-6: 2rem;
-  --space-7: 3rem;
-  --space-8: clamp(4rem, 7vw, 7rem);
+  --space-7: clamp(2.5rem, 4vw, 4rem);
+  --space-8: clamp(4.5rem, 8vw, 7.5rem);
+  --space-xs: var(--space-1);
+  --space-sm: var(--space-2);
+  --space-md: var(--space-4);
+  --space-lg: var(--space-6);
+  --space-xl: var(--space-7);
+  --space-2xl: var(--space-8);
+  --space-section: var(--space-8);
 
-  --container: 76rem;
-  --container-narrow: 50rem;
-  --page-gutter: clamp(1rem, 3vw, 2rem);
+  --container: 80rem;
+  --container-narrow: 52rem;
+  --measure: 70ch;
+  --page-gutter: clamp(1rem, 4vw, 2.75rem);
 
-  --radius-sm: 0.4rem;
-  --radius-md: 0.8rem;
-  --radius-lg: 1.25rem;
+  --radius-sm: 0.35rem;
+  --radius-md: 0.7rem;
+  --radius-lg: 1rem;
   --radius-pill: 999px;
   --border-width: 1px;
-  --shadow-sm: 0 0.25rem 1rem rgb(17 27 91 / 0.08);
-  --shadow-md: 0 1rem 2.5rem rgb(17 27 91 / 0.13);
+  --shadow-sm: 0 0.65rem 1.5rem rgb(20 35 79 / 0.08);
+  --shadow-md: 0 1.25rem 3rem rgb(20 35 79 / 0.14);
 
-  --announcement-height: 2.4rem;
-  --header-height-mobile: 4.75rem;
-  --header-height-desktop: 5.5rem;
+  --announcement-height: 2.35rem;
+  --header-height-mobile: 4.7rem;
+  --header-height-desktop: 5.25rem;
   --layer-header: 30;
   --layer-nav: 40;
   --transition-fast: 160ms ease;

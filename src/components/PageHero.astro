@@ -54,7 +54,7 @@ const {
     isolation: isolate;
     min-height: clamp(22rem, 48vw, 32rem);
     overflow: hidden;
-    background: linear-gradient(135deg, var(--color-primary-deep), var(--color-primary-alt));
+    background: var(--color-primary-deep);
     color: var(--color-surface);
   }
 
@@ -74,14 +74,12 @@ const {
   .page-hero__overlay {
     z-index: -1;
     background:
-      linear-gradient(90deg, rgb(17 27 91 / 0.96), rgb(17 27 91 / 0.64)),
-      linear-gradient(0deg, rgb(17 27 91 / 0.35), transparent);
+      linear-gradient(90deg, rgb(20 35 79 / 0.95), rgb(20 35 79 / 0.62)),
+      linear-gradient(0deg, rgb(20 35 79 / 0.38), transparent);
   }
 
   .page-hero:not(.page-hero--image) .page-hero__overlay {
-    background:
-      radial-gradient(circle at 85% 10%, rgb(232 185 77 / 0.2), transparent 28%),
-      linear-gradient(135deg, var(--color-primary-deep), var(--color-primary-alt));
+    background: var(--color-primary-deep);
   }
 
   .page-hero__inner {
@@ -116,7 +114,7 @@ const {
   .page-hero__description {
     max-width: 44rem;
     margin: 0;
-    color: rgb(255 255 255 / 0.86);
+    color: rgb(255 254 250 / 0.86);
     font-size: var(--font-size-lg);
     line-height: 1.6;
   }

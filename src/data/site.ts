@@ -57,7 +57,7 @@ export const site = {
     defaultDescription:
       'Colegio Conquistadores de Coquimbo: educación integral e inclusiva, aprendizaje con alegría y una comunidad comprometida.',
     defaultImage: '/images/brand/colegio-conquistadores-og.webp',
-    themeColor: '#1a2779',
+    themeColor: '#1d2f70',
     locale: 'es_CL',
   },
 } as const;

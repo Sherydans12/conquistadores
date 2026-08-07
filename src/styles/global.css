@@ -74,8 +74,11 @@ h1,
 h2,
 h3 {
   color: var(--color-primary-deep);
+  font-family: var(--font-family-display);
   font-weight: 800;
+  letter-spacing: -0.025em;
   line-height: var(--line-height-heading);
+  text-wrap: balance;
 }
 
 p {
@@ -85,6 +88,10 @@ p {
 .container {
   width: min(100% - (2 * var(--page-gutter)), var(--container));
   margin-inline: auto;
+}
+
+.measure {
+  max-width: var(--measure);
 }
 
 .section {
@@ -118,6 +125,7 @@ p {
     border-color var(--transition-fast),
     color var(--transition-fast),
     transform var(--transition-fast);
+  cursor: pointer;
 }
 
 .button:hover {
@@ -135,7 +143,7 @@ p {
 
 .button--secondary {
   border-color: rgb(255 255 255 / 0.72);
-  background: rgb(17 27 91 / 0.55);
+  background: rgb(20 35 79 / 0.58);
   color: var(--color-surface);
 }
 
@@ -146,6 +154,16 @@ p {
 .text-link {
   color: var(--color-primary);
   font-weight: 800;
+}
+
+.button--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.button--ghost:hover {
+  background: var(--color-surface-muted);
 }
 
 .external-note {
