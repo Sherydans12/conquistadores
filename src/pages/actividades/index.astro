@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import activityHeroImage from '../../assets/images/activities/2024/visita-biblioteca-gabriela-mistral/featured.webp';
 import ActivityArchiveCard from '../../components/activities/ActivityArchiveCard.astro';
 import ActivityArchiveSearch from '../../components/activities/ActivityArchiveSearch.astro';
 import { sortActivities } from '../../data/activities';
@@ -41,6 +42,8 @@ const collectionSchema = {
   description="Explora el archivo histórico de actividades, encuentros, celebraciones y aprendizajes del Colegio Conquistadores."
   canonicalPath="/actividades/"
   eyebrow="Vida escolar"
+  heroImage={activityHeroImage}
+  heroAlt="Estudiantes del Colegio Conquistadores durante una salida educativa"
   breadcrumbs={[
     { label: 'Inicio', href: '/' },
     { label: 'Actividades' },
@@ -52,8 +55,8 @@ const collectionSchema = {
         <p class="page-section__eyebrow">Archivo histórico</p>
         <h2>Experiencias de nuestra comunidad</h2>
         <p>
-          Este archivo reúne las actividades publicadas por el colegio entre
-          2023 y 2025. Puedes buscar por palabras o acotar los resultados por año.
+          Este archivo reúne actividades del colegio desde 2023. Busca por
+          palabras o filtra los resultados por año.
         </p>
       </div>
 
@@ -84,7 +87,6 @@ const collectionSchema = {
       <div class="page-section__intro">
         <p class="page-section__eyebrow">Todas las publicaciones</p>
         <h2 id="archive-title">Archivo completo</h2>
-        <p>Las {activities.length} actividades permanecen disponibles en el HTML, incluso sin JavaScript.</p>
       </div>
 
       <ActivityArchiveSearch years={years} total={activities.length} />

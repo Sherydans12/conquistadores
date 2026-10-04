@@ -9,7 +9,7 @@ export const institutional = {
     'Colegio Conquistadores es una comunidad educativa particular de Coquimbo que declara una propuesta integral e inclusiva, orientada a generar aprendizajes alegres y efectivos.',
   history: [
     'El Colegio Conquistadores fue fundado en 2018 por el profesor Arturo Galleguillos Trigo, licenciado en Educación y magíster en Mediación.',
-    'La información institucional publicada señala que el colegio comenzó con cursos de 1° a 3° básico y posteriormente amplió su oferta a educación básica completa. La misma fuente expresa el propósito de avanzar hasta 4° medio.',
+    'El colegio comenzó con cursos de 1° a 3° básico y amplió su oferta hasta completar la educación básica. Su proyecto institucional contempla seguir creciendo hasta 4° medio.',
   ],
   mission:
     'Entregar a nuestros educandos una educación integral e inclusiva, desarrollando habilidades cognitivas, afectivas, artísticas y deportivas dentro de un clima de alegría y respeto, permitiéndoles ser agentes de cambio positivo hacia la sociedad.',
@@ -19,12 +19,12 @@ export const institutional = {
     {
       title: 'Aprendizaje integral',
       description:
-        'La propuesta institucional reúne dimensiones cognitivas, afectivas, artísticas y deportivas.',
+        'Promovemos aprendizajes que integran el desarrollo cognitivo, afectivo, artístico y deportivo.',
     },
     {
       title: 'Inclusión y diversidad',
       description:
-        'El enfoque publicado reconoce la diversidad y las capacidades de cada estudiante como parte del aprendizaje.',
+        'Reconocemos la diversidad y las capacidades de cada estudiante como parte del aprendizaje.',
     },
     {
       title: 'Alegría y respeto',
@@ -34,7 +34,7 @@ export const institutional = {
     {
       title: 'Metodologías activas',
       description:
-        'La historia institucional destaca el uso de experiencias lúdicas para promover aprendizajes significativos.',
+        'A través de experiencias lúdicas, promovemos aprendizajes significativos.',
     },
   ],
 } as const;

@@ -3,34 +3,59 @@ interface ExternalResource {
   label: string;
   url: string;
   service: string;
+  group?: string;
 }
 
 interface Props {
   resources: ExternalResource[];
+  title?: string;
+  description?: string;
 }
 
-const { resources } = Astro.props;
+const {
+  resources,
+  title = 'Recursos externos',
+  description = 'Los enlaces se abrirán en otra pestaña.',
+} = Astro.props;
+const groups: { title?: string; resources: ExternalResource[] }[] = [];
+
+for (const resource of resources) {
+  const title = resource.group?.trim() || undefined;
+  let group = groups.find((candidate) => candidate.title === title);
+
+  if (!group) {
+    group = { title, resources: [] };
+    groups.push(group);
+  }
+
+  group.resources.push(resource);
+}
 ---
 
 {
   resources.length > 0 && (
     <section class="external-resources" aria-labelledby="external-resources-title">
-      <h2 id="external-resources-title">Recursos externos</h2>
-      <p>
-        Estos enlaces abren contenido público alojado fuera del sitio del colegio.
-      </p>
-      <ul>
-        {resources.map((resource) => (
-          <li>
-            <a href={resource.url} target="_blank" rel="noopener noreferrer">
-              {resource.label}
-              <span class="external-resources__service">
-                {resource.service}, servicio externo
-              </span>
-            </a>
-          </li>
+      <h2 id="external-resources-title">{title}</h2>
+      <p class="external-resources__description">{description}</p>
+      <div class="external-resources__groups">
+        {groups.map((group, index) => (
+          <div class:list={['external-resources__group', group.title && 'external-resources__group--titled']}>
+            {group.title && <h3 id={`external-resources-group-${index}`}>{group.title}</h3>}
+            <ul aria-labelledby={group.title ? `external-resources-group-${index}` : undefined}>
+              {group.resources.map((resource) => (
+                <li>
+                  <a href={resource.url} target="_blank" rel="noopener noreferrer">
+                    {resource.label}
+                    <span class="external-resources__service">
+                      Se abre en {resource.service}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
   )
 }
@@ -50,11 +75,34 @@ const { resources } = Astro.props;
     font-size: var(--font-size-xl);
   }
 
+  .external-resources__description {
+    max-width: 50rem;
+    margin-block-end: 0;
+    color: var(--color-text-muted);
+  }
+
+  .external-resources__groups {
+    display: grid;
+    gap: var(--space-5);
+    margin-block-start: var(--space-5);
+  }
+
+  .external-resources__group--titled {
+    padding-block-start: var(--space-5);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .external-resources__group h3 {
+    margin-block-end: var(--space-3);
+    color: var(--color-primary-deep);
+    font-size: var(--font-size-lg);
+  }
+
   .external-resources ul {
     display: grid;
     gap: var(--space-3);
     padding: 0;
-    margin: var(--space-5) 0 0;
+    margin: 0;
     list-style: none;
   }
 

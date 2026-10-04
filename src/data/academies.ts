@@ -57,7 +57,7 @@ export const academies: SchoolProgram[] = [
     id: 'yoga',
     title: 'Academia de yoga',
     description:
-      'La propuesta publicada relaciona el yoga con pensamientos positivos, hábitos saludables y bienestar emocional mediante experiencias adaptadas al crecimiento y desarrollo infantil.',
+      'El yoga integra movimiento, hábitos saludables y bienestar emocional en experiencias pensadas para el desarrollo infantil.',
     type: 'academy',
     category: 'bienestar',
     public: true,

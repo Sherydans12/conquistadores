@@ -1,5 +1,8 @@
 ---
 import { Image } from 'astro:assets';
+import culturalVisitImage from '../assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-017.webp';
+import familyImage from '../assets/images/activities/2025/dia-de-la-familia-2025/gallery-006.webp';
+import innovationImage from '../assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-004.webp';
 import ActivityCard from '../components/ActivityCard.astro';
 import ContactSection from '../components/ContactSection.astro';
 import FamilyPortalSection from '../components/FamilyPortalSection.astro';
@@ -66,24 +69,58 @@ import { site } from '../data/site';
   </section>
 
   <section class="section section--soft" id="historia" aria-labelledby="identity-title">
-    <div class="container">
-      <SectionHeading
-        id="identity-title"
-        eyebrow="Identidad institucional"
-        title="Historia, misión, visión y valores"
-        description="Los principios que orientan nuestra comunidad están disponibles sin depender de pestañas ni JavaScript."
-        align="center"
-      />
-      <div class="identity-grid">
-        {
-          home.institutional.map((item) => (
-            <article class="identity-card">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </article>
-          ))
-        }
+    <div class="container identity-story">
+      <div class="identity-story__copy">
+        <SectionHeading
+          id="identity-title"
+          eyebrow="Identidad institucional"
+          title="Historia, misión, visión y valores"
+          description="Los principios que orientan nuestra comunidad se viven en experiencias de aprendizaje, encuentro e innovación."
+        />
+        <div class="identity-grid">
+          {
+            home.institutional.map((item) => (
+              <article class="identity-card">
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))
+          }
+        </div>
       </div>
+      <figure class="identity-collage">
+        <div class="identity-collage__image identity-collage__image--main">
+          <Image
+            src={culturalVisitImage}
+            alt="Estudiantes del Colegio Conquistadores durante una visita al Centro Cultural Mohamed VI"
+            widths={[640, 800, 1200]}
+            sizes="(min-width: 64rem) 32vw, 100vw"
+            quality={84}
+            loading="lazy"
+          />
+        </div>
+        <div class="identity-collage__image">
+          <Image
+            src={familyImage}
+            alt="Familias y estudiantes compartiendo durante el Día de la Familia"
+            widths={[360, 560, 760]}
+            sizes="(min-width: 64rem) 20vw, 50vw"
+            quality={84}
+            loading="lazy"
+          />
+        </div>
+        <div class="identity-collage__image">
+          <Image
+            src={innovationImage}
+            alt="Estudiantes presentando su proyecto de robótica en una competencia escolar"
+            widths={[360, 560, 760]}
+            sizes="(min-width: 64rem) 20vw, 50vw"
+            quality={84}
+            loading="lazy"
+          />
+        </div>
+        <figcaption>Aprender también es explorar, crear y encontrarnos.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -93,7 +130,6 @@ import { site } from '../data/site';
         id="attributes-title"
         eyebrow="Nuestra forma de aprender"
         title="Una propuesta cercana, activa e inclusiva"
-        description="Atributos públicos que reflejan el enfoque educativo del colegio, sin recurrir a cifras desactualizadas."
         align="center"
       />
       <div class="attributes-grid">
@@ -173,7 +209,6 @@ import { site } from '../data/site';
           id="community-title"
           eyebrow="Nuestra comunidad"
           title="Conoce una de nuestras experiencias"
-          description="El video se carga solo cuando decides reproducirlo, para cuidar el rendimiento y tu privacidad."
           light
         />
         <LazyVideo />
@@ -182,9 +217,8 @@ import { site } from '../data/site';
         <p class="social-card__eyebrow">Redes sociales</p>
         <h2>La vida del colegio, en un canal oficial</h2>
         <p>
-          Instagram reúne actividades, aprendizajes y encuentros de nuestra
-          comunidad. En esta fase ofrecemos un enlace directo, sin cargar un feed
-          ni rastreadores en la portada.
+          En Instagram compartimos actividades, aprendizajes y encuentros de
+          nuestra comunidad educativa.
         </p>
         <a
           class="button button--primary"
@@ -194,7 +228,7 @@ import { site } from '../data/site';
         >
           Seguir en Instagram
         </a>
-        <p class="external-note">Instagram se abre en un servicio externo.</p>
+        <p class="external-note">Instagram se abre en otra pestaña.</p>
       </aside>
     </div>
   </section>
@@ -208,7 +242,7 @@ import { site } from '../data/site';
         <h2 id="enrollment-title">Da el próximo paso junto a Conquistadores</h2>
         <p>
           Revisa la orientación de matrícula, accede a trámites y pagos en línea,
-          y consulta la información pública disponible para 2027.
+          y consulta los documentos del proceso 2027.
         </p>
       </div>
       <a class="button button--primary" href="/matriculas-2027/">
@@ -265,6 +299,59 @@ import { site } from '../data/site';
   .enrichment-grid {
     display: grid;
     gap: var(--space-4);
+  }
+
+  .identity-story {
+    display: grid;
+    align-items: start;
+    gap: var(--space-7);
+  }
+
+  .identity-story__copy :global(.section-heading) {
+    margin-block-end: var(--space-6);
+  }
+
+  .identity-collage {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+    margin: 0;
+  }
+
+  .identity-collage__image {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-muted);
+  }
+
+  .identity-collage__image--main {
+    grid-column: 1 / -1;
+  }
+
+  .identity-collage__image :global(picture),
+  .identity-collage__image :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .identity-collage__image :global(img) {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .identity-collage__image--main :global(img) {
+    aspect-ratio: 16 / 9;
+  }
+
+  .identity-collage figcaption {
+    grid-column: 1 / -1;
+    padding-block-start: var(--space-2);
+    color: var(--color-primary-alt);
+    font-size: var(--font-size-sm);
+    font-weight: 800;
   }
 
   .identity-card {
@@ -579,8 +666,24 @@ import { site } from '../data/site';
       width: auto;
     }
 
-    .identity-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+    .identity-story {
+      grid-template-columns: minmax(0, 0.9fr) minmax(30rem, 1.1fr);
+      gap: var(--space-8);
+    }
+
+    .identity-collage {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+      grid-template-rows: repeat(2, minmax(0, 1fr)) auto;
+      height: 37rem;
+    }
+
+    .identity-collage__image--main {
+      grid-column: 1;
+      grid-row: 1 / 3;
+    }
+
+    .identity-collage__image--main :global(img) {
+      aspect-ratio: auto;
     }
   }
 </style>

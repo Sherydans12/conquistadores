@@ -2,12 +2,12 @@
 import Callout from '../components/Callout.astro';
 import StaffCard from '../components/StaffCard.astro';
 import PageLayout from '../layouts/PageLayout.astro';
-import { getStaffByArea, publicStaff, staffAreas } from '../data/staff';
+import { getStaffByArea, staffAreas } from '../data/staff';
 ---
 
 <PageLayout
   title="Personal"
-  description="Conoce al equipo directivo, especialistas, docentes, asistentes y auxiliares publicado por el Colegio Conquistadores."
+  description="Conoce al equipo directivo, especialistas, docentes, asistentes y auxiliares del Colegio Conquistadores."
   canonicalPath="/personal/"
   eyebrow="Comunidad educativa"
   breadcrumbs={[
@@ -21,8 +21,8 @@ import { getStaffByArea, publicStaff, staffAreas } from '../data/staff';
         <p class="page-section__eyebrow">Nuestro equipo</p>
         <h2 id="equipo-title">Personas que acompañan el aprendizaje</h2>
         <p>
-          La siguiente nómina reproduce información públicamente visible en el
-          sitio del colegio y está organizada por áreas para facilitar su consulta.
+          El equipo está organizado por áreas para que encuentres a las personas
+          que acompañan el aprendizaje.
         </p>
       </div>
       <nav class="staff-jump" aria-label="Áreas del personal">
@@ -36,9 +36,8 @@ import { getStaffByArea, publicStaff, staffAreas } from '../data/staff';
         }
       </nav>
       <p class="staff-note">
-        Publicación de referencia: {publicStaff.length} personas. Esta nómina no se
-        presenta como certificación de dotación vigente y requiere validación
-        institucional antes de producción.
+        La nómina puede cambiar. Para confirmar quiénes integran actualmente cada
+        área, comunícate con el colegio.
       </p>
     </div>
   </section>
@@ -77,7 +76,7 @@ import { getStaffByArea, publicStaff, staffAreas } from '../data/staff';
 
   <Callout
     slot="cta"
-    eyebrow="Información pública"
+    eyebrow="Consulta al colegio"
     title="¿Necesitas confirmar un cargo o integrante?"
     variant="soft"
   >

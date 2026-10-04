@@ -4,7 +4,7 @@ import workshopImage from '../assets/images/home/taller-de-musica.webp';
 import academyImage from '../assets/images/home/academia-de-teatro.webp';
 import videoImage from '../assets/images/home/video-un-mundo-de-diferencias.webp';
 import wroImage from '../assets/images/activities/world-robot-olympiad-2025.webp';
-import galaImage from '../assets/images/activities/gala-raiz-folclorica-2025.webp';
+import galaImage from '../assets/images/activities/2026/gala-raiz-folclorica-2026/featured.webp';
 import familyImage from '../assets/images/activities/dia-de-la-familia-2025.webp';
 import { familyPortal } from './family-portal';
 
@@ -105,6 +105,15 @@ export const home = {
   ],
   activities: [
     {
+      title: 'Gala de Raíz Folclórica 2026',
+      date: '2026-10-02',
+      dateLabel: '2 de octubre de 2026',
+      category: 'Comunidad',
+      href: '/2026/10/02/gala-raiz-folclorica-2026/',
+      image: galaImage,
+      alt: 'Estudiantes en escena durante la Gala de Raíz Folclórica 2026',
+    },
+    {
       title:
         'Colegio Conquistadores lleva su innovación a la World Robot Olympiad Chile',
       date: '2025-10-06',
@@ -113,15 +122,6 @@ export const home = {
       href: '/2025/10/06/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/',
       image: wroImage,
       alt: 'Estudiantes del Colegio Conquistadores en la World Robot Olympiad Chile',
-    },
-    {
-      title: 'Gala Raíz Folclórica 2025',
-      date: '2025-09-29',
-      dateLabel: '29 de septiembre de 2025',
-      category: 'Comunidad',
-      href: '/2025/09/29/gala-raiz-folclorica-2025/',
-      image: galaImage,
-      alt: 'Presentación de estudiantes en la Gala Raíz Folclórica 2025',
     },
     {
       title: 'Día de la Familia 2025',

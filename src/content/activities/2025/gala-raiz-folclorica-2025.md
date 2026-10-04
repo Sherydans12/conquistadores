@@ -84,4 +84,4 @@ Cada curso nos regaló un número único, destacando la diversidad de nuestro pa
 
 ## Videos de las presentaciones
 
-Los videos se conservan como enlaces al almacenamiento de Google Drive del colegio. No se reproducen ni descargan automáticamente desde esta página.
+Los videos de las presentaciones están disponibles en Google Drive en los enlaces de abajo.

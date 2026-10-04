@@ -143,6 +143,10 @@ function isCurrent(href: string): boolean {
     line-height: 1.15;
     text-align: center;
     text-decoration: none;
+    transition:
+      background-color var(--transition-fast),
+      border-color var(--transition-fast),
+      color var(--transition-fast);
   }
 
   .site-header__actions {
@@ -164,7 +168,7 @@ function isCurrent(href: string): boolean {
     color: var(--color-accent);
   }
 
-  .header-cta:hover {
+  .header-cta:not(.header-cta--enrollment):hover {
     background: var(--color-accent-strong);
   }
 

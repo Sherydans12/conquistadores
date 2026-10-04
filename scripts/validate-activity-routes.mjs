@@ -46,12 +46,14 @@ function parseActivity(file, source) {
   const galleryImages = [...frontmatter.matchAll(/^\s+- image:\s*(.+)$/gm)].map(
     (item) => JSON.parse(item[1]),
   );
+  const sourcePostIdValue = frontmatterValue(frontmatter, 'sourcePostId');
 
   return {
     file,
     body,
     galleryImages,
-    sourcePostId: Number(frontmatterValue(frontmatter, 'sourcePostId')),
+    hasSourcePostId: sourcePostIdValue !== undefined,
+    sourcePostId: sourcePostIdValue === undefined ? undefined : Number(sourcePostIdValue),
     title: frontmatterValue(frontmatter, 'title'),
     description: frontmatterValue(frontmatter, 'description'),
     publishDate: frontmatterValue(frontmatter, 'publishDate'),
@@ -96,48 +98,50 @@ async function main() {
     ),
   );
   const routes = activities.map((activity) => activity.historicalPath).sort();
-  const ids = activities.map((activity) => activity.sourcePostId);
+  const migratedActivities = activities.filter((activity) => activity.hasSourcePostId);
+  const migratedRoutes = migratedActivities.map((activity) => activity.historicalPath);
+  const ids = migratedActivities.map((activity) => activity.sourcePostId);
   const datedSlugs = activities.map(
     (activity) => `${activity.publishDate.slice(0, 10)}:${activity.slug}`,
   );
 
   assert(
-    files.length === EXPECTED_COUNT,
-    `Se esperaban ${EXPECTED_COUNT} archivos y hay ${files.length}.`,
+    migratedActivities.length === EXPECTED_COUNT,
+    `Se esperaban ${EXPECTED_COUNT} actividades migradas y hay ${migratedActivities.length}.`,
     errors,
   );
-  assert(
-    expectedRoutes.length === EXPECTED_COUNT,
-    `El inventario activo contiene ${expectedRoutes.length} rutas de actividad.`,
-    errors,
-  );
+  assert(expectedRoutes.length === EXPECTED_COUNT, `El inventario activo contiene ${expectedRoutes.length} rutas de actividad.`, errors);
   assert(new Set(routes).size === routes.length, 'Hay rutas históricas duplicadas.', errors);
   assert(new Set(ids).size === ids.length, 'Hay sourcePostId duplicados.', errors);
   assert(new Set(datedSlugs).size === datedSlugs.length, 'Hay slugs duplicados en una misma fecha.', errors);
 
   for (const expected of expectedRoutes) {
-    assert(routes.includes(expected), `Falta la ruta inventariada ${expected}`, errors);
+    assert(migratedRoutes.includes(expected), `Falta la ruta inventariada ${expected}`, errors);
   }
-  for (const route of routes) {
-    assert(expectedRoutes.includes(route), `Ruta no inventariada ${route}`, errors);
+  for (const route of migratedRoutes) {
+    assert(expectedRoutes.includes(route), `Ruta migrada no inventariada ${route}`, errors);
   }
 
   for (const activity of activities) {
     const prefix = path.relative(ROOT, activity.file);
     const date = new Date(activity.publishDate);
-    assert(Number.isInteger(activity.sourcePostId) && activity.sourcePostId > 0, `${prefix}: sourcePostId inválido.`, errors);
+    if (activity.hasSourcePostId) {
+      assert(Number.isInteger(activity.sourcePostId) && activity.sourcePostId > 0, `${prefix}: sourcePostId inválido.`, errors);
+    }
     assert(Boolean(activity.title?.trim()), `${prefix}: título vacío.`, errors);
     assert(Boolean(activity.description?.trim()), `${prefix}: descripción vacía.`, errors);
     assert(Boolean(activity.featuredAlt?.trim()), `${prefix}: alt destacado vacío.`, errors);
     assert(!Number.isNaN(date.getTime()), `${prefix}: fecha inválida.`, errors);
     assert(date.getUTCFullYear() === activity.year, `${prefix}: año incoherente.`, errors);
     assert(activity.historicalPath.endsWith(`/${activity.slug}/`), `${prefix}: slug y ruta no coinciden.`, errors);
-    assert(
-      activity.legacyUrl ===
-        `https://www.colegioconquistadores.com${activity.historicalPath}`,
-      `${prefix}: legacyUrl no coincide con la ruta histórica.`,
-      errors,
-    );
+    if (activity.hasSourcePostId) {
+      assert(
+        activity.legacyUrl ===
+          `https://www.colegioconquistadores.com${activity.historicalPath}`,
+        `${prefix}: legacyUrl no coincide con la ruta histórica.`,
+        errors,
+      );
+    }
     assert(
       ['reviewed', 'needs-review'].includes(activity.reviewStatus),
       `${prefix}: reviewStatus inválido.`,
@@ -188,7 +192,7 @@ async function main() {
   }
 
   console.log(
-    `Validador de rutas: ${EXPECTED_COUNT} actividades, rutas e imágenes correctas.`,
+    `Validador de rutas: ${EXPECTED_COUNT} actividades migradas y ${activities.length - migratedActivities.length} editoriales; rutas e imágenes correctas.`,
   );
 }
 

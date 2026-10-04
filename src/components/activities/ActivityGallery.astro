@@ -11,34 +11,57 @@ interface GalleryImage {
 interface Props {
   images: GalleryImage[];
   title?: string;
+  description?: string;
+  aspectRatio?: 'classic' | 'wide';
+  expanded?: boolean;
 }
 
-const { images, title = 'Galería de la actividad' } = Astro.props;
-const shouldCollapse = images.length > 12;
+const {
+  images,
+  title = 'Galería de la actividad',
+  description,
+  aspectRatio = 'classic',
+  expanded = false,
+} = Astro.props;
+const shouldCollapse = images.length > 12 && !expanded;
 ---
 
 {
   images.length > 0 && (
-    <section class="activity-gallery" aria-labelledby="activity-gallery-title">
+    <section
+      data-activity-gallery
+      class:list={['activity-gallery', aspectRatio === 'wide' && 'activity-gallery--wide']}
+      aria-labelledby="activity-gallery-title"
+    >
       <div class="activity-gallery__heading">
-        <p>Registro fotográfico</p>
-        <h2 id="activity-gallery-title">{title}</h2>
+        <div class="activity-gallery__copy">
+          <h2 id="activity-gallery-title">{title}</h2>
+          {description && <p>{description}</p>}
+        </div>
         <span>{images.length} imágenes</span>
       </div>
       {shouldCollapse ? (
         <details>
           <summary>Ver galería completa ({images.length} imágenes)</summary>
           <div class="activity-gallery__grid">
-            {images.map((item) => (
+            {images.map((item, index) => (
               <figure>
-                <Image
-                  src={resolveActivityImage(item.image)}
-                  alt={item.alt}
-                  widths={[420, 800]}
-                  sizes="(min-width: 64rem) 30vw, (min-width: 42rem) 48vw, 100vw"
-                  quality={74}
-                  loading="lazy"
-                />
+                <button
+                  class="activity-gallery__trigger"
+                  type="button"
+                  aria-label={`Ampliar imagen ${index + 1}: ${item.alt}`}
+                  aria-haspopup="dialog"
+                  data-gallery-caption={item.caption ?? item.alt}
+                >
+                  <Image
+                    src={resolveActivityImage(item.image)}
+                    alt={item.alt}
+                    widths={[420, 800, 1200, 1600]}
+                    sizes="(min-width: 64rem) 30vw, (min-width: 42rem) 48vw, 100vw"
+                    quality={80}
+                    loading="lazy"
+                  />
+                </button>
                 {item.caption && <figcaption>{item.caption}</figcaption>}
               </figure>
             ))}
@@ -46,21 +69,59 @@ const shouldCollapse = images.length > 12;
         </details>
       ) : (
         <div class="activity-gallery__grid">
-          {images.map((item) => (
+          {images.map((item, index) => (
             <figure>
-              <Image
-                src={resolveActivityImage(item.image)}
-                alt={item.alt}
-                widths={[420, 800]}
-                sizes="(min-width: 64rem) 30vw, (min-width: 42rem) 48vw, 100vw"
-                quality={74}
-                loading="lazy"
-              />
+              <button
+                class="activity-gallery__trigger"
+                type="button"
+                aria-label={`Ampliar imagen ${index + 1}: ${item.alt}`}
+                aria-haspopup="dialog"
+                data-gallery-caption={item.caption ?? item.alt}
+              >
+                <Image
+                  src={resolveActivityImage(item.image)}
+                  alt={item.alt}
+                  widths={[420, 800, 1200, 1600]}
+                  sizes="(min-width: 64rem) 30vw, (min-width: 42rem) 48vw, 100vw"
+                  quality={80}
+                  loading="lazy"
+                />
+              </button>
               {item.caption && <figcaption>{item.caption}</figcaption>}
             </figure>
           ))}
         </div>
       )}
+
+      <dialog class="activity-gallery__dialog" aria-labelledby="activity-gallery-viewer-title">
+        <div class="activity-gallery__viewer">
+          <header class="activity-gallery__viewer-header">
+            <h3 id="activity-gallery-viewer-title">{title}</h3>
+            <span class="activity-gallery__viewer-count" data-gallery-count role="status" aria-live="polite">
+              1 de {images.length}
+            </span>
+            <button class="activity-gallery__close" type="button" data-gallery-close aria-label="Cerrar galería">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m6 6 12 12M18 6 6 18" />
+              </svg>
+            </button>
+          </header>
+          <div class="activity-gallery__viewer-stage">
+            <button class="activity-gallery__step" type="button" data-gallery-previous aria-label="Fotografía anterior">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+            </button>
+            <div class="activity-gallery__viewer-frame" data-gallery-viewer></div>
+            <button class="activity-gallery__step" type="button" data-gallery-next aria-label="Fotografía siguiente">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+          <p class="activity-gallery__viewer-caption" data-gallery-caption-output aria-live="polite"></p>
+        </div>
+      </dialog>
     </section>
   )
 }
@@ -79,19 +140,19 @@ const shouldCollapse = images.length > 12;
     margin-block-end: var(--space-5);
   }
 
-  .activity-gallery__heading p {
-    width: 100%;
-    margin: 0;
-    color: var(--color-primary-alt);
-    font-size: var(--font-size-xs);
-    font-weight: 900;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
   .activity-gallery__heading h2 {
     margin: 0;
     font-size: var(--font-size-2xl);
+  }
+
+  .activity-gallery__copy {
+    max-width: 48rem;
+  }
+
+  .activity-gallery__copy p {
+    margin-block: var(--space-2) 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
   }
 
   .activity-gallery__heading span {
@@ -128,7 +189,8 @@ const shouldCollapse = images.length > 12;
 
   figure {
     min-width: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     margin: 0;
@@ -136,9 +198,14 @@ const shouldCollapse = images.length > 12;
   }
 
   figure :global(img) {
+    display: block;
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
+  }
+
+  .activity-gallery--wide figure :global(img) {
+    aspect-ratio: 16 / 9;
   }
 
   figcaption {
@@ -146,6 +213,203 @@ const shouldCollapse = images.length > 12;
     border-block-start: 1px solid var(--color-border);
     color: var(--color-text-muted);
     font-size: var(--font-size-xs);
+  }
+
+  .activity-gallery__trigger {
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    background: transparent;
+    cursor: zoom-in;
+  }
+
+  .activity-gallery__trigger:focus-visible {
+    position: relative;
+    z-index: 1;
+    outline: 0.2rem solid var(--color-accent-strong);
+    outline-offset: -0.2rem;
+  }
+
+  .activity-gallery__trigger :global(img) {
+    transition: transform 180ms ease;
+  }
+
+  @media (hover: hover) {
+    .activity-gallery__trigger:hover :global(img) {
+      transform: scale(1.025);
+    }
+  }
+
+  .activity-gallery__dialog {
+    width: min(92vw, 80rem);
+    max-width: calc(100% - 2rem);
+    max-height: calc(100dvh - 2rem);
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    border-radius: var(--radius-md);
+    background: var(--color-primary-deep);
+    color: var(--color-surface);
+  }
+
+  .activity-gallery__dialog::backdrop {
+    background: rgb(8 15 30 / 0.84);
+    backdrop-filter: blur(3px);
+  }
+
+  .activity-gallery__viewer-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .activity-gallery__viewer-header h3 {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    color: var(--color-surface);
+    font-size: var(--font-size-lg);
+  }
+
+  .activity-gallery__viewer-count {
+    color: rgb(255 255 255 / 0.78);
+    font-size: var(--font-size-sm);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .activity-gallery__close,
+  .activity-gallery__step {
+    display: inline-grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 1px solid rgb(255 255 255 / 0.3);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.1);
+    color: var(--color-surface);
+    cursor: pointer;
+  }
+
+  .activity-gallery__close:hover,
+  .activity-gallery__step:hover {
+    background: rgb(255 255 255 / 0.2);
+  }
+
+  .activity-gallery__close:focus-visible,
+  .activity-gallery__step:focus-visible {
+    outline: 0.2rem solid var(--color-accent);
+    outline-offset: 0.15rem;
+  }
+
+  .activity-gallery__close svg,
+  .activity-gallery__step svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+
+  .activity-gallery__viewer-stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding-inline: var(--space-5);
+  }
+
+  .activity-gallery__viewer-frame {
+    width: 100%;
+  }
+
+  .activity-gallery__viewer-frame :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: min(70dvh, 56rem);
+    object-fit: contain;
+  }
+
+  .activity-gallery__step[data-gallery-previous] {
+    position: absolute;
+    z-index: 1;
+    inset-inline-start: 1rem;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+  }
+
+  .activity-gallery__step[data-gallery-next] {
+    position: absolute;
+    z-index: 1;
+    inset-inline-end: 1rem;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+  }
+
+  .activity-gallery__viewer-caption {
+    min-height: 1.5em;
+    margin: 0;
+    padding: var(--space-4) var(--space-5) var(--space-5);
+    color: rgb(255 255 255 / 0.86);
+    font-size: var(--font-size-sm);
+    text-align: center;
+  }
+
+  @media (max-width: 41.99rem) {
+    .activity-gallery__dialog {
+      width: calc(100% - 1rem);
+      max-width: none;
+      max-height: calc(100dvh - 1rem);
+    }
+
+    .activity-gallery__viewer-header {
+      gap: var(--space-2);
+      padding: var(--space-3);
+    }
+
+    .activity-gallery__viewer-header h3 {
+      font-size: var(--font-size-base);
+    }
+
+    .activity-gallery__viewer-stage {
+      padding-inline: var(--space-2);
+    }
+
+    .activity-gallery__close,
+    .activity-gallery__step {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .activity-gallery__viewer-frame :global(img) {
+      max-height: min(64dvh, 42rem);
+    }
+
+    .activity-gallery__step[data-gallery-previous] {
+      inset-inline-start: var(--space-2);
+    }
+
+    .activity-gallery__step[data-gallery-next] {
+      inset-inline-end: var(--space-2);
+    }
+
+    .activity-gallery__viewer-caption {
+      padding: var(--space-3);
+      font-size: var(--font-size-xs);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .activity-gallery__trigger :global(img) {
+      transition: none;
+    }
   }
 
   @media (min-width: 42rem) {
@@ -160,3 +424,93 @@ const shouldCollapse = images.length > 12;
     }
   }
 </style>
+
+<script>
+  function setupGalleries() {
+    document.querySelectorAll<HTMLElement>('[data-activity-gallery]').forEach((gallery) => {
+      if (gallery.dataset.galleryReady === 'true') return;
+      gallery.dataset.galleryReady = 'true';
+
+      const triggers = Array.from(
+        gallery.querySelectorAll<HTMLButtonElement>('.activity-gallery__trigger'),
+      );
+      const dialog = gallery.querySelector<HTMLDialogElement>('.activity-gallery__dialog');
+      const viewer = gallery.querySelector<HTMLElement>('[data-gallery-viewer]');
+      const caption = gallery.querySelector<HTMLElement>('[data-gallery-caption-output]');
+      const counter = gallery.querySelector<HTMLElement>('[data-gallery-count]');
+      const closeButton = gallery.querySelector<HTMLButtonElement>('[data-gallery-close]');
+      const previousButton = gallery.querySelector<HTMLButtonElement>('[data-gallery-previous]');
+      const nextButton = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]');
+
+      if (
+        !triggers.length ||
+        !dialog ||
+        !viewer ||
+        !caption ||
+        !counter ||
+        !closeButton ||
+        !previousButton ||
+        !nextButton
+      ) {
+        return;
+      }
+
+      let currentIndex = 0;
+      let activeTrigger: HTMLButtonElement | null = null;
+
+      const showImage = (index: number) => {
+        currentIndex = (index + triggers.length) % triggers.length;
+        const trigger = triggers[currentIndex];
+        const thumbnail = trigger.querySelector<HTMLImageElement>('img');
+
+        if (!thumbnail) return;
+
+        const image = document.createElement('img');
+        image.src = thumbnail.src;
+        image.srcset = thumbnail.srcset;
+        image.sizes = '(min-width: 64rem) 82vw, 94vw';
+        image.alt = thumbnail.alt;
+        image.decoding = 'async';
+        image.loading = 'eager';
+        viewer.replaceChildren(image);
+        caption.textContent = trigger.dataset.galleryCaption || thumbnail.alt;
+        counter.textContent = `${currentIndex + 1} de ${triggers.length}`;
+      };
+
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener('click', () => {
+          activeTrigger = trigger;
+          showImage(index);
+          dialog.showModal();
+          closeButton.focus({ preventScroll: true });
+        });
+      });
+
+      closeButton.addEventListener('click', () => dialog.close());
+      previousButton.addEventListener('click', () => showImage(currentIndex - 1));
+      nextButton.addEventListener('click', () => showImage(currentIndex + 1));
+
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+
+      dialog.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          showImage(currentIndex - 1);
+        } else if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          showImage(currentIndex + 1);
+        }
+      });
+
+      dialog.addEventListener('close', () => {
+        activeTrigger?.focus({ preventScroll: true });
+        activeTrigger = null;
+      });
+    });
+  }
+
+  setupGalleries();
+  document.addEventListener('astro:page-load', setupGalleries);
+</script>

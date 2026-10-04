@@ -75,7 +75,7 @@ export const staffAreas: StaffAreaDefinition[] = [
   {
     id: 'especialistas',
     label: 'Equipo de especialistas',
-    description: 'Profesionales de apoyo publicados por el colegio.',
+    description: 'Profesionales que apoyan el bienestar y el aprendizaje de estudiantes.',
   },
   {
     id: 'docentes',
@@ -85,7 +85,7 @@ export const staffAreas: StaffAreaDefinition[] = [
   {
     id: 'asistentes',
     label: 'Asistentes de aula',
-    description: 'Equipo de apoyo directo en los cursos publicados.',
+    description: 'Asistentes que acompañan a estudiantes y docentes en el trabajo de aula.',
   },
   {
     id: 'auxiliares',

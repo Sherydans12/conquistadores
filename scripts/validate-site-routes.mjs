@@ -29,19 +29,51 @@ const manifest = JSON.parse(
 const staticRoutes = [
   ...publicRoutesSource.matchAll(/\bpath:\s*'([^']+)'/g),
 ].map((match) => match[1]);
-const activityRoutes = manifest.entries
+const manifestActivityRoutes = manifest.entries
   .map((entry) => entry.astroPath)
   .filter((route) => !RETIRED_ACTIVITY_ROUTES.has(route));
-const expectedRoutes = [...staticRoutes, ...activityRoutes];
 const errors = [];
+
+const contentFiles = (await walkFiles(path.join(projectRoot, 'src/content/activities')))
+  .filter((filePath) => filePath.endsWith('.md'));
+const contentRoutes = [];
+const migratedContentRoutes = [];
+for (const filePath of contentFiles) {
+  const source = await readFile(filePath, 'utf8');
+  if (source.includes('staging.colegioconquistadores.com')) {
+    errors.push(
+      `Contenido editorial con host de staging codificado: ${path.relative(projectRoot, filePath)}`,
+    );
+  }
+  const frontmatterMatch = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  const frontmatter = frontmatterMatch?.[1] ?? '';
+  const routeMatch = frontmatter.match(/^historicalPath:\s*['"]?([^'"\r\n]+)['"]?\s*$/m);
+  if (!routeMatch) {
+    errors.push(`Falta historicalPath en ${path.relative(projectRoot, filePath)}`);
+    continue;
+  }
+  contentRoutes.push(routeMatch[1]);
+  if (/^sourcePostId\s*:/m.test(frontmatter)) migratedContentRoutes.push(routeMatch[1]);
+}
+
+const activityRoutes = contentRoutes;
+const expectedRoutes = [...staticRoutes, ...activityRoutes];
 
 if (staticRoutes.length !== 9) {
   errors.push(`Se esperaban 9 rutas públicas estables y se encontraron ${staticRoutes.length}.`);
 }
-if (activityRoutes.length !== EXPECTED_ACTIVITY_COUNT) {
+if (manifestActivityRoutes.length !== EXPECTED_ACTIVITY_COUNT) {
   errors.push(
-    `El manifiesto activo contiene ${activityRoutes.length} actividades; se esperaban ${EXPECTED_ACTIVITY_COUNT}.`,
+    `El manifiesto activo contiene ${manifestActivityRoutes.length} actividades; se esperaban ${EXPECTED_ACTIVITY_COUNT}.`,
   );
+}
+if (migratedContentRoutes.length !== EXPECTED_ACTIVITY_COUNT) {
+  errors.push(
+    `La colección contiene ${migratedContentRoutes.length} actividades migradas; se esperaban ${EXPECTED_ACTIVITY_COUNT}.`,
+  );
+}
+if (unique(activityRoutes).length !== activityRoutes.length) {
+  errors.push('La colección contiene rutas de actividad duplicadas.');
 }
 if (unique(expectedRoutes).length !== expectedRoutes.length) {
   errors.push('Existen rutas públicas duplicadas.');
@@ -103,31 +135,14 @@ for (const sitemapPath of sitemapPaths) {
   }
 }
 
-const contentFiles = (await walkFiles(path.join(projectRoot, 'src/content/activities')))
-  .filter((filePath) => filePath.endsWith('.md'));
-if (contentFiles.length !== EXPECTED_ACTIVITY_COUNT) {
-  errors.push(
-    `La colección contiene ${contentFiles.length} Markdown; se esperaban ${EXPECTED_ACTIVITY_COUNT}.`,
-  );
-}
-const contentRoutes = [];
-for (const filePath of contentFiles) {
-  const source = await readFile(filePath, 'utf8');
-  if (source.includes('staging.colegioconquistadores.com')) {
-    errors.push(
-      `Contenido editorial con host de staging codificado: ${path.relative(projectRoot, filePath)}`,
-    );
-  }
-  const match = source.match(/^historicalPath:\s*['"]?([^'"\r\n]+)['"]?\s*$/m);
-  if (!match) {
-    errors.push(`Falta historicalPath en ${path.relative(projectRoot, filePath)}`);
-  } else {
-    contentRoutes.push(match[1]);
-  }
-}
-for (const route of activityRoutes) {
+for (const route of manifestActivityRoutes) {
   if (!contentRoutes.includes(route)) {
     errors.push(`El manifiesto y la colección difieren en ${route}`);
+  }
+}
+for (const route of migratedContentRoutes) {
+  if (!manifestActivityRoutes.includes(route)) {
+    errors.push(`Actividad migrada fuera del manifiesto: ${route}`);
   }
 }
 

@@ -43,8 +43,8 @@ const { total, categories, years } = Astro.props;
 
   <noscript>
     <p class="document-search__noscript">
-      La lista completa está disponible a continuación. Para buscar sin
-      JavaScript, utiliza la función “Buscar en la página” de tu navegador.
+      La lista completa está más abajo. Usa la opción “Buscar en la página” de
+      tu navegador para localizar un documento.
     </p>
   </noscript>
 </form>
@@ -219,16 +219,9 @@ const { total, categories, years } = Astro.props;
 
 <style>
   .document-search {
-    position: relative;
-    z-index: 1;
     display: grid;
     gap: var(--space-5);
-    padding: clamp(1.25rem, 4vw, 2rem);
-    margin-block-start: calc(var(--space-7) * -1);
-    border: 1px solid var(--color-border);
-    border-block-start: 0.35rem solid var(--color-accent);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
+    margin: 0;
   }
 
   .document-search__input {
@@ -309,5 +302,16 @@ const { total, categories, years } = Astro.props;
     background: var(--color-surface-soft);
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
+  }
+
+  @media (min-width: 56rem) {
+    .document-search {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.35fr);
+      align-items: start;
+    }
+
+    .document-search__summary {
+      grid-column: 1 / -1;
+    }
   }
 </style>

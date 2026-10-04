@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import documentsIllustration from '../assets/images/editorial/documentos-editorial.webp';
 import DocumentCard from '../components/documents/DocumentCard.astro';
 import DocumentList from '../components/documents/DocumentList.astro';
 import DocumentSearch from '../components/documents/DocumentSearch.astro';
@@ -53,14 +55,26 @@ const years = Array.from(
 >
   <header class="documents-hero">
     <div class="container documents-hero__inner">
-      <p class="documents-hero__eyebrow">Información pública</p>
-      <h1>Documentos</h1>
-      <p>
-        Encuentra la documentación pública de Matrículas y admisión 2027 junto
-        con calendarios, planes, reglamentos y archivos de años anteriores. Los
-        documentos pendientes de revisión no se publican en esta lista.
-      </p>
-      <p class="documents-hero__note">{publicDocuments.length} documentos públicos disponibles en el catálogo.</p>
+      <div class="documents-hero__copy">
+        <p class="documents-hero__eyebrow">Información pública</p>
+        <h1>Documentos</h1>
+        <p>
+          Encuentra la documentación pública de Matrículas y admisión 2027 junto
+          con calendarios, planes, reglamentos y archivos de años anteriores.
+        </p>
+        <p class="documents-hero__note">{publicDocuments.length} documentos públicos disponibles en el catálogo.</p>
+      </div>
+      <div class="documents-hero__media" aria-hidden="true">
+        <Image
+          src={documentsIllustration}
+          alt=""
+          widths={[640, 960, 1280]}
+          sizes="(min-width: 56rem) 46vw, 100vw"
+          quality={86}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
     </div>
   </header>
 
@@ -95,7 +109,7 @@ const years = Array.from(
         <p class="section-intro__eyebrow">Accesos destacados</p>
         <h2 id="featured-documents-title">Documentos destacados</h2>
         <p>
-          Accesos directos a documentos públicos seleccionados por el colegio.
+          Accesos directos a los documentos destacados por el colegio.
         </p>
       </div>
       <div class="featured-documents__grid">
@@ -113,17 +127,12 @@ const years = Array.from(
       <div class="catalog-heading">
         <p class="section-intro__eyebrow">Centro documental</p>
         <h2 id="catalog-title">Listado de documentos públicos</h2>
-        <p>
-          Todos los resultados siguientes están presentes en el HTML inicial.
-          La búsqueda y los filtros solo mejoran la exploración en el navegador.
-        </p>
       </div>
 
       <div class="document-groups" data-document-groups>
         <DocumentList
           id="matriculas-admision-2027"
           title="Matrículas y admisión 2027"
-          description="Documentos públicos identificados para el proceso 2027. Esta sección no reutiliza archivos de 2026."
           documents={enrollmentDocuments2027}
           emptyMessage={ENROLLMENT_DOCUMENTS_EMPTY_MESSAGE}
         />
@@ -145,21 +154,21 @@ const years = Array.from(
         <DocumentList
           id="reglamentos"
           title="Reglamentos y convivencia"
-          description="Documentos reglamentarios publicados para 2026."
+          description="Reglamentos y orientaciones para la comunidad educativa."
           documents={regulationDocuments}
         />
 
         <DocumentList
           id="documentos-institucionales"
           title="Documentos institucionales"
-          description="Información institucional publicada para 2026."
+          description="Documentos sobre el proyecto educativo y la organización del colegio."
           documents={institutionalDocuments}
         />
 
         <DocumentList
           id="matriculas-admision-anteriores"
           title="Matrículas y admisión — años anteriores"
-          description="Documentos identificados como 2026 y conservados solo como referencia de un periodo anterior. No corresponden a requisitos de Matrículas 2027."
+          description="Documentos del proceso de Matrículas 2026, conservados como referencia histórica. No corresponden a los requisitos de 2027."
           documents={previousEnrollmentDocuments}
           archive
         />
@@ -170,12 +179,11 @@ const years = Array.from(
           aria-labelledby="protocolos-title"
           data-review-notice
         >
-          <p class="review-notice__eyebrow">Revisión documental</p>
+          <p class="review-notice__eyebrow">Documentos en revisión</p>
           <h2 id="protocolos-title">Protocolos internos</h2>
           <p>
-            Los protocolos históricos identificados en el sitio anterior están
-            en revisión de vigencia. No se muestran como documentos actuales
-            hasta completar esa validación.
+            Los protocolos de años anteriores están en revisión. Por ahora no
+            están disponibles como documentos vigentes.
           </p>
         </section>
 
@@ -242,15 +250,19 @@ const years = Array.from(
 
 <style>
   .documents-hero {
-    padding-block: clamp(3.5rem, 8vw, 6.5rem) clamp(5rem, 10vw, 8rem);
+    padding-block: clamp(3.5rem, 8vw, 6.5rem) clamp(3rem, 5vw, 4rem);
     background: var(--color-primary-deep);
     color: var(--color-surface);
   }
 
   .documents-hero__inner {
+    display: grid;
+    align-items: center;
+    gap: var(--space-7);
+  }
+
+  .documents-hero__copy {
     max-width: var(--container-narrow);
-    margin-inline: auto;
-    text-align: center;
   }
 
   .documents-hero__eyebrow,
@@ -270,9 +282,9 @@ const years = Array.from(
     font-size: var(--font-size-2xl);
   }
 
-  .documents-hero__inner > p:not(.documents-hero__note) {
+  .documents-hero__copy > p:not(.documents-hero__note) {
     max-width: 44rem;
-    margin: 0 auto;
+    margin: 0;
     color: rgb(255 255 255 / 0.82);
     font-size: var(--font-size-lg);
   }
@@ -284,14 +296,31 @@ const years = Array.from(
     font-weight: 900;
   }
 
+  .documents-hero__media {
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.18);
+    border-radius: var(--radius-lg);
+    background: var(--color-primary-deep);
+  }
+
+  .documents-hero__media :global(img) {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
   .documents-tools {
-    background: var(--color-background);
+    background: #fff;
+  }
+
+  .documents-tools > .container {
+    padding-block: clamp(1.5rem, 4vw, 2.5rem);
   }
 
   .document-jump {
     padding-block: var(--space-5);
     border-block: 1px solid var(--color-border);
-    background: var(--color-surface);
+    background: #fff;
   }
 
   .document-jump__links {
@@ -457,6 +486,10 @@ const years = Array.from(
   }
 
   @media (min-width: 56rem) {
+    .documents-hero__inner {
+      grid-template-columns: minmax(0, 0.9fr) minmax(28rem, 1.1fr);
+    }
+
     .documents-help__inner {
       grid-template-columns: 1fr auto;
     }
