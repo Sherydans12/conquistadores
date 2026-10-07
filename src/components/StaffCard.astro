@@ -7,30 +7,31 @@ interface Props {
 }
 
 const { member } = Astro.props;
-const initials = member.name
-  .split(/\s+/)
-  .slice(0, 2)
-  .map((part) => part[0])
-  .join('');
 ---
 
 <article class="staff-card">
-  <div class="staff-card__portrait">
-    {
-      member.image ? (
+  {
+    member.image ? (
+      <div class="staff-card__portrait">
         <Image
           src={member.image}
           alt={member.imageAlt ?? `Retrato de ${member.name}`}
-          widths={[150, 300]}
-          sizes="9rem"
+          widths={[160, 256]}
+          sizes="5.5rem"
           quality={84}
           loading="lazy"
         />
-      ) : (
-        <span aria-hidden="true">{initials}</span>
-      )
-    }
-  </div>
+      </div>
+    ) : (
+      <div class="staff-card__portrait staff-card__portrait--pending">
+        <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <circle cx="16" cy="11" r="5" />
+          <path d="M6.5 27c.8-5.1 4.3-8 9.5-8s8.7 2.9 9.5 8" />
+        </svg>
+        <span>Foto pendiente</span>
+      </div>
+    )
+  }
   <div class="staff-card__body">
     <h3>{member.name}</h3>
     <p>{member.role}</p>
@@ -40,28 +41,25 @@ const initials = member.name
 <style>
   .staff-card {
     min-width: 0;
-    height: 100%;
+    min-height: 7.25rem;
+    display: grid;
+    grid-template-columns: 5.25rem minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-4);
     padding: var(--space-4);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    border-block-start: 0.25rem solid var(--color-accent);
     background: var(--color-surface);
-    text-align: center;
   }
 
   .staff-card__portrait {
-    width: min(8.5rem, 100%);
+    width: 5.25rem;
     aspect-ratio: 1;
     display: grid;
     overflow: hidden;
     place-items: center;
-    margin: 0 auto var(--space-4);
-    border: 0.3rem solid #eef0f8;
-    border-radius: 50%;
-    background: var(--color-primary-alt);
-    color: var(--color-surface);
-    font-size: var(--font-size-xl);
-    font-weight: 900;
+    border-radius: 0.75rem;
+    background: var(--color-surface-soft);
   }
 
   .staff-card__portrait :global(img) {
@@ -70,9 +68,40 @@ const initials = member.name
     object-fit: cover;
   }
 
+  .staff-card__portrait--pending {
+    align-content: center;
+    gap: 0.35rem;
+    padding: 0.4rem;
+    border: 1px dashed #9aa5b9;
+    background: #f4f5f7;
+    color: #59657b;
+    text-align: center;
+  }
+
+  .staff-card__portrait--pending svg {
+    width: 1.7rem;
+    height: 1.7rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.6;
+  }
+
+  .staff-card__portrait--pending span {
+    font-size: 0.58rem;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .staff-card__body {
+    min-width: 0;
+  }
+
   .staff-card h3 {
-    margin-block-end: var(--space-2);
-    font-size: 1rem;
+    margin: 0 0 var(--space-2);
+    font-size: clamp(1rem, 0.94rem + 0.18vw, 1.12rem);
+    line-height: 1.25;
     overflow-wrap: anywhere;
   }
 
@@ -80,12 +109,19 @@ const initials = member.name
     margin: 0;
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
-    line-height: 1.5;
+    line-height: 1.48;
+    overflow-wrap: anywhere;
   }
 
-  @media (min-width: 42rem) {
+  @media (max-width: 24rem) {
     .staff-card {
-      padding: var(--space-5);
+      grid-template-columns: 4.5rem minmax(0, 1fr);
+      gap: var(--space-3);
+      padding: var(--space-3);
+    }
+
+    .staff-card__portrait {
+      width: 4.5rem;
     }
   }
 </style>

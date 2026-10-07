@@ -1,20 +1,14 @@
 import type { ImageMetadata } from 'astro';
 import arturoGalleguillos from '../assets/images/staff/arturo-galleguillos.webp';
 import auryFeirlie from '../assets/images/staff/aury-feirlie.webp';
-import carlaFlores from '../assets/images/staff/carla-flores.webp';
-import cesarAlzamora from '../assets/images/staff/cesar-alzamora.webp';
-import elzaDias from '../assets/images/staff/elza-dias.webp';
 import franciscaMoroso from '../assets/images/staff/francisca-moroso.webp';
 import franciscaTello from '../assets/images/staff/francisca-tello.webp';
 import helenGonzales from '../assets/images/staff/helen-gonzales.webp';
 import irisRojas from '../assets/images/staff/iris-rojas.webp';
-import javieraGalaz from '../assets/images/staff/javiera-galaz.webp';
 import javieraToro from '../assets/images/staff/javiera-toro.webp';
 import jorgeRodriguez from '../assets/images/staff/jorge-rodriguez.webp';
 import josefaFernandois from '../assets/images/staff/josefa-fernandois.webp';
-import joselynGonzales from '../assets/images/staff/joselyn-gonzales.webp';
 import juanBravo from '../assets/images/staff/juan-bravo.webp';
-import juanPabloCastillo from '../assets/images/staff/juan-pablo-castillo.webp';
 import karenCollao from '../assets/images/staff/karen-collao.webp';
 import karinaAraya from '../assets/images/staff/karina-araya.webp';
 import katherineFuenzalida from '../assets/images/staff/katherine-fuenzalida.webp';
@@ -23,18 +17,17 @@ import marcelVasquez from '../assets/images/staff/marcel-vasquez.webp';
 import marianaParadela from '../assets/images/staff/mariana-paradela.webp';
 import nicoleRojas from '../assets/images/staff/nicole-rojas.webp';
 import omarRivera from '../assets/images/staff/omar-rivera.webp';
-import paolaBarraza from '../assets/images/staff/paola-barraza.webp';
-import paolaContreras from '../assets/images/staff/paola-contreras.webp';
 import paulinaCasanga from '../assets/images/staff/paulina-casanga.webp';
 import rodrigoAraya from '../assets/images/staff/rodrigo-araya.webp';
 import roxanaHenriquez from '../assets/images/staff/roxana-henriquez.webp';
 import sergioCaro from '../assets/images/staff/sergio-caro.webp';
 import silviaSena from '../assets/images/staff/silvia-sena.webp';
 import silvianneCabello from '../assets/images/staff/silvianne-cabello.webp';
-import sofiaNavarrete from '../assets/images/staff/sofia-navarrete.webp';
+import joselynGonzales from '../assets/images/staff/joselyn-gonzales.webp';
 
 export type StaffArea =
   | 'direccion'
+  | 'tecnico-pedagogico'
   | 'gestion'
   | 'especialistas'
   | 'docentes'
@@ -48,49 +41,57 @@ export interface StaffMember {
   area: StaffArea;
   image?: ImageMetadata;
   imageAlt?: string;
-  public: boolean;
-  needsReview?: boolean;
-  sourceUrl?: string;
 }
 
 export interface StaffAreaDefinition {
   id: StaffArea;
   label: string;
+  shortLabel: string;
   description: string;
 }
-
-const sourceUrl = 'https://www.colegioconquistadores.com/personal/';
 
 export const staffAreas: StaffAreaDefinition[] = [
   {
     id: 'direccion',
-    label: 'Dirección',
-    description: 'Sostenedor, dirección y unidades técnico-pedagógicas.',
+    label: 'Dirección y Gestión',
+    shortLabel: 'Dirección y gestión',
+    description: 'Liderazgo institucional, coordinación y enfermería.',
+  },
+  {
+    id: 'tecnico-pedagogico',
+    label: 'Técnico Pedagógico y Convivencia Educativa',
+    shortLabel: 'Técnico pedagógico',
+    description: 'Unidad técnico-pedagógica y convivencia educativa.',
   },
   {
     id: 'gestion',
-    label: 'Gestión y apoyo',
-    description: 'Administración, secretaría e inspectoría.',
+    label: 'Contabilidad, Secretaría e Inspectoría',
+    shortLabel: 'Secretaría e inspectoría',
+    description: 'Administración, secretaría e inspectoría general.',
   },
   {
     id: 'especialistas',
-    label: 'Equipo de especialistas',
-    description: 'Profesionales que apoyan el bienestar y el aprendizaje de estudiantes.',
+    label: 'Inclusión Educativa “DIE”',
+    shortLabel: 'Inclusión educativa',
+    description: 'Profesionales que acompañan el aprendizaje desde la inclusión.',
   },
   {
     id: 'docentes',
     label: 'Docentes',
+    shortLabel: 'Docentes',
     description: 'Profesoras y profesores de jefatura, asignatura y academias.',
   },
   {
     id: 'asistentes',
-    label: 'Asistentes de aula',
-    description: 'Asistentes que acompañan a estudiantes y docentes en el trabajo de aula.',
+    label: 'Asistentes de Aula',
+    shortLabel: 'Asistentes de aula',
+    description: 'Acompañamiento cotidiano en los cursos de enseñanza básica.',
   },
   {
     id: 'auxiliares',
-    label: 'Auxiliares de servicio',
-    description: 'Personal de apoyo para el funcionamiento cotidiano.',
+    label: 'Auxiliares de Servicio',
+    shortLabel: 'Auxiliares de servicio',
+    description: 'Equipo de apoyo para el funcionamiento diario del colegio.',
   },
 ];
 
@@ -102,39 +103,38 @@ export const staff: StaffMember[] = [
     area: 'direccion',
     image: arturoGalleguillos,
     imageAlt: 'Retrato de Arturo Galleguillos',
-    public: true,
-    needsReview: true,
-    sourceUrl,
   },
   {
     id: 'sergio-caro',
     name: 'Sergio Caro',
-    role: 'Director',
+    role: 'Dirección',
     area: 'direccion',
     image: sergioCaro,
     imageAlt: 'Retrato de Sergio Caro',
-    public: true,
-    sourceUrl,
   },
   {
-    id: 'francisca-moroso',
-    name: 'Francisca Moroso',
-    role: 'UTP Primer Ciclo · Profesora de Matemáticas',
+    id: 'roxana-henriquez',
+    name: 'Roxana Henríquez',
+    role: 'Coordinadora de gestión · Enfermería',
     area: 'direccion',
-    image: franciscaMoroso,
-    imageAlt: 'Retrato de Francisca Moroso',
-    public: true,
-    sourceUrl,
+    image: roxanaHenriquez,
+    imageAlt: 'Retrato de Roxana Henríquez',
   },
   {
     id: 'rodrigo-araya',
     name: 'Rodrigo Araya',
-    role: 'UTP Segundo Ciclo · Profesor de Música',
-    area: 'direccion',
+    role: 'Unidad Técnico Pedagógico · Prof. Música',
+    area: 'tecnico-pedagogico',
     image: rodrigoAraya,
     imageAlt: 'Retrato de Rodrigo Araya',
-    public: true,
-    sourceUrl,
+  },
+  {
+    id: 'francisca-moroso',
+    name: 'Francisca Moroso',
+    role: 'Convivencia Educativa · Prof. Matemáticas',
+    area: 'tecnico-pedagogico',
+    image: franciscaMoroso,
+    imageAlt: 'Retrato de Francisca Moroso',
   },
   {
     id: 'silvia-sena',
@@ -143,38 +143,36 @@ export const staff: StaffMember[] = [
     area: 'gestion',
     image: silviaSena,
     imageAlt: 'Retrato de Silvia Sena',
-    public: true,
-    sourceUrl,
   },
   {
-    id: 'roxana-henriquez',
-    name: 'Roxana Henriquez',
-    role: 'Secretaria · Técnica en Enfermería',
+    id: 'mary-jane',
+    name: 'Mary Jane',
+    role: 'Secretaría',
     area: 'gestion',
-    image: roxanaHenriquez,
-    imageAlt: 'Retrato de Roxana Henriquez',
-    public: true,
-    sourceUrl,
   },
   {
     id: 'aury-feirlie',
     name: 'Aury Feirlie',
-    role: 'Inspectora',
+    role: 'Inspectora General',
     area: 'gestion',
     image: auryFeirlie,
     imageAlt: 'Retrato de Aury Feirlie',
-    public: true,
-    sourceUrl,
   },
   {
-    id: 'karen-collao',
-    name: 'Karen Collao',
-    role: 'Inspectora · Técnica en Educación Diferencial',
+    id: 'nicole-rojas',
+    name: 'Nicole Rojas',
+    role: 'Inspectora',
     area: 'gestion',
-    image: karenCollao,
-    imageAlt: 'Retrato de Karen Collao',
-    public: true,
-    sourceUrl,
+    image: nicoleRojas,
+    imageAlt: 'Retrato de Nicole Rojas',
+  },
+  {
+    id: 'josefa-fernandois',
+    name: 'Josefa Fernandois',
+    role: 'Coordinadora “DIE” · Psicopedagoga',
+    area: 'especialistas',
+    image: josefaFernandois,
+    imageAlt: 'Retrato de Josefa Fernandois',
   },
   {
     id: 'paulina-casanga',
@@ -183,172 +181,88 @@ export const staff: StaffMember[] = [
     area: 'especialistas',
     image: paulinaCasanga,
     imageAlt: 'Retrato de Paulina Casanga',
-    public: true,
-    sourceUrl,
   },
   {
-    id: 'josefa-fernandois',
-    name: 'Josefa Fernandois',
-    role: 'Psicopedagoga',
+    id: 'karen-collao',
+    name: 'Karen Collao',
+    role: 'Téc. en Educación Diferencial',
     area: 'especialistas',
-    image: josefaFernandois,
-    imageAlt: 'Retrato de Josefa Fernandois',
-    public: true,
-    sourceUrl,
+    image: karenCollao,
+    imageAlt: 'Retrato de Karen Collao',
   },
   {
-    id: 'elza-dias',
-    name: 'Elza Días',
-    role: 'Profesora Jefe 1° Básico',
-    area: 'docentes',
-    image: elzaDias,
-    imageAlt: 'Retrato de Elza Días',
-    public: true,
-    needsReview: true,
-    sourceUrl,
+    id: 'helen-gonzalez',
+    name: 'Helen Gonzalez',
+    role: 'Educadora Diferencial',
+    area: 'especialistas',
+    image: helenGonzales,
+    imageAlt: 'Retrato de Helen Gonzalez',
   },
   {
-    id: 'katherine-fuenzalida',
-    name: 'Katherine Fuenzalida',
-    role: 'Profesora Jefe 2° Básico',
-    area: 'docentes',
-    image: katherineFuenzalida,
-    imageAlt: 'Retrato de Katherine Fuenzalida',
-    public: true,
-    needsReview: true,
-    sourceUrl,
-  },
-  {
-    id: 'mariana-paradela',
-    name: 'Mariana Paradela',
-    role: 'Profesora Jefe 3° Básico',
-    area: 'docentes',
-    image: marianaParadela,
-    imageAlt: 'Retrato de Mariana Paradela',
-    public: true,
-    sourceUrl,
+    id: 'alondra-diaz',
+    name: 'Alondra Diaz',
+    role: 'Educadora Diferencial',
+    area: 'especialistas',
   },
   {
     id: 'magda-aranda',
     name: 'Magda Aranda',
-    role: 'Profesora Jefe 4° Básico',
+    role: 'Profesora jefe · 1° básico',
     area: 'docentes',
     image: magdaAranda,
     imageAlt: 'Retrato de Magda Aranda',
-    public: true,
-    sourceUrl,
   },
   {
-    id: 'paola-contreras',
-    name: 'Paola Contreras',
-    role: 'Profesora Jefe 5° Básico',
+    id: 'katherine-fuenzalida',
+    name: 'Katherine Fuenzalida',
+    role: 'Profesora jefe · 2° básico',
     area: 'docentes',
-    image: paolaContreras,
-    imageAlt: 'Retrato de Paola Contreras',
-    public: true,
-    needsReview: true,
-    sourceUrl,
+    image: katherineFuenzalida,
+    imageAlt: 'Retrato de Katherine Fuenzalida',
   },
   {
-    id: 'javiera-toro',
-    name: 'Javiera Toro',
-    role: 'Profesora de Lenguaje',
+    id: 'mariana-paradela',
+    name: 'Mariana Paradela',
+    role: 'Profesora jefe · 3° básico',
     area: 'docentes',
-    image: javieraToro,
-    imageAlt: 'Retrato de Javiera Toro',
-    public: true,
-    sourceUrl,
+    image: marianaParadela,
+    imageAlt: 'Retrato de Mariana Paradela',
   },
   {
-    id: 'marcel-vasquez',
-    name: 'Marcel Vasquez',
-    role: 'Profesor de Ciencias',
+    id: 'valentina-carrasco',
+    name: 'Valentina Carrasco',
+    role: 'Profesora jefe · 4° básico',
     area: 'docentes',
-    image: marcelVasquez,
-    imageAlt: 'Retrato de Marcel Vasquez',
-    public: true,
-    sourceUrl,
-  },
-  {
-    id: 'juan-pablo-castillo',
-    name: 'Juan Pablo Castillo',
-    role: 'Profesor de Historia y Geografía',
-    area: 'docentes',
-    image: juanPabloCastillo,
-    imageAlt: 'Retrato de Juan Pablo Castillo',
-    public: true,
-    sourceUrl,
   },
   {
     id: 'omar-rivera',
     name: 'Omar Rivera',
-    role: 'Profesor de Matemáticas',
+    role: 'Profesor de Matemáticas y Física',
     area: 'docentes',
     image: omarRivera,
     imageAlt: 'Retrato de Omar Rivera',
-    public: true,
-    sourceUrl,
   },
   {
-    id: 'helen-gonzales',
-    name: 'Helen Gonzales',
-    role: 'Profesora de Lenguaje',
+    id: 'javiera-toro',
+    name: 'Javiera Toro',
+    role: 'Profesora de Lenguaje y Comunicación y Filosofía',
     area: 'docentes',
-    image: helenGonzales,
-    imageAlt: 'Retrato de Helen Gonzales',
-    public: true,
-    needsReview: true,
-    sourceUrl,
+    image: javieraToro,
+    imageAlt: 'Retrato de Javiera Toro',
   },
   {
-    id: 'iris-rojas',
-    name: 'Iris Rojas',
-    role: 'Profesora de Academia de Teatro y Taller de Expresión',
+    id: 'juan-pablo-fox',
+    name: 'Juan Pablo Fox',
+    role: 'Profesor de Historia, Geografía y Ciencias Sociales',
     area: 'docentes',
-    image: irisRojas,
-    imageAlt: 'Retrato de Iris Rojas',
-    public: true,
-    sourceUrl,
   },
   {
-    id: 'jorge-rodriguez',
-    name: 'Jorge Rodriguez',
-    role: 'Profesor de Educación Física',
+    id: 'marcel-vasquez',
+    name: 'Marcel Vásquez',
+    role: 'Profesor de Ciencias, Biología y Química',
     area: 'docentes',
-    image: jorgeRodriguez,
-    imageAlt: 'Retrato de Jorge Rodriguez',
-    public: true,
-    sourceUrl,
-  },
-  {
-    id: 'javiera-galaz',
-    name: 'Javiera Galaz',
-    role: 'Profesora de Academia de Voleibol',
-    area: 'docentes',
-    image: javieraGalaz,
-    imageAlt: 'Retrato de Javiera Galaz',
-    public: true,
-    sourceUrl,
-  },
-  {
-    id: 'cesar-alzamora',
-    name: 'Cesar Alzamora',
-    role: 'Profesor de Educación Física',
-    area: 'docentes',
-    image: cesarAlzamora,
-    imageAlt: 'Retrato de Cesar Alzamora',
-    public: true,
-    sourceUrl,
-  },
-  {
-    id: 'juan-bravo',
-    name: 'Juan Bravo',
-    role: 'Profesor de Academia de Taekwondo',
-    area: 'docentes',
-    image: juanBravo,
-    imageAlt: 'Retrato de Juan Bravo',
-    public: true,
-    sourceUrl,
+    image: marcelVasquez,
+    imageAlt: 'Retrato de Marcel Vásquez',
   },
   {
     id: 'francisca-tello',
@@ -357,86 +271,129 @@ export const staff: StaffMember[] = [
     area: 'docentes',
     image: franciscaTello,
     imageAlt: 'Retrato de Francisca Tello',
-    public: true,
-    sourceUrl,
+  },
+  {
+    id: 'jorge-rodriguez',
+    name: 'Jorge Rodríguez',
+    role: 'Profesor de Educación Física y Salud',
+    area: 'docentes',
+    image: jorgeRodriguez,
+    imageAlt: 'Retrato de Jorge Rodríguez',
+  },
+  {
+    id: 'maria-alejandra-perez',
+    name: 'María Alejandra Pérez',
+    role: 'Profesora de Ciencias para la Ciudadanía y Biología de los ecosistemas',
+    area: 'docentes',
+  },
+  {
+    id: 'elsa-diaz',
+    name: 'Elsa Díaz',
+    role: 'Profesora de Lenguaje y Comunicación y Religión',
+    area: 'docentes',
+  },
+  {
+    id: 'julio-bonilla',
+    name: 'Julio Bonilla',
+    role: 'Profesor de Comprensión de la historia reciente',
+    area: 'docentes',
+  },
+  {
+    id: 'iris-rojas',
+    name: 'Iris Rojas',
+    role: 'Profesora de Taller Arte en Acción y Magia de Leer · Academia de Teatro',
+    area: 'docentes',
+    image: irisRojas,
+    imageAlt: 'Retrato de Iris Rojas',
+  },
+  {
+    id: 'natalia-gonzalez',
+    name: 'Natalia González',
+    role: 'Profesora de Academia de Danza',
+    area: 'docentes',
+  },
+  {
+    id: 'carlos-morales',
+    name: 'Carlos Morales',
+    role: 'Profesor de Academia de Danza',
+    area: 'docentes',
+  },
+  {
+    id: 'bastian-zalazar',
+    name: 'Bastian Zalazar',
+    role: 'Profesor de Academia de Fútbol',
+    area: 'docentes',
+  },
+  {
+    id: 'javier-ruiz',
+    name: 'Javier Ruiz',
+    role: 'Profesor de Academia de Fútbol',
+    area: 'docentes',
+  },
+  {
+    id: 'juan-bravo',
+    name: 'Juan Bravo',
+    role: 'Profesor de Academia de Taekwondo',
+    area: 'docentes',
+    image: juanBravo,
+    imageAlt: 'Retrato de Juan Bravo',
+  },
+  {
+    id: 'loreto-araya',
+    name: 'Loreto Araya',
+    role: 'Asistente de aula · 1° Básico',
+    area: 'asistentes',
   },
   {
     id: 'silvianne-cabello',
     name: 'Silvianne Cabello',
-    role: 'Asistente de Aula 1° Básico',
+    role: 'Asistente de aula · 2° Básico',
     area: 'asistentes',
     image: silvianneCabello,
     imageAlt: 'Retrato de Silvianne Cabello',
-    public: true,
-    needsReview: true,
-    sourceUrl,
   },
   {
-    id: 'carla-flores',
-    name: 'Carla Flores',
-    role: 'Asistente de Aula 2° Básico',
+    id: 'solang-hernandez',
+    name: 'Solang Hernández',
+    role: 'Asistente de aula · 3° Básico',
     area: 'asistentes',
-    image: carlaFlores,
-    imageAlt: 'Retrato de Carla Flores',
-    public: true,
-    needsReview: true,
-    sourceUrl,
   },
   {
-    id: 'sofia-navarrete',
-    name: 'Sofía Navarrete',
-    role: 'Asistente de Aula 3° Básico',
+    id: 'romina-corvalan',
+    name: 'Romina Corvalán',
+    role: 'Asistente de aula · 4° Básico',
     area: 'asistentes',
-    image: sofiaNavarrete,
-    imageAlt: 'Retrato de Sofía Navarrete',
-    public: true,
-    sourceUrl,
   },
   {
-    id: 'paola-barraza',
-    name: 'Paola Barraza',
-    role: 'Asistente de Aula 4° Básico',
+    id: 'casandra-gutierrez',
+    name: 'Casandra Gutiérrez',
+    role: 'Asistente de aula · 5° Básico',
     area: 'asistentes',
-    image: paolaBarraza,
-    imageAlt: 'Retrato de Paola Barraza',
-    public: true,
-    sourceUrl,
   },
   {
-    id: 'nicole-rojas',
-    name: 'Nicole Rojas',
-    role: 'Auxiliar de Servicio',
-    area: 'auxiliares',
-    image: nicoleRojas,
-    imageAlt: 'Retrato de Nicole Rojas',
-    public: true,
-    sourceUrl,
-  },
-  {
-    id: 'joselyn-gonzales',
-    name: 'Joselyn Gonzáles',
-    role: 'Auxiliar de Servicio',
+    id: 'joselyn-gonzalez',
+    name: 'Joselyn González',
+    role: 'Auxiliar de servicio',
     area: 'auxiliares',
     image: joselynGonzales,
-    imageAlt: 'Retrato de Joselyn Gonzáles',
-    public: true,
-    needsReview: true,
-    sourceUrl,
+    imageAlt: 'Retrato de Joselyn González',
   },
   {
     id: 'karina-araya',
     name: 'Karina Araya',
-    role: 'Auxiliar de Servicio',
+    role: 'Auxiliar de servicio',
     area: 'auxiliares',
     image: karinaAraya,
     imageAlt: 'Retrato de Karina Araya',
-    public: true,
-    sourceUrl,
+  },
+  {
+    id: 'isabel-ovalle',
+    name: 'Isabel Ovalle',
+    role: 'Auxiliar de servicio',
+    area: 'auxiliares',
   },
 ];
 
-export const publicStaff = staff.filter((member) => member.public);
-
 export function getStaffByArea(area: StaffArea): StaffMember[] {
-  return publicStaff.filter((member) => member.area === area);
+  return staff.filter((member) => member.area === area);
 }
