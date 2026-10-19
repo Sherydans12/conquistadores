@@ -58,8 +58,8 @@ const { member } = Astro.props;
     display: grid;
     overflow: hidden;
     place-items: center;
-    border-radius: 0.75rem;
-    background: var(--color-surface-soft);
+    border-radius: 50%;
+    background: transparent;
   }
 
   .staff-card__portrait :global(img) {
@@ -72,6 +72,7 @@ const { member } = Astro.props;
     align-content: center;
     gap: 0.35rem;
     padding: 0.4rem;
+    border-radius: 0.75rem;
     border: 1px dashed #9aa5b9;
     background: #f4f5f7;
     color: #59657b;

@@ -1,10 +1,13 @@
 import type { ImageMetadata } from 'astro';
+import alondraDiaz from '../assets/images/staff/alondra-diaz.webp';
 import arturoGalleguillos from '../assets/images/staff/arturo-galleguillos.webp';
 import auryFeirlie from '../assets/images/staff/aury-feirlie.webp';
+import casandraGutierrez from '../assets/images/staff/casandra-gutierrez.webp';
 import franciscaMoroso from '../assets/images/staff/francisca-moroso.webp';
 import franciscaTello from '../assets/images/staff/francisca-tello.webp';
 import helenGonzales from '../assets/images/staff/helen-gonzales.webp';
 import irisRojas from '../assets/images/staff/iris-rojas.webp';
+import javierRuiz from '../assets/images/staff/javier-ruiz.webp';
 import javieraToro from '../assets/images/staff/javiera-toro.webp';
 import jorgeRodriguez from '../assets/images/staff/jorge-rodriguez.webp';
 import josefaFernandois from '../assets/images/staff/josefa-fernandois.webp';
@@ -14,15 +17,21 @@ import karinaAraya from '../assets/images/staff/karina-araya.webp';
 import katherineFuenzalida from '../assets/images/staff/katherine-fuenzalida.webp';
 import magdaAranda from '../assets/images/staff/magda-aranda.webp';
 import marcelVasquez from '../assets/images/staff/marcel-vasquez.webp';
+import mariaAlejandraPerez from '../assets/images/staff/maria-alejandra-perez.webp';
 import marianaParadela from '../assets/images/staff/mariana-paradela.webp';
+import maryJane from '../assets/images/staff/mary-jane.webp';
+import nataliaGonzalez from '../assets/images/staff/natalia-gonzalez.webp';
 import nicoleRojas from '../assets/images/staff/nicole-rojas.webp';
 import omarRivera from '../assets/images/staff/omar-rivera.webp';
 import paulinaCasanga from '../assets/images/staff/paulina-casanga.webp';
 import rodrigoAraya from '../assets/images/staff/rodrigo-araya.webp';
+import rominaCorvalan from '../assets/images/staff/romina-corvalan.webp';
 import roxanaHenriquez from '../assets/images/staff/roxana-henriquez.webp';
 import sergioCaro from '../assets/images/staff/sergio-caro.webp';
 import silviaSena from '../assets/images/staff/silvia-sena.webp';
 import silvianneCabello from '../assets/images/staff/silvianne-cabello.webp';
+import solangeHernandez from '../assets/images/staff/solange-hernandez.webp';
+import valentinaCarrasco from '../assets/images/staff/valentina-carrasco.webp';
 import joselynGonzales from '../assets/images/staff/joselyn-gonzales.webp';
 
 export type StaffArea =
@@ -149,6 +158,8 @@ export const staff: StaffMember[] = [
     name: 'Mary Jane',
     role: 'Secretaría',
     area: 'gestion',
+    image: maryJane,
+    imageAlt: 'Retrato de Mary Jane',
   },
   {
     id: 'aury-feirlie',
@@ -203,6 +214,8 @@ export const staff: StaffMember[] = [
     name: 'Alondra Diaz',
     role: 'Educadora Diferencial',
     area: 'especialistas',
+    image: alondraDiaz,
+    imageAlt: 'Retrato de Alondra Diaz',
   },
   {
     id: 'magda-aranda',
@@ -233,6 +246,8 @@ export const staff: StaffMember[] = [
     name: 'Valentina Carrasco',
     role: 'Profesora jefe · 4° básico',
     area: 'docentes',
+    image: valentinaCarrasco,
+    imageAlt: 'Retrato de Valentina Carrasco',
   },
   {
     id: 'omar-rivera',
@@ -285,6 +300,8 @@ export const staff: StaffMember[] = [
     name: 'María Alejandra Pérez',
     role: 'Profesora de Ciencias para la Ciudadanía y Biología de los ecosistemas',
     area: 'docentes',
+    image: mariaAlejandraPerez,
+    imageAlt: 'Retrato de María Alejandra Pérez',
   },
   {
     id: 'elsa-diaz',
@@ -311,6 +328,8 @@ export const staff: StaffMember[] = [
     name: 'Natalia González',
     role: 'Profesora de Academia de Danza',
     area: 'docentes',
+    image: nataliaGonzalez,
+    imageAlt: 'Retrato de Natalia González',
   },
   {
     id: 'carlos-morales',
@@ -329,6 +348,8 @@ export const staff: StaffMember[] = [
     name: 'Javier Ruiz',
     role: 'Profesor de Academia de Fútbol',
     area: 'docentes',
+    image: javierRuiz,
+    imageAlt: 'Retrato de Javier Ruiz',
   },
   {
     id: 'juan-bravo',
@@ -353,22 +374,28 @@ export const staff: StaffMember[] = [
     imageAlt: 'Retrato de Silvianne Cabello',
   },
   {
-    id: 'solang-hernandez',
-    name: 'Solang Hernández',
+    id: 'solange-hernandez',
+    name: 'Solange Hernández',
     role: 'Asistente de aula · 3° Básico',
     area: 'asistentes',
+    image: solangeHernandez,
+    imageAlt: 'Retrato de Solange Hernández',
   },
   {
     id: 'romina-corvalan',
     name: 'Romina Corvalán',
     role: 'Asistente de aula · 4° Básico',
     area: 'asistentes',
+    image: rominaCorvalan,
+    imageAlt: 'Retrato de Romina Corvalán',
   },
   {
     id: 'casandra-gutierrez',
     name: 'Casandra Gutiérrez',
     role: 'Asistente de aula · 5° Básico',
     area: 'asistentes',
+    image: casandraGutierrez,
+    imageAlt: 'Retrato de Casandra Gutiérrez',
   },
   {
     id: 'joselyn-gonzalez',
