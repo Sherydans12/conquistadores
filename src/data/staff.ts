@@ -15,6 +15,7 @@ import juanBravo from '../assets/images/staff/juan-bravo.webp';
 import karenCollao from '../assets/images/staff/karen-collao.webp';
 import karinaAraya from '../assets/images/staff/karina-araya.webp';
 import katherineFuenzalida from '../assets/images/staff/katherine-fuenzalida.webp';
+import loretoAraya from '../assets/images/staff/loreto-araya.webp';
 import magdaAranda from '../assets/images/staff/magda-aranda.webp';
 import marcelVasquez from '../assets/images/staff/marcel-vasquez.webp';
 import mariaAlejandraPerez from '../assets/images/staff/maria-alejandra-perez.webp';
@@ -364,6 +365,8 @@ export const staff: StaffMember[] = [
     name: 'Loreto Araya',
     role: 'Asistente de aula · 1° Básico',
     area: 'asistentes',
+    image: loretoAraya,
+    imageAlt: 'Retrato de Loreto Araya',
   },
   {
     id: 'silvianne-cabello',
