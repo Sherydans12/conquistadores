@@ -49,7 +49,7 @@ for (const fragment of [
   'Arturo Javier Galleguillos Trigo',
   'galleguillostrigo@gmail.com',
   'no ofrece registro',
-  'no se utilizará analítica',
+  'no utiliza herramientas de analítica web',
 ]) {
   if (!privacyHtml.toLowerCase().includes(fragment.toLowerCase())) {
     errors.push(`La página de privacidad omite: ${fragment}.`);

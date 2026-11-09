@@ -1,5 +1,12 @@
 # Runbook de rollback a WordPress
 
+> **Documento histórico; no ejecutar como procedimiento vigente.** WordPress y
+> HostingPlus son infraestructura anterior. La recuperación del frontend actual
+> se hace con una imagen previa de Coolify o, si no está disponible, con un
+> commit de reversión en Git. Consultar el
+> [runbook Astro/Coolify](astro-coolify-production-runbook.md). El resto de este
+> archivo conserva el plan de reversión de la migración anterior.
+
 ## Objetivo
 
 Restaurar de forma controlada el sitio público WordPress anterior si el cambio

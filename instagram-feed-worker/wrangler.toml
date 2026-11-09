@@ -1,0 +1,10 @@
+name = "conquistadores-instagram-feed"
+main = "src/index.ts"
+compatibility_date = "2026-11-05"
+workers_dev = true
+
+[vars]
+INSTAGRAM_API_VERSION = "v27.0"
+INSTAGRAM_USER_ID = "17841457327240125"
+ALLOWED_ORIGINS = "https://staging.colegioconquistadores.com,https://www.colegioconquistadores.com,https://colegioconquistadores.com,http://127.0.0.1:4322,http://localhost:4322"
+INSTAGRAM_EXCLUDED_POST_IDS = "17952797223319805,18071758166783635,18159668395459796"

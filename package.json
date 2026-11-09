@@ -11,6 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
+    "test:instagram-feed-worker": "node --experimental-strip-types --test tests/instagram-feed-worker.test.mjs",
+    "test:instagram-feed": "node --experimental-strip-types --test tests/instagram-feed-worker.test.mjs tests/instagram-feed-component.test.mjs",
     "activities:import": "node scripts/import-wordpress-activities.mjs",
     "activities:materialize": "node scripts/materialize-activity-content.mjs",
     "activities:validate": "node scripts/validate-activities.mjs",

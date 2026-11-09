@@ -1,0 +1,611 @@
+---
+import { site } from '../data/site';
+
+const feedUrl =
+  import.meta.env.PUBLIC_INSTAGRAM_FEED_URL ||
+  'https://conquistadores-instagram-feed.nicolas-18-111.workers.dev/api/instagram-feed';
+---
+
+<section
+  id="instagram-feed"
+  class="instagram-feed section section--soft"
+  aria-labelledby="instagram-feed-title"
+  data-instagram-feed
+  data-feed-url={feedUrl}
+>
+  <div class="container">
+    <div class="instagram-feed__heading">
+      <div class="instagram-feed__intro">
+        <h2 id="instagram-feed-title">Historias recientes de nuestra comunidad</h2>
+        <p>Actividades, aprendizajes y encuentros contados desde el día a día del colegio.</p>
+      </div>
+      <a class="button button--secondary" href={site.social.instagram.url} target="_blank" rel="noopener noreferrer">
+        Ver cuenta en Instagram
+        <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
+          <path d="M4 10h11M10 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="sr-only"> (se abre en una pestaña nueva)</span>
+      </a>
+    </div>
+
+    <p class="instagram-feed__status" data-feed-status role="status" aria-live="polite">
+      Cargando publicaciones de Instagram…
+    </p>
+
+    <div class="instagram-feed__skeleton" data-feed-skeleton aria-hidden="true">
+      <div class="instagram-feed__skeleton-lead"></div>
+      <div class="instagram-feed__skeleton-grid">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="instagram-feed__lead" data-feed-feature hidden></div>
+    <div class="instagram-feed__grid" data-feed-grid aria-label="Publicaciones recientes de Instagram" hidden></div>
+  </div>
+</section>
+
+<script>
+  type InstagramPost = {
+    id: string;
+    mediaType: string;
+    mediaUrl: string;
+    permalink: string;
+    caption?: string;
+    timestamp?: string;
+  };
+
+  type FeedResponse = { posts: InstagramPost[] };
+
+  const formatter = new Intl.DateTimeFormat('es-CL', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+  const postCacheKey = 'conquistadores-instagram-feed:posts:v1';
+  const excludedMediaTypes = new Set(['VIDEO', 'REELS']);
+
+  document.querySelectorAll<HTMLElement>('[data-instagram-feed]').forEach((section) => {
+    const endpoint = section.dataset.feedUrl;
+    const status = section.querySelector<HTMLElement>('[data-feed-status]');
+    const skeleton = section.querySelector<HTMLElement>('[data-feed-skeleton]');
+    const feature = section.querySelector<HTMLElement>('[data-feed-feature]');
+    const grid = section.querySelector<HTMLElement>('[data-feed-grid]');
+
+    if (!endpoint || !status || !grid) return;
+
+    const showStatus = (message: string) => {
+      status.textContent = message;
+      status.hidden = false;
+      if (skeleton) skeleton.hidden = true;
+      if (feature) feature.hidden = true;
+      grid.hidden = true;
+    };
+
+    const formatPostDate = (post: InstagramPost) => {
+      const date = post.timestamp ? new Date(post.timestamp) : null;
+      return date && !Number.isNaN(date.getTime()) ? date : null;
+    };
+
+    const getPostTitle = (post: InstagramPost) => {
+      const firstLine = post.caption?.split(/\r?\n/, 1)[0]?.trim().replace(/\s+/g, ' ');
+      if (!firstLine) return 'Publicación del colegio';
+      return firstLine.length > 96 ? `${firstLine.slice(0, 93).trimEnd()}…` : firstLine;
+    };
+
+    const getPostExcerpt = (post: InstagramPost) => {
+      const caption = post.caption?.trim() || '';
+      if (!caption) return 'Lee la publicación completa que compartió el colegio.';
+
+      const firstLine = caption.split(/\r?\n/, 1)[0]?.trim() || '';
+      const rest = caption.slice(firstLine.length).trim();
+      const excerpt = rest || (caption === firstLine ? 'Lee el mensaje completo de esta publicación.' : caption);
+      return excerpt.length > 180 ? `${excerpt.slice(0, 177).trimEnd()}…` : excerpt;
+    };
+
+    const getMediaLabel = (mediaType: string) => {
+      if (mediaType === 'CAROUSEL_ALBUM') return 'Carrusel';
+      if (mediaType === 'VIDEO' || mediaType === 'REELS') return 'Video';
+      return 'Fotografía';
+    };
+
+    const createMedia = (post: InstagramPost, featured: boolean) => {
+      const mediaFrame = document.createElement('span');
+      mediaFrame.className = `instagram-feed__media${featured ? ' instagram-feed__media--featured' : ''}`;
+
+      const isVideo = post.mediaType === 'VIDEO' || post.mediaType === 'REELS';
+      let media: HTMLImageElement | HTMLVideoElement;
+      if (isVideo) {
+        const video = document.createElement('video');
+        video.className = 'instagram-feed__visual';
+        video.src = post.mediaUrl;
+        video.muted = true;
+        video.playsInline = true;
+        video.preload = 'metadata';
+        video.setAttribute('aria-label', `Vista previa del video: ${getPostTitle(post)}`);
+        media = video;
+      } else {
+        const image = document.createElement('img');
+        image.className = 'instagram-feed__visual';
+        image.src = post.mediaUrl;
+        image.alt = getPostTitle(post);
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        image.width = 960;
+        image.height = 720;
+        media = image;
+      }
+
+      const mediaFallback = document.createElement('span');
+      mediaFallback.className = 'instagram-feed__media-fallback';
+      mediaFallback.textContent = 'Vista previa no disponible';
+      mediaFallback.hidden = true;
+      media.addEventListener('error', () => {
+        media.hidden = true;
+        mediaFallback.hidden = false;
+      }, { once: true });
+
+      const mediaLabel = document.createElement('span');
+      mediaLabel.className = 'instagram-feed__media-label';
+      mediaLabel.textContent = getMediaLabel(post.mediaType);
+      mediaFrame.append(media, mediaFallback, mediaLabel);
+      return mediaFrame;
+    };
+
+    const renderPost = (post: InstagramPost, featured = false) => {
+      const date = formatPostDate(post);
+      const title = getPostTitle(post);
+      const link = document.createElement('a');
+      link.className = featured
+        ? 'instagram-feed__post instagram-feed__post--featured'
+        : 'instagram-feed__post';
+      link.href = `/instagram/publicacion/?id=${encodeURIComponent(post.id)}`;
+      link.setAttribute('aria-label', `Leer publicación: ${title}`);
+
+      const content = document.createElement('span');
+      content.className = 'instagram-feed__post-content';
+
+      const meta = document.createElement('span');
+      meta.className = 'instagram-feed__meta';
+      if (date) {
+        const time = document.createElement('time');
+        time.dateTime = date.toISOString();
+        time.textContent = formatter.format(date);
+        meta.append(time);
+      }
+
+      const heading = document.createElement('h3');
+      heading.className = 'instagram-feed__post-title';
+      heading.textContent = title;
+
+      const excerpt = document.createElement('span');
+      excerpt.className = 'instagram-feed__post-excerpt';
+      excerpt.textContent = getPostExcerpt(post);
+
+      const action = document.createElement('span');
+      action.className = 'instagram-feed__read-more';
+      action.textContent = 'Leer publicación';
+      action.setAttribute('aria-hidden', 'true');
+
+      content.append(meta, heading, excerpt, action);
+      link.append(createMedia(post, featured), content);
+      return link;
+    };
+
+    const saveCachedPosts = (posts: InstagramPost[]) => {
+      if (typeof sessionStorage === 'undefined') return;
+      try {
+        sessionStorage.setItem(postCacheKey, JSON.stringify({ feedUrl: endpoint, posts }));
+      } catch {
+        // Storage may be disabled; the live feed should still render.
+      }
+    };
+
+    fetch(`${endpoint}${endpoint.includes('?') ? '&' : '?'}limit=6`, {
+      headers: { Accept: 'application/json' },
+      credentials: 'omit',
+    })
+      .then(async (response) => {
+        if (!response.ok) throw new Error('feed_unavailable');
+        return (await response.json()) as FeedResponse;
+      })
+      .then(({ posts }) => {
+        const validPosts = Array.isArray(posts)
+          ? posts.filter((post) =>
+              post &&
+              typeof post.id === 'string' &&
+              typeof post.mediaType === 'string' &&
+              !excludedMediaTypes.has(post.mediaType.toUpperCase()) &&
+              (post.caption === undefined || typeof post.caption === 'string') &&
+              (post.timestamp === undefined || typeof post.timestamp === 'string') &&
+              typeof post.mediaUrl === 'string' &&
+              /^https:\/\//i.test(post.mediaUrl) &&
+              typeof post.permalink === 'string' &&
+              /^https:\/\/(www\.)?instagram\.com\//i.test(post.permalink),
+            )
+          : [];
+
+        if (validPosts.length === 0) {
+          showStatus('Aún no hay publicaciones disponibles. Visita Instagram para ver las novedades.');
+          return;
+        }
+
+        saveCachedPosts(validPosts);
+        status.hidden = true;
+        if (skeleton) skeleton.hidden = true;
+
+        if (feature) {
+          feature.replaceChildren(renderPost(validPosts[0], true));
+          feature.hidden = false;
+          const remainingPosts = validPosts.slice(1);
+          grid.replaceChildren(...remainingPosts.map((post) => renderPost(post)));
+          grid.hidden = remainingPosts.length === 0;
+        } else {
+          grid.replaceChildren(...validPosts.map((post) => renderPost(post)));
+          grid.hidden = false;
+        }
+      })
+      .catch(() => {
+        showStatus('No pudimos cargar las publicaciones ahora. Puedes verlas directamente en Instagram.');
+      });
+  });
+</script>
+
+<style>
+  :global([data-instagram-feed] [hidden]) {
+    display: none !important;
+  }
+
+  .instagram-feed {
+    overflow: hidden;
+  }
+
+  .instagram-feed__heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-5);
+    margin-block-end: var(--space-6);
+  }
+
+  .instagram-feed__intro {
+    max-width: 43rem;
+  }
+
+  .instagram-feed__heading h2 {
+    max-width: 20ch;
+    margin-block-end: var(--space-3);
+    color: var(--color-primary-deep);
+    font-size: var(--font-size-2xl);
+    text-wrap: balance;
+  }
+
+  .instagram-feed__heading p {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+  }
+
+  .instagram-feed__heading .button {
+    flex: 0 0 auto;
+    gap: var(--space-2);
+  }
+
+  .instagram-feed__heading svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex: none;
+  }
+
+  .instagram-feed__status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 2rem;
+    margin: 0 0 var(--space-4);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .instagram-feed__status::before {
+    width: 0.65rem;
+    height: 0.65rem;
+    flex: none;
+    border-radius: 50%;
+    background: var(--color-accent-strong);
+    content: "";
+    animation: instagram-pulse 1.2s ease-in-out infinite alternate;
+  }
+
+  .instagram-feed__skeleton {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .instagram-feed__skeleton-lead,
+  .instagram-feed__skeleton-grid span {
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: linear-gradient(100deg, var(--color-surface-muted) 25%, var(--color-surface) 42%, var(--color-surface-muted) 60%);
+    background-size: 220% 100%;
+    animation: instagram-shimmer 1.5s ease-in-out infinite;
+  }
+
+  .instagram-feed__skeleton-lead {
+    min-height: 17rem;
+  }
+
+  .instagram-feed__skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .instagram-feed__skeleton-grid span {
+    min-height: 12rem;
+  }
+
+  .instagram-feed__lead {
+    margin-block-end: var(--space-5);
+  }
+
+  :global(.instagram-feed__post) {
+    display: grid;
+    min-width: 0;
+    overflow: hidden;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  }
+
+  :global(.instagram-feed__post:hover) {
+    border-color: var(--color-primary-alt);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  :global(.instagram-feed__post:focus-visible) {
+    outline: 0.2rem solid var(--color-focus);
+    outline-offset: 0.2rem;
+  }
+
+  :global(.instagram-feed__media) {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: var(--color-primary-deep);
+  }
+
+  :global(.instagram-feed__media--featured) {
+    aspect-ratio: 5 / 3.5;
+  }
+
+  :global(.instagram-feed__visual),
+  :global(.instagram-feed__media-fallback) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  :global(.instagram-feed__visual) {
+    transition: transform var(--transition-base);
+  }
+
+  :global(.instagram-feed__post:hover .instagram-feed__visual) {
+    transform: scale(1.025);
+  }
+
+  :global(.instagram-feed__media-fallback) {
+    display: grid;
+    place-items: center;
+    padding: var(--space-5);
+    color: var(--color-surface);
+    font-size: var(--font-size-sm);
+    text-align: center;
+  }
+
+  :global(.instagram-feed__media-label) {
+    position: absolute;
+    inset-block-start: var(--space-4);
+    inset-inline-start: var(--space-4);
+    padding: 0.4rem 0.7rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-primary-deep);
+    font-size: var(--font-size-xs);
+    font-weight: 800;
+  }
+
+  :global(.instagram-feed__post-content) {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-4) var(--space-5) var(--space-5);
+  }
+
+  :global(.instagram-feed__meta) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+    margin-block-end: var(--space-3);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+  }
+
+  :global(.instagram-feed__post-title) {
+    display: -webkit-box;
+    overflow: hidden;
+    margin-block: 0 var(--space-2);
+    color: var(--color-primary-deep);
+    font-size: var(--font-size-lg);
+    line-height: 1.35;
+    text-wrap: pretty;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  :global(.instagram-feed__post-excerpt) {
+    display: -webkit-box;
+    overflow: hidden;
+    margin-block-end: var(--space-4);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-body);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  :global(.instagram-feed__read-more) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-block-start: auto;
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+  }
+
+  :global(.instagram-feed__read-more::after) {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-block-start: 2px solid currentColor;
+    border-inline-end: 2px solid currentColor;
+    content: "";
+    transform: rotate(45deg);
+  }
+
+  :global(.instagram-feed__post:hover .instagram-feed__read-more) {
+    color: var(--color-primary-alt);
+  }
+
+  .instagram-feed__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  :global(.instagram-feed__post--featured) {
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    align-items: stretch;
+  }
+
+  :global(.instagram-feed__post--featured .instagram-feed__post-content) {
+    justify-content: center;
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  :global(.instagram-feed__post--featured .instagram-feed__meta) {
+    margin-block-end: var(--space-5);
+  }
+
+  :global(.instagram-feed__post--featured .instagram-feed__post-title) {
+    margin-block-end: var(--space-4);
+    font-size: clamp(1.55rem, 1.2rem + 1.5vw, 2.35rem);
+    line-height: 1.2;
+  }
+
+  :global(.instagram-feed__post--featured .instagram-feed__post-excerpt) {
+    margin-block-end: var(--space-6);
+    font-size: var(--font-size-base);
+  }
+
+  @media (min-width: 44rem) {
+    .instagram-feed__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-5);
+    }
+
+    .instagram-feed__skeleton-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 68rem) {
+    .instagram-feed__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .instagram-feed__skeleton {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      align-items: stretch;
+    }
+
+    .instagram-feed__skeleton-lead {
+      min-height: 27rem;
+    }
+
+    .instagram-feed__skeleton-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .instagram-feed__skeleton-grid span {
+      min-height: 12.5rem;
+    }
+  }
+
+  @media (max-width: 52rem) {
+    :global(.instagram-feed__post--featured) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    :global(.instagram-feed__media--featured) {
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (max-width: 42rem) {
+    .instagram-feed__heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .instagram-feed__heading .button {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .instagram-feed__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .instagram-feed__skeleton-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .instagram-feed__skeleton-grid span {
+      min-height: 9rem;
+    }
+
+    :global(.instagram-feed__post-content) {
+      padding: var(--space-4);
+    }
+  }
+
+  @keyframes instagram-shimmer {
+    to { background-position: -220% 0; }
+  }
+
+  @keyframes instagram-pulse {
+    to { opacity: 0.38; transform: scale(0.72); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .instagram-feed__post,
+    .instagram-feed__visual,
+    .instagram-feed__skeleton-lead,
+    .instagram-feed__skeleton-grid span,
+    .instagram-feed__status::before {
+      transition: none;
+      animation: none;
+    }
+  }
+</style>

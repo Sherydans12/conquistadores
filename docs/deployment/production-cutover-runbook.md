@@ -1,8 +1,14 @@
 # Runbook de cambio a producción
 
+> **Documento histórico; no ejecutar como procedimiento vigente.** La aplicación
+> Astro ya sirve producción desde Coolify. No se requiere corte de DNS ni
+> promoción desde staging. El flujo vigente está en el
+> [runbook Astro/Coolify](astro-coolify-production-runbook.md); este archivo se
+> conserva como evidencia del plan de migración anterior.
+
 ## Propósito y límites
 
-Este runbook describe un cambio futuro y reversible del sitio institucional
+Este runbook describió un cambio futuro y reversible del sitio institucional
 hacia Astro. No ejecuta cambios en DNS, Cloudflare, Coolify, VPS, cPanel,
 WordPress, correo, usuarios, contraseñas, plugins, base de datos, dominio ni
 redirecciones.

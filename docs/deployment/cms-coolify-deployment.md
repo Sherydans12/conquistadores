@@ -1,5 +1,11 @@
 # Despliegue CMS + Astro en Coolify
 
+> **Guía histórica de instalación.** Directus ya tiene un recurso independiente
+> en Coolify y no forma parte del despliegue Astro. No repetir aquí los pasos de
+> creación, bootstrap, importación o cambio de esquema durante una publicación
+> del frontend. Para publicar Astro, usar
+> [astro-coolify-production-runbook.md](astro-coolify-production-runbook.md).
+
 ## CMS
 
 1. Confirmar que `Sherydans12/conquistadores-cms` sea privado.

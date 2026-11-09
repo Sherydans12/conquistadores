@@ -1,5 +1,11 @@
 # Corte final WordPress → Astro usando la misma aplicación
 
+> **Documento histórico; no ejecutar como procedimiento vigente.** La web ya
+> está alojada en Astro mediante Coolify y no se usa staging. Para publicar o
+> recuperar la versión actual, seguir el
+> [runbook Astro/Coolify](astro-coolify-production-runbook.md). El resto de
+> este archivo conserva decisiones y evidencia de la migración.
+
 ## Decisiones cerradas
 
 - La aplicación actual de staging se promoverá a producción; no se crea una segunda app.
