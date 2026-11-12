@@ -3,12 +3,10 @@ import { Image } from 'astro:assets';
 import culturalVisitImage from '../assets/images/activities/2023/visita-centro-cultural-mohamed-vi/gallery-017.webp';
 import familyImage from '../assets/images/activities/2025/dia-de-la-familia-2025/gallery-006.webp';
 import innovationImage from '../assets/images/activities/2025/colegio-conquistadores-lleva-su-innovacion-a-la-world-robot-olympiad-chile/gallery-004.webp';
-import ActivityCard from '../components/ActivityCard.astro';
 import ContactSection from '../components/ContactSection.astro';
 import FamilyPortalSection from '../components/FamilyPortalSection.astro';
 import Hero from '../components/Hero.astro';
 import InstagramFeed from '../components/InstagramFeed.astro';
-import LazyVideo from '../components/LazyVideo.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { home } from '../data/home';
@@ -147,28 +145,9 @@ import { site } from '../data/site';
     </div>
   </section>
 
-  <section class="section section--surface" id="actividades" aria-labelledby="activities-title">
-    <div class="container">
-      <div class="section-lead">
-        <SectionHeading
-          id="activities-title"
-          eyebrow="Vida escolar"
-          title="Actividades destacadas"
-          description="Experiencias recientes que muestran innovación, cultura y encuentro en nuestra comunidad educativa."
-        />
-        <a class="button activities-link" href="/actividades/">
-          Ver todas las actividades
-        </a>
-      </div>
-      <div class="activities-grid">
-        {
-          home.activities.map((activity) => (
-            <ActivityCard activity={activity} />
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <div id="actividades">
+    <InstagramFeed />
+  </div>
 
   <section class="section enrichment" aria-labelledby="enrichment-title">
     <div class="container">
@@ -202,39 +181,6 @@ import { site } from '../data/site';
       </div>
     </div>
   </section>
-
-  <section class="section community-media" id="social" aria-labelledby="community-title">
-    <div class="container community-media__grid">
-      <div>
-        <SectionHeading
-          id="community-title"
-          eyebrow="Nuestra comunidad"
-          title="Conoce una de nuestras experiencias"
-          light
-        />
-        <LazyVideo />
-      </div>
-      <aside class="social-card">
-        <p class="social-card__eyebrow">Redes sociales</p>
-        <h2>La vida del colegio, en un canal oficial</h2>
-        <p>
-          En Instagram compartimos actividades, aprendizajes y encuentros de
-          nuestra comunidad educativa.
-        </p>
-        <a
-          class="button button--primary"
-          href={site.social.instagram.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Seguir en Instagram
-        </a>
-        <p class="external-note">Instagram se abre en otra pestaña.</p>
-      </aside>
-    </div>
-  </section>
-
-  <InstagramFeed />
 
   <ContactSection />
 
@@ -298,7 +244,6 @@ import { site } from '../data/site';
 
   .identity-grid,
   .attributes-grid,
-  .activities-grid,
   .enrichment-grid {
     display: grid;
     gap: var(--space-4);
@@ -470,24 +415,6 @@ import { site } from '../data/site';
     color: rgb(255 255 255 / 0.79);
   }
 
-  .section-lead {
-    margin-block-end: var(--space-7);
-  }
-
-  .section-lead :global(.section-heading) {
-    margin-block-end: var(--space-5);
-  }
-
-  .activities-link {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-  }
-
-  .activities-link:hover {
-    background: var(--color-primary);
-    color: var(--color-surface);
-  }
-
   .enrichment {
     background: var(--color-background);
   }
@@ -513,25 +440,6 @@ import { site } from '../data/site';
     margin-block-end: var(--space-4);
   }
 
-  .community-media {
-    background: var(--color-primary-deep);
-  }
-
-  .community-media__grid {
-    display: grid;
-    align-items: center;
-    gap: var(--space-7);
-  }
-
-  .social-card {
-    padding: clamp(1.6rem, 4vw, 2.8rem);
-    border: 1px solid var(--color-border);
-    border-block-start: 0.25rem solid var(--color-accent);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-  }
-
-  .social-card__eyebrow,
   .enrollment__eyebrow {
     margin-block-end: var(--space-2);
     color: var(--color-primary-alt);
@@ -539,15 +447,6 @@ import { site } from '../data/site';
     font-weight: 900;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-  }
-
-  .social-card h2 {
-    margin-block-end: var(--space-4);
-    font-size: var(--font-size-2xl);
-  }
-
-  .social-card .external-note {
-    margin: var(--space-3) 0 0;
   }
 
   .enrollment {
@@ -597,15 +496,8 @@ import { site } from '../data/site';
     }
 
     .identity-grid,
-    .attributes-grid,
-    .activities-grid {
+    .attributes-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .activities-grid > :global(:last-child) {
-      grid-column: 1 / -1;
-      width: min(100%, calc(50% - var(--space-2)));
-      justify-self: center;
     }
 
     .enrichment-grid {
@@ -638,35 +530,14 @@ import { site } from '../data/site';
       grid-template-columns: 1.35fr 0.65fr;
     }
 
-    .section-lead {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: var(--space-5);
-    }
-
-    .section-lead :global(.section-heading) {
-      margin-block-end: 0;
-    }
-
-    .community-media__grid {
-      grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
-    }
-
     .enrollment__inner {
       grid-template-columns: 1fr auto;
     }
   }
 
   @media (min-width: 64rem) {
-    .attributes-grid,
-    .activities-grid {
+    .attributes-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .activities-grid > :global(:last-child) {
-      grid-column: auto;
-      width: auto;
     }
 
     .identity-story {

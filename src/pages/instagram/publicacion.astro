@@ -5,6 +5,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const feedUrl =
   import.meta.env.PUBLIC_INSTAGRAM_FEED_URL ||
   'https://conquistadores-instagram-feed.nicolas-18-111.workers.dev/api/instagram-feed';
+const archiveUrl = new URL(feedUrl);
+archiveUrl.pathname = archiveUrl.pathname.replace(/\/api\/instagram-feed\/?$/, '/api/instagram-archive');
+archiveUrl.search = '';
 ---
 
 <BaseLayout
@@ -14,7 +17,7 @@ const feedUrl =
   type="article"
   noindex
 >
-  <section class="instagram-story" data-instagram-story data-feed-url={feedUrl} aria-busy="true">
+  <section class="instagram-story" data-instagram-story data-feed-url={feedUrl} data-archive-url={archiveUrl.toString()} aria-busy="true">
     <div class="container instagram-story__container">
       <a class="instagram-story__back" href="/#instagram-feed">
         <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
@@ -31,7 +34,7 @@ const feedUrl =
         <p data-story-error-message>No pudimos cargar esta publicación ahora.</p>
         <div class="instagram-story__error-actions">
           <a class="button button--primary" href={site.social.instagram.url} target="_blank" rel="noopener noreferrer">
-            Ir a Instagram
+            Ver cuenta en Instagram
             <span class="sr-only"> (se abre en una pestaña nueva)</span>
           </a>
           <a class="instagram-story__back-link" href="/#instagram-feed">Volver al feed</a>
@@ -58,11 +61,15 @@ const feedUrl =
             <div class="instagram-story__caption" data-story-caption></div>
             <div class="instagram-story__actions">
               <a class="button button--primary" data-story-instagram-link href={site.social.instagram.url} target="_blank" rel="noopener noreferrer">
-                Ir a Instagram
+                Ver publicación original
                 <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
                   <path d="M7.5 4.5h8v8m0-8-9 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
                   <path d="M13 11.5v4h-9v-9h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
+                <span class="sr-only"> (se abre en una pestaña nueva)</span>
+              </a>
+              <a class="button button--secondary" href={site.social.instagram.url} target="_blank" rel="noopener noreferrer">
+                Ver cuenta del colegio
                 <span class="sr-only"> (se abre en una pestaña nueva)</span>
               </a>
               <a class="instagram-story__back-link" href="/#instagram-feed">Ver otras publicaciones</a>
@@ -79,12 +86,13 @@ const feedUrl =
     id: string;
     mediaType: string;
     mediaUrl: string;
+    mediaUrls?: string[];
     permalink: string;
     caption?: string;
     timestamp?: string;
   };
 
-  const cacheKey = 'conquistadores-instagram-feed:posts:v1';
+  const cacheKey = 'conquistadores-instagram-feed:posts:v2';
   const formatter = new Intl.DateTimeFormat('es-CL', {
     day: 'numeric',
     month: 'long',
@@ -95,6 +103,7 @@ const feedUrl =
 
   if (root) {
     const endpoint = root.dataset.feedUrl;
+    const archiveEndpoint = root.dataset.archiveUrl;
     const loading = root.querySelector<HTMLElement>('[data-story-loading]');
     const error = root.querySelector<HTMLElement>('[data-story-error]');
     const errorMessage = root.querySelector<HTMLElement>('[data-story-error-message]');
@@ -114,6 +123,10 @@ const feedUrl =
         typeof candidate.mediaType === 'string' &&
         typeof candidate.mediaUrl === 'string' &&
         /^https:\/\//i.test(candidate.mediaUrl) &&
+        (candidate.mediaUrls === undefined || (
+          Array.isArray(candidate.mediaUrls) &&
+          candidate.mediaUrls.every((url) => typeof url === 'string' && /^https:\/\//i.test(url))
+        )) &&
         typeof candidate.permalink === 'string' &&
         /^https:\/\/(www\.)?instagram\.com\//i.test(candidate.permalink) &&
         (candidate.caption === undefined || typeof candidate.caption === 'string') &&
@@ -174,7 +187,10 @@ const feedUrl =
       }
 
       const isVideo = post.mediaType === 'VIDEO' || post.mediaType === 'REELS';
-      let media: HTMLImageElement | HTMLVideoElement;
+      const mediaUrls = !isVideo && post.mediaType === 'CAROUSEL_ALBUM'
+        ? [...new Set((post.mediaUrls?.length ? post.mediaUrls : [post.mediaUrl]).filter((url) => /^https:\/\//i.test(url)))]
+        : [post.mediaUrl];
+      let media: HTMLElement;
       if (isVideo) {
         const video = document.createElement('video');
         video.className = 'instagram-story__visual';
@@ -184,10 +200,215 @@ const feedUrl =
         video.preload = 'metadata';
         video.setAttribute('aria-label', headline);
         media = video;
+      } else if (mediaUrls.length > 1) {
+        const viewport = document.createElement('div');
+        viewport.className = 'instagram-story__carousel-viewport';
+        viewport.tabIndex = 0;
+        viewport.setAttribute('role', 'region');
+        viewport.setAttribute('aria-roledescription', 'carrusel');
+        viewport.setAttribute('aria-label', `Imágenes de la publicación: ${headline}`);
+
+        const track = document.createElement('div');
+        track.className = 'instagram-story__carousel-track';
+        const createSlide = (url: string, index: number, clone = false) => {
+          const slide = document.createElement('div');
+          slide.className = 'instagram-story__carousel-slide';
+          slide.setAttribute('role', 'group');
+          slide.setAttribute('aria-roledescription', 'diapositiva');
+          slide.setAttribute('aria-label', `Imagen ${index + 1} de ${mediaUrls.length}`);
+          if (clone) slide.setAttribute('aria-hidden', 'true');
+
+          const image = document.createElement('img');
+          image.className = 'instagram-story__visual';
+          image.src = url;
+          image.alt = clone ? '' : `${headline}, imagen ${index + 1} de ${mediaUrls.length}`;
+          image.loading = index <= 1 ? 'eager' : 'lazy';
+          image.decoding = 'async';
+          image.draggable = false;
+          if (index === 0 && !clone) image.fetchPriority = 'high';
+          image.width = 1200;
+          image.height = 1000;
+          const slideFallback = document.createElement('span');
+          slideFallback.className = 'instagram-story__slide-fallback';
+          slideFallback.textContent = 'Esta imagen no está disponible.';
+          slideFallback.hidden = true;
+          image.addEventListener('error', () => {
+            image.hidden = true;
+            slideFallback.hidden = false;
+          }, { once: true });
+          slide.append(image, slideFallback);
+          return slide;
+        };
+        const slides = mediaUrls.map((url, index) => createSlide(url, index));
+        const leadingClone = createSlide(mediaUrls[mediaUrls.length - 1], mediaUrls.length - 1, true);
+        const trailingClone = createSlide(mediaUrls[0], 0, true);
+        track.append(leadingClone, ...slides, trailingClone);
+        viewport.append(track);
+
+        const controls = document.createElement('div');
+        controls.className = 'instagram-story__carousel-controls';
+        const previous = document.createElement('button');
+        previous.className = 'instagram-story__carousel-button';
+        previous.type = 'button';
+        previous.setAttribute('aria-label', 'Imagen anterior');
+        const next = document.createElement('button');
+        next.className = 'instagram-story__carousel-button';
+        next.type = 'button';
+        next.setAttribute('aria-label', 'Imagen siguiente');
+        const createArrow = (direction: 'previous' | 'next') => {
+          const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          svg.setAttribute('viewBox', '0 0 20 20');
+          svg.setAttribute('fill', 'none');
+          svg.setAttribute('aria-hidden', 'true');
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', direction === 'previous' ? 'm12.5 4.5-5.5 5.5 5.5 5.5' : 'm7.5 4.5 5.5 5.5-5.5 5.5');
+          path.setAttribute('stroke', 'currentColor');
+          path.setAttribute('stroke-width', '1.8');
+          path.setAttribute('stroke-linecap', 'round');
+          path.setAttribute('stroke-linejoin', 'round');
+          svg.append(path);
+          return svg;
+        };
+        previous.append(createArrow('previous'));
+        next.append(createArrow('next'));
+        const count = document.createElement('span');
+        count.className = 'instagram-story__carousel-count';
+        count.setAttribute('role', 'status');
+        count.setAttribute('aria-live', 'polite');
+        count.setAttribute('aria-atomic', 'true');
+        controls.append(previous, count, next);
+
+        let currentIndex = 0;
+        let trackPosition = 1;
+        let isDragging = false;
+        let isAnimating = false;
+        let activePointerId: number | null = null;
+        let pointerStartX = 0;
+        let pointerDelta = 0;
+        let transitionTimer: number | undefined;
+
+        const setTrackPosition = (dragOffset = 0) => {
+          const basePosition = -trackPosition * 100;
+          const offset = dragOffset === 0
+            ? `${basePosition}%`
+            : `calc(${basePosition}% ${dragOffset < 0 ? '-' : '+'} ${Math.abs(dragOffset)}px)`;
+          track.style.transform = `translate3d(${offset}, 0, 0)`;
+        };
+
+        const updateCarousel = () => {
+          count.textContent = `${currentIndex + 1} de ${slides.length}`;
+          slides.forEach((slide, index) => {
+            slide.setAttribute('aria-hidden', String(index !== currentIndex));
+          });
+        };
+
+        const resetFromClone = () => {
+          if (trackPosition === 0) trackPosition = slides.length;
+          else if (trackPosition === slides.length + 1) trackPosition = 1;
+          else return;
+
+          track.classList.add('is-jumping');
+          setTrackPosition();
+          void track.offsetWidth;
+          requestAnimationFrame(() => track.classList.remove('is-jumping'));
+        };
+
+        const finishMotion = () => {
+          if (transitionTimer !== undefined) window.clearTimeout(transitionTimer);
+          transitionTimer = undefined;
+          isAnimating = false;
+          resetFromClone();
+        };
+
+        track.addEventListener('transitionend', (event) => {
+          if (event.target === track && event.propertyName === 'transform') finishMotion();
+        });
+
+        const moveBy = (amount: number) => {
+          if (isAnimating) return;
+          currentIndex = (currentIndex + amount + slides.length) % slides.length;
+          trackPosition += amount;
+          updateCarousel();
+          setTrackPosition();
+
+          const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (reduceMotion) {
+            finishMotion();
+            return;
+          }
+
+          isAnimating = true;
+          transitionTimer = window.setTimeout(finishMotion, 500);
+        };
+
+        const finishDrag = (commit: boolean) => {
+          if (!isDragging) return;
+          isDragging = false;
+          activePointerId = null;
+          track.classList.remove('is-dragging');
+
+          const threshold = Math.max(40, viewport.clientWidth * 0.12);
+          if (commit && Math.abs(pointerDelta) >= threshold) {
+            moveBy(pointerDelta < 0 ? 1 : -1);
+          } else {
+            setTrackPosition();
+          }
+          pointerDelta = 0;
+        };
+
+        const updateDrag = (clientX: number) => {
+          pointerDelta = clientX - pointerStartX;
+          const isAtEdge = (currentIndex === 0 && pointerDelta > 0) ||
+            (currentIndex === slides.length - 1 && pointerDelta < 0);
+          setTrackPosition(isAtEdge ? pointerDelta * 0.3 : pointerDelta);
+        };
+
+        viewport.addEventListener('pointerdown', (event) => {
+          if (isAnimating || isDragging || !event.isPrimary || (event.pointerType === 'mouse' && event.button !== 0)) return;
+          isDragging = true;
+          activePointerId = event.pointerId;
+          pointerStartX = event.clientX;
+          pointerDelta = 0;
+          track.classList.add('is-dragging');
+          viewport.setPointerCapture(event.pointerId);
+        });
+        viewport.addEventListener('pointermove', (event) => {
+          if (!isDragging || event.pointerId !== activePointerId) return;
+          updateDrag(event.clientX);
+        });
+        viewport.addEventListener('pointerup', () => finishDrag(true));
+        viewport.addEventListener('pointercancel', () => finishDrag(false));
+        viewport.addEventListener('lostpointercapture', () => finishDrag(false));
+        viewport.addEventListener('touchstart', (event) => {
+          if (isAnimating || isDragging || event.touches.length !== 1) return;
+          isDragging = true;
+          activePointerId = null;
+          pointerStartX = event.touches[0].clientX;
+          pointerDelta = 0;
+          track.classList.add('is-dragging');
+        }, { passive: true });
+        viewport.addEventListener('touchmove', (event) => {
+          if (!isDragging || activePointerId !== null || event.touches.length !== 1) return;
+          updateDrag(event.touches[0].clientX);
+        }, { passive: true });
+        viewport.addEventListener('touchend', () => {
+          if (isDragging && activePointerId === null) finishDrag(true);
+        }, { passive: true });
+        viewport.addEventListener('touchcancel', () => {
+          if (activePointerId === null) finishDrag(false);
+        }, { passive: true });
+
+        previous.addEventListener('click', () => moveBy(-1));
+        next.addEventListener('click', () => moveBy(1));
+        updateCarousel();
+        setTrackPosition();
+        media = document.createElement('div');
+        media.className = 'instagram-story__carousel';
+        media.append(viewport, controls);
       } else {
         const image = document.createElement('img');
         image.className = 'instagram-story__visual';
-        image.src = post.mediaUrl;
+        image.src = mediaUrls[0] || post.mediaUrl;
         image.alt = headline;
         image.loading = 'eager';
         image.decoding = 'async';
@@ -197,15 +418,19 @@ const feedUrl =
         media = image;
       }
 
-      media.addEventListener('error', () => {
-        media.hidden = true;
-        mediaFallback.hidden = false;
-      }, { once: true });
+      if (isVideo || mediaUrls.length <= 1) {
+        media.addEventListener('error', () => {
+          media.hidden = true;
+          mediaFallback.hidden = false;
+        }, { once: true });
+      }
 
       const mediaDescription = document.createElement('figcaption');
       mediaDescription.className = 'instagram-story__media-caption';
       mediaDescription.textContent = post.mediaType === 'CAROUSEL_ALBUM'
-        ? 'Vista previa del carrusel. Abre Instagram para recorrer todas las imágenes.'
+        ? mediaUrls.length > 1
+          ? 'Arrastra o desliza para recorrer las imágenes. También puedes usar las flechas.'
+          : 'Imagen compartida en el carrusel del colegio.'
         : isVideo
           ? 'Video compartido por el Colegio Conquistadores.'
           : 'Imagen compartida por el Colegio Conquistadores.';
@@ -225,16 +450,34 @@ const feedUrl =
     } else if (!endpoint || !loading || !error || !article) {
       fail('No pudimos preparar esta publicación. Vuelve al feed e inténtalo otra vez.');
     } else {
-      fetch(`${endpoint}${endpoint.includes('?') ? '&' : '?'}limit=12`, {
-        headers: { Accept: 'application/json' },
-        credentials: 'omit',
-      })
-        .then(async (response) => {
-          if (!response.ok) throw new Error('feed_unavailable');
-          return await response.json() as { posts?: unknown };
-        })
-        .then((payload) => {
-          const posts = Array.isArray(payload.posts) ? payload.posts.filter(isValidPost) : [];
+      const requestPosts = async (url: string) => {
+        const response = await fetch(url, {
+          cache: 'no-store',
+          headers: { Accept: 'application/json' },
+          credentials: 'omit',
+        });
+        if (!response.ok) throw new Error('feed_unavailable');
+        const payload = await response.json() as { posts?: unknown };
+        return Array.isArray(payload.posts) ? payload.posts.filter(isValidPost) : [];
+      };
+
+      void (async () => {
+        try {
+          let posts: InstagramPost[] = [];
+          if (archiveEndpoint) {
+            try {
+              posts = await requestPosts(`${archiveEndpoint}?id=${encodeURIComponent(requestedId)}`);
+            } catch {
+              posts = [];
+            }
+          }
+          let post = posts.find((candidate) => candidate.id === requestedId);
+
+          if (!post && endpoint) {
+            posts = await requestPosts(`${endpoint}${endpoint.includes('?') ? '&' : '?'}limit=12`);
+            post = posts.find((candidate) => candidate.id === requestedId);
+          }
+
           if (posts.length && typeof sessionStorage !== 'undefined') {
             try {
               sessionStorage.setItem(cacheKey, JSON.stringify({ feedUrl: endpoint, posts }));
@@ -242,7 +485,6 @@ const feedUrl =
               // Storage may be disabled; the current publication can still render.
             }
           }
-          const post = posts.find((candidate) => candidate.id === requestedId);
 
           if (post) {
             renderPost(post);
@@ -252,15 +494,15 @@ const feedUrl =
             renderPost(cachedPost);
             return;
           }
-          fail('Esta publicación ya no está entre las más recientes. Vuelve al feed para ver las publicaciones disponibles.');
-        })
-        .catch(() => {
+          fail('Esta publicación no está disponible ahora. Vuelve a Actividades para elegir otra.');
+        } catch {
           if (cachedPost) {
             renderPost(cachedPost);
             return;
           }
-          fail('No pudimos cargar esta publicación ahora. Intenta nuevamente desde el feed.');
-        });
+          fail('No pudimos cargar esta publicación ahora. Intenta nuevamente desde Actividades.');
+        }
+      })();
     }
   }
 </script>
@@ -417,6 +659,119 @@ const feedUrl =
     display: none !important;
   }
 
+  :global(.instagram-story__carousel) {
+    position: absolute;
+    inset: 0;
+    min-width: 0;
+  }
+
+  :global(.instagram-story__carousel-viewport) {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    touch-action: pan-y;
+    cursor: grab;
+    user-select: none;
+  }
+
+  :global(.instagram-story__carousel-viewport:active) {
+    cursor: grabbing;
+  }
+
+  :global(.instagram-story__carousel-track) {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  :global(.instagram-story__carousel-track.is-dragging),
+  :global(.instagram-story__carousel-track.is-jumping) {
+    transition: none;
+  }
+
+  :global(.instagram-story__carousel-slide) {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+  }
+
+  :global(.instagram-story__carousel-slide .instagram-story__visual) {
+    background: var(--color-primary-deep);
+    object-fit: contain;
+  }
+
+  :global(.instagram-story__slide-fallback) {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    padding: var(--space-5);
+    background: var(--color-primary-deep);
+    color: var(--color-surface);
+    font-size: var(--font-size-sm);
+    text-align: center;
+  }
+
+  :global(.instagram-story__carousel-controls) {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4);
+    pointer-events: none;
+  }
+
+  :global(.instagram-story__carousel-button) {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border: 1px solid rgb(255 255 255 / 0.7);
+    border-radius: 50%;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    color: var(--color-primary-deep);
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  :global(.instagram-story__carousel-button:hover:not(:disabled)) {
+    background: var(--color-accent);
+  }
+
+  :global(.instagram-story__carousel-button:disabled) {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  :global(.instagram-story__carousel-button:focus-visible),
+  :global(.instagram-story__carousel-viewport:focus-visible) {
+    outline: 0.2rem solid var(--color-focus);
+    outline-offset: 0.15rem;
+  }
+
+  :global(.instagram-story__carousel-button svg) {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  :global(.instagram-story__carousel-count) {
+    position: absolute;
+    inset-block-start: var(--space-4);
+    inset-inline-end: var(--space-4);
+    padding: 0.35rem 0.65rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-primary-deep);
+    font-size: var(--font-size-xs);
+    font-weight: 800;
+  }
+
   :global(video.instagram-story__visual) {
     height: auto;
     max-height: 100%;
@@ -471,6 +826,17 @@ const feedUrl =
     gap: var(--space-2);
   }
 
+  .instagram-story__actions .button--secondary {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  .instagram-story__actions .button--secondary:hover {
+    border-color: var(--color-primary-deep);
+    background: var(--color-primary-deep);
+  }
+
   .instagram-story__actions svg {
     width: 1rem;
     height: 1rem;
@@ -499,7 +865,10 @@ const feedUrl =
     }
 
     .instagram-story__media {
-      min-height: 15rem;
+      height: min(125vw, 34rem, 72vh);
+      height: min(125vw, 34rem, 72svh);
+      min-height: 22rem;
+      aspect-ratio: auto;
     }
 
     .instagram-story__content {
@@ -520,6 +889,10 @@ const feedUrl =
   @media (prefers-reduced-motion: reduce) {
     .instagram-story__state::before {
       animation: none;
+    }
+
+    :global(.instagram-story__carousel-track) {
+      transition: none;
     }
   }
 </style>

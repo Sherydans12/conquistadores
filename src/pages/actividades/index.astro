@@ -7,11 +7,20 @@ import { sortActivities } from '../../data/activities';
 import { absoluteUrl, site } from '../../data/site';
 import PageLayout from '../../layouts/PageLayout.astro';
 
+const instagramFeedUrl =
+  import.meta.env.PUBLIC_INSTAGRAM_FEED_URL ||
+  'https://conquistadores-instagram-feed.nicolas-18-111.workers.dev/api/instagram-feed';
+const instagramArchiveUrl = new URL(instagramFeedUrl);
+instagramArchiveUrl.pathname = instagramArchiveUrl.pathname.replace(
+  /\/api\/instagram-feed\/?$/,
+  '/api/instagram-archive',
+);
+instagramArchiveUrl.search = '';
+
 const activities = sortActivities(await getCollection('activities'));
 const years = [...new Set(activities.map((activity) => activity.data.year))].sort(
   (a, b) => b - a,
 );
-const featured = activities.filter((activity) => activity.data.featured);
 const groupedActivities = years.map((year) => ({
   year,
   activities: activities.filter((activity) => activity.data.year === year),
@@ -49,47 +58,28 @@ const collectionSchema = {
     { label: 'Actividades' },
   ]}
 >
-  <section class="page-section activities-intro">
+  <section class="page-section page-section--soft archive" aria-labelledby="archive-title">
     <div class="container">
       <div class="page-section__intro">
-        <p class="page-section__eyebrow">Archivo histórico</p>
-        <h2>Experiencias de nuestra comunidad</h2>
+        <h2 id="archive-title">Experiencias de nuestra comunidad</h2>
         <p>
           Este archivo reúne actividades del colegio desde 2023. Busca por
           palabras o filtra los resultados por año.
         </p>
       </div>
 
-      {
-        featured.length > 0 && (
-          <section class="featured-activities" aria-labelledby="featured-title">
-            <div class="featured-activities__heading">
-              <p>Selección</p>
-              <h2 id="featured-title">Actividades destacadas</h2>
-            </div>
-            <div class="featured-activities__grid">
-              {featured.map((activity, index) => (
-                <ActivityArchiveCard
-                  activity={activity}
-                  headingLevel={3}
-                  priority={index === 0}
-                />
-              ))}
-            </div>
-          </section>
-        )
-      }
-    </div>
-  </section>
-
-  <section class="page-section page-section--soft archive" aria-labelledby="archive-title">
-    <div class="container">
-      <div class="page-section__intro">
-        <p class="page-section__eyebrow">Todas las publicaciones</p>
-        <h2 id="archive-title">Archivo completo</h2>
-      </div>
-
       <ActivityArchiveSearch years={years} total={activities.length} />
+
+      <p
+        class="instagram-archive__status"
+        data-instagram-archive-status
+        data-archive-url={instagramArchiveUrl.toString()}
+        data-feed-url={instagramFeedUrl}
+        role="status"
+        aria-live="polite"
+      >
+        Cargando publicaciones de Instagram…
+      </p>
 
       <div class="archive__groups" id="activity-results">
         {
@@ -114,6 +104,39 @@ const collectionSchema = {
         }
       </div>
 
+      <template data-instagram-activity-template>
+        <article class="instagram-archive-card" data-activity-card data-instagram-post-id="">
+          <a class="instagram-archive-card__image" data-card-image-link>
+            <img data-card-image loading="lazy" decoding="async" width="960" height="720" />
+            <span class="instagram-archive-card__image-fallback" data-card-image-fallback hidden>
+              Vista previa no disponible
+            </span>
+          </a>
+          <div class="instagram-archive-card__body">
+            <p class="instagram-archive-card__meta">
+              <span data-card-year></span>
+              <time data-card-date></time>
+              <span class="instagram-archive-card__source">Instagram</span>
+            </p>
+            <h3><a data-card-title-link></a></h3>
+            <p data-card-description></p>
+            <a class="instagram-archive-card__link" data-card-story-link>
+              Leer publicación
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+      </template>
+      <template data-instagram-activity-group-template>
+        <details class="archive-group" data-activity-group>
+          <summary>
+            <span data-dynamic-group-label></span>
+            <strong data-group-count>0</strong>
+          </summary>
+          <div class="archive-group__grid"></div>
+        </details>
+      </template>
+
       <div class="archive-empty" id="activity-empty" role="status" hidden>
         <h2>No encontramos coincidencias</h2>
         <p>Prueba con otra palabra o limpia los filtros para volver al archivo completo.</p>
@@ -127,11 +150,18 @@ const collectionSchema = {
 <script>
   const form = document.querySelector<HTMLFormElement>('#activity-search');
   const queryInput = document.querySelector<HTMLInputElement>('#activity-query');
-  const groups = [
+  let groups = [
     ...document.querySelectorAll<HTMLDetailsElement>('[data-activity-group]'),
   ];
+  const groupsContainer = document.querySelector<HTMLElement>('#activity-results');
   const resultCount = document.querySelector<HTMLElement>('#activity-results-count');
   const emptyState = document.querySelector<HTMLElement>('#activity-empty');
+  const archiveStatus = document.querySelector<HTMLElement>('[data-instagram-archive-status]');
+  const archiveTemplate = document.querySelector<HTMLTemplateElement>('[data-instagram-activity-template]');
+  const groupTemplate = document.querySelector<HTMLTemplateElement>('[data-instagram-activity-group-template]');
+  const instagramArchiveUrl = archiveStatus?.dataset.archiveUrl;
+  const instagramFeedUrl = archiveStatus?.dataset.feedUrl;
+  const yearOptions = form?.querySelector<HTMLElement>('.archive-search__years');
   const allowedYears = new Set(
     groups.map((group) => group.dataset.year).filter(Boolean),
   );
@@ -195,7 +225,184 @@ const collectionSchema = {
     if (updateUrl) syncUrl(query, selectedYear);
   }
 
+  function sortCards(grid: HTMLElement) {
+    const cards = [...grid.children].filter((node): node is HTMLElement => node instanceof HTMLElement);
+    cards.sort((first, second) => {
+      const firstDate = Date.parse(first.querySelector('time')?.getAttribute('datetime') || '') || 0;
+      const secondDate = Date.parse(second.querySelector('time')?.getAttribute('datetime') || '') || 0;
+      return secondDate - firstDate;
+    });
+    grid.append(...cards);
+  }
+
+  function getOrCreateGroup(year: number) {
+    const yearValue = String(year);
+    let group = groups.find((candidate) => candidate.dataset.year === yearValue);
+    if (!group) {
+      if (!groupsContainer) return null;
+      const groupElement = groupTemplate?.content.firstElementChild?.cloneNode(true);
+      if (!(groupElement instanceof HTMLDetailsElement)) return null;
+      group = groupElement;
+      group.dataset.activityGroup = '';
+      group.dataset.year = yearValue;
+      const label = group.querySelector<HTMLElement>('[data-dynamic-group-label]');
+      if (label) label.textContent = `Actividades ${yearValue}`;
+      groups.push(group);
+
+      if (!allowedYears.has(yearValue) && yearOptions) {
+        const yearLabel = document.createElement('label');
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'year';
+        input.value = yearValue;
+        const scopeAttributes = [...(yearOptions.querySelector('label')?.attributes ?? [])]
+          .map((attribute) => attribute.name)
+          .filter((name) => name.startsWith('data-astro-cid-'));
+        for (const attribute of scopeAttributes) {
+          yearLabel.setAttribute(attribute, '');
+          input.setAttribute(attribute, '');
+        }
+        yearLabel.append(input, document.createTextNode(yearValue));
+        yearOptions.append(yearLabel);
+      }
+      allowedYears.add(yearValue);
+      groups.sort((first, second) => Number(second.dataset.year) - Number(first.dataset.year));
+      groupsContainer.append(...groups);
+    }
+    return group;
+  }
+
+  function renderInstagramPost(post: {
+    id: string;
+    mediaType: string;
+    mediaUrl: string;
+    permalink: string;
+    caption?: string;
+    timestamp?: string;
+  }) {
+    if (!archiveTemplate || !groupsContainer) return;
+    const date = post.timestamp ? new Date(post.timestamp) : null;
+    if (!date || Number.isNaN(date.getTime())) return;
+    const year = date.getFullYear();
+    const group = getOrCreateGroup(year);
+    const grid = group?.querySelector<HTMLElement>('.archive-group__grid');
+    const card = archiveTemplate.content.firstElementChild?.cloneNode(true);
+    if (!(card instanceof HTMLElement) || !grid) return;
+    if (grid.querySelector(`[data-instagram-post-id="${CSS.escape(post.id)}"]`)) return;
+
+    const title = post.caption?.split(/\r?\n/, 1)[0]?.trim().replace(/\s+/g, ' ') || 'Publicación del colegio';
+    const caption = post.caption?.trim() || 'Lee la publicación compartida por el colegio.';
+    const firstLine = caption.split(/\r?\n/, 1)[0]?.trim() || '';
+    const excerpt = (caption.slice(firstLine.length).trim() || caption);
+    const storyUrl = `/instagram/publicacion/?id=${encodeURIComponent(post.id)}`;
+    const imageLink = card.querySelector<HTMLAnchorElement>('[data-card-image-link]');
+    const titleLink = card.querySelector<HTMLAnchorElement>('[data-card-title-link]');
+    const storyLink = card.querySelector<HTMLAnchorElement>('[data-card-story-link]');
+    const image = card.querySelector<HTMLImageElement>('[data-card-image]');
+    const imageFallback = card.querySelector<HTMLElement>('[data-card-image-fallback]');
+    const yearLabel = card.querySelector<HTMLElement>('[data-card-year]');
+    const dateLabel = card.querySelector<HTMLTimeElement>('[data-card-date]');
+    const description = card.querySelector<HTMLElement>('[data-card-description]');
+    const sourceLabel = card.querySelector<HTMLElement>('.instagram-archive-card__source');
+    if (!imageLink || !titleLink || !storyLink || !image || !imageFallback || !yearLabel || !dateLabel || !description || !sourceLabel) return;
+
+    card.dataset.year = String(year);
+    card.dataset.instagramPostId = post.id;
+    card.dataset.search = `${title} ${caption} Instagram Carrusel Fotografía`;
+    imageLink.href = storyUrl;
+    imageLink.setAttribute('aria-label', `Leer publicación de Instagram: ${title}`);
+    image.src = post.mediaUrl;
+    image.alt = title;
+    image.addEventListener('error', () => {
+      image.hidden = true;
+      imageFallback.hidden = false;
+    }, { once: true });
+    titleLink.href = storyUrl;
+    titleLink.textContent = title;
+    storyLink.href = storyUrl;
+    storyLink.replaceChildren(document.createTextNode(post.mediaType === 'CAROUSEL_ALBUM' ? 'Ver carrusel ' : 'Leer publicación '), document.createElement('span'));
+    storyLink.lastElementChild!.textContent = '→';
+    yearLabel.textContent = String(year);
+    sourceLabel.textContent = post.mediaType === 'CAROUSEL_ALBUM' ? 'Instagram · Carrusel' : 'Instagram';
+    dateLabel.dateTime = date.toISOString();
+    dateLabel.textContent = new Intl.DateTimeFormat('es-CL', { day: 'numeric', month: 'long' }).format(date);
+    description.textContent = excerpt.length > 180 ? `${excerpt.slice(0, 177).trimEnd()}…` : excerpt;
+    grid.append(card);
+    sortCards(grid);
+  }
+
+  async function loadInstagramArchive() {
+    if (!instagramArchiveUrl || !instagramFeedUrl || !archiveStatus) return;
+    try {
+      const response = await fetch(instagramArchiveUrl, {
+        cache: 'no-store',
+        credentials: 'omit',
+        headers: { Accept: 'application/json' },
+      });
+      if (!response.ok) throw new Error('archive_unavailable');
+      const payload = await response.json() as { posts?: unknown };
+      if (!Array.isArray(payload.posts)) throw new Error('archive_invalid');
+      for (const post of payload.posts) {
+        if (!post || typeof post !== 'object') continue;
+        const candidate = post as Record<string, unknown>;
+        if (
+          typeof candidate.id !== 'string' ||
+          typeof candidate.mediaType !== 'string' ||
+          !['IMAGE', 'CAROUSEL_ALBUM'].includes(candidate.mediaType.toUpperCase()) ||
+          typeof candidate.mediaUrl !== 'string' || !/^https:\/\//i.test(candidate.mediaUrl) ||
+          typeof candidate.permalink !== 'string' || !/^https:\/\/(www\.)?instagram\.com\//i.test(candidate.permalink) ||
+          (candidate.caption !== undefined && typeof candidate.caption !== 'string') ||
+          (candidate.timestamp !== undefined && typeof candidate.timestamp !== 'string')
+        ) continue;
+        renderInstagramPost(candidate as { id: string; mediaType: string; mediaUrl: string; permalink: string; caption?: string; timestamp?: string });
+      }
+      archiveStatus.hidden = true;
+      if (payload.posts.length === 0) {
+        archiveStatus.textContent = 'Aún no hay publicaciones de Instagram archivadas.';
+        archiveStatus.hidden = false;
+      }
+      const initialYear = new URLSearchParams(window.location.search).get('year');
+      if (initialYear && allowedYears.has(initialYear)) {
+        const yearInput = form?.querySelector<HTMLInputElement>(`input[name="year"][value="${CSS.escape(initialYear)}"]`);
+        if (yearInput) yearInput.checked = true;
+      }
+      applyFilters(false);
+    } catch {
+      try {
+        const response = await fetch(`${instagramFeedUrl}${instagramFeedUrl.includes('?') ? '&' : '?'}limit=6`, {
+          cache: 'no-store',
+          credentials: 'omit',
+          headers: { Accept: 'application/json' },
+        });
+        if (!response.ok) throw new Error('feed_unavailable');
+        const payload = await response.json() as { posts?: unknown };
+        if (!Array.isArray(payload.posts)) throw new Error('feed_invalid');
+        for (const post of payload.posts) {
+          if (!post || typeof post !== 'object') continue;
+          const candidate = post as Record<string, unknown>;
+          if (
+            typeof candidate.id !== 'string' ||
+            typeof candidate.mediaType !== 'string' ||
+            !['IMAGE', 'CAROUSEL_ALBUM'].includes(candidate.mediaType.toUpperCase()) ||
+            typeof candidate.mediaUrl !== 'string' || !/^https:\/\//i.test(candidate.mediaUrl) ||
+            typeof candidate.permalink !== 'string' || !/^https:\/\/(www\.)?instagram\.com\//i.test(candidate.permalink) ||
+            (candidate.caption !== undefined && typeof candidate.caption !== 'string') ||
+            (candidate.timestamp !== undefined && typeof candidate.timestamp !== 'string')
+          ) continue;
+          renderInstagramPost(candidate as { id: string; mediaType: string; mediaUrl: string; permalink: string; caption?: string; timestamp?: string });
+        }
+        archiveStatus.textContent = 'Mostramos las publicaciones recientes mientras se conecta el archivo histórico de Instagram.';
+        archiveStatus.hidden = false;
+        applyFilters(false);
+      } catch {
+        archiveStatus.textContent = 'No se pudieron cargar las publicaciones de Instagram. Intenta nuevamente más tarde.';
+        archiveStatus.hidden = false;
+      }
+    }
+  }
+
   form?.addEventListener('input', () => applyFilters());
+  yearOptions?.addEventListener('change', () => applyFilters());
   form?.addEventListener('submit', (event) => event.preventDefault());
   form?.addEventListener('reset', () => {
     window.requestAnimationFrame(() => {
@@ -218,36 +425,10 @@ const collectionSchema = {
   }
   if (initialQuery && queryInput) queryInput.value = initialQuery;
   applyFilters();
+  void loadInstagramArchive();
 </script>
 
 <style>
-  .activities-intro {
-    background: var(--color-surface);
-  }
-
-  .featured-activities {
-    margin-block-start: var(--space-8);
-  }
-
-  .featured-activities__heading {
-    margin-block-end: var(--space-5);
-  }
-
-  .featured-activities__heading p {
-    margin-block-end: var(--space-2);
-    color: var(--color-primary-alt);
-    font-size: var(--font-size-xs);
-    font-weight: 900;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .featured-activities__heading h2 {
-    margin: 0;
-    font-size: var(--font-size-2xl);
-  }
-
-  .featured-activities__grid,
   .archive-group__grid {
     display: grid;
     gap: var(--space-4);
@@ -291,6 +472,122 @@ const collectionSchema = {
     padding: 0 var(--space-4) var(--space-4);
   }
 
+  .instagram-archive__status {
+    margin-block-start: var(--space-5);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .instagram-archive-card {
+    min-width: 0;
+    overflow: hidden;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .instagram-archive-card:hover {
+    border-color: var(--color-primary-alt);
+    transform: translateY(-2px);
+  }
+
+  .instagram-archive-card__image {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: var(--color-primary-deep);
+  }
+
+  .instagram-archive-card__image img,
+  .instagram-archive-card__image-fallback {
+    width: 100%;
+    height: 100%;
+  }
+
+  .instagram-archive-card__image img {
+    display: block;
+    object-fit: cover;
+  }
+
+  .instagram-archive-card__image-fallback {
+    display: grid;
+    place-items: center;
+    color: var(--color-surface);
+    font-size: var(--font-size-sm);
+  }
+
+  .instagram-archive-card__body {
+    padding: var(--space-5);
+  }
+
+  .instagram-archive-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+    margin-block-end: var(--space-3);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+  }
+
+  .instagram-archive-card__meta > span:first-child {
+    color: var(--color-primary-deep);
+    font-weight: 900;
+  }
+
+  .instagram-archive-card__source {
+    padding: 0.2rem 0.45rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-soft);
+    color: var(--color-primary);
+    font-weight: 900;
+  }
+
+  .instagram-archive-card h3 {
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-lg);
+  }
+
+  .instagram-archive-card h3 a {
+    color: var(--color-primary-deep);
+    text-decoration: none;
+  }
+
+  .instagram-archive-card h3 a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .instagram-archive-card__body > p:not(.instagram-archive-card__meta) {
+    display: -webkit-box;
+    overflow: hidden;
+    margin-block-end: var(--space-4);
+    color: var(--color-text-muted);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .instagram-archive-card__link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary);
+    font-weight: 900;
+  }
+
+  .instagram-archive-card__link span {
+    font-size: 1.25em;
+    transition: transform var(--transition-fast);
+  }
+
+  .instagram-archive-card__link:hover span {
+    transform: translateX(0.2rem);
+  }
+
   .archive-empty {
     margin-block-start: var(--space-6);
     padding: var(--space-7);
@@ -314,14 +611,12 @@ const collectionSchema = {
   }
 
   @media (min-width: 42rem) {
-    .featured-activities__grid,
     .archive-group__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (min-width: 64rem) {
-    .featured-activities__grid,
     .archive-group__grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }

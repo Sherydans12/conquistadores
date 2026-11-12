@@ -95,6 +95,139 @@ test('uses the first carousel item as its preview and keeps the post link', () =
   assert.equal(posts[0].permalink, 'https://www.instagram.com/p/carousel/');
 });
 
+test('archives new posts without replacing earlier ones and serves an ID lookup', async () => {
+  const cachesDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'caches');
+  const originalFetch = globalThis.fetch;
+  const entries = new Map();
+  const archived = [
+    {
+      id: 'older-post',
+      mediaType: 'IMAGE',
+      mediaUrl: 'https://cdninstagram.example/older-post.jpg',
+      permalink: 'https://www.instagram.com/p/older-post/',
+      caption: 'Post anterior',
+      timestamp: '2026-10-30T10:00:00Z',
+    },
+  ];
+  const cache = {
+    async match() { return undefined; },
+    async put(request, response) { entries.set(request.url, await response.text()); },
+  };
+  Object.defineProperty(globalThis, 'caches', {
+    configurable: true,
+    writable: true,
+    value: { default: cache },
+  });
+  const kv = {
+    async get(key, type) {
+      assert.equal(key, 'instagram-posts-v1');
+      assert.equal(type, 'json');
+      return archived;
+    },
+    async put(key, value) {
+      assert.equal(key, 'instagram-posts-v1');
+      archived.splice(0, archived.length, ...JSON.parse(value));
+    },
+  };
+  const bucket = { async get() { return null; }, async put() {} };
+  globalThis.fetch = async (input, init) => {
+    const apiUrl = new URL(input);
+    assert.equal(apiUrl.searchParams.get('limit'), '20');
+    assert.equal(new Headers(init?.headers).get('Authorization'), 'Bearer test-token');
+    return new Response(JSON.stringify({
+      data: [media('new-post', '2026-11-06T10:00:00Z', {
+        media_type: 'CAROUSEL_ALBUM',
+        children: { data: [{ media_type: 'IMAGE', media_url: 'https://cdninstagram.example/new-one.jpg' }] },
+      })],
+    }), { headers: { 'Content-Type': 'application/json' } });
+  };
+
+  try {
+    const env = {
+      INSTAGRAM_ACCESS_TOKEN: 'test-token',
+      INSTAGRAM_USER_ID: 'test-account',
+      INSTAGRAM_API_VERSION: 'v27.0',
+      ALLOWED_ORIGINS: 'http://localhost:4322',
+      INSTAGRAM_FEED_ARCHIVE: kv,
+      INSTAGRAM_MEDIA_ARCHIVE: bucket,
+    };
+    const response = await worker.fetch(new Request('https://worker.example/api/instagram-archive', {
+      headers: { Origin: 'http://localhost:4322' },
+    }), env);
+    const payload = await response.json();
+
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get('Cache-Control'), 'public, max-age=900');
+    assert.equal(response.headers.get('Access-Control-Allow-Origin'), 'http://localhost:4322');
+    assert.deepEqual(payload.posts.map((post) => post.id), ['new-post', 'older-post']);
+    assert.equal(payload.posts[0].mediaUrl, 'https://worker.example/api/instagram-media/new-post/0');
+    assert.equal(payload.posts[0].mediaUrls[0], 'https://worker.example/api/instagram-media/new-post/0');
+    assert.equal(archived.length, 2);
+    assert.equal(entries.size, 1);
+
+    const lookup = await worker.fetch(new Request('https://worker.example/api/instagram-archive?id=older-post', {
+      headers: { Origin: 'http://localhost:4322' },
+    }), env);
+    assert.deepEqual((await lookup.json()).posts.map((post) => post.id), ['older-post']);
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (cachesDescriptor) Object.defineProperty(globalThis, 'caches', cachesDescriptor);
+    else delete globalThis.caches;
+  }
+});
+
+test('copies historical Instagram images to R2 and serves the stable Worker URL', async () => {
+  const originalFetch = globalThis.fetch;
+  const objects = new Map();
+  const post = {
+    id: 'archived-image',
+    mediaType: 'IMAGE',
+    mediaUrl: 'https://cdninstagram.example/archived-image.jpg',
+    permalink: 'https://www.instagram.com/p/archived-image/',
+    caption: 'Archivo',
+    timestamp: '2026-11-01T10:00:00Z',
+  };
+  const kv = { async get() { return [post]; }, async put() {} };
+  const bucket = {
+    async get(key) {
+      const body = objects.get(key);
+      return body ? { body: new Response(body).body, httpMetadata: { contentType: 'image/jpeg' } } : null;
+    },
+    async put(key, body, options) {
+      objects.set(key, body);
+      assert.equal(options.httpMetadata.contentType, 'image/jpeg');
+    },
+  };
+  let originCalls = 0;
+  globalThis.fetch = async (input) => {
+    originCalls += 1;
+    assert.equal(String(input), post.mediaUrl);
+    return new Response(new Uint8Array([1, 2, 3]), { headers: { 'Content-Type': 'image/jpeg' } });
+  };
+
+  try {
+    const env = {
+      INSTAGRAM_ACCESS_TOKEN: 'test-token',
+      INSTAGRAM_USER_ID: 'test-account',
+      INSTAGRAM_API_VERSION: 'v27.0',
+      ALLOWED_ORIGINS: 'http://localhost:4322',
+      INSTAGRAM_FEED_ARCHIVE: kv,
+      INSTAGRAM_MEDIA_ARCHIVE: bucket,
+    };
+    const first = await worker.fetch(new Request('https://worker.example/api/instagram-media/archived-image/0'), env);
+    assert.equal(first.status, 200);
+    assert.equal(first.headers.get('Cache-Control'), 'public, max-age=31536000, immutable');
+    assert.equal(first.headers.get('Content-Type'), 'image/jpeg');
+    assert.deepEqual([...new Uint8Array(await first.arrayBuffer())], [1, 2, 3]);
+
+    const second = await worker.fetch(new Request('https://worker.example/api/instagram-media/archived-image/0'), env);
+    assert.equal(second.status, 200);
+    assert.equal(originCalls, 1);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test('keeps Meta failures generic, logs safe diagnostics, and does not cache 503 responses', async () => {
   const cachesDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'caches');
   const originalFetch = globalThis.fetch;
@@ -207,14 +340,14 @@ test('caches the feed for 900 seconds and applies CORS per request origin', asyn
     const firstBody = await firstResponse.json();
     assert.equal(firstResponse.headers.get('Cache-Control'), 'public, max-age=900');
     assert.equal(firstResponse.headers.get('Access-Control-Allow-Origin'), 'http://localhost:4322');
-    assert.deepEqual(cacheVersions, ['3']);
+      assert.deepEqual(cacheVersions, ['5']);
     assert.deepEqual(firstBody.posts.map((post) => post.id), ['cached-post']);
     assert.equal(metaCalls, 1);
 
     now += 899_999;
     const cachedResponse = await worker.fetch(request('http://127.0.0.1:4322'), env);
     assert.equal(cachedResponse.headers.get('Access-Control-Allow-Origin'), 'http://127.0.0.1:4322');
-    assert.deepEqual(cacheVersions, ['3', '3']);
+    assert.deepEqual(cacheVersions, ['5', '5']);
     assert.equal((await cachedResponse.json()).posts.length, 1);
     assert.equal(metaCalls, 1);
 

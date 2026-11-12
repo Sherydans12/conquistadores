@@ -1,6 +1,4 @@
 ---
-import { site } from '../data/site';
-
 const feedUrl =
   import.meta.env.PUBLIC_INSTAGRAM_FEED_URL ||
   'https://conquistadores-instagram-feed.nicolas-18-111.workers.dev/api/instagram-feed';
@@ -16,15 +14,14 @@ const feedUrl =
   <div class="container">
     <div class="instagram-feed__heading">
       <div class="instagram-feed__intro">
-        <h2 id="instagram-feed-title">Historias recientes de nuestra comunidad</h2>
+        <h2 id="instagram-feed-title">Actividades destacadas</h2>
         <p>Actividades, aprendizajes y encuentros contados desde el día a día del colegio.</p>
       </div>
-      <a class="button button--secondary" href={site.social.instagram.url} target="_blank" rel="noopener noreferrer">
-        Ver cuenta en Instagram
+      <a class="button button--secondary" href="/actividades/">
+        Ver todas las actividades
         <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
           <path d="M4 10h11M10 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
-        <span class="sr-only"> (se abre en una pestaña nueva)</span>
       </a>
     </div>
 
@@ -35,7 +32,7 @@ const feedUrl =
     <div class="instagram-feed__skeleton" data-feed-skeleton aria-hidden="true">
       <div class="instagram-feed__skeleton-lead"></div>
       <div class="instagram-feed__skeleton-grid">
-        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
       </div>
     </div>
 
@@ -49,6 +46,7 @@ const feedUrl =
     id: string;
     mediaType: string;
     mediaUrl: string;
+    mediaUrls?: string[];
     permalink: string;
     caption?: string;
     timestamp?: string;
@@ -61,7 +59,7 @@ const feedUrl =
     month: 'long',
     year: 'numeric',
   });
-  const postCacheKey = 'conquistadores-instagram-feed:posts:v1';
+  const postCacheKey = 'conquistadores-instagram-feed:posts:v2';
   const excludedMediaTypes = new Set(['VIDEO', 'REELS']);
 
   document.querySelectorAll<HTMLElement>('[data-instagram-feed]').forEach((section) => {
@@ -200,7 +198,8 @@ const feedUrl =
       }
     };
 
-    fetch(`${endpoint}${endpoint.includes('?') ? '&' : '?'}limit=6`, {
+    fetch(`${endpoint}${endpoint.includes('?') ? '&' : '?'}limit=7`, {
+      cache: 'no-store',
       headers: { Accept: 'application/json' },
       credentials: 'omit',
     })
@@ -219,6 +218,10 @@ const feedUrl =
               (post.timestamp === undefined || typeof post.timestamp === 'string') &&
               typeof post.mediaUrl === 'string' &&
               /^https:\/\//i.test(post.mediaUrl) &&
+              (post.mediaUrls === undefined || (
+                Array.isArray(post.mediaUrls) &&
+                post.mediaUrls.every((url) => typeof url === 'string' && /^https:\/\//i.test(url))
+              )) &&
               typeof post.permalink === 'string' &&
               /^https:\/\/(www\.)?instagram\.com\//i.test(post.permalink),
             )
@@ -289,6 +292,17 @@ const feedUrl =
   .instagram-feed__heading .button {
     flex: 0 0 auto;
     gap: var(--space-2);
+  }
+
+  :global(.instagram-feed__heading .button--secondary) {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  :global(.instagram-feed__heading .button--secondary:hover) {
+    border-color: var(--color-primary-deep);
+    background: var(--color-primary-deep);
   }
 
   .instagram-feed__heading svg {
@@ -534,17 +548,12 @@ const feedUrl =
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .instagram-feed__skeleton {
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-      align-items: stretch;
-    }
-
     .instagram-feed__skeleton-lead {
       min-height: 27rem;
     }
 
     .instagram-feed__skeleton-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .instagram-feed__skeleton-grid span {
